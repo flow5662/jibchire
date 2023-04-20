@@ -45,114 +45,159 @@
 	%>
 	</header>
     <div id="wrap">
+    <div class="subtitle">이번주 가장 북마크가 많이 눌린 집들이</div>
    	<%
+	if(alist != null && listCount > 0){
+	%>
+	    <div id="list">
+	    	<ul>
+	    		<%  
+    			for(int i=0; i<3; i++){   //한 줄에 세 칸을 넣을	
+    			%>
+	    		<li>
+	    			<a href = "view_read.jsp?post_id=<%=alist.get(i).getPost_id() %>">
+		    			<div class="thumbnail"> <img src="postPics/sm_<%=alist.get(i).getPost_pics() %>"></div>
+		    			<div class="title"><%=alist.get(i).getPost_title() %>  </div>
+	    			</a>
+	    				<!-- 북마크 버튼 -->
+	    				<% 
+							String bookmark= alist.get(i).getBookmark_time();
+							if(bookmark==null){
+								%><img src="img/community/png/bookmark-line.png" class="bookmark" value="<%=alist.get(i).getPost_id()%>"><%
+							}else{
+								%><img src="img/community/png/bookmark-2-fill.png" class="bookmark" value="<%=alist.get(i).getPost_id()%>"><%
+							}
+						%>
+		    			<!-- <img src="img/community/png/book-mark-fill.png" class="bookmark" value=""> -->
+		    			<div class="writer"><%=alist.get(i).getCust_id() %> </div>
+	    			<div class="view">조회수  북마크 10</div>
+	    		</li>
+    			<%		
+    			
+    			}
+	    		%>
+	    	</ul>
+	    </div>
+	
+			<%
+			}
+			else
+			{
+			%>
+			<section id="emptyArea">등록된 글이 없습니다.</section>
+			<%
+			}
+			%>
+					
+	   
+	       	<%
 	if(alist != null && listCount > 0){
 	%>
 	    <!-- 참고) section style 분류 탭 : jsp:include page="tap_style.jsp" -->    	
     	<!-- 메뉴 분류 탭 주거형태 방 개수, 집 평수, 가족인원수, 집 연식-->
-		   	<div class="selectBoxList">
-		        <!-- selectBox주거환경-->
-		        <div class="box">
-		            <div class="selectBox2 ">
-		            <button class="label">주거환경</button>
-		            <ul class="optionList1" name="box1" value="post_house">
-		                <li class="optionItem" value="apart">아파트</li>
-		                <li class="optionItem" value="officetel">오피스텔</li>
-		                <li class="optionItem" value="house">주택</li>
-		                <li class="optionItem" value="villa">빌라</li>
-		                <li class="optionItem" value="dorm">기숙사</li>
-		            </ul>
-		            </div>
-		        </div>
-		        <!-- selectBox방 개수 -->
-		        <div class="box">
-		            <div class="selectBox2 ">
-		            <button class="label">방 개수</button>
-		            <ul class="optionList2" name="box2" value="post_rooms">
-		                <li class="optionItem" value="1" >1개</li>
-		                <li class="optionItem" value="2" >2개</li>
-		                <li class="optionItem" value="3" >3개</li>
-		                <li class="optionItem" value="4" >4개 이상</li>
-		            </ul>
-		            </div>
-		        </div>
-		        <!-- selectBox집 평수 -->
-		        <div class="box">
-		            <div class="selectBox2  ">
-		            <button class="label">집 평수</button>
-		            <ul class="optionList3" name="box3" value="post_m2">
-		                <li class="optionItem" value="5">5평 이상</li>
-		                <li class="optionItem" value="10">10평 이상</li>
-		                <li class="optionItem" value="15">15평 이상</li>
-		                <li class="optionItem" value="20">20평 이상</li>
-		                <li class="optionItem" value="25">25평 이상</li>
-		                <li class="optionItem" value="30">30평 이상</li>
-		            </ul>
-		            </div>
-		        </div>
-		        <!-- selectBox집 연식 -->
-		        <div class="box">
-		            <div class="selectBox2">
-		            <button class="label">집 연식</button>
-		            <ul class="optionList4" name="box4" value="post_houseold">
-		                <li class="optionItem" value="1">신축~ 5년 미만</li>
-		                <li class="optionItem" value="5">5년 이상</li>
-		                <li class="optionItem" value="10">10년 이상</li>
-		                <li class="optionItem" value="15">15년 이상</li>
-		                <li class="optionItem" value="20">20년 이상</li>
-		            </ul>
-		            </div>
-		        </div>
-		        <!-- selectBox가족형태 -->
-		        <div class="box">
-		            <div class="selectBox2  ">
-		            <button class="label">가족형태</button>
-		            <ul class="optionList5" name="box5" value="post_family">
-		                <li class="optionItem" value="1인가구">1인가구</li>
-		                <li class="optionItem" value="신혼부부">신혼부부</li>
-		                <li class="optionItem" value="룸메이트">룸메이트</li>
-		                <li class="optionItem" value="부모님과 함께">부모님과 함께</li>
-		                <li class="optionItem" value="어린 자녀와 함께">어린 자녀와 함께</li>
-		            </ul>
-		            </div>
-		        </div>
-		        <!-- selectBox스타일 -->
-		        <div class="box">
-		            <div class="selectBox2  ">
-		            <button class="label">스타일</button>
-		            <ul class="optionList6" name="box6" value="post_style">
-		                <li class="optionItem" value="미니멀/심플">미니멀/심플</li>
-		                <li class="optionItem" value="내추럴">내추럴</li>
-		                <li class="optionItem" value="북유럽">북유럽</li>
-		                <li class="optionItem" value="빈티지">빈티지</li>
-		                <li class="optionItem" value="유니크">유니크</li>
-		                <li class="optionItem" value="프렌치/플로럴">프렌치/플로럴</li>
-		                <li class="optionItem" value="믹스매치">믹스매치</li>
-		                <li class="optionItem" value="한옥">한옥</li>
-		                <li class="optionItem" value="오피스겸용">오피스겸용</li>
-		            </ul>
-		            </div>
-		        </div>
-		        <!-- selectBox스타일 -->
-		        <div class="box">
-		            <div class="selectBox2  ">
-		            <button class="label">색상</button>
-		            <ul class="optionList7" name="box7" value="post_color">
-		                <li class="optionItem" value="black">black</li>
-		                <li class="optionItem" value="white">white</li>
-		                <li class="optionItem" value="red">red</li>
-		                <li class="optionItem" value="orange">orange</li>
-		                <li class="optionItem" value="yellow">yellow</li>
-		                <li class="optionItem" value="green">green</li>
-		                <li class="optionItem" value="blue">blue</li>
-		                <li class="optionItem" value="purple">purple</li>
-		                <li class="optionItem" value="brown">brown</li>
-		                <li class="optionItem" value="pink">pink</li>
-		            </ul>
-		            </div>
-		        </div>
-		    </div>
-	  
+		<div class="subtitle">최근 집들이</div>
+	   	<div class="selectBoxList">
+	        <!-- selectBox주거환경-->
+	        <div class="box">
+	            <div class="selectBox2 ">
+	            <button class="label">주거환경</button>
+	            <ul class="optionList1" name="box1" value="post_house">
+	                <li class="optionItem" value="apart">아파트</li>
+	                <li class="optionItem" value="officetel">오피스텔</li>
+	                <li class="optionItem" value="house">주택</li>
+	                <li class="optionItem" value="villa">빌라</li>
+	                <li class="optionItem" value="dorm">기숙사</li>
+	            </ul>
+	            </div>
+	        </div>
+	        <!-- selectBox방 개수 -->
+	        <div class="box">
+	            <div class="selectBox2 ">
+	            <button class="label">방 개수</button>
+	            <ul class="optionList2" name="box2" value="post_rooms">
+	                <li class="optionItem" value="1" >1개</li>
+	                <li class="optionItem" value="2" >2개</li>
+	                <li class="optionItem" value="3" >3개</li>
+	                <li class="optionItem" value="4" >4개 이상</li>
+	            </ul>
+	            </div>
+	        </div>
+	        <!-- selectBox집 평수 -->
+	        <div class="box">
+	            <div class="selectBox2  ">
+	            <button class="label">집 평수</button>
+	            <ul class="optionList3" name="box3" value="post_m2">
+	                <li class="optionItem" value="5">5평 이상</li>
+	                <li class="optionItem" value="10">10평 이상</li>
+	                <li class="optionItem" value="15">15평 이상</li>
+	                <li class="optionItem" value="20">20평 이상</li>
+	                <li class="optionItem" value="25">25평 이상</li>
+	                <li class="optionItem" value="30">30평 이상</li>
+	            </ul>
+	            </div>
+	        </div>
+	        <!-- selectBox집 연식 -->
+	        <div class="box">
+	            <div class="selectBox2">
+	            <button class="label">집 연식</button>
+	            <ul class="optionList4" name="box4" value="post_houseold">
+	                <li class="optionItem" value="1">신축~ 5년 미만</li>
+	                <li class="optionItem" value="5">5년 이상</li>
+	                <li class="optionItem" value="10">10년 이상</li>
+	                <li class="optionItem" value="15">15년 이상</li>
+	                <li class="optionItem" value="20">20년 이상</li>
+	            </ul>
+	            </div>
+	        </div>
+	        <!-- selectBox가족형태 -->
+	        <div class="box">
+	            <div class="selectBox2  ">
+	            <button class="label">가족형태</button>
+	            <ul class="optionList5" name="box5" value="post_family">
+	                <li class="optionItem" value="1인가구">1인가구</li>
+	                <li class="optionItem" value="신혼부부">신혼부부</li>
+	                <li class="optionItem" value="룸메이트">룸메이트</li>
+	                <li class="optionItem" value="부모님과 함께">부모님과 함께</li>
+	                <li class="optionItem" value="어린 자녀와 함께">어린 자녀와 함께</li>
+	            </ul>
+	            </div>
+	        </div>
+	        <!-- selectBox스타일 -->
+	        <div class="box">
+	            <div class="selectBox2  ">
+	            <button class="label">스타일</button>
+	            <ul class="optionList6" name="box6" value="post_style">
+	                <li class="optionItem" value="미니멀/심플">미니멀/심플</li>
+	                <li class="optionItem" value="내추럴">내추럴</li>
+	                <li class="optionItem" value="북유럽">북유럽</li>
+	                <li class="optionItem" value="빈티지">빈티지</li>
+	                <li class="optionItem" value="유니크">유니크</li>
+	                <li class="optionItem" value="프렌치/플로럴">프렌치/플로럴</li>
+	                <li class="optionItem" value="믹스매치">믹스매치</li>
+	                <li class="optionItem" value="한옥">한옥</li>
+	                <li class="optionItem" value="오피스겸용">오피스겸용</li>
+	            </ul>
+	            </div>
+	        </div>
+	        <!-- selectBox스타일 -->
+	        <div class="box">
+	            <div class="selectBox2  ">
+	            <button class="label">색상</button>
+	            <ul class="optionList7" name="box7" value="post_color">
+	                <li class="optionItem" value="black">black</li>
+	                <li class="optionItem" value="white">white</li>
+	                <li class="optionItem" value="red">red</li>
+	                <li class="optionItem" value="orange">orange</li>
+	                <li class="optionItem" value="yellow">yellow</li>
+	                <li class="optionItem" value="green">green</li>
+	                <li class="optionItem" value="blue">blue</li>
+	                <li class="optionItem" value="purple">purple</li>
+	                <li class="optionItem" value="brown">brown</li>
+	                <li class="optionItem" value="pink">pink</li>
+	            </ul>
+	            </div>
+	        </div>
+	    </div>
 	    <div id="list">
 	    	<ul>
 	    		<%  
@@ -213,9 +258,7 @@
 			<%
 			}
 			%>
-					
-	    </div>
-	</div>    
+	 </div>				
 <script type="text/javascript">
 $(function(){
 	/* 북마크 버튼 눌렀을 때 바로 DB작업하기*/
