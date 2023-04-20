@@ -17,6 +17,7 @@
 <!-- 게시판 메인화면을 위한 전체 데이터 셀렉-->
 <%
 
+
 	ArrayList<Post_house> alist = (ArrayList<Post_house>) request.getAttribute("articleList");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	// "pageInfo"라는 key값에 pageInfo라는 객체를 value값으로 넣었기 때문에 getAttribute할때도 객체로의 형변환이 필요한 것. 
