@@ -73,9 +73,9 @@ public class CmtHousewarming {
 				String feed_pics = rs.getString("post_pics");
 				String [] filename = feed_pics.split(",");
 				po.setPost_pics(filename[0]);
-				po.setPost_pic1(filename[1]);
-				po.setPost_pic2(filename[2]);
-				po.setPost_pic3(filename[3]);
+				po.setPost_pic2(filename[1]);
+				po.setPost_pic3(filename[2]);
+				po.setPost_pic4(filename[3]);
 				po.setPost_writetime(rs.getString("post_writetime"));
 			}
 			
@@ -101,6 +101,9 @@ public class CmtHousewarming {
 				po.setCust_id(rs.getString("cust_id"));
 				po.setPost_title(rs.getString("post_title"));
 				po.setPost_txt(rs.getString("post_txt"));
+				po.setPost_txt2(rs.getString("post_txt2"));
+				po.setPost_txt3(rs.getString("post_txt3"));
+				po.setPost_txt4(rs.getString("post_txt4"));
 				po.setPost_house(rs.getString("post_house"));
 				
 				po.setPost_rooms(rs.getInt("post_rooms"));
@@ -122,17 +125,17 @@ public class CmtHousewarming {
 				String feed_pics = rs.getString("post_pics");
 				String [] filename = feed_pics.split(",");
 				po.setPost_pics(filename[0]);
-				po.setPost_pic1(filename[1]);
-				po.setPost_pic2(filename[2]);
-				po.setPost_pic3(filename[3]);
+				po.setPost_pic2(filename[1]);
+				po.setPost_pic3(filename[2]);
+				po.setPost_pic4(filename[3]);
 				po.setPost_writetime(rs.getString("post_writetime"));
-				System.out.println("feed_pics=>"+feed_pics);
-				/* 실험
+				//System.out.println("feed_pics=>"+feed_pics);
+
 				System.out.println("filename[0] =>"+filename[0]);
 				System.out.println("filename[1] =>"+filename[1]);
 				System.out.println("filename[2] =>"+filename[2]);
 				System.out.println("filename[3] =>"+filename[3]);
-				*/
+
 				alist.add(po);
 			}
 		}catch(Exception e) {
@@ -179,9 +182,9 @@ public class CmtHousewarming {
 				String feed_pics = rs.getString("post_pics");
 				String [] filename = feed_pics.split(",");
 				po.setPost_pics(filename[0]);
-				po.setPost_pic1(filename[1]);
-				po.setPost_pic2(filename[2]);
-				po.setPost_pic3(filename[3]);
+				po.setPost_pic2(filename[1]);
+				po.setPost_pic3(filename[2]);
+				po.setPost_pic4(filename[3]);
 				po.setPost_writetime(rs.getString("post_writetime"));
 				po.setBookmark_time(rs.getString("bookmark_time"));
 				System.out.println("feed_pics=>"+feed_pics);
@@ -227,10 +230,11 @@ public class CmtHousewarming {
 		try {
 			conn();
 			stmt = conn.createStatement();
-			String insert = String.format("insert into post_house (post_id,cust_id,post_title,post_txt,post_house,"
+			String insert = String.format("insert into post_house (post_id,cust_id,post_title,post_txt,post_txt2,post_txt3,post_txt4,post_house,"
 					+ "post_rooms,post_m2,post_fam,post_houseold,post_budget,post_family,post_direc,post_region,"
-					+ "post_pet,post_startdate,post_enddate,post_pics,post_style,post_color,post_writetime"
-					+ ") values(%s,'%s','%s','%s','%s',%s,%s,%s,%s,%s,'%s','%s','%s','%s','%s','%s','%s','%s','%s',now());", "default",po.getCust_id(),po.getPost_title(),po.getPost_txt(),po.getPost_house(),
+					+ "post_pet,post_startdate,post_enddate,post_pics,post_style,post_color,post_writetime)"
+					+ "values(%s,'%s','%s','%s','%s',%s,%s,%s,%s,%s,'%s','%s','%s','%s','%s','%s','%s','%s','%s',now());", "default",
+					po.getCust_id(),po.getPost_title(),po.getPost_txt(),po.getPost_txt2(),po.getPost_txt3(),po.getPost_txt4(),po.getPost_house(),
 					po.getPost_rooms(),po.getPost_m2(),po.getPost_fam(),po.getPost_houseold(),po.getPost_budget(),
 					po.getPost_family(),po.getPost_direc(),po.getPost_region(),po.getPost_pet(),po.getPost_startdate(),
 					po.getPost_enddate(),po.getPost_pics(),po.getPost_style(),po.getPost_color());
@@ -389,9 +393,9 @@ public class CmtHousewarming {
 				String feed_pics = rs.getString("post_pics");
 				String [] filename = feed_pics.split(",");
 				po.setPost_pics(filename[0]);
-				po.setPost_pic1(filename[1]);
-				po.setPost_pic2(filename[2]);
-				po.setPost_pic3(filename[3]);
+				po.setPost_pic2(filename[1]);
+				po.setPost_pic3(filename[2]);
+				po.setPost_pic4(filename[3]);
 				po.setPost_writetime(rs.getString("post_writetime"));
 				System.out.println("feed_pics=>"+feed_pics);
 				/* 실험
@@ -446,9 +450,9 @@ public class CmtHousewarming {
 				String feed_pics = rs.getString("post_pics");
 				String [] filename = feed_pics.split(",");
 				po.setPost_pics(filename[0]);
-				po.setPost_pic1(filename[1]);
-				po.setPost_pic2(filename[2]);
-				po.setPost_pic3(filename[3]);
+				po.setPost_pic2(filename[1]);
+				po.setPost_pic3(filename[2]);
+				po.setPost_pic4(filename[3]);
 				po.setPost_writetime(rs.getString("post_writetime"));
 				po.setBookmark_time(rs.getString("bookmark_time"));
 				System.out.println("feed_pics=>"+feed_pics);
@@ -504,9 +508,9 @@ public class CmtHousewarming {
 				String feed_pics = rs.getString("post_pics");
 				String [] filename = feed_pics.split(",");
 				po.setPost_pics(filename[0]);
-				po.setPost_pic1(filename[1]);
-				po.setPost_pic2(filename[2]);
-				po.setPost_pic3(filename[3]);
+				po.setPost_pic2(filename[1]);
+				po.setPost_pic3(filename[2]);
+				po.setPost_pic4(filename[3]);
 				po.setPost_writetime(rs.getString("post_writetime"));
 				po.setBookmark_time(rs.getString("bookmark_time"));
 				System.out.println("feed_pics=>"+feed_pics);

@@ -1,20 +1,15 @@
 package dto;
 
 public class Post_house {
-	/* foreign key 있을 때는 insert할때 해당 테이블에 진짜 값이 있는지 확인해야만 한다
-	 * insert into post_house (post_id,cust_id,post_title,post_txt,post_house,
-post_rooms,post_m2,post_fam,post_houseold,post_budget,post_family,post_direc,post_region,
-post_pet,post_startdate,post_enddate,post_pics,post_style,post_color
-) values(default,'jessie','우리집을 소개합니다','헤헤 좋죠','아파트',
-2,24,2,5,1000,'반려동물과','남동향','송파구',
-'y',20230202,20230303,'src=ggg.jpg','colorful,minimal','red,green');
-	 * */
 	
 	// 추가 : 작성일, 그리고 사진 +설명, 사진+설명 이런식으로 가야할 수도 있다
 	public int post_id;  //auto increment
 	public String cust_id; // cust_info테이블에 이미 들어가있는 데이터여야만 한다는 걸 주의!!!
 	public String post_title; //게시글 제목
 	public String post_txt;  //게시글 내용
+	public String post_txt2;  //게시글 내용
+	public String post_txt3;  //게시글 내용
+	public String post_txt4;  //게시글 내용
 	public String post_house; //주거형태
 
 	public int post_rooms; // 방의 갯수
@@ -32,9 +27,9 @@ post_pet,post_startdate,post_enddate,post_pics,post_style,post_color
 	public String post_style; // 컬러풀,등등
 	public String post_color; // 색상 00,00,00,
 	public String post_pics; // 이미지 루트?
-	public String post_pic1;
 	public String post_pic2;
 	public String post_pic3;
+	public String post_pic4;
 	public String post_writetime;
 	public String bookmark_time;
 	
@@ -152,12 +147,6 @@ post_pet,post_startdate,post_enddate,post_pics,post_style,post_color
 	public void setPost_color(String post_color) {
 		this.post_color = post_color;
 	}
-	public String getPost_pic1() {
-		return post_pic1;
-	}
-	public void setPost_pic1(String post_pic1) {
-		this.post_pic1 = post_pic1;
-	}
 	public String getPost_pic2() {
 		return post_pic2;
 	}
@@ -170,6 +159,13 @@ post_pet,post_startdate,post_enddate,post_pics,post_style,post_color
 	public void setPost_pic3(String post_pic3) {
 		this.post_pic3 = post_pic3;
 	}
+	
+	public String getPost_pic4() {
+		return post_pic4;
+	}
+	public void setPost_pic4(String post_pic4) {
+		this.post_pic4 = post_pic4;
+	}
 	public String getPost_writetime() {
 		return post_writetime;
 	}
@@ -181,6 +177,24 @@ post_pet,post_startdate,post_enddate,post_pics,post_style,post_color
 	}
 	public void setBookmark_time(String bookmark_time) {
 		this.bookmark_time = bookmark_time;
+	}
+	public String getPost_txt2() {
+		return post_txt2;
+	}
+	public void setPost_txt2(String post_txt2) {
+		this.post_txt2 = post_txt2;
+	}
+	public String getPost_txt3() {
+		return post_txt3;
+	}
+	public void setPost_txt3(String post_txt3) {
+		this.post_txt3 = post_txt3;
+	}
+	public String getPost_txt4() {
+		return post_txt4;
+	}
+	public void setPost_txt4(String post_txt4) {
+		this.post_txt4 = post_txt4;
 	}
 
 	

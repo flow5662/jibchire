@@ -77,11 +77,11 @@
 							<!-- 검색창 및 메뉴가 들어갈 1행2열 여기서 집어넣기 -->
 							<li style="width: 370px; height: 420px;" id="topmiddle">
 								<form action="snsSearchAction.sns">
-									<div class="serch">
-										<div class="search-box">
-											<input type="text" class="search-txt" name="snsSearchWord" placeholder="#hashtag">
+									<div id="search">
+										<div id="search-box">
+											<input type="text" id="search-txt" name="snsSearchWord" placeholder="#hashtag">
 								     		<a class="search-btn" href="snsSearchAction.sns">
-									        	<input type="submit" class="search-btn" >
+									        	<input type="submit" id="search-btn" value="GO">
 									        	<!-- form/submit태그로 값을 넘겨보자<i class="fas fa-search"></i> -->
 								     		</a>
 							     		</div>

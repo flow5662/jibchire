@@ -17,7 +17,6 @@
 <!-- 게시판 메인화면을 위한 전체 데이터 셀렉-->
 <%
 
-
 	ArrayList<Post_house> alist = (ArrayList<Post_house>) request.getAttribute("articleList");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	// "pageInfo"라는 key값에 pageInfo라는 객체를 value값으로 넣었기 때문에 getAttribute할때도 객체로의 형변환이 필요한 것. 
@@ -57,7 +56,9 @@
     			%>
 	    		<li>
 	    			<a href = "view_read.jsp?post_id=<%=alist.get(i).getPost_id() %>">
-		    			<div class="thumbnail"> <img src="postPics/sm_<%=alist.get(i).getPost_pics() %>"></div>
+	    				<!-- data 직접 집어넣어서 따로 썸네일 만들지 않고있음, postPics/sm_ 라는 루트가 다름
+	    				<div class="thumbnail"> <img src="postPics/sm_%=alist.get(i).getPost_pics() %>"></div> -->
+		    			<div class="thumbnail"> <img src="postPics/<%=alist.get(i).getPost_pics() %>"></div>
 		    			<div class="title"><%=alist.get(i).getPost_title() %>  </div>
 	    			</a>
 	    				<!-- 북마크 버튼 -->
@@ -206,7 +207,9 @@
     			%>
 	    		<li>
 	    			<a href = "view_read.jsp?post_id=<%=alist.get(i).getPost_id() %>">
-		    			<div class="thumbnail"> <img src="postPics/sm_<%=alist.get(i).getPost_pics() %>"></div>
+		    			<!-- data 직접 집어넣어서 따로 썸네일 만들지 않고있음, postPics/sm_ 라는 루트가 다름
+	    				<div class="thumbnail"> <img src="postPics/sm_%=alist.get(i).getPost_pics() %>"></div> -->
+		    			<div class="thumbnail"> <img src="postPics/<%=alist.get(i).getPost_pics() %>"></div>
 		    			<div class="title"><%=alist.get(i).getPost_title() %>  </div>
 	    			</a>
 	    				<!-- 북마크 버튼 -->

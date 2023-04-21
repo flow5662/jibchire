@@ -60,7 +60,7 @@
 	    			</a>
 	    				<!-- 북마크 버튼 -->
 	    				<% 
-	    				String bookmark= alist.get(i).getBookmark_time();
+							String bookmark= alist.get(i).getBookmark_time();
 							if(bookmark==null){
 								%><img src="img/community/png/bookmark-line.png" class="bookmark" value="<%=alist.get(i).getPost_id()%>"><%
 							}else{

@@ -49,24 +49,10 @@
 			//out.println(sFilePath);
 			%>
 			<!-- 사진 슬라이더 -->
-			<div id="sliderwrap">
-				<div id="slider">
-					<a href="#" class="control_next">>></a>
-					<a href="#" class="control_prev"><<</a>
-					<ul>
-						<li><img src="postPics/<%=po.getPost_pics() %>" style="width: 860px; height: 500px;">></li>
-						<li><img src="postPics/<%=po.getPost_pic1() %>" style="width: 860px; height: 500px;"></li>
-						<li><img src="postPics/<%=po.getPost_pic2() %>" style="width: 860px; height: 500px;"></li>
-						<li><img src="postPics/<%=po.getPost_pic3() %>" style="width: 860px; height: 500px;"></li>
-					</ul>  
-				</div>
+			<div class="postPics">
+				 <div class="pics"> <img src="postPics/<%=po.getPost_pics() %>"> </div>
 			</div>
-			<!-- 사진
-			<section >
-				<div id="mainpic">
-				<img src="postPics/<%=po.getPost_pics() %>" id="mainpicimg"></div>
-			</section>-->
-			<!-- 제목 -->
+
 		   	<div id="title"> 
 		   		<h1><%=po.getPost_title() %></h1>
 		   		<!-- //현재 session에서 저장된 ID값과 db에서 가져온 id 값이 일치한다면 버튼생성 -->
@@ -124,6 +110,24 @@
 			<!-- 내용 -->
     		<div id="content">
     			<%= po.getPost_txt() %>
+    		</div>
+    		<div class="postPics">
+				 <div class="pics"> <img src="postPics/<%=po.getPost_pic2() %>"> </div>
+			</div>
+			<div id="content">
+    			<%= po.getPost_txt2() %>
+    		</div>
+    		<div class="postPics">
+				 <div class="pics"> <img src="postPics/<%=po.getPost_pic3() %>"> </div>
+			</div>
+			<div id="content">
+    			<%= po.getPost_txt3() %>
+    		</div>
+    		<div class="postPics">
+				 <div class="pics"> <img src="postPics/<%=po.getPost_pic4() %>"> </div>
+			</div>
+			<div id="content">
+    			<%= po.getPost_txt4() %>
     		</div>
 		</div>
 	<!-- footer -->

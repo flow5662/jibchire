@@ -375,7 +375,7 @@
 								<div class="login_item_text2"><a href="../sns/snsHeartLoginAction.sns?cust_id=<%=id%>">좋아요</div>
 							</div>
 							<div class="login_item_index2">
-								<div class="login_item_text2"><a href="select_bookmark_list.jsp?cust_id=<%=id%>">북마크</div>
+								<div class="login_item_text2"><a href="#">북마크</div>
 							</div>
 							<div class="login_item_index2">
 								<div class="login_item_text2"><a href="logout.jsp">로그아웃</a></div>
