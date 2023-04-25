@@ -30,7 +30,7 @@ margin:0 auto;
 		}
 	%>
 	</header>
-<form method="post" action="bachi_info.bc"> 
+<form method="post" action="bachi_info.bc" onsubmit="return select()"> 
 <input type="hidden" name="cust_id" value="<%=id%>">
 
 대분류<select name="gosu_menu1">
@@ -57,5 +57,23 @@ margin:0 auto;
 <jsp:include page="footer.jsp" />
 </div>
 </body>
+<script>
+$(document).ready(function(){
+	$.ajax({
+		url : "id.jsp" ,
+		data : {id: <%=id%> },
+		type : "post",
+		// 이동하고있는게 눈에 보이는 것 뿐
+		// 중요한 역할들을 가지고 있지는 않음(html 타입변환)
+		success: function(result){ //매개변수
+			if(result == "true"){
+				alert("중복된 아이디입니다.");	
+			}
+		}
+			
+		});
+	
+});
 
+</script>
 </html>

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import action.BachiMatchCateAction;
 import action.BachiMatchReqAction;
 import action.BachiQuestionsAction;
 import dto.ActionForward;
+import svc.BachiInfoSelectService;
 
 @WebServlet("*.bc")//��� �� ��Ʈ�ѷ��� Ÿ�� ���ڴ�
 public class Bachi_match_controller extends javax.servlet.http.HttpServlet 
@@ -58,7 +60,25 @@ public class Bachi_match_controller extends javax.servlet.http.HttpServlet
 			forward=new ActionForward();
 			forward.setPath("bachi_insert.jsp");
 		}else if(command.equals("/bachi/bachi_select_id.bc")) { //등록확인용
-			
+			  String cust_id = request.getParameter("cust_id");
+			    BachiInfoSelectService service = new BachiInfoSelectService();
+			    boolean isCheck;
+			    
+				try {
+					isCheck = service.select_bachi_id(cust_id);
+					 PrintWriter out = response.getWriter(); 
+					    if(isCheck) {
+					        out.println("<script>alert('중복된 아이디입니다.');</script>");
+					    } else {
+					        out.println("<script>alert('사용 가능한 아이디입니다.');</script>");
+					    }
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			   
+			    
+			    
 		}else if(command.equals("/bachi/bachi_info.bc")) {
 			action= new BachiInfoAction();	
 			try {

@@ -65,7 +65,31 @@ public class Gosu_ch {
 
 	    return insertCount;
 	}
+	public boolean select_cust_id(String cust_id) { //ajax 처리용,submit 기능 막기
+		PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    String sql = "select count(*) from gosu_info where cust_id = ?";
 
+	   try {
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setString(1, cust_id);
+		   rs = pstmt.executeQuery();
+		   
+		   if(rs.next()) {
+			 int count = rs.getInt(1);
+			 if(count > 0) {
+				 return true;
+			 }
+		   }
+		   
+	   }catch(Exception e) {
+		   e.printStackTrace();
+	   }finally {
+		   close(rs);
+		   close(pstmt);
+	   }
+	   return false;
+	}
 		
 
 	
