@@ -242,7 +242,7 @@ input[type="checkbox"] {
 											<input type="radio" id="etc" name="place" value="기타">
 											<div class="text-textarea">
 												기타
-												<div id="inputFields2"></div>
+												<div id="inputFields2" name="place"></div>
 											</div>
 										</div>
 									</div>
@@ -300,7 +300,7 @@ input[type="checkbox"] {
 											<input type="checkbox" name="type" id="etc" value="기타">
 											<div class="text-textarea">
 												기타
-												<div id="inputFields3"></div>
+												<div id="inputFields3" name="type"></div>
 											</div>
 										</div>
 									</div>
@@ -565,7 +565,7 @@ input[type="checkbox"] {
 											<input type="checkbox" name="serv" id="etc" value="기타">
 											<div class="text-textarea">
 												기타
-												<div id="inputFields"></div>
+												<div id="inputFields" name="serv"></div>
 											</div>
 										</div>
 									</div>
@@ -620,7 +620,7 @@ input[type="checkbox"] {
 											<input type="radio" id="etc" name="place" value="기타">
 											<div class="text-textarea">
 												기타
-												<div id="inputFields2"></div>
+												<div id="inputFields2"  name="place"></div>
 											</div>
 										</div>
 									</div>
@@ -729,7 +729,7 @@ checkbox.addEventListener("change", function() {
 	    //새로운 입력 필드 생성
 	    const inputField = document.createElement("input");
 	    inputField.type = "text";
-	    inputField.name = "dynamicInput";
+	    inputField.name = "serv";
 	    inputField.placeholder = "입력 필드";
 
 	    //입력 필드를 추가할 div 요소를 찾습니다.
@@ -755,7 +755,7 @@ const checkbox2 = document.querySelectorAll('input[name="type"][value="기타"]'
 		    //새로운 입력 필드 생성
 		    const inputField = document.createElement("input");
 		    inputField.type = "text";
-		    inputField.name = "dynamicInput";
+		    inputField.name = "type";
 		    inputField.placeholder = "입력 필드";
 
 		    //입력 필드를 추가할 div 요소를 찾습니다.
@@ -781,7 +781,7 @@ radioGroup.forEach(function(radio) {
       // 기타를 선택한 경우, 텍스트 박스를 생성
       const inputField = document.createElement("input");
       inputField.type = "text";
-      inputField.name = "dynamicInput";
+      inputField.name = "place";
       inputField.placeholder = "입력 필드";
 
       // 텍스트 박스를 추가할 div 요소를 찾습니다.

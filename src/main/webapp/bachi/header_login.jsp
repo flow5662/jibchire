@@ -521,7 +521,7 @@ li {
 							</div>
 							<div class="login_item_index2">
 								<div class="login_item_text2">
-									<a href="#고수전환">고수전환
+									<a href="bachi_insert.bc">바치전환
 								</div>
 							</div>
 							<div class="login_item_index2">
@@ -756,7 +756,7 @@ li {
 			</div>
 			<div id="gosu">
 				<div class="index1">
-					<li><a href="#">홈</a></li>
+					<li><a href="bachi_match_req.bc">홈</a></li>
 				</div>
 				<div class="index2">
 					<li><a href="bachi_match.jsp"> 고수매칭 </a></li>

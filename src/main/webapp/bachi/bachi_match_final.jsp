@@ -6,6 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+
+
+</style>
 <body>
    <div class="wrap">
                <header>
@@ -26,11 +30,12 @@
 	<section>
 	<div class="matching">
 	<input type="button" onclick="location.href='bachi_main.jsp'" value="메인화면">
-	<input tyle="button" onclick="location.href='bachi_match.jsp'" value="받은 답변보기">
+	<input type="button" onclick="location.href='bachi_match.jsp'" value="받은 답변보기">
 	정상적으로 요청되었습니다!<br>
 	바치들과의 빠른 매칭을 기원합니다!
 	</div>
 	</section>
+	
 	
 	    <div style="margin-left: auto; margin-right: auto;">
 <jsp:include page="footer.jsp" />

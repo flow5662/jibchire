@@ -208,7 +208,6 @@ if(value.equals("all")){
 	serch_id = serch;
 	serch_title = serch;
 	serch_text = serch;
-	
 }else if(value.equals("cust_id")){
 	serch_id = serch;
 	

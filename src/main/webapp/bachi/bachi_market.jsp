@@ -13,10 +13,10 @@
     <title>바치상점</title>
 </head>
 <%
-String cust_id = request.getParameter("cust_id"); //request.getParameter("cust_id");
-String cust_pw = request.getParameter("cust_pw");
-session.setAttribute("cust_id",cust_id);
-session.setAttribute("cust_pw",cust_pw);
+//String cust_id = request.getParameter("cust_id"); //request.getParameter("cust_id");
+//String cust_pw = request.getParameter("cust_pw");
+//session.setAttribute("cust_id",cust_id);
+//session.setAttribute("cust_pw",cust_pw);
 %>
 <%
 // 이미지 파일이 저장된 경로를 가져옵니다.
