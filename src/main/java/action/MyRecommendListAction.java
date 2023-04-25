@@ -22,6 +22,10 @@ import svc.SnsListService;
 		 * 2. 그 값을 다시 select문으로 보내야함
 		 * 3. select을 여러개해서 각기다른 arraylist에 담아야 함
 		 * 4. jsp에서 ~~님의 취향과 동일한 ~~글입니다 & 글 3개 썸네일 * 3세트 ?
+		 * 		i) 주거형태 집평수 방개수
+		 * 		ii) 가족인원수 가족형태 
+		 * 		iii) 집의방향
+		 * 		iv) 
 		 * 5. 
 		 * */
 		MyRecommendListService myRecommendListService = new MyRecommendListService(); 

@@ -22,7 +22,7 @@ import dto.ActionForward;
 import dto.Cust_houseinfo;
 import dto.Feed;
 import svc.MyPageWriteService;
-import svc.SnswriteService;
+import svc.SnsWriteService;
 
 
 public class MyPageWriteAction implements Action {

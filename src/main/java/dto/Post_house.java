@@ -32,6 +32,7 @@ public class Post_house {
 	public String post_pic4;
 	public String post_writetime;
 	public String bookmark_time;
+	public int post_read;
 	
 	public int getPost_id() {
 		return post_id;
@@ -195,6 +196,12 @@ public class Post_house {
 	}
 	public void setPost_txt4(String post_txt4) {
 		this.post_txt4 = post_txt4;
+	}
+	public int getPost_read() {
+		return post_read;
+	}
+	public void setPost_read(int post_read) {
+		this.post_read = post_read;
 	}
 
 	

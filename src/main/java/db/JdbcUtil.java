@@ -67,7 +67,6 @@ public class JdbcUtil {
 			con.rollback();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("rollback");
 		}
 		
 	}

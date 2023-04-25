@@ -11,7 +11,6 @@
 		url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 	} 
 	section #mid{height: 100px; width: 1280px;}
-	section #midtitle{font-size: 18pt; padding: 20px;}
 	.tabs {  display: flex;  position: relative;
 	  box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
 	  padding: 0.75rem;  border-radius: 99px; }
@@ -36,9 +35,6 @@
 	<!-- section style 분류 탭-->
 	<section>
     	<article id="mid">
-    		<div id="midtitle">
-    			공간 분위기 더 확인하기 
-    		</div>
     		<div class="wrap">
 				<div class="tabs">
 					<input type="radio" id="radio-1"  name="tabs" checked />

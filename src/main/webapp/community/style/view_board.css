@@ -16,25 +16,25 @@ option{background: #ffffff;  color: #000;  padding: 3px 0; font-size:12pt;}
 .subtitle{font-size: 20pt; font-weight: bold; padding-left: 1em; margin-top:30px;}
 
 /*스타일 들어간 select box*/
-.selectBoxList { margin:10px 20px 0 20px; display: flex;  grid-gap: 30px;}
-.selectBox2 * {box-sizing: border-box; }
-.selectBox2 {position: relative; z-index: 1; width: 142px;  height: 35px;  border-radius: 4px;
-  border: 2px solid #789849;  background-size: 20px;  cursor: pointer; }
-.selectBox2 .label {  display: flex;  align-items: center;  width: inherit;  height: inherit;
-  border: 0 none;  outline: 0 none;  padding-left: 15px;  background: transparent;  cursor: pointer;}
-.selectBox2 ul {  position: absolute;   top: 52px;  left: 0;  width: 100%;  background: #789849;
-  color: #fff;  list-style-type: none;  padding: 0;  border-radius: 6px;  overflow: hidden;  max-height: 0;
-  transition: .3s ease-in;}
-.selectBox2 ul::-webkit-scrollbar {width: 6px;}
-.selectBox2 ul::-webkit-scrollbar-track {background: transparent; }
-.selectBox2 ul::-webkit-scrollbar-thumb {background: #303030; border-radius: 45px;}
-.selectBox2 ul::-webkit-scrollbar-thumb:hover {background: #303030;}
-.selectBox2.active {    z-index: 10;}
-.selectBox2.active ul {  max-height: 500px;}
-.selectBox2 .optionItem {  border-bottom: 1px dashed #E5FFCC;  padding: 5px 15px 5px;
- transition: .1s;     display: inherit;}
-.selectBox2 .optionItem:hover {  background: rgb(175, 93, 93);}
-.selectBox2 .optionItem:last-child {  border-bottom: 0 none;}
+section #mid{height: 100px; width: 1280px;}
+.tabs {  display: flex;  position: relative;
+  box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+  padding: 0.75rem;  border-radius: 99px; }
+.tab {  display: flex;   align-items: center;    justify-content: center;	height: 54px;  width: 200px; 
+ font-size: 12pt;   z-index: 2; border-radius: 99px;  cursor: pointer;  transition: color 0.15s ease-in;}
+.glider {  position: absolute;  height: 54px;  width: 140px; z-index: 1;
+  border-radius: 99px;  transition: 0.25s ease-out; background-color: #ECD1AD;}
+input[type="radio"] {  display: none;}
+input[type="radio"]:checked + label {  color: #3F1709; filter:opacity(0.5) drop-shadow(0 0 0 #926b61);}
+input[id="radio-1"]:checked ~ .glider {	transform: translateX(0);}
+input[id="radio-2"]:checked ~ .glider {	transform: translateX(100%);}
+input[id="radio-3"]:checked ~ .glider {	transform: translateX(200%);}
+input[id="radio-4"]:checked ~ .glider { transform: translateX(300%);}
+input[id="radio-5"]:checked ~ .glider { transform: translateX(400%);}
+input[id="radio-6"]:checked ~ .glider { transform: translateX(500%);}
+input[id="radio-7"]:checked ~ .glider { transform: translateX(600%);}
+input[id="radio-8"]:checked ~ .glider { transform: translateX(700%);}
+input[id="radio-9"]:checked ~ .glider { transform: translateX(800%);}
 
 /*새로 만드는 틀
 #list{margin-top:30px;}*/
@@ -48,8 +48,8 @@ ul{margin:0 auto;}
 
 /*사진 아래 제목과 아이디*/
 #list>ul>li div{text-align: center;}/*border: 1px solid gray; */
-.title{width:90%; height: 22px;  font-size: 13pt;  color: #000;  font-weight: bold;  margin: 5px auto;}
-.writer{width: 50%; height: 18px; font-size:12pt; margin: 0 auto;}
+.title{width:90%; height: auto;  font-size: 13pt;  color: #000;  font-weight: bold;  margin: 5px auto;}
+.writer{width: 50%; height: auto; font-size:12pt; margin: 0 auto;}
 .view{width: 50%; height: 18px; font-size:10pt;  margin: 0 auto;}
 .bookmark{float: right;}
 

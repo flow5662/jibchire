@@ -30,20 +30,6 @@ public class MyRecommendListService {
 		
 	}
 
-	public ArrayList<Feed> getHeartArticleList(int page, int limit, String cust_id) throws Exception{
-		
-		//db커넥과 객체 초기화		
-		ArrayList<Feed> articleList = null; 
-		Connection con = getConnection();
-		CmtSns sns = CmtSns.getInstance();
-		sns.setConnection(con);
-		
-		// dao 패키지에 연결
-		articleList = sns.selectHeartArticleList(page,limit,cust_id);
-		// 닫기
-		close(con);
-		return articleList;
-		
-	}
+
 
 }

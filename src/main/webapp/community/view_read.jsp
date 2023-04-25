@@ -20,6 +20,8 @@
 	CmtHousewarming sl = new CmtHousewarming();
 	int pid = Integer.parseInt(request.getParameter("post_id"));
 	Post_house po = sl.select_one(pid);
+	sl.updateReadCount(pid); //조회수 올리기 
+	
 %>
 <body>
  	<!-- header -->
@@ -50,7 +52,7 @@
 			%>
 			<!-- 사진 슬라이더 -->
 			<div class="postPics">
-				 <div class="pics"> <img src="postPics/<%=po.getPost_pics() %>"> </div>
+				 <img src="postPics/<%=po.getPost_pics() %>" style="width:100%; height:auto;">
 			</div>
 
 		   	<div id="title"> 
@@ -108,27 +110,27 @@
 					
 			</div >
 			<!-- 내용 -->
-    		<div id="content">
-    			<%= po.getPost_txt() %>
-    		</div>
+    		<pre>
+    			<%=po.getPost_txt()%>
+    		</pre>
     		<div class="postPics">
-				 <div class="pics"> <img src="postPics/<%=po.getPost_pic2() %>"> </div>
+				 <div class="pics"> <img src="postPics/<%=po.getPost_pic2() %>" > </div>
 			</div>
-			<div id="content">
-    			<%= po.getPost_txt2() %>
-    		</div>
+			<pre>
+    			<%=po.getPost_txt2()%>
+    		</pre>
     		<div class="postPics">
 				 <div class="pics"> <img src="postPics/<%=po.getPost_pic3() %>"> </div>
 			</div>
-			<div id="content">
-    			<%= po.getPost_txt3() %>
-    		</div>
+			<pre>
+    			<%=po.getPost_txt3()%>
+    		</pre>
     		<div class="postPics">
 				 <div class="pics"> <img src="postPics/<%=po.getPost_pic4() %>"> </div>
 			</div>
-			<div id="content">
-    			<%= po.getPost_txt4() %>
-    		</div>
+			<pre>
+    			<%=po.getPost_txt4() %>
+    		</pre>
 		</div>
 	<!-- footer -->
 	<footer>
