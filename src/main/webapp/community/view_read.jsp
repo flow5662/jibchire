@@ -52,7 +52,7 @@
 			%>
 			<!-- 사진 슬라이더 -->
 			<div class="postPics">
-				 <img src="postPics/<%=po.getPost_pics() %>" style="width:100%; height:auto;">
+				 <img src="postPics/<%=po.getPost_pics() %>" style="max-width:100%; height:auto;">
 			</div>
 
 		   	<div id="title"> 
