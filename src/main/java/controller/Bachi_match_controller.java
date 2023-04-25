@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.BachiInfoAction;
 import action.BachiMatchCateAction;
+import action.BachiMatchReqAction;
 import action.BachiQuestionsAction;
 import dto.ActionForward;
 
@@ -26,22 +28,47 @@ public class Bachi_match_controller extends javax.servlet.http.HttpServlet
 		ActionForward forward = null;
 		Action action=null;
 		System.out.println(command);
-		if(command.equals("/bachi/bachi_match.bc")){
+		if(command.equals("/bachi/bachi_match.bc")){ //미사용 코드, 정리 예정
 			action= new BachiMatchCateAction();	
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/bachi/bachi_question.bc")) {
-			action  = new BachiQuestionsAction();
+		}else if(command.equals("/bachi/bachi_question.bc")) { //카테고리별 타고 들어가는 경로
+			action  = new BachiQuestionsAction(); //질문을 받는 Action 호출
 			try {
-				forward = action.execute(request, response);
+				forward = action.execute(request, response);				
 				
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+		}else if(command.equals("/bachi/bachi_match_req.bc")) {
+			action = new BachiMatchReqAction();
+			try {
+				forward = action.execute(request, response);
+			}catch (Exception e) {
+			e.printStackTrace();			
+			}
+		}else if(command.equals("/bachi/bachi_match_ans.bc")) {
+			
+		}else if(command.equals("/bachi/bachi_match_change.bc")) {
+			
+		}else if(command.equals("/bachi/bachi_insert.bc")) {
+			forward=new ActionForward();
+			forward.setPath("bachi_insert.jsp");
+		}else if(command.equals("/bachi/bachi_select_id.bc")) { //등록확인용
+			
+		}else if(command.equals("/bachi/bachi_info.bc")) {
+			action= new BachiInfoAction();	
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
+		
 		//System.out.println(forward.getPath());
 		
 		if(forward != null){
@@ -52,7 +79,6 @@ public class Bachi_match_controller extends javax.servlet.http.HttpServlet
 						request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
-		
 		}
 	}
 	

@@ -1,9 +1,16 @@
 package dao;
 
+import static db.JdbcUtil.close;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
+
+import javax.sql.DataSource;
+
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import dto.Cust_info;
 import dto.Gosu_info;
@@ -11,75 +18,63 @@ import dto.Gosu_product;
 
 
 public class Gosu_ch {
-
-		Connection conn = null;
-		Statement stmt = null;
-		Gosu_info bachi_info = new Gosu_info();
-		
-		void conn() {
-			
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/interior","root","1234");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		void diconn() {
-			try {
-				 conn.close();
-				 stmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		
-		}
-		public void gosu_ch(Gosu_info bachi_add) { 
-			
-
-			try{
-				this.conn();
-				if(conn == null)
-						throw new Exception("");			
-				
-				stmt = conn.createStatement();
-				String command = String.format("insert into student values "+"('%s','%s','%s',%s,'%s','%s','%s','%s','%s');",
-					bachi_add.getCust_id(),bachi_add.getGosu_menu1(),bachi_add.getGosu_menu2(),bachi_add.getGosu_intro(),bachi_add.getGosu_car(),bachi_add.getGosu_comp(),bachi_add.getWorktime_s(),bachi_add.getWorktime_e());
-					
-				int rowNum = stmt.executeUpdate(command);
-				
-				if(rowNum < 1)
-					throw new Exception("�����͸� DB�� �Է��� �� �����ϴ�.");
-			
-				
-				
-				this.diconn();
-				}catch(Exception ignored) {
-					ignored.printStackTrace();
-				}
-		}
-		
-		public void gosu_login(String cust_id,String cust_pw) {
-			try{
-				this.conn();
-				if(conn == null)
-						throw new Exception("데이터베이스에 접근할 수 없습니다.");
-					stmt = conn.createStatement();
-					ResultSet rs = stmt.executeQuery("select* from cust_info where cust_id='"+cust_id+"' and cust_pw='"+cust_pw+"';");
-				
-					if(rs.next()){							
-						
-						Cust_info cust = new Cust_info();
-						cust.setCust_id(cust_id);
-						cust.setCust_pw(cust_pw);
-						
-					}
-					this.diconn();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+	DataSource ds;
+	Connection con;
+	private static Gosu_ch bachi_ch;
 	
+	
+	public static Gosu_ch getInstance() {
+		if(bachi_ch == null) {
+			bachi_ch = new Gosu_ch();
+		}
+		return bachi_ch;
 	}
+	
+	public void setConnection(Connection con) {
+		this.con = con;
+	}
+	
+	
+	public int gosu_ch(Gosu_info bachi_info) {  //바치 등록
+	    PreparedStatement pstmt = null; //SQL문에 매핑
+	    ResultSet rs = null; // 모두 초기화
+
+	    String sql = "";
+	    int insertCount = 0;
+
+	    try{
+	        sql = "insert into gosu_info(cust_id,gosu_menu1,gosu_menu2,gosu_intro,gosu_car,gosu_reg,gosu_comp,worktime_s,worktime_e) values(?,?,?,?,?,?,?,?,?)";
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, bachi_info.getCust_id());
+	        pstmt.setString(2, bachi_info.getGosu_menu1());
+	        pstmt.setString(3, bachi_info.getGosu_menu2());
+	        pstmt.setString(4, bachi_info.getGosu_intro());
+	        pstmt.setString(5, bachi_info.getGosu_car());
+	        pstmt.setString(6, bachi_info.getGosu_reg());
+	        pstmt.setString(7, bachi_info.getGosu_comp());
+	        pstmt.setString(8, bachi_info.getWorktime_s());
+	        pstmt.setString(9, bachi_info.getWorktime_e());
+
+	        insertCount=pstmt.executeUpdate();
+	    } catch(SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	    }
+
+	    return insertCount;
+	}
+
 		
-}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+} //"select* from cust_info where cust_id='"+cust_id+"' and cust_pw='"+cust_pw+"';"
