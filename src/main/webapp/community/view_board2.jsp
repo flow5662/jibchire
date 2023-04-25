@@ -45,7 +45,7 @@
 	%>
 	</header>
     <div id="wrap">
-    <div class="subtitle">이번주 가장 북마크가 많이 눌린 집들이</div>
+    <div class="subtitle">이번주 가장 북마크가 많이 눌린 집들이 sdfsdfsdfsdf</div>
    	<%
 	if(alist != null && listCount > 0){
 	%>
