@@ -4,9 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<% String category = request.getParameter("category"); %>
+<title>
+<% if(category.equals("aircon-sigong")){
+%>에어컨 및 시공 <%	
+}else if(category.equals("job-conserting")){
+	%>취업 컨설팅 <%	
+}else if(category.equals("math-lesson")){
+	%>수학레슨 <%	
+}
+%></title>
 <!-- 값마다 다름 -->
 </head>
+
 <style>
 .wrap {
 	margin: 0 auto;
@@ -87,7 +97,7 @@ input[type="checkbox"] {
 	gap: 20px;
 }
 </style>
-<% String category = request.getParameter("category"); %>
+
 
 <body>
 	<div class="wrap">

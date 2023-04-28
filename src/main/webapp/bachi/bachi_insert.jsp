@@ -30,8 +30,8 @@ margin:0 auto;
 		}
 	%>
 	</header>
-<form method="post" action="bachi_info.bc" onsubmit="return select()"> 
-<input type="hidden" name="cust_id" value="<%=id%>">
+<form method="post" action="bachi_info.bc"> 
+<input type="hidden" name="cust_id" value="<%=id%>" id="cust_id">
 
 대분류<select name="gosu_menu1">
 	<option value="취미">취미</option>
@@ -48,32 +48,38 @@ margin:0 auto;
 <input type="time" name="worktime_s"> <!-- 스크립트 기능 중 e가 s보다 시간이 빠르면 안됨. -->
 <input type="time" name="worktime_e">
 
-<input type="submit" value="바치등록">
+<input type="submit" value="바치등록" id="idcheck">
 
 </form>
 
 
     <div style="margin-left: auto; margin-right: auto;">
-<jsp:include page="footer.jsp" />
+	<jsp:include page="footer.jsp" />
+	</div>
 </div>
 </body>
 <script>
 $(document).ready(function(){
-	$.ajax({
-		url : "id.jsp" ,
-		data : {id: <%=id%> },
-		type : "post",
-		// 이동하고있는게 눈에 보이는 것 뿐
-		// 중요한 역할들을 가지고 있지는 않음(html 타입변환)
-		success: function(result){ //매개변수
-			if(result == "true"){
-				alert("중복된 아이디입니다.");	
-			}
-		}
-			
-		});
-	
+    $("#idcheck").click(function(event) { // id 확인 버튼 클릭 시
+        event.preventDefault(); // 기본 이벤트인 submit 막기
+        $.ajax({
+            url : "bachi_select_id.bc",
+            data : {cust_id: $("#cust_id").val() },
+            type : "post",
+            success: function(result){
+                if(result === "false"){ // "false" 값이 반환되면
+                    alert("중복된 아이디입니다.");
+                } else {
+                    $("form").submit(); // 중복되지 않은 경우에만 submit 실행
+                }
+            }
+        });
+    });
 });
+
+
+
+
 
 </script>
 </html>

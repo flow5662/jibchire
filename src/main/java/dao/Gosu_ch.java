@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -100,5 +101,4 @@ public class Gosu_ch {
 	
 	
 	
-	
-} //"select* from cust_info where cust_id='"+cust_id+"' and cust_pw='"+cust_pw+"';"
+} 

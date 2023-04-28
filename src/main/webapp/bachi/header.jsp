@@ -591,7 +591,7 @@ li {
 				<li><a href="shopping.jsp"> 스토어 </a></li>
 			</div>
 			<div class="gosu">
-				<li><a href="gosumain.jsp"> 고수 </a></li>
+				<li><a href="gosumain.jsp"> 바치 </a></li>
 			</div>
 			<li><a href="index.jsp"><div class="logo"></div></a></li>
 
@@ -650,17 +650,12 @@ li {
 			</div>
 			<div id="gosu">
 				<div class="index1">
-					<li><a href="#">홈</a></li>
+					<li><a href="../bachi/bachi_match.jsp">고수매칭</a></li>
 				</div>
 				<div class="index2">
-					<li><a href="bachi_match.jsp"> 고수매칭 </a></li>
+					<li><a href="../bachi/bachi_market.jsp"> 마켓 </a></li>
 				</div>
-				<div class="index4">
-					<li><a href="../bachi/bachi_market.jsp">마켓</a></li>
-				</div>
-				<div class="index5">
-					<li><a href="#">받은견적</a></li>
-				</div>
+				
 			</div>
 		</nav>
 	</div>

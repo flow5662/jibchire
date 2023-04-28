@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.BachiInfoAction;
+import action.BachiMatchAnsAction;
 import action.BachiMatchCateAction;
 import action.BachiMatchReqAction;
+import action.BachiMatchReqSAction;
 import action.BachiQuestionsAction;
 import dto.ActionForward;
 import svc.BachiInfoSelectService;
@@ -53,34 +55,44 @@ public class Bachi_match_controller extends javax.servlet.http.HttpServlet
 			e.printStackTrace();			
 			}
 		}else if(command.equals("/bachi/bachi_match_ans.bc")) {
+			action = new BachiMatchAnsAction();
+			try {
+				forward = action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 			
 		}else if(command.equals("/bachi/bachi_match_change.bc")) {
 			
 		}else if(command.equals("/bachi/bachi_insert.bc")) {
 			forward=new ActionForward();
 			forward.setPath("bachi_insert.jsp");
-		}else if(command.equals("/bachi/bachi_select_id.bc")) { //등록확인용
-			  String cust_id = request.getParameter("cust_id");
-			    BachiInfoSelectService service = new BachiInfoSelectService();
-			    boolean isCheck;
-			    
-				try {
-					isCheck = service.select_bachi_id(cust_id);
-					 PrintWriter out = response.getWriter(); 
-					    if(isCheck) {
-					        out.println("<script>alert('중복된 아이디입니다.');</script>");
-					    } else {
-					        out.println("<script>alert('사용 가능한 아이디입니다.');</script>");
-					    }
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			   
-			    
-			    
+		}else if(command.equals("/bachi/bachi_select_id.bc")) { //중복확인용
+		    String cust_id = request.getParameter("cust_id"); //hidden에 저장된 id 값
+		    BachiInfoSelectService service = new BachiInfoSelectService();
+		    boolean isCheck; //id가 중복이면 true, 중복이 아니면 false 
+		    try {
+		        isCheck = service.select_bachi_id(cust_id);
+
+		        if(isCheck == true) {
+		            response.getWriter().print("false");
+		        } else {
+		            response.getWriter().print("true");
+		        }
+
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
 		}else if(command.equals("/bachi/bachi_info.bc")) {
 			action= new BachiInfoAction();	
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/bachi/bachi_match_req_s.bc")) {
+			action = new BachiMatchReqSAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

@@ -188,7 +188,6 @@ li {
 	float: left;
 	width: 100px;
 	height: 40px;
-	color: #cfb89c;
 }
 
 .nav .index2 {
@@ -223,9 +222,7 @@ li {
 	color: #926b61;
 }
 
-.nav #gosu .index1 a {
-	color: #926b61;
-}
+
 
 .nav .index1 a:hover {
 	color: #926b61;
@@ -693,13 +690,13 @@ li {
 		</div>
 		<div class="header">
 			<div class="cumu">
-				<li><a href="../community.html"> 커뮤니티 </a></li>
+				<li><a href="../community/community.jsp"> 커뮤니티 </a></li>
 			</div>
 			<div class="store">
 				<li><a href="../shopping.html"> 스토어 </a></li>
 			</div>
 			<div class="gosu">
-				<li><a href="../gosumain.html"> 고수 </a></li>
+				<li><a href="../bachi/bachi_main.jsp"> 바치 </a></li>
 			</div>
 
 			<li><a href="index.jsp"><div class="logo"></div></a></li>
@@ -719,23 +716,15 @@ li {
 		<nav>
 			<div id="cumu">
 				<div class="index1">
-					<li><a href="../community/view_board.jsp">집들이</a></li>
+					<li><a href="../community/select_board.jsp?cust_id=<%=id%>">집들이</a></li>
 				</div>
 				<div class="index2">
 					<li><a href="#">일상공유</a></li>
 				</div>
 				<div class="index2">
-					<li><a href="#">나와 비슷한</a></li>
+					<li><a href="../sns/snsListAction.sns?cust_id=<%=id%>">나와 비슷한</a></li>
 				</div>
-				<div class="index3">
-					<li><a href="#">좋아요</a></li>
-				</div>
-				<div class="index4">
-					<li><a href="#">북마크</a></li>
-				</div>
-				<div class="index5">
-					<li><a href="#">팔로우</a></li>
-				</div>
+				
 			</div>
 			<div id="shop">
 				<div class="index1">
@@ -756,13 +745,16 @@ li {
 			</div>
 			<div id="gosu">
 				<div class="index1">
-					<li><a href="bachi_match_req.bc">홈</a></li>
+					<li><a href="bachi_match_ans.bc">받은견적</a></li>
 				</div>
 				<div class="index2">
 					<li><a href="bachi_match.jsp"> 고수매칭 </a></li>
 				</div>
+				<div class="index3">
+					<li><a href="bachi_match_req.bc">견적답변</a></li>
+				</div>
 				<div class="index4">
-					<li><a href="#">마켓</a></li>
+					<li><a href="bachi_market.jsp">마켓</a></li>
 				</div>
 	
 			</div>
@@ -808,6 +800,20 @@ li {
 						$(".login_items").hide();
 					}
 			});
+			
+			
+			        $.ajax({ // gosu_info에 등록되지 않은 아이디일 경우, hide되며 등록된 아이디만 show하도록 구현
+			            url : "bachi_select_id.bc",
+			            data : {cust_id: "<%= id %>" },
+			            type : "post",
+			            success: function(result){ 
+			                if(result === "false"){ // "false" 값이 반환되면
+			                  $(".index3").show(); //견적답변이 보이게 하기
+			                }else{
+			                	$(".index3").hide(); //견적답변 보이지 않게 하기
+			                }
+			            }
+			    });
 		});
 </script>
 </html>

@@ -61,7 +61,46 @@ public class Bachi_match {
 	    return insertCount; //삽입된 행의 개수를 반환
 	}
 
-	public ArrayList<Bachi_match_Been> selectMatchReq(){
+	public ArrayList<Bachi_match_Been> selectMatchReq(int page,int limit){
+		 PreparedStatement pstmt = null;
+		    ResultSet rs = null;
+		    String sql = "select * from gosu_req order by est_id desc, est_q_date asc limit ?,10;";
+		 ArrayList<Bachi_match_Been> match_been = new ArrayList<Bachi_match_Been>();
+		 Bachi_match_Been been = null;
+		 int startrow=(page-1)*10;
+		 try {
+			 pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startrow);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					 been = new Bachi_match_Been(); //삽입할 객체 생성
+				
+					
+//					been = new Bachi_match_Been();
+					been.setEst_id(rs.getInt("est_id")); //객체에 select한 값 담기
+					been.setCust_id(rs.getString("cust_id")); // 참조 아이디
+					been.setEst_q1(rs.getString("est_q1"));
+					been.setEst_q2(rs.getString("est_q2"));
+					been.setEst_q3(rs.getString("est_q3"));
+					been.setGosu_menu1(rs.getString("gosu_menu1"));
+					been.setGosu_menu2(rs.getString("gosu_menu2"));
+					been.setEst_q_date(rs.getString("est_q_date"));
+
+					match_been.add(been); //ArrayList에 담기
+
+				}
+		 }catch(Exception e){
+			 e.printStackTrace();
+		 }finally{
+				close(rs);
+				close(pstmt); //sql 닫기
+			}
+		 
+		return match_been; //프론트 화면에 보낼 ArrayList 반환하기
+	}
+	
+	public ArrayList<Bachi_match_Been> select_one_req(int est_id){
 		 PreparedStatement pstmt = null;
 		    ResultSet rs = null;
 		    String sql = "select * from gosu_req";
@@ -71,7 +110,7 @@ public class Bachi_match {
 			 pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 			 
-				while(rs.next()){
+				if(rs.next()){
 					Bachi_match_Been been = new Bachi_match_Been(); //삽입할 객체 생성
 				
 					
@@ -100,6 +139,19 @@ public class Bachi_match {
 		return match_been; //프론트 화면에 보낼 ArrayList 반환하기
 	}
 	
+	public int count_list ()throws Exception{
+		int count = 0;
+		 PreparedStatement pstmt = null;
+		    ResultSet rs = null;
+		    String sql = "select count(*) from gosu_req"; // 페이징하기위함
+		    pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				count = rs.getInt("count(*)");
+			
+			System.out.println(count);
+		return count;
+	}
 	
 	
 }
