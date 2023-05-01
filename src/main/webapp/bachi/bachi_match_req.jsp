@@ -29,10 +29,19 @@ flex-direction: column;}
 
 #pageList{
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: row;
     justify-content: center;
+    padding-top: 30px;
+    gap: 10px;
+    color: #6c7a56;
 }
+#pageList a{color: #353c2b;}
+.list_section{
+    width: 1280px;
+    height: auto;
+    margin: 0 auto;
+    }
 </style>
 
 <body>
@@ -54,11 +63,12 @@ flex-direction: column;}
 		}
 	%>
 	</header>
-	<div>
+	<div class= "list_section">
 	<div class="list">
 	<table>
 	<tr><th style="
     width: 180px;
+    height: 90px;
 ">아이디</th><th style="
     width: 160px;
 ">대분류 카테고리</th><th style="width: 190px;">중분류 카테고리</th><th style="width: 200px;">목적</th><th style="
@@ -74,10 +84,9 @@ flex-direction: column;}
 	if(article_match != null){
 		for(int i=0;i<article_match.size();i++){
 			%>
-
 			<tr> 
 			
-			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><%=article_match.get(i).getCust_id()%></a></td>
+			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><img src="" style=border-radius:40%; /><%=article_match.get(i).getCust_id()%></a></td>
 			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><%=article_match.get(i).getGosu_menu1() %></a></td>
 			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><%=article_match.get(i).getGosu_menu2() %></a></td>
 			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><%=article_match.get(i).getEst_q1()%></a></td>
@@ -85,7 +94,6 @@ flex-direction: column;}
 			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><%=article_match.get(i).getEst_q3() %></a></td>
 			
 			</tr>
-			
 			<%
 			}
 
@@ -105,27 +113,27 @@ flex-direction: column;}
 
 	<section id="pageList">
 		<%if(nowPage<=1){ %>
-		[이전]&nbsp;
+		◀
 		<%}else{ %>
-		<a href="bachi_match_req.bc?page=<%=nowPage-1 %>">[이전]</a>&nbsp;
+		<a href="bachi_match_req.bc?page=<%=nowPage-1 %>">◀</a>
 		<%} %>
 
 		<%for(int a=startPage;a<=endPage;a++){
 				if(a==nowPage){%>
-		<a href="bachi_match_req.bc?page=<%=a %>">[<%=a %>]</a>
+		<a href="bachi_match_req.bc?page=<%=a %>"><%=a %></a>
 		<%}else{ %>
-		<a href="bachi_match_req.bc?page=<%=a %>">[<%=a %>]
-		</a>&nbsp;
+		<a href="bachi_match_req.bc?page=<%=a %>"><%=a %>
+		</a>
 		<%} %>
 		<%} %>
 
 		<%if(nowPage>=maxPage){ %>
-		[다음]
+		▶
 		<%}else{ %>
-		<a href="bachi_match_req.bc?page=<%=nowPage+1 %>">[다음]</a>
+		<a href="bachi_match_req.bc?page=<%=nowPage+1 %>">▶</a>
 		<%} %>
 	</section>
-
+</div>
 
 
     <div style="margin-left: auto; margin-right: auto;">

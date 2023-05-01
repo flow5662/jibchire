@@ -8,6 +8,21 @@
 <meta charset="UTF-8">
 <title>답변하기</title>
 </head>
+<style>
+.wrap{
+margin:0 auto;
+}
+.cust_section{
+width:1280px;
+margin:0 auto;
+}
+.list{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+</style>
 <body>
 <%
 ArrayList<Bachi_match_Been> article_match = (ArrayList<Bachi_match_Been>)request.getAttribute("been");
@@ -31,18 +46,24 @@ ArrayList<Bachi_match_Been> article_match = (ArrayList<Bachi_match_Been>)request
 		}
 	%>
 	</header>
-
+<div class="cust_section">
+<div class="list">
+<table>
 <% 
 	if(article_match != null){
 		for(int i=0;i<article_match.size();i++){
 			%>	
 			<tr> 
-			<td><%=article_match.get(i).getEst_id() %></a></td>
 			<td><%=article_match.get(i).getCust_id()%></a></td>
-			<td><%=article_match.get(i).getGosu_menu1() %></a></td>
-			<td><%=article_match.get(i).getGosu_menu2() %></a></td>
-			<td><%=article_match.get(i).getEst_q1()%></a></td>
-			<td><%=article_match.get(i).getEst_q2()%></a></td>
+			</tr>
+			<tr>
+			<td><%=article_match.get(i).getGosu_menu1() %>/<%=article_match.get(i).getGosu_menu2() %></a></td>
+			</tr>
+			<tr>
+			<td><%=article_match.get(i).getEst_q1()%></a></td></tr>
+			<tr>
+			<td><%=article_match.get(i).getEst_q2()%></a></td></tr>
+			<tr>
 			<td><%=article_match.get(i).getEst_q3() %></a></td>
 			
 		</tr>
@@ -52,21 +73,23 @@ ArrayList<Bachi_match_Been> article_match = (ArrayList<Bachi_match_Been>)request
 		}
 	%>
 	
+	</table>
 	
 	<br>
 답변하기<br>
 ----------------------<br>
 <br>
-<form>
+<form action="bachi_match_ans.bc">
+<input type="hidden" name="cust_id" value="<%=id%>">
 
-제목<input type="text"><br>
-질문1<input type="text"><br>
-질문2<input type="text"><br>
-질문3<input type="text"><br>
+제목<input type="text" name="title"><br>
+질문1<input type="text" name="serv"><br>
+질문2<input type="text" name="place"><br>
+질문3<input type="text" name="type"><br>
 
 <input type="submit" value="답변하기">
 </form>
-
+</div>
     <div style="margin-left: auto; margin-right: auto;">
 <jsp:include page="footer.jsp" />
 </div>
