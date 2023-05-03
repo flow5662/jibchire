@@ -89,10 +89,11 @@ String est_id = request.getParameter("est_id");
 <input type="submit" value="답변하기">
 </form>
 </div>
-    <div style="margin-left: auto; margin-right: auto;">
+ 
+</div>
+   <div style="margin-left: auto; margin-right: auto;">
 <jsp:include page="footer.jsp" />
 </div>
 
-</div>
 </body>
 </html>

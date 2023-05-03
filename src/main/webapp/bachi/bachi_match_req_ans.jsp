@@ -9,21 +9,7 @@
 <meta charset="UTF-8">
 <title>답변하기</title>
 </head>
-<style>
-.wrap{
-margin:0 auto;
-}
-.cust_section{
-width:1280px;
-margin:0 auto;
-}
-.list{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-</style>
+<link rel="stylesheet" type="text/css" href="style/bachi_match_req_ans.css">
 <body>
 <%
 ArrayList<Bachi_match_Been> article_match = (ArrayList<Bachi_match_Been>)request.getAttribute("been");
@@ -112,10 +98,11 @@ ArrayList<Bachi_match_AnsBeen> match_ans = (ArrayList<Bachi_match_AnsBeen>)reque
 
 
 </div>
-    <div style="margin-left: auto; margin-right: auto;">
-<jsp:include page="footer.jsp" />
-</div>
+ 
 
+</div>
+   <div style="margin-left: auto; margin-right: auto;">
+<jsp:include page="footer.jsp" />
 </div>
 </body>
 </html>

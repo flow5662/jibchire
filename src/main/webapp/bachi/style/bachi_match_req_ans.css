@@ -1,0 +1,13 @@
+@charset "UTF-8";
+.wrap{
+margin:0 auto;
+}
+.cust_section{
+width:1280px;
+margin:0 auto;
+}
+.list{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
