@@ -2,7 +2,7 @@ package dto;
 
 public class Bachi_match_AnsBeen {
 	int est_id;
-	String cust_id_c;
+	String cust_id;
 	String est_a1;
 	String est_a2;
 	String est_a3;
@@ -15,11 +15,11 @@ public class Bachi_match_AnsBeen {
 	public void setEst_id(int est_id) {
 		this.est_id = est_id;
 	}
-	public String getCust_id_c() {
-		return cust_id_c;
+	public String getCust_id() {
+		return cust_id;
 	}
-	public void setCust_id_c(String cust_id_c) {
-		this.cust_id_c = cust_id_c;
+	public void setCust_id(String cust_id) {
+		this.cust_id= cust_id;
 	}
 	public String getEst_a1() {
 		return est_a1;

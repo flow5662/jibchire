@@ -35,6 +35,7 @@ flex-direction: column;}
     padding-top: 30px;
     gap: 10px;
     color: #6c7a56;
+    font-size:16pt;
 }
 #pageList a{color: #353c2b;}
 .list_section{
@@ -42,6 +43,25 @@ flex-direction: column;}
     height: auto;
     margin: 0 auto;
     }
+th{
+font-size: 16pt;
+}
+img {
+    margin-right: 15px;
+    height: 70px;
+    width: 70px;
+    border-radius: 45px;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.user-info {
+    display: flex;
+    align-items: center;
+}
+table{
+text-align: center;
+}
+
 </style>
 
 <body>
@@ -75,7 +95,9 @@ flex-direction: column;}
     width: 200px;
 ">장소</th><th style="
     width: 200px;
-">유형</th></tr>
+">유형</th>
+<th>답변여부</th>
+</tr>
 		<!-- 견적리스트, 선택하여 상세 안에서 답변을 줄 수 있음.  -->
 		<!-- 구글맵으로 된다면 반경 내 설정으로 바꿀예정. -->
 		<!-- 활동가능지역을 기준으로 삼음 -->
@@ -85,14 +107,25 @@ flex-direction: column;}
 		for(int i=0;i<article_match.size();i++){
 			%>
 			<tr> 
+			<%
+			String serverImagePath = request.getContextPath() + "/img/sm_" + article_match.get(i).getCust_pic();
 			
-			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><img src="" style=border-radius:40%; /><%=article_match.get(i).getCust_id()%></a></td>
+			%>
+			<td ><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><div class="user-info"><img src=<%=serverImagePath%> style=""><h5><%=article_match.get(i).getCust_id()%></h5></div></a></td>
 			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><%=article_match.get(i).getGosu_menu1() %></a></td>
 			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><%=article_match.get(i).getGosu_menu2() %></a></td>
 			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><%=article_match.get(i).getEst_q1()%></a></td>
 			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><%=article_match.get(i).getEst_q2()%></a></td>
 			<td><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><%=article_match.get(i).getEst_q3() %></a></td>
-			
+			<td>
+			<%
+			if(article_match.get(i).getEst_id() == article_match.get(i).getAns_est_id()){
+				out.print("<font style='color:#6464ad;'>답변완료</font>");
+			}else{
+				out.print("답변대기중");
+			}
+			%>
+			</td>
 			</tr>
 			<%
 			}
@@ -102,8 +135,6 @@ flex-direction: column;}
 	결과값없음
 	<%
 }
-
-
 %>
 
 

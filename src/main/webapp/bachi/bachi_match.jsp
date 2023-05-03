@@ -5,11 +5,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="style/gosumach.css">
+
 <title>고수매칭</title>
 </head>
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+<link rel="stylesheet" type="text/css" href="style/bachi_match.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <%
@@ -61,25 +62,31 @@ $('.btn_gotop').click(function(){
 
 
 		<section class="section">
+		
+		<!-- 고수 검색부분 -->
+		  
 			<article>
-				<!-- 고수 검색부분 -->
+				
 				<div class="servimg">
 					<div class="servtext">
+					<div class="text">
 						<h2>
-							어떤 서비스를 찾고 계신가요?<br> 고수들을 만나 견적을 요청해보세요.
-							<div>
-								<input type="textarea" name="gosuserch"
-									placeholder="어떤 고수를 찾으시나요?"> <input type="button"
+							어떤 서비스를 찾고 계신가요?<br> 바치들을 매칭해드립니다.
+							</div>
+							<div class="search_area">
+								<input type="text" name="gosuserch"
+									placeholder="어떤 고수를 찾으시나요?" style="width: 450px;border: solid 1px gray;"> <input type="button"
 									name="gosuserch" value="서비스검색">
 							</div>
 						</h2>
 					</div>
 				</div>
 			</article>
-
+			
+<!-- 카테고리별 선택 -->
 
 			<article>
-				<!-- 카테고리별 선택 -->
+				<!-- 
 				<div class="gosucate">
 					<a href="#"><div class="cate1">
 							<li>레슨</li>
@@ -89,6 +96,7 @@ $('.btn_gotop').click(function(){
 						<a> <a href="#"><div class="cate3">
 									<li>이벤트</li>
 								</div></a> <a href="#"><div class="cate4">
+								
 									<li>비즈니스</li>
 								</div></a> <a href="#"><div class="cate5">
 									<li>디자인/개발</li>
@@ -96,11 +104,12 @@ $('.btn_gotop').click(function(){
 									<li>건강/미용</li>
 								</div></a> <a href="#"><div class="cate7">
 									<li>알바</li>
+									
 								</div></a> <a href="#"><div class="cate8">
 									<li>기타</li>
 								</div></a>
 				</div>
-
+-->
 			</article>
 
 
@@ -108,7 +117,7 @@ $('.btn_gotop').click(function(){
 				<!-- 인기서비스 카테고리 영역 -->
 				<div class="bestcate">
 					<div class="gosust">
-						<h2>인기 서비스</h2>
+						<h2>대표 서비스</h2>
 					</div>
 
 
@@ -139,48 +148,30 @@ $('.btn_gotop').click(function(){
 						</div>
 
 						<div class="boxtitle">
-							<div class="bestcateimg4"></div>
+						<a href="bachi_match.bc?category=dobe-sigong">
+							<div class="bestcateimg4"></div></a>
 							<div class="box2">
-								<li><strong>도배시공</strong></li>
+								<li><strong><a href="bachi_match.bc?category=dobe-sigong">도배시공</a></strong></li>
 							</div>
 						</div>
 
 						<div class="boxtitle">
-							<div class="bestcateimg5"></div>
+						<a href="bachi_match.bc?category=music-lesson">
+							<div class="bestcateimg5"></div></a>
 							<div class="box2">
-								<li><strong>음악과외</strong></li>
+								<li><strong><a href="bachi_match.bc?category=music-lesson">음악과외</a></strong></li>
 							</div>
 						</div>
 
 						<div class="boxtitle">
+						<a href="bachi_match.bc?category=pt-training">
 							<div class="bestcateimg6"></div>
+							</a>
 							<div class="box2">
-								<li><strong>PT트레이닝</strong></li>
+								<li><strong><a href="bachi_match.bc?category=pt-training">PT트레이닝</a></strong></li>
 							</div>
 						</div>
 
-
-
-						<div class="boxtitle">
-							<div class="bestcateimg7"></div>
-							<div class="box2">
-								<li><strong>화물/운반</strong></li>
-							</div>
-						</div>
-						<div class="boxtitle">
-							<div class="bestcateimg8"></div>
-
-							<div class="box2">
-								<li><strong>인테리어/시공</strong></li>
-
-							</div>
-						</div>
-						<div class="boxtitle">
-							<div class="bestcateimg9"></div>
-							<div class="box2">
-								<li><strong>메이크업</strong></li>
-							</div>
-						</div>
 
 					</div>
 			</article>

@@ -143,7 +143,7 @@ li {
 	width: 94px;
 	height: 40px;
 	color: white;
-	background-color: #926b61;
+	background-color: #789849;
 	border-radius: 8px;
 	border: none;
 	cursor: pointer;
@@ -154,10 +154,10 @@ li {
 	/*position: absolute;*/
 	/*top: 10%;
 		left: 61%;*/
-	box-shadow: 0px 0px .5px 1px #926b61;
+	box-shadow: 0px 0px .5px 1px #789849;
 	height: 30px;
 	background-color: #fff;
-	border: 1px solid #926b61;
+	border: 1px solid #789849;
 	border-radius: 30px;
 	transition: 0.4s;
 	width: 282px;
@@ -650,7 +650,7 @@ li {
 			</div>
 			<div id="gosu">
 				<div class="index1">
-					<li><a href="../bachi/bachi_match.jsp">고수매칭</a></li>
+					<li><a href="../bachi/bachi_match-home.bc">고수매칭</a></li>
 				</div>
 				<div class="index2">
 					<li><a href="../bachi/bachi_market.jsp"> 마켓 </a></li>

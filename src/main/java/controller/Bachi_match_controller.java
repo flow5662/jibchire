@@ -14,6 +14,7 @@ import action.BachiInfoAction;
 import action.BachiMatchAnsAction;
 import action.BachiMatchCateAction;
 import action.BachiMatchReqAction;
+import action.BachiMatchReqAns;
 import action.BachiMatchReqSAction;
 import action.BachiQuestionsAction;
 import dto.ActionForward;
@@ -98,6 +99,19 @@ public class Bachi_match_controller extends javax.servlet.http.HttpServlet
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/bachi/bachi_match_req_sw.bc")) {
+			action = new BachiMatchReqAns();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/bachi/bachi_match_anser.bc")) {
+			forward=new ActionForward();
+			forward.setPath("bachi_match_req_ans_info.jsp");
+		}else if(command.equals("/bachi/bachi_match-home.bc")) {
+			forward=new ActionForward();
+			forward.setPath("bachi_match.jsp");
 		}
 		
 		

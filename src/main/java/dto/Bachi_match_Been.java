@@ -9,6 +9,21 @@ public class Bachi_match_Been {
 	private String est_q2;
 	private String est_q3;
 	private String est_q_date;
+	private String cust_pic;
+	private int ans_est_id; //답변된 est_id가 있을 경우 추려내기 위함
+	
+	public int getAns_est_id() {
+		return ans_est_id;
+	}
+	public void setAns_est_id(int ans_est_id) {
+		this.ans_est_id = ans_est_id;
+	}
+	public String getCust_pic() {
+		return cust_pic;
+	}
+	public void setCust_pic(String cust_pic) {
+		this.cust_pic = cust_pic;
+	}
 	public int getEst_id() {
 		return est_id;
 	}

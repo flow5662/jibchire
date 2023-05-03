@@ -26,7 +26,7 @@ margin:0 auto;
 <body>
 <%
 ArrayList<Bachi_match_Been> article_match = (ArrayList<Bachi_match_Been>)request.getAttribute("been");
-
+String est_id = request.getParameter("est_id");
 
 %>
 
@@ -80,13 +80,12 @@ ArrayList<Bachi_match_Been> article_match = (ArrayList<Bachi_match_Been>)request
 ----------------------<br>
 <br>
 <form action="bachi_match_ans.bc">
+<input type="hidden" name="est_id" value="<%=est_id%>">
 <input type="hidden" name="cust_id" value="<%=id%>">
-
-제목<input type="text" name="title"><br>
-질문1<input type="text" name="serv"><br>
-질문2<input type="text" name="place"><br>
-질문3<input type="text" name="type"><br>
-
+질문1<input type="text" name="est_a1"><br>
+질문2<input type="text" name="est_a2"><br>
+질문3<input type="text" name="est_a3"><br>
+<!-- const_date, payment는 답변 이후에 같이 db에 (update)입력되도록 -->
 <input type="submit" value="답변하기">
 </form>
 </div>

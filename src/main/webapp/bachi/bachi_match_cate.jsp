@@ -96,6 +96,30 @@ input[type="checkbox"] {
 	display: flex;
 	gap: 20px;
 }
+.bachi_section{
+margin: 0 auto;
+padding-top: 20px;
+}
+input[type="button"]{
+background-color: #789849;
+color: white;
+border: none;
+width:110px;
+height: 60px;
+}
+input[type="submit"]{
+background-color: #789849;
+color: white;
+border: none;
+width:110px;
+height: 60px;
+}
+input[type="button"]:hover{
+background-color: #4f5645;
+}
+input[type="submit"]:hover{
+background-color: #4f5645;
+}
 </style>
 
 
@@ -121,8 +145,8 @@ input[type="checkbox"] {
 			<form action="bachi_question.bc" method="post">
 			
 			<input type="hidden" name="cust_id" value="<%=id %>">
-				<div>
-	<img src="" />이미지<%
+				<div class="bachi_section">
+	<%
 			//out.println("에어컨 및 시공"); 
 			%>
 			<%
@@ -140,6 +164,7 @@ input[type="checkbox"] {
 			%>
 							<%
 	if(category.equals("aircon-sigong")){
+		
 			%>
 					<div class="category">
 
@@ -704,7 +729,7 @@ input[type="checkbox"] {
 							</div>
 						</div>
 					</div>
-
+					
 				</div>
 			
 			<%

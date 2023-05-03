@@ -135,7 +135,7 @@ li {
 	width: 94px;
 	height: 40px;
 	color: white;
-	background-color: #926b61;
+	background-color: #789849;
 	border-radius: 8px;
 	border: none;
 	cursor: pointer;
@@ -146,10 +146,10 @@ li {
 	/*position: absolute;*/
 	/*top: 10%;
 		left: 61%;*/
-	box-shadow: 0px 0px .5px 1px #926b61;
+	box-shadow: 0px 0px .5px 1px #789849;
 	height: 30px;
 	background-color: #fff;
-	border: 1px solid #926b61;
+	border: 1px solid #789849;
 	border-radius: 30px;
 	transition: 0.4s;
 	width: 282px;
@@ -165,7 +165,7 @@ li {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: #926b61;
+	color: gray;
 }
 
 .gosuch:hover {
@@ -745,10 +745,10 @@ li {
 			</div>
 			<div id="gosu">
 				<div class="index1">
-					<li><a href="bachi_match_ans.bc">받은견적</a></li>
+					<li><a href="bachi_match_anser.bc">받은견적</a></li>
 				</div>
 				<div class="index2">
-					<li><a href="bachi_match.jsp"> 고수매칭 </a></li>
+					<li><a href="bachi_match-home.bc"> 고수매칭 </a></li>
 				</div>
 				<div class="index3">
 					<li><a href="bachi_match_req.bc">견적답변</a></li>
