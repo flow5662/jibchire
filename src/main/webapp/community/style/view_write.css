@@ -66,7 +66,7 @@ input[id="cb10"] + label {background-color:#FF66B2;}
 #writing input[type="submit"]{width: 100px;height: 40px; background-color:#C0C0C0; border-radius: 5px;}
 
 /* 이미지 미리보기*/
-#preview{width:98%; height: 600px; margin:0 auto;  overflow:hidden; }
+#preview{max-width:98%; height: auto; margin:0 auto;  overflow:hidden; }
 #previewImg{width: 100%; height: 100%; object-fit:cover;}
 #writing h5{margin-bottom:5px;font-size: 13pt;}
 #writing input[type=file]{position:relative; left:30px;}

@@ -8,8 +8,6 @@ public class Post_house {
 	public String post_title; //게시글 제목
 	public String post_txt;  //게시글 내용
 	public String post_txt2;  //게시글 내용
-	public String post_txt3;  //게시글 내용
-	public String post_txt4;  //게시글 내용
 	public String post_house; //주거형태
 
 	public int post_rooms; // 방의 갯수
@@ -24,7 +22,6 @@ public class Post_house {
 	public String post_pet; // char y or n
 	public String post_startdate; //공사시작일
 	public String post_enddate; //공사마감일
-	public String post_style; // 컬러풀,등등
 	public String post_color; // 색상 00,00,00,
 	public String post_pics; // 이미지 루트?
 	public String post_pic2;
@@ -33,6 +30,17 @@ public class Post_house {
 	public String post_writetime;
 	public String bookmark_time;
 	public int post_read;
+	
+	public String post_item10; // 아이템의 사진 이름등록해서 mouse hover 했을 때 해당 상품의 이름과, 가격, 브랜드 등 보일 수 있게 
+	public String post_item11;
+	public String post_item12;
+	public String post_item13;
+	public String post_item14;
+	public String post_item15;
+	public String post_item16;
+	public String post_item17;
+	public String post_item18;
+	public String post_item19;
 	
 	public int getPost_id() {
 		return post_id;
@@ -136,12 +144,6 @@ public class Post_house {
 	public void setPost_pics(String post_pics) {
 		this.post_pics = post_pics;
 	}
-	public String getPost_style() {
-		return post_style;
-	}
-	public void setPost_style(String post_style) {
-		this.post_style = post_style;
-	}
 	public String getPost_color() {
 		return post_color;
 	}
@@ -185,26 +187,71 @@ public class Post_house {
 	public void setPost_txt2(String post_txt2) {
 		this.post_txt2 = post_txt2;
 	}
-	public String getPost_txt3() {
-		return post_txt3;
-	}
-	public void setPost_txt3(String post_txt3) {
-		this.post_txt3 = post_txt3;
-	}
-	public String getPost_txt4() {
-		return post_txt4;
-	}
-	public void setPost_txt4(String post_txt4) {
-		this.post_txt4 = post_txt4;
-	}
 	public int getPost_read() {
 		return post_read;
 	}
 	public void setPost_read(int post_read) {
 		this.post_read = post_read;
 	}
-
+	public String getPost_item10() {
+		return post_item10;
+	}
+	public void setPost_item10(String post_item10) {
+		this.post_item10 = post_item10;
+	}
+	public String getPost_item11() {
+		return post_item11;
+	}
+	public void setPost_item11(String post_item11) {
+		this.post_item11 = post_item11;
+	}
+	public String getPost_item12() {
+		return post_item12;
+	}
+	public void setPost_item12(String post_item12) {
+		this.post_item12 = post_item12;
+	}
+	public String getPost_item13() {
+		return post_item13;
+	}
+	public void setPost_item13(String post_item13) {
+		this.post_item13 = post_item13;
+	}
+	public String getPost_item14() {
+		return post_item14;
+	}
+	public void setPost_item14(String post_item14) {
+		this.post_item14 = post_item14;
+	}
+	public String getPost_item15() {
+		return post_item15;
+	}
+	public void setPost_item15(String post_item15) {
+		this.post_item15 = post_item15;
+	}
+	public String getPost_item16() {
+		return post_item16;
+	}
+	public void setPost_item16(String post_item16) {
+		this.post_item16 = post_item16;
+	}
+	public String getPost_item17() {
+		return post_item17;
+	}
+	public void setPost_item17(String post_item17) {
+		this.post_item17 = post_item17;
+	}
+	public String getPost_item18() {
+		return post_item18;
+	}
+	public void setPost_item18(String post_item18) {
+		this.post_item18 = post_item18;
+	}
+	public String getPost_item19() {
+		return post_item19;
+	}
+	public void setPost_item19(String post_item19) {
+		this.post_item19 = post_item19;
+	}
 	
-	
-
 }

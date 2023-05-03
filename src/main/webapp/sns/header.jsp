@@ -415,8 +415,8 @@
 
 		<div class="header">
 			<div class="cumu"><li><a href ="../community/community.jsp"> 커뮤니티 </a></li></div>
-			<div class="store"><li><a href ="shopping.jsp"> 스토어 </a></li></div>
-			<div class="gosu"><li><a href ="gosumain.jsp"> 고수 </a></li></div>
+<!-- 			<div class="store"><li><a href ="shopping.jsp"> 스토어 </a></li></div> -->
+			<div class="gosu"><li><a href ="gosumain.jsp"> 바치 </a></li></div>
 			<li><a href="index.jsp"><div class="logo"> </div></a></li>
 
 			<div class="serch">
@@ -443,19 +443,16 @@
 				<div class="index2"><li><a href="login.jsp">나와 비슷한</a></li></div>
 			</div>
 		
-			<div id="shop">
-				<div class="index1"><li><a href="../store/used/board_index.jsp">중고거래</a></li></div>
-				<div class="index2"><li><a href="#">브랜드관</a></li></div>
-				<div class="index3"><li><a href="#">신상품</a></li></div>
-				<div class="index4"><li><a href="#">베스트</a></li></div>
-				<div class="index5"><li><a href="#">이벤트</a></li></div>
-			</div>
+<!-- 			<div id="shop"> -->
+<!-- 				<div class="index1"><li><a href="../store/used/board_index.jsp">중고거래</a></li></div> -->
+<!-- 				<div class="index2"><li><a href="#">브랜드관</a></li></div> -->
+<!-- 				<div class="index3"><li><a href="#">신상품</a></li></div> -->
+<!-- 				<div class="index4"><li><a href="#">베스트</a></li></div> -->
+<!-- 				<div class="index5"><li><a href="#">이벤트</a></li></div> -->
+<!-- 			</div> -->
 			<div id="gosu">
-				<div class="index1"><li><a href="#">홈</a></li></div>
-				<div class="index2"><li><a href="#"> 고수매칭 </a></li></div>
-				<div class="index3"><li><a href="#">고수찾기</a></li></div>
+				<div class="index2"><li><a href="../bachi/bachi_match.jsp"> 고수매칭 </a></li></div>
 				<div class="index4"><li><a href="../bachi/bachi_market.jsp">마켓</a></li></div>
-				<div class="index5"><li><a href="#">받은견적</a></li></div>
 			</div>
 		</nav>
 	</div>
@@ -467,21 +464,37 @@
 		$("#cumu").hide();
 		$("#shop").hide();
 		$("#gosu").hide();
+		$(".nav").hide();
 		
 		$(".cumu").mouseenter(function(){
+			$(".nav").slideDown();
 			$("#cumu").show();
 			$("#shop").hide();
 			$("#gosu").hide();
 		});
 		$(".store").mouseenter(function(){
+			$(".nav").slideDown();
 			$("#shop").show();
 			$("#cumu").hide();
 			$("#gosu").hide();
 		})
 		$(".gosu").mouseenter(function(){
+			$(".nav").slideDown();
 			$("#gosu").show();
 			$("#cumu").hide();
 			$("#shop").hide();
+		});
+
+		$(".cumu , .store, .gosu").mouseout(function(){
+			$(".nav").mouseenter(function(){
+				$(".nav").show();
+			});
+			$("header ~ .line").mouseout(function(){
+				$(".nav, .header").mouseenter(function(){
+					$(".nav").show();
+				});	
+				$(".nav").slideUp();
+			});
 		});
 		
 		$("#write").on("click", function() {

@@ -64,7 +64,7 @@
 	
 	/*path를 세팅하기 위해 ActionForward class의 객체 생성*/
 	//response.sendRedirect("view_board.jsp");
-	RequestDispatcher dispatcher=request.getRequestDispatcher("view_board2.jsp");
+	RequestDispatcher dispatcher=request.getRequestDispatcher("view_board.jsp");
 	dispatcher.forward(request, response);
 %>
 </body>

@@ -165,12 +165,12 @@
 			    	</td>
 			    	<td> <input type="text" name="emailadr_input" id="email_input" placeholder="직접입력" readonly="true"> </td>
 			    </tr>
-			    <tr>
-			    	<td colspan="2" class="menu"> 계정을 소개할 사진을 올려주세요  </td> 
-			    	<td colspan="4">
-			    		<input type="file" name="cust_pic"  >
-			    	</td>
-			    </tr>
+<!-- 			    <tr> -->
+<!-- 			    	<td colspan="2" class="menu"> 계정을 소개할 사진을 올려주세요  </td>  -->
+<!-- 			    	<td colspan="4"> -->
+<!-- 			    		<input type="file" name="cust_pic"  > -->
+<!-- 			    	</td> -->
+<!-- 			    </tr> -->
 			    <tfoot>
 			    	<tr>
 				    	<td colspan="6" align="center"> 

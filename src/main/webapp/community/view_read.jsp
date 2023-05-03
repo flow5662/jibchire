@@ -17,11 +17,7 @@
  request.setCharacterEncoding("utf-8");
 %>
 <%
-	CmtHousewarming sl = new CmtHousewarming();
-	int pid = Integer.parseInt(request.getParameter("post_id"));
-	Post_house po = sl.select_one(pid);
-	sl.updateReadCount(pid); //조회수 올리기 
-	
+	Post_house po = (Post_house)request.getAttribute("post");
 %>
 <body>
  	<!-- header -->
@@ -40,8 +36,27 @@
 		}
 	%>
 	</header>
-		<div id="wrap">
-
+<!-- 	<aside> -->
+<!-- 		<div id="like"> -->
+<!-- 			<ul> -->
+<!-- 				<li>북마크</li> -->
+<!-- 				<li> -->
+<%-- 				<% --%>
+<%-- 					%><img src="img/sns/heart-add-line.png" class="buttonlike" ><% --%>
+<%-- 				%> --%>
+<!-- 				</li> -->
+<!-- 				<li>42</li> -->
+<!-- 				<li>팔로우</li> -->
+<!-- 				<li> -->
+<%-- 				<% --%>
+<%-- 					%><img src="img/sns/user-follow-fill.png" class="buttonfollow" ><% --%>
+<%-- 				%> --%>
+<!-- 				</li> -->
+<!-- 				<li>16</li> -->
+<!-- 			</ul> -->
+<!-- 		</div> -->
+<!-- 	</aside> -->
+	<div id="wrap">
 			<%
 			String savePath = "/community/communityPic";
 			ServletContext context = getServletContext();
@@ -51,8 +66,52 @@
 			//out.println(sFilePath);
 			%>
 			<!-- 사진 슬라이더 -->
-			<div class="postPics">
-				 <img src="postPics/<%=po.getPost_pics() %>" style="max-width:100%; height:auto;">
+			<div id="mainpic">
+				 <img src="postPics/<%=po.getPost_pics() %>" id="mainpicimg">
+				 			<!-- 세부내용박스(집특징, 평수 등등) -->	   	
+			   	<div id="info">
+			   		<table>
+			   			<tr><td>주거형태</td>
+			   				<td><%=po.getPost_house()%> </td>
+			   				<td>방개수</td>
+			   				<td><%=po.getPost_rooms()%>개</td>
+			   				<td>집 평수</td>
+			   				<td><%=po.getPost_m2()%>평</td>
+			   			</tr>
+			   			<tr>	
+			   				<td>집 연식</td>
+			   				<td><%=po.getPost_houseold()%>년 이상</td>
+			   				<td>가족 인원</td>
+			   				<td><%=po.getPost_fam()%>명</td>
+			   				<td>가족 형태</td>
+			   				<td><%=po.getPost_family()%></td>
+			   			</tr>
+	<!-- 		   			<tr> 스타일, 색상 빠졌음--> 
+	<!-- 		   				<td>가족 인원</td> -->
+	<%-- 		   				<td><%=po.getPost_fam()%>명</td> --%>
+	<!-- 		   				<td>가족형태</td> -->
+	<%-- 		   				<td><%=po.getPost_family()%></td> --%>
+	<!-- 		   				<td>반려동물</td> -->
+	<%-- 		   				<td><%=po.getPost_pet()%></td> --%>
+	<!--    					</tr> -->
+	<!--    					<tr> -->
+	<!-- 		   				<td>지역</td> -->
+	<%-- 		   				<td><%=po.getPost_region()%></td> --%>
+	<!-- 		   				<td>예산</td> -->
+	<%-- 		   				<td><%=po.getPost_budget()%>만원</td> --%>
+	<!-- 		   				<td></td> -->
+	<!-- 		   				<td></td> -->
+	<!--    					</tr> -->
+	<!--    					<tr> -->
+	<!-- 		   				<td>공사시작일</td> -->
+	<%-- 		   				<td><%=po.getPost_startdate()%></td> --%>
+	<!-- 		   				<td>공사마감일</td> -->
+	<%-- 		   				<td><%=po.getPost_enddate()%></td> --%>
+	<!-- 		   				<td></td> -->
+	<!-- 		   				<td></td> -->
+	<!-- 		   			</tr> -->
+			   		</table>
+				</div >
 			</div>
 
 		   	<div id="title"> 
@@ -68,69 +127,97 @@
 				}	
 				%>   	
 		   	</div>	
-			<!-- 세부내용박스(집특징, 평수 등등) -->	   	
-		   	<div id="info">
-		   		<table>
-		   			<tr><td>주거형태</td>
-		   				<td><%=po.getPost_house()%> </td>
-		   				<td>방개수</td>
-		   				<td><%=po.getPost_rooms()%>개</td>
-		   				<td>집 평수</td>
-		   				<td><%=po.getPost_m2()%>평</td>
-		   			</tr><tr>	
-		   				<td>집 연식</td>
-		   				<td><%=po.getPost_houseold()%>년 이상</td>
-		   				<td>스타일</td>
-		   				<td><%=po.getPost_style()%></td>
-		   				<td>색상 톤</td>
-		   				<td><%=po.getPost_color()%></td>
-		   			</tr><tr>
-		   				<td>가족 인원</td>
-		   				<td><%=po.getPost_fam()%>명</td>
-		   				<td>가족형태</td>
-		   				<td><%=po.getPost_family()%></td>
-		   				<td>반려동물</td>
-		   				<td><%=po.getPost_pet()%></td>
-   					</tr><tr>
-		   				<td>지역</td>
-		   				<td><%=po.getPost_region()%></td>
-		   				<td>예산</td>
-		   				<td><%=po.getPost_budget()%>만원</td>
-		   				<td></td>
-		   				<td></td>
-   					</tr><tr>
-		   				<td>공사시작일</td>
-		   				<td><%=po.getPost_startdate()%></td>
-		   				<td>공사마감일</td>
-		   				<td><%=po.getPost_enddate()%></td>
-		   				<td></td>
-		   				<td></td>
-		   			</tr>
-		   		</table>
-					
-			</div >
 			<!-- 내용 -->
-    		<pre>
-    			<%=po.getPost_txt()%>
-    		</pre>
+			<div class="content">
+		   		<pre>
+		   			<%=po.getPost_txt()%>
+		   		</pre>
+    		</div>
     		<div class="postPics">
-				 <div class="pics"> <img src="postPics/<%=po.getPost_pic2() %>" > </div>
-			</div>
+				 <div class="pics">
+				 	<img src="postPics/<%=po.getPost_pic2() %>" id="insertedbigpicture" style="width:630px; height: 780px;">
+				 	<!-- 상품(슬라이드) 에 대한 세부정보 들어가는 공간 -->
+				 	<div class="itemthumbnailinfo">
+<!-- 				 		<li> <div id="iteminfo11" class="postIteminfos">123 </div> </li> -->
+				 	</div>
+				 </div>
+				 <div class="postItem">
+				 	<!-- 큰 사진에 대한 상품 사진 넣는 공간 -->
+				 	<ul class="insertedpicture">
+				 		<li><img src="postPics/<%=po.getPost_pics()%>" style="width:140px; height: 190px;"> 
+				 			<input type="hidden" value="postPics/<%=po.getPost_pics()%>"></li>
+				 		<li><img src="postPics/<%=po.getPost_pic2()%>" style="width:140px; height: 190px;"> 
+				 			<input type="hidden" value="postPics/<%=po.getPost_pic2()%>"></li>
+				 		<li><img src="postPics/<%=po.getPost_pic3()%>" style="width:140px; height: 190px;"> 
+				 			<input type="hidden" value="postPics/<%=po.getPost_pic3()%>"></li>
+				 		<li><img src="postPics/<%=po.getPost_pic4()%>" style="width:140px; height: 193px;"> 
+				 			<input type="hidden" value="postPics/<%=po.getPost_pic4()%>"></li>
+				 	</ul>
+				 </div> 
+	 		</div>
+			<!-- 상품 슬라이드 -->
+			<div id="slider" >
+				<a class="control_next">>></a>
+				<a class="control_prev"><<</a>
+				<ul class="itemthumbnail">
+						<% if(!(po.getPost_item10()==null)){ %>
+				    <li id="item10"><img src="postPics/<%=po.getPost_item10()%>"style="width:130px; height: 130px;">
+				    	<input type="hidden" value="<%=po.getPost_item10()%>"></li>
+				    	<% } if(!(po.getPost_item11()==null)){ %>
+				    <li id="item11"><img src="postPics/<%=po.getPost_item11()%>"style="width:130px; height: 130px;">
+				    	<input type="hidden" value="<%=po.getPost_item11()%>"></li>
+				    	<% } if(!(po.getPost_item12()==null)){ %>
+				    <li id="item12"><img src="postPics/<%=po.getPost_item12()%>"style="width:130px; height: 130px;">
+				    	<input type="hidden" value="<%=po.getPost_item12()%>"></li>
+				    	<% } if(!(po.getPost_item13()==null)){ %>
+				    <li id="item13"><img src="postPics/<%=po.getPost_item13()%>"style="width:130px; height: 130px;">
+				    	<input type="hidden" value="<%=po.getPost_item13()%>"></li>
+			    		<% } if(!(po.getPost_item14()==null)){ %>
+			    	<li id="item14"><img src="postPics/<%=po.getPost_item14()%>"style="width:130px; height: 130px;">
+				    	<input type="hidden" value="<%=po.getPost_item14()%>"></li>
+				    	<% } if(!(po.getPost_item15()==null)){ %>
+				    <li id="item15"><img src="postPics/<%=po.getPost_item15()%>"style="width:130px; height: 130px;">
+				    	<input type="hidden" value="<%=po.getPost_item15()%>"></li>
+				    	<% } if(!(po.getPost_item16()==null)){ %>
+				    <li id="item16"><img src="postPics/<%=po.getPost_item16()%>"style="width:130px; height: 130px;">
+				    	<input type="hidden" value="<%=po.getPost_item16()%>"></li>
+				    	<% } if(!(po.getPost_item17()==null)){ %>
+				    <li id="item17"><img src="postPics/<%=po.getPost_item17()%>"style="width:130px; height: 130px;">
+				    	<input type="hidden" value="<%=po.getPost_item17()%>"></li>
+				    	<% } if(!(po.getPost_item18()==null)){ %>
+			    	<li id="item18"><img src="postPics/<%=po.getPost_item18()%>"style="width:130px; height: 130px;">
+				    	<input type="hidden" value="<%=po.getPost_item18()%>"></li>
+				    	<% } if(!(po.getPost_item19()==null)){ %>
+			    	<li id="item19"><img src="postPics/<%=po.getPost_item19()%>"style="width:130px; height: 130px;">
+				    	<input type="hidden" value="<%=po.getPost_item19()%>"></li>
+				    	<% }%>
+			    </ul>
+			</div>	
 			<pre>
     			<%=po.getPost_txt2()%>
     		</pre>
-    		<div class="postPics">
-				 <div class="pics"> <img src="postPics/<%=po.getPost_pic3() %>"> </div>
-			</div>
-			<pre>
-    			<%=po.getPost_txt3()%>
-    		</pre>
-    		<div class="postPics">
-				 <div class="pics"> <img src="postPics/<%=po.getPost_pic4() %>"> </div>
-			</div>
-			<pre>
-    			<%=po.getPost_txt4() %>
-    		</pre>
+<!--     		<div class="postPics"> -->
+<%-- 				 <div class="pics"> <img src="postPics/<%=po.getPost_pic3() %>"style="width:600px; height: auto;"> </div> --%>
+<!-- 				 <div class="postItem"> -->
+<!-- 				 	<ul class="itemthumbnailinfo"> -->
+<!-- 				 		<li> <div class="postIteminfos"> </div> </li> -->
+<!-- 				 		<li> <div class="postIteminfos"> </div> </li> -->
+<!-- 				 		<li> <div class="postIteminfos"> </div> </li> -->
+<!-- 				 		<li> <div class="postIteminfos"> </div> </li> -->
+<!-- 				 	</ul> -->
+<!-- 				 	큰 사진에 대한 상품 사진 넣는 공간 -->
+<!-- 				 	<ul class="itemthumbnail"> -->
+<%-- 				 		<li><img src="postPics/<%=po.getPost_item10()%>" style="width:120px; height: 120px;">  --%>
+<%-- 				 			<input type="hidden" value="<%=po.getPost_item10()%>"></li> --%>
+<%-- 				 		<li><img src="postPics/<%=po.getPost_item11()%>" style="width:120px; height: 120px;">  --%>
+<%-- 				 			<input type="hidden" value="<%=po.getPost_item11()%>"></li> --%>
+<%-- 				 		<li><img src="postPics/<%=po.getPost_item12()%>" style="width:120px; height: 120px;">  --%>
+<%-- 				 			<input type="hidden" value="<%=po.getPost_item12()%>"></li> --%>
+<%-- 				 		<li><img src="postPics/<%=po.getPost_item13()%>" style="width:120px; height: 120px;">  --%>
+<%-- 				 			<input type="hidden" value="<%=po.getPost_item13()%>"></li> --%>
+<!-- 				 	</ul> -->
+<!-- 				 </div>  -->
+<!-- 			</div> -->
 		</div>
 	<!-- footer -->
 	<footer>
@@ -138,48 +225,6 @@
 	</footer>
 <script>
 $(function(){
-	/*slider 관련 기능*/
-	$("subnav").hide();
-	setInterval(function () {
-	    moveRight();
-	}, 3000);
-	
-	var slideCount = $('#slider ul li').length;
-	var slideWidth = $('#slider ul li').width();
-	var slideHeight = $('#slider ul li').height();
-	var sliderUlWidth = slideCount * slideWidth;
-	
-	$('#slider').css({ width: slideWidth, height: slideHeight });
-	
-	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-	
-	$('#slider ul li:last-child').prependTo('#slider ul');
-	
-	function moveLeft() {
-	    $('#slider ul').animate({
-	        left: + slideWidth
-	    }, 200, function () {
-	        $('#slider ul li:last-child').prependTo('#slider ul');
-	        $('#slider ul').css('left', '');
-	    });
-	};
-	
-	function moveRight() {
-	    $('#slider ul').animate({
-	        left: - slideWidth
-	    }, 200, function () {
-	        $('#slider ul li:first-child').appendTo('#slider ul');
-	        $('#slider ul').css('left', '');
-	    });
-	};
-	
-	$('a.control_prev').click(function () {
-	    moveLeft();
-	});
-	
-	$('a.control_next').click(function () {
-	    moveRight();
-	});
 	
 });
 </script>

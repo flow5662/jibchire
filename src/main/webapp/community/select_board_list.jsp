@@ -14,7 +14,6 @@
 <%
 	request.setCharacterEncoding("utf-8"); 
 	String menuword = request.getParameter("menuword");
-	String field = request.getParameter("field");
 	CmtHousewarming sl = new CmtHousewarming();
 	
 	ArrayList<Post_house> alist=new ArrayList<Post_house>();
@@ -35,9 +34,9 @@
 	/*로그인 되어있으면 북마크 정보까지 가져오기, 로그인 안되어있으면 전체정보만 가져오기*/
 	String cust_id= request.getParameter("cust_id");
 	if(cust_id==null){
-		alist = house.selectSearchList(pages,limit,field,menuword);    // articleList = feed테이블에 저장되어 있는 모든 값
+		alist = house.selectSearchList(pages,limit,menuword);    // articleList = feed테이블에 저장되어 있는 모든 값
 	}else {
-		alist = house.selectLoginSearchList(pages,limit,field,menuword,cust_id); //로그인되어있으면 좋아요정보까지 가져오는 메소드 연결
+		alist = house.selectLoginSearchList(pages,limit,menuword,cust_id); //로그인되어있으면 좋아요정보까지 가져오는 메소드 연결
 	}
 	
 	/* 페이징을 하는 거의 공식과 같은 문장들 */
@@ -58,6 +57,8 @@
 	/*snsList.jsp 에서 이 값들을 사용하기 위해서 setAttribute로 객체를 세팅*/
 	request.setAttribute("pageInfo", pageInfo);  // "pageInfo"라는 key값에 pageInfo라는 객체를 value값으로 넣음
 	request.setAttribute("articleList", alist);
+	request.setAttribute("color",menuword);
+	
 	
 	/*path를 세팅하기 위해 ActionForward class의 객체 생성*/
 	//response.sendRedirect("view_board.jsp");

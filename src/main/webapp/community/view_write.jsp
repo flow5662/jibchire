@@ -197,7 +197,7 @@
 			<tbody>
 				<tr><td id="title"> <input type="text" name="post_title" placeholder="글제목"> </td></tr>
 				<tr><td><div id="preview"><img id="previewImg" ></div> </td></tr>
-				<tr><td><h5>가장 메인이 되는 사진을 올려주세요</h5> 
+				<tr><td><h5>가장 메인이 되는 사진을 올려주세요. 이 사진은 썸네일로 사용 될 예정입니다</h5> 
 						 <input type="file" onchange="readImage(this);" name="post_pics"> 
 						 <input type="file" name="post_pic1"> 
 						 <input type="file" name="post_pic2"> 

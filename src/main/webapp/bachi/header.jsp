@@ -587,9 +587,9 @@ li {
 			<div class="cumu">
 				<li><a href="community.jsp"> 커뮤니티 </a></li>
 			</div>
-			<div class="store">
-				<li><a href="shopping.jsp"> 스토어 </a></li>
-			</div>
+<!-- 			<div class="store"> -->
+<!-- 				<li><a href="shopping.jsp"> 스토어 </a></li> -->
+<!-- 			</div> -->
 			<div class="gosu">
 				<li><a href="gosumain.jsp"> 바치 </a></li>
 			</div>
@@ -612,42 +612,33 @@ li {
 		<nav>
 			<div id="cumu">
 				<div class="index1">
-					<li><a href="../community/view_board.jsp">집들이</a></li>
+					<li><a href="../community/select_board.jsp">집들이</a></li>
 				</div>
 				<div class="index2">
-					<li><a href="#">일상공유</a></li>
+					<li><a href="../sns/snsListAction.sns">일상공유</a></li>
 				</div>
 				<div class="index2">
-					<li><a href="#">나와 비슷한</a></li>
-				</div>
-				<div class="index3">
-					<li><a href="#">좋아요</a></li>
-				</div>
-				<div class="index4">
-					<li><a href="#">북마크</a></li>
-				</div>
-				<div class="index5">
-					<li><a href="#">팔로우</a></li>
+					<li><a href="login.jsp">나와 비슷한</a></li>
 				</div>
 			</div>
 
-			<div id="shop">
-				<div class="index1">
-					<li><a href="../store/used_board/board_index.jsp">중고거래</a></li>
-				</div>
-				<div class="index2">
-					<li><a href="#">브랜드관</a></li>
-				</div>
-				<div class="index3">
-					<li><a href="#">신상품</a></li>
-				</div>
-				<div class="index4">
-					<li><a href="#">베스트</a></li>
-				</div>
-				<div class="index5">
-					<li><a href="#">이벤트</a></li>
-				</div>
-			</div>
+<!-- 			<div id="shop"> -->
+<!-- 				<div class="index1"> -->
+<!-- 					<li><a href="../store/used_board/board_index.jsp">중고거래</a></li> -->
+<!-- 				</div> -->
+<!-- 				<div class="index2"> -->
+<!-- 					<li><a href="#">브랜드관</a></li> -->
+<!-- 				</div> -->
+<!-- 				<div class="index3"> -->
+<!-- 					<li><a href="#">신상품</a></li> -->
+<!-- 				</div> -->
+<!-- 				<div class="index4"> -->
+<!-- 					<li><a href="#">베스트</a></li> -->
+<!-- 				</div> -->
+<!-- 				<div class="index5"> -->
+<!-- 					<li><a href="#">이벤트</a></li> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div id="gosu">
 				<div class="index1">
 					<li><a href="../bachi/bachi_match-home.bc">고수매칭</a></li>
@@ -668,21 +659,37 @@ li {
 		$("#cumu").hide();
 		$("#shop").hide();
 		$("#gosu").hide();
+		$(".nav").hide();
 		
 		$(".cumu").mouseenter(function(){
+			$(".nav").slideDown();
 			$("#cumu").show();
 			$("#shop").hide();
 			$("#gosu").hide();
 		});
 		$(".store").mouseenter(function(){
+			$(".nav").slideDown();
 			$("#shop").show();
 			$("#cumu").hide();
 			$("#gosu").hide();
 		})
 		$(".gosu").mouseenter(function(){
+			$(".nav").slideDown();
 			$("#gosu").show();
 			$("#cumu").hide();
 			$("#shop").hide();
+		});
+
+		$(".cumu , .store, .gosu").mouseout(function(){
+			$(".nav").mouseenter(function(){
+				$(".nav").show();
+			});
+			$("header ~ .line").mouseout(function(){
+				$(".nav, .header").mouseenter(function(){
+					$(".nav").show();
+				});	
+				$(".nav").slideUp();
+			});
 		});
 		
 		$("#write").on("click", function() {

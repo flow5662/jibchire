@@ -138,7 +138,6 @@ public class CmtSns {
 		String board_list_sql="select * from Feed "
 				+" left outer join cust_houseinfo on Feed.cust_id=cust_houseinfo.cust_id "
 				+ "order by feed_date desc limit ?,8";
-						// 가장 최근에 작성한 순서대로 시작지점 부터 10개 셀렉 해오기
 		ArrayList<Feed> articleList = new ArrayList<Feed>();
 		Feed feed = null;
 		int startrow=(page-1)*8; 
@@ -831,7 +830,6 @@ public class CmtSns {
 				po.setPost_pet(rs.getString("post_pet"));
 				po.setPost_startdate(rs.getString("post_startdate"));
 				po.setPost_enddate(rs.getString("post_enddate"));
-				po.setPost_style(rs.getString("post_style"));
 				po.setPost_color(rs.getString("post_color"));
 				
 				String feed_pics = rs.getString("post_pics");

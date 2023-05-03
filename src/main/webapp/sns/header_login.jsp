@@ -500,8 +500,8 @@
 		</div>
 		<div class="header">
 			<div class="cumu"><li><a href ="../community/community.jsp"> 커뮤니티 </a></li></div>
-			<div class="store"><li><a href ="../shopping.html"> 스토어 </a></li></div>
-			<div class="gosu"><li><a href ="../gosumain.html"> 고수 </a></li></div>
+<!-- 			<div class="store"><li><a href ="../shopping.html"> 스토어 </a></li></div> -->
+			<div class="gosu"><li><a href ="../gosumain.html"> 바치 </a></li></div>
 	
 			<li><a href="index.jsp"><div class="logo"> </div></a></li>
 	
@@ -520,24 +520,22 @@
 	<div class="nav">
 		<nav>
 			<div id="cumu">	
-			
 				<div class="index1"><li><a href="../community/select_board.jsp?cust_id=<%=id%>">집들이</a></li></div>
 				<div class="index2"><li><a href="snsListAction.sns?cust_id=<%=id%>">일상공유</a></li></div>
 				<div class="index2"><li><a href="#">나와 비슷한</a></li></div>
 			</div>
-			<div id="shop">
-				<div class="index1"><li><a href="../store/used/board_index.jsp">중고거래</a></li></div>
-				<div class="index2"><li><a href="#">브랜드관</a></li></div>
-				<div class="index3"><li><a href="#">신상품</a></li></div>
-				<div class="index4"><li><a href="#">베스트</a></li></div>
-				<div class="index5"><li><a href="#">이벤트</a></li></div>
-			</div>
+<!-- 			<div id="shop"> -->
+<!-- 				<div class="index1"><li><a href="../store/used/board_index.jsp">중고거래</a></li></div> -->
+<!-- 				<div class="index2"><li><a href="#">브랜드관</a></li></div> -->
+<!-- 				<div class="index3"><li><a href="#">신상품</a></li></div> -->
+<!-- 				<div class="index4"><li><a href="#">베스트</a></li></div> -->
+<!-- 				<div class="index5"><li><a href="#">이벤트</a></li></div> -->
+<!-- 			</div> -->
 			<div id="gosu">
-				<div class="index1"><li><a href="#">홈</a></li></div>
-				<div class="index2"><li><a href ="../bachi/bachi_market.jsp"> 고수매칭 </a></li></div>
-				<div class="index3"><li><a href="#">고수찾기</a></li></div>
-				<div class="index4"><li><a href="#">마켓</a></li></div>
-				<div class="index5"><li><a href="#">받은견적</a></li></div>
+				<div class="index2"><li><a href ="../bachi/bachi_match_anser.bc"> 받은견적 </a></li></div>
+				<div class="index3"><li><a href="../bachi/bachi_match-home.bc">고수매칭</a></li></div>
+				<div class="index4"><li><a href="../bachi/bachi_match_req.bc">견적답변</a></li></div>
+				<div class="index5"><li><a href="../bachi/bachi_market.jsp">마켓</a></li></div>
 			</div>
 		</nav>
 	</div>
@@ -546,40 +544,56 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
 	$(function(){
-			$("#cumu").hide();
+		
+	$("#cumu").hide();
+		$("#shop").hide();
+		$("#gosu").hide();
+		$(".nav").hide();
+
+		$(".cumu").mouseenter(function() {
+			$(".nav").slideDown();
+			$("#cumu").show();
 			$("#shop").hide();
 			$("#gosu").hide();
+		});
+		$(".store").mouseenter(function() {
+			$(".nav").slideDown();
+			$("#shop").show();
+			$("#cumu").hide();
+			$("#gosu").hide();
+		})
+		$(".gosu").mouseenter(function() {
+			$(".nav").slideDown();
+			$("#gosu").show();
+			$("#cumu").hide();
+			$("#shop").hide();
+		});
 
-			$(".cumu").mouseenter(function(){
-				$("#cumu").show();
-				$("#shop").hide();
-				$("#gosu").hide();
+		$(".cumu , .store, .gosu").mouseout(function() {
+			$(".nav").mouseenter(function() {
+				$(".nav").show();
 			});
-			$(".store").mouseenter(function(){
-				$("#shop").show();
-				$("#cumu").hide();
-				$("#gosu").hide();
-			})
-			$(".gosu").mouseenter(function(){
-				$("#gosu").show();
-				$("#cumu").hide();
-				$("#shop").hide();
-			});
-
-
-			$("#cust").on("click",function(){
-				$(".login_items, .login_items2").toggle();
-				if($(".item, .items, .items2").css('display') !== 'none') {
-					$(".item, .items, .items2").hide();
-				}
-			});
-				
-			$("#write").on("click", function() {
-				$(".items, .items2").toggle();
-					if($(".login_items").css('display') !== 'none') {
-						$(".login_items").hide();
-					}
+			$("header ~ .line").mouseout(function() {
+				$(".nav, .header").mouseenter(function() {
+					$(".nav").show();
+				});
+				$(".nav").slideUp();
 			});
 		});
+
+		$("#cust").on("click", function() {
+			$(".login_items, .login_items2").toggle();
+			if ($(".item, .items, .items2").css('display') !== 'none') {
+				$(".item, .items, .items2").hide();
+			}
+		});
+
+		$("#write").on("click", function() {
+			$(".items, .items2").toggle();
+			if ($(".login_items").css('display') !== 'none') {
+				$(".login_items").hide();
+			}
+		});
+	});
 </script>
 </html>

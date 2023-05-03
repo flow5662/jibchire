@@ -37,7 +37,7 @@
 									선택항목에 대한 동의를 거부하시는 경우에도 회원가입은 가능합니다.
 								</div><br>
 					    	<input type="checkbox" id="mustall" > &nbsp필수항목 전체동의 <br><br>
-					    	<details>
+					    	<details open>
 					    		<summary>
 					    			<span> <input type="checkbox" class="must" name="must"> [필수] 만 14세 이상입니다.  </span>
 					    		</summary>
@@ -46,7 +46,7 @@
 								2.여러분이 다른 사람의 명의나 이메일 주소 등 개인정보를 이용하여 집치레계정을 생성하려 한 경우
 								</div>	
 					    	</details>
-					    	<details>
+					    	<details open>
 					    		<summary>
 					    			<span> <input type="checkbox" class="must" name="must"> [필수] 집치레 회원가입 약관 </span>
 					    		</summary>
@@ -55,28 +55,28 @@
 								2.타인의 명예를 손상시키거나 불이익을 주는 행위<br> 			
 					    		</div>
 					    	</details>
-					    	<details>
+					    	<details open>
 					    		<summary>
 					    			<span> <input type="checkbox" class="choice" name="must"> [선택] 집치레 집치레톡 알림채널 추가 및 광고메세지 수신 </span>
 					    		</summary>
 					    		<div class="explain">여러분은 집치레계정 웹사이트 또는 개별 서비스 내 집치레계정 설정 화면을 통하여 여러분의 집치레계정 정보를 열람하고 수정할 수 있습니다. 다만, 집치레계정 서비스의 제공 및 관리를 위해 필요한 집치레계정, 전화번호, 단말기 식별번호, 기타 본인확인정보 등 일부 정보는 수정이 불가능할 수 있으며, 수정하는 경우에는 추가적인 본인 확인 절차가 필요할 수 있습니다. 여러분이 이용 신청 시 알려주신 내용에 변동이 있을 때, 직접 수정하시거나 이메일, 고객센터를 통하여 회사에 알려 주시기 바랍니다.    			
 					    		</div>
 					    	</details>
-					    	<details>
+					    	<details open>
 					    		<summary>
 					    			<span> <input type="checkbox" class="must" name="must"> [필수] 개인정보 수집 및 이용동의</span>
 					    		</summary>
 					    		<div class="explain">여러분의 개인정보의 안전한 처리는 회사에게 있어 가장 중요한 일 중 하나입니다. 여러분의 개인정보는 서비스의 원활한 제공을 위하여 여러분이 동의한 목적과 범위 내에서만 이용됩니다. 법령에 의하거나 여러분이 별도로 동의하지 아니하는 한 회사가 여러분의 개인정보를 제3자에게 제공하는 일은 결코 없으므로, 안심하셔도 좋습니다. 회사가 여러분의 개인정보를 안전하게 처리하기 위하여 기울이는 노력이나 기타 자세한 사항은 개인정보처리방침을 참고하여 주십시오.
 					    		</div>
 					    	</details>
-					    	<details>
+					    	<details open>
 					    		<summary>
 					    			<span> <input type="checkbox" class="choice" name="must"> [선택] 위치정보 수집 및 이용동의</span>
 					    		</summary>
 					    		<div class="explain">회사는 여러분과의 의견 교환을 소중하게 생각합니다. 여러분은 언제든지 고객센터(https://cs.kakao.com/)에 방문하여 의견을 개진할 수 있습니다. 서비스 이용자 전체에 대한 공지는 칠(7)일 이상 서비스 공지사항(https://www.kakao.com/notices)란에 게시함으로써 효력이 발생합니다. 여러분에게 중대한 영향을 미치는 사항의 경우에는 집치레계정에 등록된 이메일 주소로 이메일(이메일주소가 없는 경우 서비스 내 전자쪽지 발송, 서비스 내 알림 메시지를 띄우는 등의 별도의 전자적 수단) 발송 또는 여러분이 등록한 휴대폰번호로 집치레톡 메시지 또는 문자메시지 발송하는 방법 등으로 개별적으로 알려 드리겠습니다.					    			
 					    		</div>
 					    	</details>
-					    	<details>
+					    	<details open>
 					    		<summary>
 					    			<span> <input type="checkbox" class="choice" name="must"> [선택] 프로필정보 추가 및 수집 동의</span>
 					    		</summary>

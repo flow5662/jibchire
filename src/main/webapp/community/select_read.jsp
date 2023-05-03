@@ -16,6 +16,14 @@ request.setCharacterEncoding("utf-8");
 	CmtHousewarming sl = new CmtHousewarming();
 	int pid = Integer.parseInt(request.getParameter("post_id"));
 	Post_house po = sl.select_one(pid);
+	sl.updateReadCount(pid); //조회수 올리기 
+	
+	
+	
+	
+	request.setAttribute("post", po);
+	RequestDispatcher dispatcher=request.getRequestDispatcher("view_read.jsp");
+	dispatcher.forward(request, response);
 %>
 
 </body>
