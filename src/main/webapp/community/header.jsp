@@ -450,8 +450,8 @@
 <!-- 				<div class="index5"><li><a href="#">이벤트</a></li></div> -->
 <!-- 			</div> -->
 			<div id="gosu">
-				<div class="index2"><li><a href="../bachi/bachi_match.jsp"> 고수매칭 </a></li></div>
-				<div class="index4"><li><a href="../bachi/bachi_market.jsp">마켓</a></li></div>
+				<div class="index1"><li><a href="../bachi/bachi_match.jsp"> 고수매칭 </a></li></div>
+				<div class="index2"><li><a href="../bachi/bachi_market.jsp">마켓</a></li></div>
 			</div>
 		</nav>
 	</div>

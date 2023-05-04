@@ -12,6 +12,10 @@
 </head>
 
 <style>
+* {
+	margin: 0;
+	padding: 0;
+}
 section {
 	width: 1690px;
 	margin: 0 auto;
@@ -90,7 +94,7 @@ input:focus, input:not(:placeholder-shown) {
 }
 
 input[type=submit] {
-	background-color: #FF6666;
+	background-color: #789849;
 	border: none;
 	color: white;
 	border-radius: 5px;

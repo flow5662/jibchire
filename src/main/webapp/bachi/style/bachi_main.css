@@ -5,7 +5,7 @@
 @import
 	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
 	;
-
+* { margin : 0 ; padding : 0 ; } 
 .headslider {
 	margin: -120 0 120px;
 }
@@ -524,7 +524,6 @@ li {
 	margin-left: 30px;
 }
 
-}
 .foot .ft3 li {
 	margin-right: 50px;
 }

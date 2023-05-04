@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html;charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ page import="java.sql.*"%>
+<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="utf-8" %>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
 </head>
 <body>
 	<%
@@ -24,7 +23,7 @@
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/interior", "root", "1234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/interior", "root", "1111");
 			if(conn == null) {
 				throw new Exception("데이터베이스에 연결할 수 없습니다.");
 			}
@@ -44,11 +43,11 @@
 				out.println("document.location.href = 'index.jsp' </script>");
 			}else {
 		%>
-	<script type="text/javascript">
+			<script type="text/javascript">
 				alert("가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 				history.go(-1);
 			</script>
-	<%
+		<%
 			}
 		}catch(Exception e){
 			e.printStackTrace();

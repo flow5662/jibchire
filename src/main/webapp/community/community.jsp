@@ -282,9 +282,9 @@
 		    	</div>
 	    	</section>
 	    </div>
-	    <aside>
-	    	<div><a href="#logo"><img src="img/community/png/arrow-up-circle-line.png"><br>&nbsp&nbsp맨위로</a></div>
-	    </aside>
+<!-- 	    <aside> -->
+<!-- 	    	<div><a href="#logo"><img src="img/community/png/arrow-up-circle-line.png"><br>&nbsp&nbsp맨위로</a></div> -->
+<!-- 	    </aside> -->
    	</div>
     <!-- footer -->
 	<footer>

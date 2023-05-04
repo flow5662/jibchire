@@ -585,7 +585,7 @@ li {
 
 		<div class="header">
 			<div class="cumu">
-				<li><a href="community.jsp"> 커뮤니티 </a></li>
+				<li><a href="../community/community.jsp"> 커뮤니티 </a></li>
 			</div>
 <!-- 			<div class="store"> -->
 <!-- 				<li><a href="shopping.jsp"> 스토어 </a></li> -->
