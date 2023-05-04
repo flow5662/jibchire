@@ -39,10 +39,10 @@
 				<a href="#" class="control_next">>></a>
 				<a href="#" class="control_prev"><<</a>
 				<ul>
-				    <li><div class="pics"><img src="feedPics/<%=feed.getFeed_pics() %>"></div></li>
-				    <li><div class="pics"><img src="feedPics/<%=feed.getFeed_pic1() %>"></div></li>
-				    <li><div class="pics"><img src="feedPics/<%=feed.getFeed_pic2() %>"></div></li>
-				    <li><div class="pics"><img src="feedPics/<%=feed.getFeed_pic3() %>"></div></li>
+				    <li><div class="pics"><img src="feedPics/<%=feed.getFeed_pics() %>" style="width: 370px; height: 450px;"></div></li>
+				    <li><div class="pics"><img src="feedPics/<%=feed.getFeed_pic1() %>" style="width: 370px; height: 450px;"></div></li>
+				    <li><div class="pics"><img src="feedPics/<%=feed.getFeed_pic2() %>" style="width: 370px; height: 450px;"></div></li>
+				    <li><div class="pics"><img src="feedPics/<%=feed.getFeed_pic3() %>" style="width: 370px; height: 450px;"></div></li>
 			    </ul>
 			</div>
 		</div>

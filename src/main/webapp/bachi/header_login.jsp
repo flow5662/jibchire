@@ -32,7 +32,7 @@ a {
 
 .header .logo {
 	margin-top: 20px;
-	margin-left: 200px;
+	margin-left: 350px;
 	width: 150px;
 	height: 50px;
 	background-image: url("img/logo/chiere.jpg");

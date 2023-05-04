@@ -25,6 +25,7 @@ a.control_next {  right: 0;}
 #like {width:80px;position: fixed; right: 230px;  top: 350px; }
 #like li{display: block; text-align: center; font-size: 10pt; margin-top: 5px;}
 #like li:nth-child(3n){margin-bottom:20px;}
+pre{ margin-top: 20px; font-size: 12pt; white-space: pre-wrap;}
 
 /*글쓴이 정보가 들어가는 공간*/
 #writerinfo{ width:80%;  height: 100px; margin: 30px auto 0 auto;}

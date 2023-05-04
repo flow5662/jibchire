@@ -21,7 +21,7 @@
 	.head{width:1900px; margin-left: auto; margin-right: auto;}
 	.header .logo{
 		margin-top: 20px;
-		margin-left: 200px;
+		margin-left: 350px;
 		width: 150px;
 		height: 50px;
 		background-image: url("img/logo/chiere.jpg");
@@ -502,7 +502,7 @@
 		<div class="header">
 			<div class="cumu"><li><a href ="community.jsp"> 커뮤니티 </a></li></div>
 <!-- 			<div class="store"><li><a href ="../shopping.html"> 스토어 </a></li></div> -->
-			<div class="gosu"><li><a href ="../gosumain.html"> 바치 </a></li></div>
+			<div class="gosu"><li><a href ="../bachi/bachi_main.jsp"> 바치 </a></li></div>
 	
 			<li><a href="index.jsp"><div class="logo"> </div></a></li>
 	

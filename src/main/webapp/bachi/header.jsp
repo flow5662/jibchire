@@ -32,7 +32,7 @@ a {
 
 .header .logo {
 	margin-top: 20px;
-	margin-left: 200px;
+	margin-left: 350px;
 	width: 150px;
 	height: 50px;
 	background-image: url("img/logo/chiere.jpg");
@@ -591,7 +591,7 @@ li {
 <!-- 				<li><a href="shopping.jsp"> 스토어 </a></li> -->
 <!-- 			</div> -->
 			<div class="gosu">
-				<li><a href="gosumain.jsp"> 바치 </a></li>
+				<li><a href="bachi_main.jsp"> 바치 </a></li>
 			</div>
 			<li><a href="index.jsp"><div class="logo"></div></a></li>
 

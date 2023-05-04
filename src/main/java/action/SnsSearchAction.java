@@ -63,7 +63,7 @@ import svc.SnsSearchService;
 		
 		/*path를 세팅하기 위해 ActionForward class의 객체 생성*/
 		ActionForward forward= new ActionForward();
-   		forward.setPath("snsSearch.jsp"); //ActionForward.java 클래스에 setpath메소드에 setting.
+   		forward.setPath("snsList.jsp"); //ActionForward.java 클래스에 setpath메소드에 setting.
    		return forward;
    		
 	 }

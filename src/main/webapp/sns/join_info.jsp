@@ -86,10 +86,10 @@
 						<img src="img/join/chat-check-fill.png">
 					</td> 
 					<td colspan="1"> 
-						<input type="radio" name="male" value="male" >남 <br> 
+						<input type="radio" name="cust_sex" value="m" >남 <br> 
 					</td>
 					<td colspan="1"> 
-						<input type="radio" name="male" value="female" >여 <br>
+						<input type="radio" name="cust_sex" value="f" >여 <br>
 					</td>
 					<td colspan="2"></td>
 				</tr>

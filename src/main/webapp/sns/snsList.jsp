@@ -70,7 +70,7 @@
 								  	<div class='snstitle'>
 								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>" onerror="this.src='img/sns/901.png'"> </div>
 								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
-									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>'> </div>
+									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>' onerror="this.src='feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
 								</a>
 								<!-- 내용공간. hashtag, 조회수 -->
 								<div class='txt'>
@@ -130,7 +130,7 @@
 								  	<div class='snstitle'>
 								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='img/sns/901.png'"> </div>
 								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
-									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>'> </div>
+									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>'  onerror="this.src='feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
 								</a>	
 								<!-- 내용공간. hashtag, 조회수 -->
 								<div class='txt'>
@@ -167,7 +167,7 @@
 								  	<div class='snstitle'>
 								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='img/sns/901.png'"></div>
 								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
-									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>'> </div>
+									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>' onerror="this.src='feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
 								</a>	
 								<!-- 내용공간. hashtag, 조회수 -->
 								<div class='txt'>
