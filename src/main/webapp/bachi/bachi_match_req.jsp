@@ -60,6 +60,13 @@ img {
 }
 table{
 text-align: center;
+    border-spacing: 0 15px;
+    border-collapse: separate;
+}
+.user{
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+border-radius: 5px;
+    
 }
 
 </style>
@@ -96,7 +103,7 @@ text-align: center;
 ">장소</th><th style="
     width: 200px;
 ">유형</th>
-<th>답변여부</th>
+<th style="width: 200px;">답변여부</th>
 </tr>
 		<!-- 견적리스트, 선택하여 상세 안에서 답변을 줄 수 있음.  -->
 		<!-- 구글맵으로 된다면 반경 내 설정으로 바꿀예정. -->
@@ -106,7 +113,7 @@ text-align: center;
 	if(article_match != null){
 		for(int i=0;i<article_match.size();i++){
 			%>
-			<tr> 
+			<tr class="user"> 
 			<%
 			String serverImagePath = request.getContextPath() + "/img/sm_" + article_match.get(i).getCust_pic();
 			

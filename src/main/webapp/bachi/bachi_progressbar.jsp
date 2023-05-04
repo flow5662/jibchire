@@ -29,7 +29,7 @@
 
 .request-form-progress-bar .progress .progress-bar {
 	background: #00c7ae;
-	background: linear-gradient(92deg, #00c7ae, #03b9c9);
+	background: linear-gradient(92deg, #789849, #03b9c9);
 	border-radius: 5px;
 	box-shadow: none;
 }

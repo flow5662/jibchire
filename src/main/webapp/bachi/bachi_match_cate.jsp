@@ -12,117 +12,15 @@
 	%>취업 컨설팅 <%	
 }else if(category.equals("math-lesson")){
 	%>수학레슨 <%	
+}else if(category.equals("dobe-sigong")){
+	%>도배시공<%
 }
 %></title>
 <!-- 값마다 다름 -->
 </head>
 
-<style>
-.wrap {
-	margin: 0 auto;
-}
 
-.data-category {
-	width: 900px;
-	height: 780px;
-	background: border-box;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	align-content: center;
-	border: #d2d2d2 1px solid;
-	padding: 2.4375rem;
-}
-
-.category {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.serv-text {
-	font-size: 1.5rem;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-.bachi-select-section {
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	padding-bottom: 90px;
-}
-
-.bachi-select-section .answer {
-	display: flex;
-	border: 0.2rem solid #f2f2f2;
-	flex-direction: column;
-	width: 790px;
-	height: 90px;
-}
-
-.answer-area {
-	display: flex;
-	flex-direction: row;
-	height: 100%;
-	padding: 10px 20px;
-}
-
-.checkbox-text {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap: 10px;
-}
-
-input[type="checkbox"] {
-	width: 30px;
-	height: 30px;
-}
-
-.text-textarea {
-	display: flex;
-	gap: 10px;
-	align-items: center;
-}
-
-.text-textarea input[type="text"] {
-	width: 350px;
-	height: 60px;
-}
-
-.behind-next {
-	display: flex;
-	gap: 20px;
-}
-.bachi_section{
-margin: 0 auto;
-padding-top: 20px;
-}
-input[type="button"]{
-background-color: #789849;
-color: white;
-border: none;
-width:110px;
-height: 60px;
-}
-input[type="submit"]{
-background-color: #789849;
-color: white;
-border: none;
-width:110px;
-height: 60px;
-}
-input[type="button"]:hover{
-background-color: #4f5645;
-}
-input[type="submit"]:hover{
-background-color: #4f5645;
-}
-</style>
-
-
+<link rel="stylesheet" type="text/css" href="style/bachi_match_cate.css">
 <body>
 	<div class="wrap">
 		<header>
@@ -733,6 +631,585 @@ background-color: #4f5645;
 				</div>
 			
 			<%
+		}else if(category.equals("dobe-sigong")){
+			%>
+				<div class="category">
+
+						<div class="data-category">
+							<jsp:include page="bachi_progressbar.jsp" />
+
+							<div class="serv-text">어떤 서비스를 원하시나요?</div>
+							<input type="hidden" name="gosu_menu1" value="홈">
+							<input type="hidden" name="gosu_menu2" value="도배시공">
+	
+	
+							<!-- 1번째 질문 -->
+							<ul class="bachi-select-section">
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="벽지도배">
+											<div class="text-textarea">벽지도배</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="샷시">
+											<div class="text-textarea">샷시</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="전체 리모델링">
+											<div class="text-textarea">전체 리모델링</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="장판">
+											<div class="text-textarea">장판</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" id="etc" value="기타">
+											<div class="text-textarea">
+												기타
+												<div id="inputFields"></div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+							</ul>
+
+
+							<!-- 2번째 질문 -->
+							<ul class="bachi-select-section">
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="아파트">
+											<div class="text-textarea">아파트</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="주택">
+											<div class="text-textarea">주택</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="빌라">
+											<div class="text-textarea">빌라</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="사무공간">
+											<div class="text-textarea">사무공간</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" id="etc" name="place" value="기타">
+											<div class="text-textarea">
+												기타
+												<div id="inputFields2" name="place"></div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+							</ul>
+
+
+
+							<!-- 3번째 질문 -->
+
+
+							<ul class="bachi-select-section">
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="베란다">
+											<div class="text-textarea">베란다</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="안방">
+											<div class="text-textarea">안방</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="거실">
+											<div class="text-textarea">거실</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="작은방">
+											<div class="text-textarea">작은방</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" id="etc" value="기타">
+											<div class="text-textarea">
+												기타
+												<div id="inputFields3" name="type"></div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+							</ul>
+
+							<div class="behind-next">
+								<input type="button" value="이전" 
+									class="forword-button"> <input type="button" value="다음"
+									 class="next-button"> <input type="submit" value="제출" class="submit">
+							</div>
+						</div>
+					</div>
+
+				</div>
+			
+			
+			<%
+			
+		}else if(category.equals("music-lesson")){
+		%> 
+				<div class="category">
+
+						<div class="data-category">
+							<jsp:include page="bachi_progressbar.jsp" />
+
+							<div class="serv-text">어떤 레슨을 원하시나요?</div>
+							<input type="hidden" name="gosu_menu1" value="레슨">
+							<input type="hidden" name="gosu_menu2" value="음악">
+							
+							
+							<!-- 1번째 질문 -->
+							<ul class="bachi-select-section">
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="작곡">
+											<div class="text-textarea">작곡</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="바이올린">
+											<div class="text-textarea">바이올린</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="피아노">
+											<div class="text-textarea">피아노</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="기타레슨">
+											<div class="text-textarea">기타레슨</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" id="etc" value="기타">
+											<div class="text-textarea">
+												기타
+												<div id="inputFields" name="serv"></div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+							</ul>
+
+
+							<!-- 2번째 질문 -->
+							<ul class="bachi-select-section">
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="가정집">
+											<div class="text-textarea">가정집</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="사무공간">
+											<div class="text-textarea">사무공간</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="상업공간">
+											<div class="text-textarea">상업공간</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="물류창고">
+											<div class="text-textarea">물류창고</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" id="etc" name="place" value="기타">
+											<div class="text-textarea">
+												기타
+												<div id="inputFields2"  name="place"></div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+							</ul>
+
+
+
+							<!-- 3번째 질문 -->
+
+
+							<ul class="bachi-select-section">
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="중학생">
+											<div class="text-textarea">중학생</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="고등학생">
+											<div class="text-textarea">고등학생</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="대학생">
+											<div class="text-textarea">대학생</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="직장인">
+											<div class="text-textarea">직장인</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" id="etc" value="기타">
+											<div class="text-textarea">
+												기타
+												<div id="inputFields3"></div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+							</ul>
+
+							<div class="behind-next">
+								<input type="button" value="이전" 
+									class="forword-button"> <input type="button" value="다음"
+								 class="next-button"> <input
+									type="submit" value="제출" class="submit">
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			
+		
+		
+		
+		<% 
+			
+		}else if(category.equals("pt-training")){
+			
+			%>
+				<div class="category">
+
+						<div class="data-category">
+							<jsp:include page="bachi_progressbar.jsp" />
+
+							<div class="serv-text">어떤 트레이닝을 원하시나요?</div>
+								<input type="hidden" name="gosu_menu1" value="자기계발">
+							<input type="hidden" name="gosu_menu2" value="PT트레이닝">
+							
+							<!-- 1번째 질문 -->
+							<ul class="bachi-select-section">
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="바디프로필">
+											<div class="text-textarea">바디프로필</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="건강형">
+											<div class="text-textarea">건강형</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="미용목적">
+											<div class="text-textarea">미용목적</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" value="운동 집중수업">
+											<div class="text-textarea">운동 집중수업</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="serv" id="etc" value="기타">
+											<div class="text-textarea">
+												기타
+												<div id="inputFields"></div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+							</ul>
+
+
+							<!-- 2번째 질문 -->
+							<ul class="bachi-select-section">
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="가정집">
+											<div class="text-textarea">가정집</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="사무공간">
+											<div class="text-textarea">사무공간</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="외부">
+											<div class="text-textarea">외부</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" name="place" value="헬스장">
+											<div class="text-textarea">헬스장</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="radio" id="etc" name="place" value="기타">
+											<div class="text-textarea">
+												기타
+												<div id="inputFields2"></div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+							</ul>
+
+
+
+							<!-- 3번째 질문 -->
+
+
+							<ul class="bachi-select-section">
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="중학생">
+											<div class="text-textarea">중학생</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="고등학생">
+											<div class="text-textarea">고등학생</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="대학생">
+											<div class="text-textarea">대학생</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" value="직장인">
+											<div class="text-textarea">직장인</div>
+										</div>
+									</div>
+								</li>
+
+
+								<li class="answer">
+									<div class="answer-area">
+										<div class="checkbox-text">
+											<input type="checkbox" name="type" id="etc" value="기타">
+											<div class="text-textarea">
+												기타
+												<div id="inputFields3"></div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+							</ul>
+
+							<div class="behind-next">
+								<input type="button" value="이전" 
+									class="forword-button"> <input type="button" value="다음"
+									 class="next-button"> <input type="submit" value="제출" class="submit">
+							</div>
+						</div>
+					</div>
+
+				</div>
+			
+			
+			<%
+			
 		}
 			%>
 
@@ -908,6 +1385,10 @@ $(document).ready(function() {
 			 return false;
 		 } 
 	  });
+
+
+
+
 });
 
 
