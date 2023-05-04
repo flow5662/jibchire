@@ -8,21 +8,7 @@
 <meta charset="UTF-8">
 <title>답변하기</title>
 </head>
-<style>
-.wrap{
-margin:0 auto;
-}
-.cust_section{
-width:1280px;
-margin:0 auto;
-}
-.list{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-</style>
+<link rel="stylesheet" type="text/css" href="style/bachi_match_req_s.css">
 <body>
 <%
 ArrayList<Bachi_match_Been> article_match = (ArrayList<Bachi_match_Been>)request.getAttribute("been");
@@ -46,50 +32,62 @@ String est_id = request.getParameter("est_id");
 		}
 	%>
 	</header>
+<div class="cust_Resection">
 <div class="cust_section">
 <div class="list">
-<table>
+<div class="article section">
+
 <% 
 	if(article_match != null){
 		for(int i=0;i<article_match.size();i++){
 			%>	
-			<tr> 
-			<td><%=article_match.get(i).getCust_id()%></a></td>
-			</tr>
-			<tr>
-			<td><%=article_match.get(i).getGosu_menu1() %>/<%=article_match.get(i).getGosu_menu2() %></a></td>
-			</tr>
-			<tr>
-			<td><%=article_match.get(i).getEst_q1()%></a></td></tr>
-			<tr>
-			<td><%=article_match.get(i).getEst_q2()%></a></td></tr>
-			<tr>
-			<td><%=article_match.get(i).getEst_q3() %></a></td>
+			 
+			<div class="cust"><h4>요청고객</h4> <%=article_match.get(i).getCust_id()%></div>
 			
-		</tr>
+			<div class="cust"><h4>카테고리</h4><%=article_match.get(i).getGosu_menu1() %>/<%=article_match.get(i).getGosu_menu2() %></div>
+			<div class="list"><h4>질문항목</h4></div>
+			
+			<div class="cust"><h4>목적</h4>
+			<%=article_match.get(i).getEst_q1()%>
+			</div>
+			<div class="cust"><h4>장소</h4>
+			<%=article_match.get(i).getEst_q2()%>
+			</div>
+			<div class="cust"><h4>유형</h4>
+			<%=article_match.get(i).getEst_q3() %>
+				</div>
+			<div class="cust"><h4>요청일자</h4>
+			<%=article_match.get(i).getEst_q_date()%>
+			</div>
+			<div class="cust"><h4>지역</h4>
+			<%=article_match.get(i).getCust_adr()%>
+			</div>
 			
 			<%
 			}
 		}
 	%>
+	</div>
 	
-	</table>
-	
-	<br>
-답변하기<br>
-----------------------<br>
-<br>
+	<span style="border: 1px solid lightgray; width:680px;"></span>
+<div class="ans">
+
+<div class="list"><h4>답변하기</h4></div>
+
 <form action="bachi_match_ans.bc">
 <input type="hidden" name="est_id" value="<%=est_id%>">
 <input type="hidden" name="cust_id" value="<%=id%>">
-질문1<input type="text" name="est_a1"><br>
-질문2<input type="text" name="est_a2"><br>
-질문3<input type="text" name="est_a3"><br>
+<div class="cust"><h4>목적</h4> <input type="text" name="est_a1"></div>
+<div class="cust"><h4>장소</h4> <input type="text" name="est_a2"></div>
+<div class="cust"><h4>유형</h4><input type="text" name="est_a3"></div>
 <!-- const_date, payment는 답변 이후에 같이 db에 (update)입력되도록 -->
-<input type="submit" value="답변하기">
+<div class="list btn"><input type="submit" value="답변하기"></div>
+
 </form>
 </div>
- 
+</div>
+ </div>
+</div>
 </div>
    <div style="margin-left: auto; margin-right: auto;">
 <jsp:include page="footer.jsp" />

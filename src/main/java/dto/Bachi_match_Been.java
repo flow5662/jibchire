@@ -10,6 +10,14 @@ public class Bachi_match_Been {
 	private String est_q3;
 	private String est_q_date;
 	private String cust_pic;
+	private String cust_adr;
+	
+	public String getCust_adr() {
+		return cust_adr;
+	}
+	public void setCust_adr(String cust_adr) {
+		this.cust_adr = cust_adr;
+	}
 	private int ans_est_id; //답변된 est_id가 있을 경우 추려내기 위함
 	
 	public int getAns_est_id() {

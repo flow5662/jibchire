@@ -1259,6 +1259,8 @@ checkbox.addEventListener("change", function() {
 	});
 });
 
+
+
 const checkbox2 = document.querySelectorAll('input[name="type"][value="기타"]');
 	checkbox2.forEach(function(checkbox) {
 	checkbox.addEventListener("change", function() {

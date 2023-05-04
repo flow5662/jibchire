@@ -65,7 +65,7 @@ public class Bachi_match {
 	public ArrayList<Bachi_match_Been> selectMatchReq(int page,int limit){
 		 PreparedStatement pstmt = null;
 		    ResultSet rs = null;
-		    String sql = "select gosu_req.est_id, gosu_req.cust_id, gosu_menu1, gosu_menu2, est_q1, est_q2, est_q3, est_q_date, cust_pic, gosu_ans.est_id as ans_est_id from gosu_req inner join cust_info on gosu_req.cust_id = cust_info.cust_id left join gosu_ans on gosu_req.est_id = gosu_ans.est_id order by gosu_req.est_id desc, est_q_date asc limit ?, 10;";
+		    String sql = "select gosu_req.est_id, gosu_req.cust_id, gosu_menu1, gosu_menu2, est_q1, est_q2, est_q3, est_q_date,cust_adr, cust_pic, gosu_ans.est_id as ans_est_id from gosu_req inner join cust_info on gosu_req.cust_id = cust_info.cust_id left join gosu_ans on gosu_req.est_id = gosu_ans.est_id order by gosu_req.est_id desc, est_q_date asc limit ?, 10;";
 		 ArrayList<Bachi_match_Been> match_been = new ArrayList<Bachi_match_Been>();
 		 Bachi_match_Been been = null;
 		 int startrow=(page-1)*10;
@@ -89,6 +89,7 @@ public class Bachi_match {
 					been.setEst_q_date(rs.getString("est_q_date"));
 					been.setCust_pic(rs.getString("cust_pic"));
 					been.setAns_est_id(rs.getInt("ans_est_id")); //답변된 아이디
+					been.setCust_adr(rs.getString("cust_adr"));
 					
 					match_been.add(been); //ArrayList에 담기
 
@@ -106,13 +107,13 @@ public class Bachi_match {
 	public ArrayList<Bachi_match_Been> select_one_req(int est_id){
 		 PreparedStatement pstmt = null;
 		    ResultSet rs = null;
-		    String sql = "select * from gosu_req";
+		    String sql = "select est_id,gosu_req.cust_id,gosu_menu1,gosu_menu2,est_q1,est_q2,est_q3,est_q_date,cust_adr from gosu_req inner join cust_info where gosu_req.cust_id = cust_info.cust_id and est_id = ?;";
 		 ArrayList<Bachi_match_Been> match_been = new ArrayList<Bachi_match_Been>();
 		
 		 try {
 			 pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
-			 
+				  pstmt.setInt(1, est_id); // 입력받은 est_id 값을 SQL 쿼리문에 전달
+				  rs = pstmt.executeQuery();
 				if(rs.next()){
 					Bachi_match_Been been = new Bachi_match_Been(); //삽입할 객체 생성
 				
@@ -126,7 +127,8 @@ public class Bachi_match {
 					been.setGosu_menu1(rs.getString("gosu_menu1"));
 					been.setGosu_menu2(rs.getString("gosu_menu2"));
 					been.setEst_q_date(rs.getString("est_q_date"));
-
+					been.setCust_adr(rs.getString("cust_adr"));
+					
 					match_been.add(been); //ArrayList에 담기
 				
 				}
@@ -211,16 +213,17 @@ public class Bachi_match {
 
 	    return est_id_been;
 	}
-
+	
 	
 	public ArrayList<Bachi_match_AnsBeen> select_one_ans(int est_id){
 		 PreparedStatement pstmt = null;
 		    ResultSet rs = null;
-		    String sql = "select * from gosu_ans";
+		    String sql = "select * from gosu_ans where est_id = ?";
 		 ArrayList<Bachi_match_AnsBeen> match_been = new ArrayList<Bachi_match_AnsBeen>();
 		
 		 try {
 			 pstmt = con.prepareStatement(sql);
+			   pstmt.setInt(1, est_id); // 입력받은 est_id 값을 SQL 쿼리문에 전달
 				rs = pstmt.executeQuery();
 			 
 				if(rs.next()){

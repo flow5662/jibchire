@@ -33,73 +33,84 @@ ArrayList<Bachi_match_AnsBeen> match_ans = (ArrayList<Bachi_match_AnsBeen>)reque
 		}
 	%>
 	</header>
+<div class="cust_Resection">
 <div class="cust_section">
 <div class="list">
-<table>
+<div class="article section">
+
 <% 
 	if(article_match != null){
 		for(int i=0;i<article_match.size();i++){
 			%>	
-			<tr> 
-			<td><%=article_match.get(i).getCust_id()%></a></td>
-			</tr>
-			<tr>
-			<td><%=article_match.get(i).getGosu_menu1() %>/<%=article_match.get(i).getGosu_menu2() %></a></td>
-			</tr>
-			<tr>
-			<td><%=article_match.get(i).getEst_q1()%></a></td></tr>
-			<tr>
-			<td><%=article_match.get(i).getEst_q2()%></a></td></tr>
-			<tr>
-			<td><%=article_match.get(i).getEst_q3() %></a></td>
 			
-		</tr>
+			<div class="cust"><h4>요청고객</h4><%=article_match.get(i).getCust_id()%></div>
+			
+			<div class="cust"><h4>카테고리</h4><%=article_match.get(i).getGosu_menu1() %>/<%=article_match.get(i).getGosu_menu2() %></div>
+			
+			<div class="list"><h4>질문항목</h4></div>
+			<div class="cust"><h4>목적</h4>
+			<%=article_match.get(i).getEst_q1()%>
+			</div>
+			<div class="cust"><h4>장소</h4>
+			<%=article_match.get(i).getEst_q2()%>
+			</div>
+			<div class="cust"><h4>유형</h4>
+			<%=article_match.get(i).getEst_q3() %>
+			</div>
+			<div class="cust"><h4>요청일자</h4>
+			<%=article_match.get(i).getEst_q_date()%>
+			</div>
+			<div class="cust"><h4>지역</h4>
+			<%=article_match.get(i).getCust_adr()%>
+			</div>
 			
 			<%
 			}
 		}
 	%>
+		</div>
 	
-	</table>
+	<span style="border: 1px solid lightgray; width:680px;"></span>
+<div class="ans">
+
 	
-	<br>
-답변완료<br>
-----------------------<br>
-<br>
+	
+<div class="list"><h4>답변완료</h4></div>
+
 
 <% 
 	if(match_ans != null){
 		for(int i=0;i<match_ans.size();i++){
 			%>	
-			<tr> 
-			<td><%=match_ans.get(i).getCust_id() %></a></td>
-			</tr>
-			<tr>
-			<td><%=match_ans.get(i).getEst_a1() %></a></td>
-			</tr>
-			<tr>
-			<td><%=match_ans.get(i).getEst_a2()%></a></td></tr>
-			<tr>
-			<td><%=match_ans.get(i).getEst_a3()%></a></td></tr>
-			<tr>
-			<td><%=match_ans.get(i).getConst_date()%></a></td>
-			</tr>
-			<tr>
-			<td><%=match_ans.get(i).getPayment()%></a></td>
-			</tr>
+		
+			<div class="cust"><h4>답변자 아이디</h4> <%=match_ans.get(i).getCust_id() %></div>
+			
+			<div class="cust"><h4>목적</h4> <%=match_ans.get(i).getEst_a1() %></div>
+			
+			<div class="cust"><h4>장소</h4> <%=match_ans.get(i).getEst_a2()%></div>
+			
+			<div class="cust"><h4>유형</h4> <%=match_ans.get(i).getEst_a3()%></div>
+		
+			<div class="cust"><h4>답변일자</h4> <%=match_ans.get(i).getConst_date()%></div>
+		
+		<div class="cust"><h4>결제수단</h4> <% if(match_ans.get(i).getPayment()==null){
+			out.println("미결제");
+				}else {out.println(match_ans.get(i).getPayment());}%>
+			
 			<%
 			}
 		}
 	%>
-
 
 
 
 
 
 </div>
- 
-
+</div>
+ </div>
+</div>
+</div>
 </div>
    <div style="margin-left: auto; margin-right: auto;">
 <jsp:include page="footer.jsp" />

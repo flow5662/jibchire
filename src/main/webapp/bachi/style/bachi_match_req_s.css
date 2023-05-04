@@ -29,3 +29,24 @@ align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.cust_section input[type="text"]{
+height: 25px;
+border: 1px solid gray;
+}
+input[type="submit"]{
+width:100px;
+height: 40px;
+background-color: #789849;
+color: white;
+border: none;
+border-radius: 8px;
+}
+input[type="submit"]:hover{
+background-color: #6b745d;
+}
+.list.btn{
+padding-top: 20px;
+}
+input[type="text"]:focus {
+  outline: #789849;
+}

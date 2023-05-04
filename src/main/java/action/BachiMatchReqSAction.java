@@ -32,13 +32,6 @@ public class BachiMatchReqSAction implements Action {
 		ActionForward forward= new ActionForward(); //이동 클래스
 		
 		
-		
-		
-		
-	
-		
-		
-		
 		if(est_id_ans == est_id) { //이미 답변된 id라면
 			forward.setPath("bachi_match_req_sw.bc?board="+est_id);
 			return forward;
