@@ -13,13 +13,13 @@ import dto.Bachi_match_Been;
 
 public class Bachi_Match_Req_Service {
 
-	public ArrayList<Bachi_match_Been> select_matchReq(int page,int limit) throws Exception{
+	public ArrayList<Bachi_match_Been> select_matchReq(int page,int limit,String gosu_menu1,String gosu_menu2) throws Exception{
 		
 		ArrayList<Bachi_match_Been> match_been = null; //ArrayList 초기화
 		Connection con = getConnection(); //Conn 호출
 		Bachi_match bachi_match_req = Bachi_match.getInstance(); //싱글톤패턴, 하나의 Bachi_match 인스턴스만 사용
 		bachi_match_req.setConnection(con);
-		match_been = bachi_match_req.selectMatchReq(page,limit);
+		match_been = bachi_match_req.selectMatchReq(page,limit,gosu_menu1,gosu_menu2);
 		
 		close(con);
 		return match_been;

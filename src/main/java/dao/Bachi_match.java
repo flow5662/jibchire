@@ -62,16 +62,36 @@ public class Bachi_match {
 	    return insertCount; //삽입된 행의 개수를 반환
 	}
 
-	public ArrayList<Bachi_match_Been> selectMatchReq(int page,int limit){
+	public ArrayList<Bachi_match_Been> selectMatchReq(int page,int limit ,String gosu_menu1,String gosu_menu2){
 		 PreparedStatement pstmt = null;
 		    ResultSet rs = null;
-		    String sql = "select gosu_req.est_id, gosu_req.cust_id, gosu_menu1, gosu_menu2, est_q1, est_q2, est_q3, est_q_date,cust_adr, cust_pic, gosu_ans.est_id as ans_est_id from gosu_req inner join cust_info on gosu_req.cust_id = cust_info.cust_id left join gosu_ans on gosu_req.est_id = gosu_ans.est_id order by gosu_req.est_id desc, est_q_date asc limit ?, 10;";
+		    String sql = "select gosu_req.est_id, gosu_req.cust_id, gosu_menu1, gosu_menu2, est_q1, est_q2, est_q3, est_q_date,cust_adr, cust_pic, gosu_ans.est_id as ans_est_id from gosu_req inner join cust_info on gosu_req.cust_id = cust_info.cust_id left join gosu_ans on gosu_req.est_id = gosu_ans.est_id";
+		    if (gosu_menu1 == null || gosu_menu1.equals("") || gosu_menu1.equals("전체")) {
+		        // where절을 생략합니다.
+		    } else if (gosu_menu2 == null || gosu_menu2.equals("")) {
+		        sql = sql + " where gosu_menu1 = ?";
+		    } else if (!"전체".equals(gosu_menu1)) {
+		        sql = sql + " where gosu_menu1 = ? and gosu_menu2 = ?";
+		    }
+		    sql = sql + " order by gosu_req.est_id desc, est_q_date asc limit ?, 10;";
+
 		 ArrayList<Bachi_match_Been> match_been = new ArrayList<Bachi_match_Been>();
 		 Bachi_match_Been been = null;
 		 int startrow=(page-1)*10;
 		 try {
 			 pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, startrow);
+				
+			 	if(gosu_menu1 == null || gosu_menu1.equals("") || gosu_menu1.equals("전체")) { //gosu_menu1(기본값이 null)일경우
+			 		pstmt.setInt(1, startrow);
+			 	}else if(gosu_menu2 == null || gosu_menu2.equals("")) {
+			 		pstmt.setString(1, gosu_menu1);
+			 		pstmt.setInt(2, startrow);
+			 	}else {
+			 		pstmt.setString(1, gosu_menu1);
+					pstmt.setString(2, gosu_menu2);
+					pstmt.setInt(3, startrow);
+			 	}
+				
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()){
@@ -253,5 +273,38 @@ public class Bachi_match {
 		 
 		return match_been; //프론트 화면에 보낼 ArrayList 반환하기
 	}
+	
+	public ArrayList<Bachi_match_Been> select_gosu_menu(){ //gosu_menu 중복제거하여 현재 있는 카테고리를 선택하도록
+		  PreparedStatement pstmt = null;
+		    ResultSet rs = null;
+		    String sql = "select distinct gosu_menu1,gosu_menu2 from gosu_req;";
+
+		    ArrayList<Bachi_match_Been> list = new ArrayList<Bachi_match_Been>();
+			 try {
+				 pstmt = con.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+				 
+					while(rs.next()){
+					 //삽입할 객체 생성
+						Bachi_match_Been menu = new Bachi_match_Been();
+						
+						menu.setGosu_menu1(rs.getString("gosu_menu1"));	
+						menu.setGosu_menu2(rs.getString("gosu_menu2"));
+						list.add(menu); 
+						
+					}
+				 
+				 
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }finally{
+					close(rs);
+					close(pstmt); //sql 닫기
+				}
+			 
+			return list; //프론트 화면에 보낼 ArrayList 반환하기
+		
+		}
+	
 	
 }

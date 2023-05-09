@@ -12,6 +12,9 @@
 	int maxPage=pageInfo.getMaxPage();
 	int startPage=pageInfo.getStartPage();
 	int endPage=pageInfo.getEndPage();
+	
+	String gosu_menu1 = request.getParameter("gosu_menu1");
+	String gosu_menu2 = request.getParameter("gosu_menu2");
     %>
 <!DOCTYPE html>
 <html>
@@ -20,6 +23,7 @@
 <title>견적답변</title>
 </head>
 <link rel="stylesheet" type="text/css" href="style/bachi_match_req.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <body>
 	
 	   <!-- 헤더 -->
@@ -39,7 +43,16 @@
 		}
 	%>
 	</header>
+	
+	
+	
 	<div class= "list_section">
+	<form id="form" method="post">
+	<input type="text" value=<%=gosu_menu1 %>>
+	<div id="gosu_menu">
+	
+	</div>
+	</form>
 	<div class="list">
 	<table>
 	<tr><th style="
@@ -59,6 +72,7 @@
 		<!-- 활동가능지역을 기준으로 삼음 -->
 
 <% 
+	
 	if(article_match != null){
 		for(int i=0;i<article_match.size();i++){
 			%>
@@ -127,4 +141,29 @@
 <jsp:include page="footer.jsp" />
 </div>
 </body>
+<script>
+$(document).ready(function(){
+	$.ajax({
+		url : "bachi_match_cate.bc" ,
+		dataType : "html",
+		type : "post",
+		// 이동하고있는게 눈에 보이는 것 뿐
+		// 중요한 역할들을 가지고 있지는 않음(html 타입변환)
+		success: function(re){ //매개변수
+			$("#gosu_menu").html(re);
+			
+		}
+		//정상적으로 잘 갔다 왔냐	 
+	});
+	
+	
+	
+	
+	
+
+});
+
+
+</script>
+
 </html>

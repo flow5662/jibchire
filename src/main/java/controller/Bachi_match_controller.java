@@ -17,6 +17,7 @@ import action.BachiMatchReqAction;
 import action.BachiMatchReqAns;
 import action.BachiMatchReqSAction;
 import action.BachiQuestionsAction;
+import action.Bachi_match_categoryAction;
 import dto.ActionForward;
 import svc.BachiInfoSelectService;
 
@@ -61,11 +62,7 @@ public class Bachi_match_controller extends javax.servlet.http.HttpServlet
 				forward = action.execute(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
-			}
-			
-			
-		}else if(command.equals("/bachi/bachi_match_change.bc")) {
-			
+			}	
 		}else if(command.equals("/bachi/bachi_insert.bc")) {
 			forward=new ActionForward();
 			forward.setPath("bachi_insert.jsp");
@@ -112,6 +109,13 @@ public class Bachi_match_controller extends javax.servlet.http.HttpServlet
 		}else if(command.equals("/bachi/bachi_match-home.bc")) {
 			forward=new ActionForward();
 			forward.setPath("bachi_match.jsp");
+		}else if(command.equals("/bachi/bachi_match_cate.bc")) { //gosu_menu1~2 
+			action = new Bachi_match_categoryAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		

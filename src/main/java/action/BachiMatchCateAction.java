@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.ActionForward;
 
-public class BachiMatchCateAction implements Action {
+public class BachiMatchCateAction implements Action { //매칭화면
 	
  public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
 	 

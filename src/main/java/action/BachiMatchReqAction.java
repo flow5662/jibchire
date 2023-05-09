@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.Bachi_match;
 import dto.ActionForward;
 import dto.Bachi_match_Been;
 import svc.Bachi_Match_Req_Service;
@@ -20,6 +21,8 @@ public class BachiMatchReqAction implements Action{
 	
 		int page=1;
 		int limit=10;
+		String gosu_menu1 = request.getParameter("gosu_menu1"); //select태그
+		String gosu_menu2 = request.getParameter("gosu_menu2");
 		
 		if(request.getParameter("page")!=null){
 			page=Integer.parseInt(request.getParameter("page"));
@@ -28,7 +31,7 @@ public class BachiMatchReqAction implements Action{
 		Bachi_Match_Req_Service match_req = new Bachi_Match_Req_Service();
 		
 		int listCount = match_req.getListCount();
-		match_been = match_req.select_matchReq(page,limit); //ArrayList 객체 호출, 서비스 클래스의 메소드의 return값 담기
+		match_been = match_req.select_matchReq(page,limit,gosu_menu1,gosu_menu2); //ArrayList 객체 호출, 서비스 클래스의 메소드의 return값 담기
 		int maxPage=(int)((double)listCount/limit+0.95); 
    		int startPage = (((int) ((double)page / 10 + 0.9)) - 1) * 10 + 1;
    	    int endPage = startPage+10-1;
@@ -44,7 +47,7 @@ public class BachiMatchReqAction implements Action{
 		pageInfo.setPage(page);
 		pageInfo.setStartPage(startPage);	
 		request.setAttribute("pageInfo", pageInfo);
-   	 
+		
 		request.setAttribute("match_been", match_been);//key value 설정
 		ActionForward forward= new ActionForward(); //이동 클래스
    		forward.setPath("bachi_match_req.jsp");
