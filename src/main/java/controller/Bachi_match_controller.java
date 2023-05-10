@@ -19,6 +19,7 @@ import action.BachiMatchReqSAction;
 import action.BachiQuestionsAction;
 import action.Bachi_match_categoryAction;
 import dto.ActionForward;
+import dto.Bachi_match_Been;
 import svc.BachiInfoSelectService;
 
 @WebServlet("*.bc")//��� �� ��Ʈ�ѷ��� Ÿ�� ���ڴ�
@@ -50,6 +51,7 @@ public class Bachi_match_controller extends javax.servlet.http.HttpServlet
 				e.printStackTrace();
 			}
 		}else if(command.equals("/bachi/bachi_match_req.bc")) {
+			
 			action = new BachiMatchReqAction();
 			try {
 				forward = action.execute(request, response);

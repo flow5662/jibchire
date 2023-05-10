@@ -25,13 +25,17 @@
 <body>
         <jsp:useBean id="market1" class="dao.Gosu_mark">
 <%
+//SE17버전은 jpg 지원불가능, 따로 라이브러리 설치해야함.
+//SE18버전으로 실행요망
+
+
 ServletContext context = request.getServletContext();
 String imagePath=context.getRealPath("image");
 
 int size = 1*1024*1024 ;
 String filename="";
 
-try{
+try{ //png이외의 파일이면 이슈발생, 수정요망
 	MultipartRequest multi=	new MultipartRequest(request,
 	  					  imagePath,
 						  size,
@@ -60,19 +64,20 @@ try{
 	e.printStackTrace();
 }
 
+
+
 ParameterBlock pb=new ParameterBlock();
 pb.add(imagePath+"/"+filename);
 RenderedOp rOp=JAI.create("fileload",pb);
 
 BufferedImage bi= rOp.getAsBufferedImage();
-BufferedImage thumb=new BufferedImage(600,600,BufferedImage.TYPE_INT_RGB);
+BufferedImage thumb=new BufferedImage(600,600,BufferedImage.TYPE_INT_RGB); //이미지가 png여야 하는이유
 
 Graphics2D g=thumb.createGraphics();
 g.drawImage(bi,0,0,600,600,null);
 
 File file=new File(imagePath+"/sm_"+filename);
 ImageIO.write(thumb,"jpg",file);
-
 
 %>
 </jsp:useBean>

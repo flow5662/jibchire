@@ -149,38 +149,13 @@ jQuery(document).ready(function ($) {
 				</article>
 			</div>
 
-			<!-- 카테고리별 -->
-			<div class="category" id="midnav">
-				<article>
-					<nav>
-						<div class="cate">
-							<a href="#"><div class="cate1">
-									<li>레슨</li>
-								</div></a> <a href="#"><div class="cate2">
-									<li>홈/리빙</li>
-								</div></a> <a href="#"><div class="cate3">
-									<li>이벤트</li>
-								</div></a> <a href="#"><div class="cate4">
-									<li>비즈니스</li>
-								</div></a> <a href="#"><div class="cate5">
-									<li>디자인/개발</li>
-								</div></a> <a href="#"><div class="cate6">
-									<li>건강/미용</li>
-								</div></a> <a href="#"><div class="cate7">
-									<li>알바</li>
-								</div></a> <a href="#"><div class="cate8">
-									<li>기타</li>
-								</div></a>
-							<div id="indicator"></div>
-					</nav>
-			</div>
-			</article>
+		
 
 			<!-- 지금 인기있는 고수 -->
 			<article>
 				<div class="bestgosu">
 					<div class="besttext">
-						<div class="bestmore">더 많은 고수 찾기 ></div>
+						<div class="bestmore"><a href="#gosu_list ">더 많은 고수 찾기 ></a></div>
 						<h2>지금 인기있는 고수</h2>
 					</div>
 					<!-- 회원사진, 각종 정보 들어가는 곳 (n개)-->
@@ -223,8 +198,16 @@ jQuery(document).ready(function ($) {
 					<article>
 						<div class="gosuserv">
 							<div class="besttext">
-								<div class="bestmore">상품 더 보기 ></div>
-								<h2>{닉네임}님을 위한 추천 서비스</h2>
+								<div class="bestmore"><a href="bachi_market.jsp">상품 더 보기 ></a></div>
+								<h2><%
+								if(id==null){
+									out.println("고객");
+								}else{
+									out.println(id);
+								}
+								
+								
+								%>님을 위한 추천 서비스</h2>
 							</div>
 							<div class="bo">
 								<div class="boxtitle">
@@ -257,54 +240,7 @@ jQuery(document).ready(function ($) {
 								</div>
 							</div>
 
-							<!-- 지역별 고수찾기 -->
-							<article>
-								<div class="adrgosu">
-									<div class="gosuad">
-										<h2>지역별 고수찾기</h2>
-									</div>
-									<div class="adressbox">
-
-										<div class="ad1">
-											<li>서울</li>
-										</div>
-										<div class="ad2">
-											<li>인천</li>
-										</div>
-										<div class="ad3">
-											<li>경기</li>
-										</div>
-										<div class="ad4">
-											<li>강원</li>
-										</div>
-										<div class="ad5">
-											<li>충북</li>
-										</div>
-
-										<div class="adgroup2">
-											<div class="ad6">
-												<li>충남</li>
-											</div>
-											<div class="ad7">
-												<li>경북</li>
-											</div>
-											<div class="ad8">
-												<li>경남</li>
-											</div>
-											<div class="ad9">
-												<li>전남</li>
-											</div>
-											<div class="ad10">
-												<li>전북</li>
-											</div>
-										</div>
-									</div>
-									<h4>
-										지역별로 고수를 찾으시나요?<br>저희가 도와드리겠습니다.
-									</h4>
-								</div>
-							</article>
-
+							
 							<!-- 고수 게시글(후기) -->
 							<article>
 								<div class="gosustory"></div>

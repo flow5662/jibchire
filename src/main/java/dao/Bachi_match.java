@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import dto.Bachi_match_AnsBeen;
@@ -63,7 +65,8 @@ public class Bachi_match {
 	}
 
 	public ArrayList<Bachi_match_Been> selectMatchReq(int page,int limit ,String gosu_menu1,String gosu_menu2){
-		 PreparedStatement pstmt = null;
+		
+		PreparedStatement pstmt = null;
 		    ResultSet rs = null;
 		    String sql = "select gosu_req.est_id, gosu_req.cust_id, gosu_menu1, gosu_menu2, est_q1, est_q2, est_q3, est_q_date,cust_adr, cust_pic, gosu_ans.est_id as ans_est_id from gosu_req inner join cust_info on gosu_req.cust_id = cust_info.cust_id left join gosu_ans on gosu_req.est_id = gosu_ans.est_id";
 		    if (gosu_menu1 == null || gosu_menu1.equals("") || gosu_menu1.equals("전체")) {

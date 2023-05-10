@@ -24,6 +24,19 @@
 </head>
 <link rel="stylesheet" type="text/css" href="style/bachi_match_req.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<style>
+.menu_section{
+    display: flex;
+    align-items: center;
+    width: 1280px;
+    margin: 0 auto;
+}
+#gosu_menu{
+padding-top: 50px;
+}
+
+</style>
+
 <body>
 	
 	   <!-- 헤더 -->
@@ -44,15 +57,15 @@
 	%>
 	</header>
 	
-	
+	<div class="menu_section">
+	<!-- ajax select영역 -->
+	<div id="gosu_menu"></div>
+	</div>
 	
 	<div class= "list_section">
-	<form id="form" method="post">
-	<input type="text" value=<%=gosu_menu1 %>>
-	<div id="gosu_menu">
 	
-	</div>
-	</form>
+	
+	
 	<div class="list">
 	<table>
 	<tr><th style="
@@ -99,19 +112,23 @@
 			</tr>
 			<%
 			}
-
-}else{
-	%>
-	결과값없음
-	<%
-}
-%>
+			if(article_match.size() == 0){
+			%> <tr> <td colspan="7">결과값이 없습니다. 다시 검색을 시도해보세요.</td> </tr><%
+			}
+		}else{
+		%>
+		<tr>
+		<td colspan="7"> 데이터가 존재하지 않습니다. </td>
+		</tr>
+		<%
+		}
+		%>
 
 
 </table>
 </div>
 
-
+<!-- 페이징 수정요망 -->
 	<section id="pageList">
 		<%if(nowPage<=1){ %>
 		◀
@@ -155,10 +172,8 @@ $(document).ready(function(){
 		}
 		//정상적으로 잘 갔다 왔냐	 
 	});
-	
-	
-	
-	
+
+
 	
 
 });
