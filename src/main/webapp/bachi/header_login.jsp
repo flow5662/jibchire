@@ -14,7 +14,7 @@
 @import
 	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
 	;
-
+* { margin : 0 ; padding : 0 ; } 
 html {
 	font-family: 'NanumSquare';
 }
@@ -448,7 +448,7 @@ li {
 	width: 100%;
 	border-bottom: 1px solid lightgray;
 	height: 70px;
-	margin: 0 auto;
+	background-color: #EBE1B9;
 }
 
 .line {
@@ -699,7 +699,7 @@ li {
 				<li><a href="../bachi/bachi_main.jsp"> 바치 </a></li>
 			</div>
 
-			<li><a href="index.jsp"><div class="logo"></div></a></li>
+			<li><a href="snsIndexList.sns"><div class="logo"></div></a></li>
 
 			<div class="serch">
 				<div class="search-box">

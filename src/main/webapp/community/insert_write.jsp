@@ -54,7 +54,7 @@
 			stylesum += pstl[i]+",";
 		}
 		post.setPost_color(colorsum);
-		post.setPost_style(stylesum);
+// 		post.setPost_style(stylesum);
 
 		String region1 = multi.getParameter("post_region");
 		String region2 = multi.getParameter("post_region2");

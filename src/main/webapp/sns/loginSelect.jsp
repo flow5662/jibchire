@@ -40,7 +40,7 @@
 				//로그인 되었을 때 alert 하도록 수정
 				out.println("<script> alert('로그인 되었습니다')"); 
 				session.setAttribute("ID",id); 
-				out.println("document.location.href = 'index.jsp' </script>");
+				out.println("document.location.href = 'snsIndexList.sns' </script>");
 			}else {
 		%>
 			<script type="text/javascript">

@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 <style>
 	@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
-	
+	* { margin : 0 ; padding : 0 ; } 
 	html{
 		font-family: 'NanumSquare';
 	}
@@ -320,7 +320,7 @@
 	.item_index	.st6{fill:#0C6667;}
 
 	.cart .st0{fill:#000000;}
-	.tophead{width: 100%; border-bottom: 1px solid lightgray; height: 70px; margin : 0 auto;}
+	.tophead{width: 100%; border-bottom: 1px solid lightgray; height: 70px; background-color: #d0c0b0;}
 	.line{width:100%; border-bottom: 1px solid lightgray; }
 </style>
 <body>
@@ -503,7 +503,7 @@
 <!-- 			<div class="store"><li><a href ="../shopping.html"> 스토어 </a></li></div> -->
 			<div class="gosu"><li><a href ="../bachi/bachi_main.jsp"> 바치 </a></li></div>
 	
-			<li><a href="index.jsp"><div class="logo"> </div></a></li>
+			<li><a href="snsIndexList.sns"><div class="logo"> </div></a></li>
 	
 			<div class="serch">
 				<div class="search-box">
@@ -606,6 +606,13 @@
 	                }
 	            }
 	    });
+		 /* 외부영역 클릭시 팝업 닫기 */
+        $(document).mouseup(function (e){
+           if($(".items").has(e.target).length === 0 || $(".login_items").has(e.target).length === 0 ){
+              $(".login_items").hide();
+              $(".item, .items, .items2").hide();
+           }
+        });
 	});
 </script>
 </html>

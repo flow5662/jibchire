@@ -13,6 +13,7 @@ import action.SnsFollowAction;
 import action.SnsFollowLoginAction;
 import action.SnsHeartAction;
 import action.SnsHeartLoginAction;
+import action.SnsIndexAction;
 import action.SnsListAction;
 import action.SnsReadAction;
 import action.SnsSearchAction;
@@ -131,6 +132,30 @@ public class SnsController extends javax.servlet.http.HttpServlet
 		}else if(command.equals("/sns/myPageWrite.sns")){  //follow한 회원의 글만 보기
 			System.out.println("myPageWrite 컨트롤러 실행");
 			action = new MyPageWriteAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/community/snsIndexList.sns")){  //index화면에서 보여줄 데이터 연결
+			System.out.println("index 컨트롤러 실행");
+			action = new SnsIndexAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/sns/snsIndexList.sns")){  //index화면에서 보여줄 데이터 연결
+			System.out.println("index 컨트롤러 실행");
+			action = new SnsIndexAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/bachi/snsIndexList.sns")){  //index화면에서 보여줄 데이터 연결
+			System.out.println("index 컨트롤러 실행");
+			action = new SnsIndexAction();
 			try{
 				forward=action.execute(request, response);
 			}catch(Exception e){

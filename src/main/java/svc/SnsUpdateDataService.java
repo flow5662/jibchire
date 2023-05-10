@@ -23,7 +23,7 @@ public class SnsUpdateDataService {
 		else{
 			rollback(con);
 		}
-		feed = consns.selectArticle(feed_id);
+		feed = consns.selectyUpdateArticle(feed_id);
 		close(con);
 		return feed;
 		
@@ -45,7 +45,7 @@ public class SnsUpdateDataService {
 		else{
 			rollback(con);
 		}
-		feed = consns.selectHeartArticle(feed_id,cust_id);
+		feed = consns.selectUpdateHeartArticle(feed_id,cust_id);
 		close(con);
 		return feed;
 		

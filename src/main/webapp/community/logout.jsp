@@ -10,7 +10,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	session.removeAttribute("ID");
-	response.sendRedirect("index.jsp");
+	response.sendRedirect("snsIndexList.sns");
 %>
 </body>
 </html>

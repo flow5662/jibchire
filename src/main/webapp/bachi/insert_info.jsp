@@ -46,7 +46,7 @@
 				//confirm() 으로 해서 확인==> 로그인하러가기
 			out.println(" if(cfm){ document.location.href = 'login.jsp';  }");
 				//확인버튼 누르면 로그인페이지로 
-			out.println("else{	document.location.href = 'index.jsp'; 	}</script>"); 		
+			out.println("else{	document.location.href = 'snsIndexList.sns'; 	}</script>"); 		
 				//취소버튼 누르면 회원가입페이지로
 		} finally {
 			try{

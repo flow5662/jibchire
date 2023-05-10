@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.renderable.ParameterBlock;
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.imageio.ImageIO;

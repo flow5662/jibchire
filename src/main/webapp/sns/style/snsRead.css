@@ -4,45 +4,55 @@ a { text-decoration : none; }
 
 /*전체구조*/
 #wrap{width: 1280px; margin: 0 auto;}
-#wraper{width: 900px; margin: 0 auto;}
+#wraper{width: 450px; margin: 0 auto;}
 #title{text-align: center;  margin: 30px auto;    height: 30px;}
 
 /*이미지 슬라이더*/
-#slider {  position: relative;  overflow: hidden;  margin: 20px auto 0 auto;}
-#slider ul {  position: relative;  margin: 0;  padding: 0;  list-style: none;}
-#slider ul li {  position: relative;  display: block;  float: left;  margin: 0;padding: 0;  height: 450px; 
+.slider {  position: relative;  overflow: hidden;  margin: 20px auto 0 auto; height: 450px;}
+.slider ul {  position: relative;  margin: 0;  padding: 0;  list-style: none;}
+.slider ul li {  position: relative;  display: block;  float: left;  margin: 0;padding: 0;  height: 450px; 
 	  text-align: center;  line-height: 300px; }
 a.control_prev, a.control_next {  position: absolute;top: 40%;  z-index: 999;  display: block;  padding: 4% 3%;
   color: #fff;  font-size: 30px;  opacity: 0.8;  cursor: pointer;}
 a.control_prev:hover, a.control_next:hover {  opacity: 1;  -webkit-transition: all 0.2s ease;}
 a.control_prev {}
 a.control_next {  right: 0;}
-.pics{width: 370px; height: 450px; overflow: hidden;  margin-left:20px;}
+#snsthunbnail li.feed:hover{ box-shadow: 0 14px 18px rgba(29, 31, 25, 0.23), 0 10px 10px rgba(29, 31, 25, 0.23);}
+.pics{width: 450px; height: 450px; overflow: hidden; margin-left: -2px;}
 .pics>img{object-fit:cover;}
 
-/*내용이 들어가는 공간*/
-#text {width:80%; margin: 20px auto 0 auto; }
-#like {width:80px;position: fixed; right: 230px;  top: 350px; }
-#like li{display: block; text-align: center; font-size: 10pt; margin-top: 5px;}
-#like li:nth-child(3n){margin-bottom:20px;}
-pre{ margin-top: 20px; font-size: 12pt; white-space: pre-wrap;}
+/*feed border style*/
+#snsthunbnail li.feed{display: block; width: 450px;  border: 1px solid white;  
+			 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+ 			 transition: all 0.3s cubic-bezier(.25,.8,.25,1); border-radius: 10px;}
+pre{font-size: 12pt; white-space: pre-wrap;}
 
-/*글쓴이 정보가 들어가는 공간*/
-#writerinfo{ width:80%;  height: 100px; margin: 30px auto 0 auto;}
-#writerinfo ul{position: relative; left: 115px; top:-95px;}
-#writerinfo ul li{display: block;}
-#writerinfo ul li:first-child{font-size: 18pt; font-weight: bold;}
-#writerinfo ul li:nth-child(3){margin-top:8px;}
-#writerinfo ul li:nth-child(3) img{position: relative; top:7px;}
-#writerpic{width:100px; height:100%; border-radius: 50%; background-color: #A0A0A0; overflow: hidden; }
-#writerpic>img{object-fit:cover; }
+/*댓글관련 css*/
+.comment{width: 100%; background-color: beige;}
+.comment ul{display: block;}
+.comment ul li{display: inline-block;}
+/*내용이 들어가는 공간 */
+/* #text {width:80%; margin: 20px auto 0 auto; } */
+/* #like {width:80px;position: fixed; right: 230px;  top: 350px; } */
+/* #like li{display: block; text-align: center; font-size: 10pt; margin-top: 5px;} */
+/* #like li:nth-child(3n){margin-bottom:20px;} */
 
-/*글쓴이일때 수정,삭제버튼*/
-#buttonforid{position: relative; left: 43%; margin-top:20px;}
-input[type=button]{width:100px; height: 60px; background-color: #A0A0A0; border:1px solid #A0A0A0; border-radius: 5px; 
-font-size:12pt; color: white; position:relative; }
+
+/*글쓴이 정보가 들어가는 공간 */
+/* #writerinfo{ width:80%;  height: 100px; margin: 30px auto 0 auto;} */
+/* #writerinfo ul{position: relative; left: 115px; top:-95px;} */
+/* #writerinfo ul li{display: block;} */
+/* #writerinfo ul li:first-child{font-size: 18pt; font-weight: bold;} */
+/* #writerinfo ul li:nth-child(3){margin-top:8px;} */
+/* #writerinfo ul li:nth-child(3) img{position: relative; top:7px;} */
+/* #writerpic{width:100px; height:100%; border-radius: 50%; background-color: #A0A0A0; overflow: hidden; } */
+/* #writerpic>img{object-fit:cover; } */
+
+/*글쓴이일때 수정,삭제버튼 */
+/* #buttonforid{position: relative; left: 43%; margin-top:20px;} */
+/* input[type=button]{width:100px; height: 60px; background-color: #A0A0A0; border:1px solid #A0A0A0; border-radius: 5px;  */
+/* font-size:12pt; color: white; position:relative; } */
 
 /*
 border:1px solid #A0A0A0; border-radius: 5px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 */
-

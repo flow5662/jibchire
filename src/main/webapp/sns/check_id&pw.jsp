@@ -41,7 +41,7 @@
 				if(id.equals(cust_id) && pw.equals(cust_pw)){							
 						out.println("<script> alert('로그인 되었습니다')"); 
 						session.setAttribute("ID",id); // 아이디와 비밀번호가 일치한 순간 session에 값을 넣어주고, 글수정/글삭제가 가능하도록 한다
-						out.println("document.location.href = 'index.jsp' </script>"); //로그인하면 이동할 페이지 넣기
+						out.println("document.location.href = 'snsIndexList.sns' </script>"); //로그인하면 이동할 페이지 넣기
 				}else if(id.equals(cust_id) && !pw.equals(cust_pw)){
 					out.println("<script> alert('아이디와 비밀번호가 일치하지 않습니다')");
 					out.println("document.location.href = 'login.jsp' </script>");

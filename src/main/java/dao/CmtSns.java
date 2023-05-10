@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import dto.Cust_follow;
 import dto.Cust_houseinfo;
 import dto.Feed;
+import dto.Feed_comment;
 import dto.Feed_like;
 import dto.Post_house;
 import dto.SearchSns;
@@ -227,7 +228,114 @@ public class CmtSns {
 		return updateCount;
 
 	}
-	public Feed selectArticle(int feed_id){  // sns 글읽기를 위해 select하는 메소드
+	public ArrayList<Feed> selectArticle(int feed_id){  // sns 글읽기를 위해 select하는 메소드
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+		Feed feed = null;
+		String id = null;
+		ArrayList<Feed> articleList = new ArrayList<Feed>();
+		try{
+			pstmt2=con.prepareStatement("select cust_id from feed where feed_id="+feed_id); //feed_id는 PK이므로 제일 큰 값을 가져와서 (값이 있으면) 그것보다 1 큰값을 insert
+			rs2 = pstmt2.executeQuery();
+			if(rs2.next()) {
+				id = rs2.getString("cust_id");
+			}
+			pstmt = con.prepareStatement("select * from feed left outer join cust_houseinfo on cust_houseinfo.cust_id= ? where feed.cust_id = ? ");
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			rs= pstmt.executeQuery();
+
+			while(rs.next()){
+				feed = new Feed();
+				feed.setFeed_id(rs.getInt("feed_id"));
+				feed.setCust_id(rs.getString("cust_id"));
+				//feed.setFeed_pics(rs.getString("feed_pics"));
+				feed.setFeed_txt(rs.getString("feed_txt"));
+				feed.setFeed_date(rs.getString("feed_date"));
+				feed.setFeed_hashtag(rs.getString("feed_hashtag"));
+				feed.setPro_id(rs.getInt("pro_id"));
+				feed.setUsed_id(rs.getInt("used_id"));
+				feed.setMarket_id(rs.getInt("market_id"));
+				String feed_pics = rs.getString("feed_pics");
+				String [] filename = feed_pics.split(",");
+				feed.setFeed_pics(filename[0]);
+				feed.setFeed_pic1(filename[1]);
+				feed.setFeed_pic2(filename[2]);
+				feed.setFeed_pic3(filename[3]);
+				/*확인용
+				System.out.println("feed_pics=>"+feed_pics);
+				System.out.println("filename[0] =>"+filename[0]);
+				System.out.println("filename[1] =>"+filename[1]);
+				System.out.println("filename[2] =>"+filename[2]);
+				System.out.println("filename[3] =>"+filename[3]);
+				*/
+				feed.setWriterpic(rs.getString("cust_pic"));
+//				feed.setWriterintroduce(rs.getString("cust_introduce"));
+				feed.setFeed_read(rs.getInt("feed_read"));
+				articleList.add(feed);
+			}
+		}catch(Exception ex){
+			System.out.println(ex+"selectArticle 메소드에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return articleList;
+	}
+	public ArrayList<Feed> selectHeartArticle(int feed_id,String cust_id){  // 로그인 후 sns 글읽기
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Feed feed = null;
+		ArrayList<Feed> articleList = new ArrayList<Feed>();
+		try{
+			String sql="select * from feed ";
+			sql+=" left outer join feed_like on feed.feed_id= feed_like.feed_id and feed_like.cust_id= ? ";
+			sql+=" left outer join cust_follow on feed.cust_id = cust_follow.cust_following and cust_follow.cust_id= ? ";
+			sql+=" left outer join cust_houseinfo on cust_houseinfo.cust_id= ? ";
+			//sql+=" where feed.feed_id= ? "; 회원의 글 모두를 가지고 오는 걸로 조정 
+			sql+=" where feed.cust_id= ? order by feed.feed_date desc;";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cust_id);
+			pstmt.setString(2, cust_id);
+			pstmt.setString(3, cust_id);
+			pstmt.setString(4, cust_id);
+			rs= pstmt.executeQuery();
+
+			while(rs.next()){
+				feed = new Feed();
+				feed.setFeed_id(rs.getInt("feed_id"));
+				feed.setCust_id(rs.getString("cust_id"));
+				feed.setFeed_txt(rs.getString("feed_txt"));
+				feed.setFeed_date(rs.getString("feed_date"));
+				feed.setFeed_hashtag(rs.getString("feed_hashtag"));
+				feed.setLike_time(rs.getString("like_time")); //좋아요 한 피드 알기 위해서
+				feed.setFollow_time(rs.getString("follow_time")); // 팔로우 한 사용자 알기 위해서
+				feed.setPro_id(rs.getInt("pro_id"));
+				feed.setUsed_id(rs.getInt("used_id"));
+				feed.setMarket_id(rs.getInt("market_id"));
+				String feed_pics = rs.getString("feed_pics");
+				String [] filename = feed_pics.split(",");
+				feed.setFeed_pics(filename[0]);
+				feed.setFeed_pic1(filename[1]);
+				feed.setFeed_pic2(filename[2]);
+				feed.setFeed_pic3(filename[3]);
+				feed.setWriterpic(rs.getString("cust_pic"));
+				feed.setWriterintroduce(rs.getString("cust_introduce"));
+				feed.setFeed_read(rs.getInt("feed_read"));
+				
+				articleList.add(feed);
+			}
+		}catch(Exception ex){
+			System.out.println(ex+"selectHeartArticle메소드에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return articleList;
+	}
+	public Feed selectyUpdateArticle(int feed_id){  // sns 글수정
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
@@ -281,22 +389,21 @@ public class CmtSns {
 		}
 		return feed;
 	}
-	public Feed selectHeartArticle(int feed_id,String cust_id){  // 로그인 후 sns 글읽기
+	public Feed selectUpdateHeartArticle(int feed_id,String cust_id){  // 로그인 후 sns 글 수정
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Feed feed = null;
-		
 		try{
 			String sql="select * from feed ";
 			sql+=" left outer join feed_like on feed.feed_id= feed_like.feed_id and feed_like.cust_id= ? ";
 			sql+=" left outer join cust_follow on feed.cust_id = cust_follow.cust_following and cust_follow.cust_id= ? ";
 			sql+=" left outer join cust_houseinfo on cust_houseinfo.cust_id= ? ";
-			sql+=" where feed.feed_id= ?";
+			sql+=" where feed.feed_id= ? "; 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cust_id);
 			pstmt.setString(2, cust_id);
 			pstmt.setString(3, cust_id);
-			pstmt.setInt(4, feed_id);
+			pstmt.setString(4, cust_id);
 			rs= pstmt.executeQuery();
 
 			if(rs.next()){
@@ -320,6 +427,7 @@ public class CmtSns {
 				feed.setWriterpic(rs.getString("cust_pic"));
 				feed.setWriterintroduce(rs.getString("cust_introduce"));
 				feed.setFeed_read(rs.getInt("feed_read"));
+				
 			}
 		}catch(Exception ex){
 			System.out.println(ex+"selectHeartArticle메소드에서 오류");
@@ -850,6 +958,53 @@ public class CmtSns {
 			close(pstmt);
 		}
 		return alist;
+	}
+	public ArrayList<Feed_comment> getFeedComment(ArrayList<Feed> articleList) throws Exception{
+		
+		ArrayList<Feed_comment> commentlist = new ArrayList<Feed_comment>();
+		Feed_comment comment = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int feed_id = 0;
+		for (int i = 0 ; i<articleList.size(); i++) {
+			feed_id= articleList.get(i).getFeed_id();
+//			System.out.println(i+feed_id+"  출력중");
+		
+		try{
+			pstmt = con.prepareStatement(
+					"select * from feed_comment  "
+					+ "left outer join cust_houseinfo on feed_comment.cust_id = cust_houseinfo.cust_id  "
+					+ " where feed_id=? order by cmt_time desc;");
+//			pstmt = con.prepareStatement(
+//					"select feed_comment.feed_id, feed_comment.cmt_id, feed_comment.cust_id, feed_comment.root_cmt,"
+//					+"feed_comment.parent_cmt, feed_comment.cmt_txt, cust_houseinfo.cust_pic,DATE_FORMAT(feed_comment.cmt_time,'%b.%e %H:%i') as cmt_time "
+//					+"from feed_comment"
+//					+"left outer join cust_houseinfo on feed_comment.cust_id = cust_houseinfo.cust_id  "
+//					+"where feed_id=? order by cmt_time desc;");
+			pstmt.setInt(1, feed_id); 
+			rs= pstmt.executeQuery();
+	
+			while(rs.next()){
+				
+				comment = new Feed_comment();
+				comment.setFeed_id(rs.getInt("feed_id"));
+				comment.setCmt_id(rs.getInt("cmt_id"));
+				comment.setCust_id(rs.getString("cust_id"));
+				comment.setRoot_cmt(rs.getInt("root_cmt"));
+				comment.setParent_cmt(rs.getInt("parent_cmt"));
+				comment.setCmt_txt(rs.getString("cmt_txt"));
+				comment.setCmt_time(rs.getString("cmt_time"));
+				comment.setCust_pic(rs.getString("cust_pic"));
+				commentlist.add(comment);
+			}
+		}catch(Exception ex){
+			System.out.println(ex+"getFeedComment메소드에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+	}
+		return commentlist;
 	}
 
 }

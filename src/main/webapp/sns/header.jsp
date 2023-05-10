@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 <style>
 	@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
-
+	* { margin : 0 ; padding : 0 ; } 
 	html{
 		font-family: 'NanumSquare';
 	}
@@ -131,10 +131,10 @@
 		/*position: absolute;*/
 		/*top: 10%;
 		left: 61%;*/
-		box-shadow: 0px 0px .5px 1px #789849;
+		box-shadow: 0px 0px .5px 1px #926b61;
 		height: 30px;
 		background-color: #fff;
-		border: 1px solid #789849;
+		border: 1px solid #926b61;
 		border-radius: 30px;
 		transition: 0.4s;
 		width: 282px;
@@ -261,7 +261,7 @@
 	.item_index	.st6{fill:#0C6667;}
 	
 	.cart .st0{fill:#000000;}
-	.tophead{width: 100%; border-bottom: 1px solid lightgray; height: 70px; margin : 0 auto;}
+	.tophead{width: 100%; border-bottom: 1px solid lightgray; height: 70px;background-color: #d0c0b0;}
 	.line{width:100%; border-bottom: 1px solid lightgray; }
 </style>
 <body>
@@ -271,32 +271,32 @@
 			<div style="width : 1280px; margin: 0 auto;">
 				<div class="topheader">
 					<div class="top">
-						<div class="cart">
-							<a href="#cart">
-								<svg height="35px" width="35px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-						 viewBox="0 0 512 512"  xml:space="preserve">
-									<g>
-										<path class="st0" d="M494.365,133.438c-11.528-15.738-29.35-25.678-48.804-27.219L126.245,80.918l-3.129-17.749
-										c-5.252-29.676-28.858-52.657-58.671-57.066L24.597,0.187C15.093-1.209,6.253,5.359,4.84,14.846
-										c-1.409,9.512,5.158,18.356,14.658,19.761v-0.008l39.861,5.907c14.97,2.218,26.868,13.785,29.501,28.71l54.009,306.134
-										c5.073,28.735,30.027,49.669,59.206,49.678h221.971c9.606,0,17.394-7.792,17.394-17.39c0-9.607-7.788-17.398-17.394-17.398H202.075
-										c-12.282,0.009-22.813-8.836-24.946-20.934l-5-28.349h244.879c31.234,0,58.346-21.55,65.367-52.005l23.258-100.767
-										c1.151-5,1.717-10.06,1.717-15.086C507.35,158.962,502.88,145.04,494.365,133.438z M319.692,125.33l72.469,5.745v180.898h-72.469
-										V125.33z M296.502,311.973h-72.47V117.752l72.47,5.746V311.973z M131.451,110.415l69.395,5.496v196.062h-33.833L131.451,110.415z
-										 M477.378,181.668l-23.245,100.776c-3.986,17.278-19.385,29.53-37.125,29.53h-1.657V132.916l27.926,2.208
-										c11.049,0.866,21.174,6.516,27.706,15.447c4.838,6.592,7.381,14.495,7.381,22.526C478.363,175.949,478.038,178.809,477.378,181.668
-										z"/>
-										<path class="st0" d="M215.346,450.165c-17.076,0-30.909,13.853-30.909,30.926c0,17.073,13.832,30.909,30.909,30.909
-											c17.078,0,30.927-13.836,30.927-30.909C246.273,464.018,232.423,450.165,215.346,450.165z"/>
-										<path class="st0" d="M381.539,450.165c-17.073,0-30.913,13.853-30.913,30.926c0,17.073,13.84,30.909,30.913,30.909
-											c17.072,0,30.922-13.836,30.922-30.909C412.461,464.018,398.612,450.165,381.539,450.165z"/>
-									</g>
-								</svg>
-							</a>
-						</div>
+<!-- 						<div class="cart"> -->
+<!-- 							<a href="#cart"> -->
+<!-- 								<svg height="35px" width="35px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  -->
+<!-- 						 viewBox="0 0 512 512"  xml:space="preserve"> -->
+<!-- 									<g> -->
+<!-- 										<path class="st0" d="M494.365,133.438c-11.528-15.738-29.35-25.678-48.804-27.219L126.245,80.918l-3.129-17.749 -->
+<!-- 										c-5.252-29.676-28.858-52.657-58.671-57.066L24.597,0.187C15.093-1.209,6.253,5.359,4.84,14.846 -->
+<!-- 										c-1.409,9.512,5.158,18.356,14.658,19.761v-0.008l39.861,5.907c14.97,2.218,26.868,13.785,29.501,28.71l54.009,306.134 -->
+<!-- 										c5.073,28.735,30.027,49.669,59.206,49.678h221.971c9.606,0,17.394-7.792,17.394-17.39c0-9.607-7.788-17.398-17.394-17.398H202.075 -->
+<!-- 										c-12.282,0.009-22.813-8.836-24.946-20.934l-5-28.349h244.879c31.234,0,58.346-21.55,65.367-52.005l23.258-100.767 -->
+<!-- 										c1.151-5,1.717-10.06,1.717-15.086C507.35,158.962,502.88,145.04,494.365,133.438z M319.692,125.33l72.469,5.745v180.898h-72.469 -->
+<!-- 										V125.33z M296.502,311.973h-72.47V117.752l72.47,5.746V311.973z M131.451,110.415l69.395,5.496v196.062h-33.833L131.451,110.415z -->
+<!-- 										 M477.378,181.668l-23.245,100.776c-3.986,17.278-19.385,29.53-37.125,29.53h-1.657V132.916l27.926,2.208 -->
+<!-- 										c11.049,0.866,21.174,6.516,27.706,15.447c4.838,6.592,7.381,14.495,7.381,22.526C478.363,175.949,478.038,178.809,477.378,181.668 -->
+<!-- 										z"/> -->
+<!-- 										<path class="st0" d="M215.346,450.165c-17.076,0-30.909,13.853-30.909,30.926c0,17.073,13.832,30.909,30.909,30.909 -->
+<!-- 											c17.078,0,30.927-13.836,30.927-30.909C246.273,464.018,232.423,450.165,215.346,450.165z"/> -->
+<!-- 										<path class="st0" d="M381.539,450.165c-17.073,0-30.913,13.853-30.913,30.926c0,17.073,13.84,30.909,30.913,30.909 -->
+<!-- 											c17.072,0,30.922-13.836,30.922-30.909C412.461,464.018,398.612,450.165,381.539,450.165z"/> -->
+<!-- 									</g> -->
+<!-- 								</svg> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
 						<div class="login"><li><a href="login.jsp">로그인</a></li></div>
 						<div class="join"><li><a href ="join.jsp">회원가입</a></li></div>
-						<input type="button" class="gosuch" id="write" value="글쓰기">
+<!-- 						<input type="button" class="gosuch" id="write" value="글쓰기"> -->
 					</div>
 					<div class="items items2">
 						<a class="item_index" href="login.jsp">
@@ -417,7 +417,7 @@
 			<div class="cumu"><li><a href ="../community/community.jsp"> 커뮤니티 </a></li></div>
 <!-- 			<div class="store"><li><a href ="shopping.jsp"> 스토어 </a></li></div> -->
 			<div class="gosu"><li><a href ="../bachi/bachi_main.jsp"> 바치 </a></li></div>
-			<li><a href="index.jsp"><div class="logo"> </div></a></li>
+			<li><a href="snsIndexList.sns"><div class="logo"> </div></a></li>
 
 			<div class="serch">
 				<div class="search-box">
@@ -467,19 +467,19 @@
 		$(".nav").hide();
 		
 		$(".cumu").mouseenter(function(){
-			$(".nav").slideDown();
+			$(".nav").slideDown(200,'swing');
 			$("#cumu").show();
 			$("#shop").hide();
 			$("#gosu").hide();
 		});
 		$(".store").mouseenter(function(){
-			$(".nav").slideDown();
+			$(".nav").slideDown(200,'swing');
 			$("#shop").show();
 			$("#cumu").hide();
 			$("#gosu").hide();
 		})
 		$(".gosu").mouseenter(function(){
-			$(".nav").slideDown();
+			$(".nav").slideDown(200,'swing');
 			$("#gosu").show();
 			$("#cumu").hide();
 			$("#shop").hide();
@@ -487,13 +487,13 @@
 
 		$(".cumu , .store, .gosu").mouseout(function(){
 			$(".nav").mouseenter(function(){
-				$(".nav").show();
+				$(".nav").show(200,'swing');
 			});
 			$("header ~ .line").mouseout(function(){
 				$(".nav, .header").mouseenter(function(){
-					$(".nav").show();
+					$(".nav").show(200,'swing');
 				});	
-				$(".nav").slideUp();
+				$(".nav").slideUp(200,'swing');
 			});
 		});
 		

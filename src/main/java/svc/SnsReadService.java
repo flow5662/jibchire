@@ -1,13 +1,17 @@
 package svc;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+
 import dao.CmtSns;
 import dto.Feed;
+import dto.Feed_comment;
+
 import static db.JdbcUtil.*;
 
 public class SnsReadService {
 
-	public Feed getArticle(int feed_id) throws Exception{
+	public ArrayList<Feed> getArticle(int feed_id) throws Exception{
 
 		Feed feed = null;
 		Connection con = getConnection();
@@ -16,39 +20,49 @@ public class SnsReadService {
 		
 		/*조회수 높이기*/
 		int updateCount = consns.updateReadCount(feed_id); 
-		System.out.println("1이면 조회수 상승=>"+updateCount);
 		if(updateCount > 0){
 			commit(con);
 		}
 		else{
 			rollback(con);
 		}
-		feed = consns.selectArticle(feed_id);
+		ArrayList<Feed> articleList = consns.selectArticle(feed_id);
 		close(con);
-		return feed;
+		return articleList;
 		
 	}
 	
-	public Feed getHeartArticle(int feed_id,String cust_id) throws Exception{
+	public ArrayList<Feed> getHeartArticle(int feed_id,String cust_id) throws Exception{
 
 		Feed feed = null;
 		Connection con = getConnection();
 		CmtSns consns = CmtSns.getInstance();
 		consns.setConnection(con);
+		ArrayList<Feed> articleList = null;
 		
 		/*조회수 높이기*/
 		int updateCount = consns.updateReadCount(feed_id); 
-		System.out.println("1이면 조회수 상승=>"+updateCount);
 		if(updateCount > 0){
 			commit(con);
 		}
 		else{
 			rollback(con);
 		}
-		feed = consns.selectHeartArticle(feed_id,cust_id);
+		articleList = consns.selectHeartArticle(feed_id,cust_id);
 		close(con);
-		return feed;
+		return articleList;
 		
+	}
+	
+	public ArrayList<Feed_comment> getFeedComment(ArrayList<Feed> articleList) throws Exception{
+			
+		ArrayList<Feed_comment> commentlist = null;
+		Connection con = getConnection();
+		CmtSns consns = CmtSns.getInstance();
+		consns.setConnection(con);
+		commentlist = consns.getFeedComment(articleList);
+		
+		return commentlist;
 	}
 
 }

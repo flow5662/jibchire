@@ -28,7 +28,7 @@
 	post.setPost_direc(request.getParameter("post_direc"));
 	post.setPost_region(request.getParameter("post_region"));
 	post.setPost_pet(request.getParameter("post_pet"));
-	post.setPost_style(request.getParameter("post_style"));
+// 	post.setPost_style(request.getParameter("post_style"));
 	post.setPost_color(request.getParameter("post_color"));
 	//post.setPost_pics(request.getParameter("post_pics")); 사진등록은 나중에 더 배울 것
 	
