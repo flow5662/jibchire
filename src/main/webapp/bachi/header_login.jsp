@@ -699,7 +699,7 @@ li {
 				<li><a href="../bachi/bachi_main.jsp"> 바치 </a></li>
 			</div>
 
-			<li><a href="snsIndexList.sns"><div class="logo"></div></a></li>
+			<li><a href="snsIndexList.sns?cust_id=<%=id%>"><div class="logo"></div></a></li>
 
 			<div class="serch">
 				<div class="search-box">
