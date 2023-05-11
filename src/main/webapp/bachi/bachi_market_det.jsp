@@ -8,7 +8,7 @@
 <html>
 <%
 String market_id = request.getParameter("market_id");
-String cust_id = (String)session.getAttribute("cust_id");
+String cust_id = (String)session.getAttribute("ID");
 String cust_pw = (String)session.getAttribute("cust_pw");
 %>
 

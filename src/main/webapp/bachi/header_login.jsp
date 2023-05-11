@@ -806,7 +806,7 @@ li {
 			            url : "bachi_select_id.bc",
 			            data : {cust_id: "<%= id %>" },
 			            type : "post",
-			            success: function(result){ 
+			            success: function(result){    
 			                if(result === "false"){ // "false" 값이 반환되면
 			                  $(".index3").show(); //견적답변이 보이게 하기
 			                }else{
@@ -814,6 +814,17 @@ li {
 			                }
 			            }
 			    });
+			    
+			        /* 외부영역 클릭시 팝업 닫기 */
+			         $(document).mouseup(function (e){
+			            if($(".items").has(e.target).length === 0 || $(".login_items").has(e.target).length === 0 ){
+			               $(".login_items").hide();
+			               $(".item, .items, .items2").hide();
+			            }
+			         });
+			        
+			        
+			        
 		});
 </script>
 </html>

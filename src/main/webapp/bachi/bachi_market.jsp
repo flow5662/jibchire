@@ -32,7 +32,7 @@ String imageUrl = request.getContextPath() + "/image/";
 
     <!-- 헤더 -->
     <div class="wrap">
-        <header>
+         <header>
     <% 
 		request.setCharacterEncoding("utf-8"); 
 		String id = (String) session.getAttribute("ID");  //session값에서 아이디 가져올 때 null이면 일반헤더, 아니면 로그인헤더

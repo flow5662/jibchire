@@ -6,7 +6,6 @@ html{
 }
 
 .wrap{
-	width:1900px;
 	margin:0 auto;
 }
 #market_picture{
@@ -22,7 +21,7 @@ float: left;
     font-size: 1rem;
 }
 article{height: auto;}
-.search_mark{display:flex;flex-wrap: wrap;margin-bottom: 50px;border-color: #bdbdbd;border-radius: 3px;padding: 10px; gap: 3px}
+.search_mark{display:flex;flex-wrap: wrap;margin-bottom: 50px;border-color: #bdbdbd;border-radius: 3px;padding: 10px; gap: 3px;padding-top: 20px;}
 .market_section{width:1280px;margin-left:auto;margin-right:auto;}
 #market_text{font-size: 16pt;}
 .market_re{margin-bottom: 10px;margin-left: 490px}
@@ -31,7 +30,10 @@ article{height: auto;}
 .page-title{font-size: 3rem;
     font-weight: 500;
     line-height: normal;
-    margin: 0;}
+    margin: 0;
+        padding-top: 30px;
+    }
+    
 .css-price{
      display: flex; 
 }

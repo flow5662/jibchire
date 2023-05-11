@@ -18,7 +18,7 @@ display: flex;
 .css-bord-menu{flex-wrap: wrap;
     display: flex;
     font-size: .875rem;
-    margin-left: -40px;
+    height: 50px;
 }
 .no-space{padding-top: 0;
     padding-bottom: 0;}
@@ -154,4 +154,13 @@ margin-bottom: 0;
     white-space: pre-line;
         width: 750px;
     
+}
+.flex-controller{
+padding-bottom: 10px;	
+	
+}
+.css-option-body{
+	    padding-bottom: 20px;
+    padding-top: 20px;
+	
 }

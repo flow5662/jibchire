@@ -172,8 +172,26 @@ $(document).ready(function(){
 		}
 		//정상적으로 잘 갔다 왔냐	 
 	});
-
-
+	
+	var cust_id = "<%=id%>"; 
+	//로그인을 하지 않았을때 강제적으로 탈출시키는 스크립트
+	if(cust_id === "null"){
+		alert("해당 권한이 없습니다.");
+		history.back(); //이전 화면으로 되돌아가게끔 구현
+	}else{
+        $.ajax({ // gosu_info에 등록되지 않은 아이디일 경우면 권한아예 없음
+        	//원래 목록 화면에 보이지않지만 링크 직접 들어갈 경우 권한 처리
+            url : "bachi_select_id.bc",
+            data : {cust_id: "<%=id %>" },
+            type : "post",
+            success: function(result){    
+                if(result === "true"){ //true => 바치 등록이 안된 것
+                	alert("해당 권한이 없습니다.");
+            		history.back(); //이전 화면으로 되돌아가게끔 구현
+                }
+            }
+    });
+	}
 	
 
 });

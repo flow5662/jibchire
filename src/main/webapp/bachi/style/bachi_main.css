@@ -32,7 +32,6 @@ a {
 }
 
 .wrap {
-	width: 1900px;
 	margin: 0 auto;
 }
 
@@ -41,7 +40,9 @@ li {
 }
 
 .selcton {
-	margin-top: 20px;
+	width: 1900px;
+	padding-top: 20px;
+	margin:0 auto;
 }
 
 .selcton .headimg {

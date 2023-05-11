@@ -70,6 +70,7 @@ public class Bachi_match_controller extends javax.servlet.http.HttpServlet
 			forward.setPath("bachi_insert.jsp");
 		}else if(command.equals("/bachi/bachi_select_id.bc")) { //중복확인용
 		    String cust_id = request.getParameter("cust_id"); //hidden에 저장된 id 값
+		    
 		    BachiInfoSelectService service = new BachiInfoSelectService();
 		    boolean isCheck; //id가 중복이면 true, 중복이 아니면 false 
 		    try {

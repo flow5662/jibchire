@@ -80,8 +80,6 @@ public class Gosu_mark {
 			while(rs.next()){							
 				//return 해야함
 				Bachi_product gosu_pro = new Bachi_product();
-				
-				
 				gosu_pro.setGosu_id(rs.getString("gosu_id"));
 				gosu_pro.setCust_id(rs.getString("cust_id"));
 				gosu_pro.setGosu_text(rs.getString("gosu_text"));
@@ -120,7 +118,7 @@ public class Gosu_mark {
 	            throw new Exception("데이터베이스에 접근할 수 없습니다.");			
 
 	        stmt = conn.createStatement();
-	        ResultSet rs = stmt.executeQuery("select * from gosu_product inner join gosu_market ON gosu_product.gosu_id = gosu_market.gosu_id;");
+	        ResultSet rs = stmt.executeQuery("select market_id,gosu_market.cust_id,gosu_market.gosu_id,market_picture,market_text,market_title,gosu_menu1,gosu_menu2,gosu_price from gosu_product inner join gosu_market ON gosu_product.gosu_id = gosu_market.gosu_id;");
 
 	        while(rs.next()){
 	            Bachi_market mark = new Bachi_market();
@@ -129,6 +127,7 @@ public class Gosu_mark {
 	            // gosu_market 테이블의 데이터를 Gosu_market 객체에 저장
 	            mark.setMarket_id(rs.getInt("market_id"));
 	            mark.setCust_id(rs.getString("cust_id"));
+
 	            mark.setGosu_id(rs.getString("gosu_id"));
 	            mark.setMarket_picture(rs.getString("market_picture"));
 	            mark.setMarket_text(rs.getString("market_text"));
@@ -163,7 +162,7 @@ public class Gosu_mark {
 					throw new Exception("데이터베이스에 접근할 수 없습니다.");			
 			
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from gosu_market inner join gosu_product on gosu_market.gosu_id = gosu_product.gosu_id where gosu_market.cust_id like '%"+serch_id+"%' or market_title like '%"+serch_title+"%' or market_text like'%"+serch_text+"%';");
+			ResultSet rs = stmt.executeQuery("select market_id,gosu_market.cust_id,gosu_market.gosu_id,market_picture,market_text,market_title,gosu_menu1,gosu_menu2,gosu_price from gosu_market inner join gosu_product on gosu_market.gosu_id = gosu_product.gosu_id where gosu_market.cust_id like '%"+serch_id+"%' or market_title like '%"+serch_title+"%' or market_text like'%"+serch_text+"%';");
 			while(rs.next()){
 				
 				Bachi_market mark = new Bachi_market();
@@ -199,7 +198,7 @@ public class Gosu_mark {
 					throw new Exception("데이터베이스에 접근할 수 없습니다..");			
 			
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select* from gosu_product inner join gosu_market on gosu_product.gosu_id = gosu_market.gosu_id where market_id="+market_id);
+			ResultSet rs = stmt.executeQuery("select market_id,gosu_market.cust_id,gosu_market.gosu_id,market_picture,market_text,market_title,gosu_menu1,gosu_menu2,gosu_price from gosu_product inner join gosu_market on gosu_product.gosu_id = gosu_market.gosu_id where market_id="+market_id);
 			while(rs.next()){
 			
 				Bachi_market mark = new Bachi_market();

@@ -7,8 +7,23 @@
 <title>Insert title here</title>
 </head>
 <style>
-
-
+.matching{
+width:1280px;
+margin: 0 auto;
+padding-top:20px;
+}
+.match_text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.final-btn{
+display: flex;
+gap:10px;
+    justify-content: center;
+  align-items: center;
+      padding-top: 50px;
+}
 </style>
 <body>
    <div class="wrap">
@@ -29,10 +44,15 @@
 	</header>
 	<section>
 	<div class="matching">
+	<div class="match_text">
+
+	<h2>정상적으로 요청되었습니다!<br>
+	바치들과의 빠른 매칭을 기원합니다!</h2>
+	</div>
+		<div class="final-btn">
 	<input type="button" onclick="location.href='bachi_main.jsp'" value="메인화면">
 	<input type="button" onclick="location.href='bachi_match.jsp'" value="받은 답변보기">
-	정상적으로 요청되었습니다!<br>
-	바치들과의 빠른 매칭을 기원합니다!
+	</div>
 	</div>
 	</section>
 	

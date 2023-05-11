@@ -48,7 +48,7 @@ try{ //png이외의 파일이면 이슈발생, 수정요망
 	filename=multi.getFilesystemName(file);
 	
 	Bachi_market mark = new Bachi_market();
-	mark.setCust_id((String) session.getAttribute("cust_id"));
+	mark.setCust_id((String) session.getAttribute("ID"));
 	mark.setGosu_id(multi.getParameter("gosu_id"));
 	mark.setMarket_text(multi.getParameter("market_text"));
 	mark.setMarket_title(multi.getParameter("market_title"));

@@ -20,7 +20,7 @@ display: flex;
     align-items: center;
     width: 1280px;
     margin: 0 auto;
-    padding-top: 20px;
+    padding-top: 60px;
     padding-bottom: 20px;
 }
 .intro{
@@ -30,12 +30,8 @@ max-height: 378px;
 
 .menu_all .menu_section{
 display: flex;
-    display: flex;
     align-items: center;
     gap: 10px;
-}
-.menu_all .input_area input[type="text"]{
-
 }
 .menu_all .input_area .intro{
 width:300px;
@@ -85,8 +81,17 @@ padding: 5px 10px 5px 10px;
 input[type="time"]{
 width:200px;
 height: 50px;
+border: 1px solid lightgray;
 }
-
+input[type="text"]{
+border: 1px solid lightgray;
+}
+select{
+border: 1px solid lightgray;
+}
+textarea{
+border: 1px solid lightgray;
+}
 #idcheck{
 background-color: #789849;
 width:120px;
@@ -100,9 +105,20 @@ background-color: #7e8377;
 color: white;
 
 }
+.input_area{
+margin-top: 30px;
+margin-bottom: 30px;
 
+}
 .submit-id{
 padding-top: 60px;
+}
+h4{padding-top: 20px;padding-bottom: 20px;}
+.menu_text{
+padding-bottom: 50px;
+}
+.menu{
+padding-top: 20px;
 }
 </style>
 <body>
@@ -127,6 +143,11 @@ padding-top: 60px;
 <input type="hidden" name="cust_id" value="<%=id%>" id="cust_id">
 
 <div class="menu_all">
+<div class="menu_text">
+<h2>바치등록</h2>
+
+</div>
+<span style="border-bottom: 4px solid lightgray; width: 600px;"></span>
 <div class="menu">
 <div class="menu_section">
 <h4>카테고리</h4>
