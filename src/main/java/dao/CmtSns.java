@@ -46,7 +46,6 @@ public class CmtSns {
 		try{
 			pstmt=con.prepareStatement("select max(feed_id) from feed"); //feed_id는 PK이므로 제일 큰 값을 가져와서 (값이 있으면) 그것보다 1 큰값을 insert
 			rs = pstmt.executeQuery();
-
 			if(rs.next())
 				num =rs.getInt(1)+1;
 			else
@@ -228,23 +227,15 @@ public class CmtSns {
 		return updateCount;
 
 	}
-	public ArrayList<Feed> selectArticle(int feed_id){  // sns 글읽기를 위해 select하는 메소드
+	public ArrayList<Feed> selectArticle(int feed_id,String feed_writer){  // sns 글읽기를 위해 select하는 메소드
 		PreparedStatement pstmt = null;
-		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
-		ResultSet rs2 = null;
 		Feed feed = null;
-		String id = null;
 		ArrayList<Feed> articleList = new ArrayList<Feed>();
 		try{
-			pstmt2=con.prepareStatement("select cust_id from feed where feed_id="+feed_id); //feed_id는 PK이므로 제일 큰 값을 가져와서 (값이 있으면) 그것보다 1 큰값을 insert
-			rs2 = pstmt2.executeQuery();
-			if(rs2.next()) {
-				id = rs2.getString("cust_id");
-			}
 			pstmt = con.prepareStatement("select * from feed left outer join cust_houseinfo on cust_houseinfo.cust_id= ? where feed.cust_id = ? ");
-			pstmt.setString(1, id);
-			pstmt.setString(2, id);
+			pstmt.setString(1, feed_writer);
+			pstmt.setString(2, feed_writer);
 			rs= pstmt.executeQuery();
 
 			while(rs.next()){
@@ -271,7 +262,7 @@ public class CmtSns {
 				System.out.println("filename[2] =>"+filename[2]);
 				System.out.println("filename[3] =>"+filename[3]);
 				*/
-				feed.setWriterpic(rs.getString("cust_pic"));
+				feed.setCust_pic(rs.getString("cust_pic"));
 //				feed.setWriterintroduce(rs.getString("cust_introduce"));
 				feed.setFeed_read(rs.getInt("feed_read"));
 				articleList.add(feed);
@@ -284,23 +275,22 @@ public class CmtSns {
 		}
 		return articleList;
 	}
-	public ArrayList<Feed> selectHeartArticle(int feed_id,String cust_id){  // 로그인 후 sns 글읽기
+	public ArrayList<Feed> selectHeartArticle(int feed_id,String cust_id,String feed_writer){  // 로그인 후 sns 글읽기
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Feed feed = null;
 		ArrayList<Feed> articleList = new ArrayList<Feed>();
 		try{
-			String sql="select * from feed ";
-			sql+=" left outer join feed_like on feed.feed_id= feed_like.feed_id and feed_like.cust_id= ? ";
-			sql+=" left outer join cust_follow on feed.cust_id = cust_follow.cust_following and cust_follow.cust_id= ? ";
-			sql+=" left outer join cust_houseinfo on cust_houseinfo.cust_id= ? ";
-			//sql+=" where feed.feed_id= ? "; 회원의 글 모두를 가지고 오는 걸로 조정 
-			sql+=" where feed.cust_id= ? order by feed.feed_date desc;";
+			String sql="select * from feed left outer join feed_like on feed.feed_id= feed_like.feed_id and feed_like.cust_id= ? "
+					+ " left outer join cust_follow on feed.cust_id = cust_follow.cust_following and cust_follow.cust_id= ? "
+					+ " left outer join cust_houseinfo on cust_houseinfo.cust_id= ? "
+					+ " where feed.cust_id= ? "
+					+ " order by feed.feed_date desc;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cust_id);
 			pstmt.setString(2, cust_id);
-			pstmt.setString(3, cust_id);
-			pstmt.setString(4, cust_id);
+			pstmt.setString(3, feed_writer);
+			pstmt.setString(4, feed_writer);
 			rs= pstmt.executeQuery();
 
 			while(rs.next()){
@@ -317,12 +307,19 @@ public class CmtSns {
 				feed.setMarket_id(rs.getInt("market_id"));
 				String feed_pics = rs.getString("feed_pics");
 				String [] filename = feed_pics.split(",");
-				feed.setFeed_pics(filename[0]);
-				feed.setFeed_pic1(filename[1]);
-				feed.setFeed_pic2(filename[2]);
-				feed.setFeed_pic3(filename[3]);
-				feed.setWriterpic(rs.getString("cust_pic"));
-				feed.setWriterintroduce(rs.getString("cust_introduce"));
+				for(int i = 0; i<filename.length;i++) {
+					if(i==0) {
+						feed.setFeed_pics(filename[0]);
+					}else if(i==1) {
+						feed.setFeed_pic1(filename[1]);
+					}else if(i==2) {
+						feed.setFeed_pic2(filename[2]);
+					}else if(i==3) {
+						feed.setFeed_pic3(filename[3]);
+					}
+				}
+				feed.setCust_pic(rs.getString("cust_pic"));
+				//feed.setWriterintroduce(rs.getString("cust_introduce"));
 				feed.setFeed_read(rs.getInt("feed_read"));
 				
 				articleList.add(feed);
@@ -377,8 +374,8 @@ public class CmtSns {
 				System.out.println("filename[2] =>"+filename[2]);
 				System.out.println("filename[3] =>"+filename[3]);
 				*/
-				feed.setWriterpic(rs.getString("cust_pic"));
-				feed.setWriterintroduce(rs.getString("cust_introduce"));
+				feed.setCust_pic(rs.getString("cust_pic"));
+				//feed.setWriterintroduce(rs.getString("cust_introduce"));
 				feed.setFeed_read(rs.getInt("feed_read"));
 			}
 		}catch(Exception ex){
@@ -430,7 +427,7 @@ public class CmtSns {
 				
 			}
 		}catch(Exception ex){
-			System.out.println(ex+"selectHeartArticle메소드에서 오류");
+			System.out.println(ex+"selectUpdateHeartArticle메소드에서 오류");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -531,10 +528,14 @@ public class CmtSns {
 		Feed feed;
 		int startrow=(page-1)*8; 
 		try{
-			pstmt = con.prepareStatement(
-					"select * from feed f,feed_like l where f.feed_id = l.feed_id and l.cust_id= ? order by feed_date desc limit ?,8");
+			pstmt = con.prepareStatement("select * from feed "
+					+ " join feed_like on feed.feed_id= feed_like.feed_id and feed_like.cust_id=? "
+					+ " left outer join cust_follow on feed.cust_id= cust_follow.cust_following and cust_follow.cust_id=?"
+					+ " left outer join cust_houseinfo on feed.cust_id=cust_houseinfo.cust_id "
+					+ " order by feed_like.like_time desc limit ?,8");
 			pstmt.setString(1, cust_id);
-			pstmt.setInt(2, startrow);
+			pstmt.setString(2, cust_id);
+			pstmt.setInt(3, startrow);
 			
 			rs= pstmt.executeQuery();
 
@@ -542,7 +543,7 @@ public class CmtSns {
 				feed = new Feed();
 				feed.setFeed_id(rs.getInt("feed_id"));
 				feed.setCust_id(rs.getString("cust_id"));
-				//feed.setFeed_pics(rs.getString("feed_pics"));
+				feed.setCust_pic(rs.getString("cust_pic"));
 				feed.setFeed_txt(rs.getString("feed_txt"));
 				feed.setFeed_date(rs.getString("feed_date"));
 				feed.setFeed_hashtag(rs.getString("feed_hashtag"));
@@ -552,7 +553,19 @@ public class CmtSns {
 				feed.setFeed_read(rs.getInt("feed_read"));
 				String feed_pics = rs.getString("feed_pics");
 				String [] filename = feed_pics.split(",");
-				feed.setFeed_pics(filename[0]);
+				for(int i = 0; i<filename.length;i++) {
+					if(i==0) {
+						feed.setFeed_pics(filename[0]);
+					}else if(i==1) {
+						feed.setFeed_pic1(filename[1]);
+					}else if(i==2) {
+						feed.setFeed_pic2(filename[2]);
+					}else if(i==3) {
+						feed.setFeed_pic3(filename[3]);
+					}
+				}
+				feed.setLike_time(rs.getString("like_time"));
+				feed.setFollow_time(rs.getString("follow_time"));
 				//썸네일에서는 어차피 파일 하나만 보여지기 때문에 썸네일 파일을 만든 첫번째 파일로 만들면 된다
 				articleList.add(feed);
 			}
@@ -570,8 +583,11 @@ public class CmtSns {
 		PreparedStatement pstmt = null;  
 		ResultSet rs = null;
 		int page = search.getPage();
-		String select_search ="select * from Feed where feed_hashtag like '%"+search.getSearchword()+"%' "
-				+ "or feed_txt like '%"+search.getSearchword()+"%' order by feed_date desc limit ?,8 ;";
+		String select_search ="select * from Feed "
+				+ " left outer join cust_houseinfo on feed.cust_id = cust_houseinfo.cust_id "
+				+ " where feed_hashtag like '%"+search.getSearchword()+"%' "
+//				+ " or feed_txt like '%"+search.getSearchword()+"%' "
+				+ "order by feed_date desc limit ?,8 ;";
 		
 		ArrayList<Feed> articleList = new ArrayList<Feed>();
 		Feed feed = null;
@@ -597,7 +613,18 @@ public class CmtSns {
 				feed.setFeed_read(rs.getInt("feed_read"));
 				String feed_pics = rs.getString("feed_pics");
 				String [] filename = feed_pics.split(",");
-				feed.setFeed_pics(filename[0]);
+				for(int i = 0; i<filename.length;i++) {
+					if(i==0) {
+						feed.setFeed_pics(filename[0]);
+					}else if(i==1) {
+						feed.setFeed_pic1(filename[1]);
+					}else if(i==2) {
+						feed.setFeed_pic2(filename[2]);
+					}else if(i==3) {
+						feed.setFeed_pic3(filename[3]);
+					}
+				}
+				feed.setCust_pic(rs.getString("cust_pic"));
 				//썸네일에서는 어차피 파일 하나만 보여지기 때문에 썸네일 파일을 만든 첫번째 파일로 만들면 된다
 				articleList.add(feed);
 			}
@@ -618,8 +645,8 @@ public class CmtSns {
 		ResultSet rs = null;
 
 		try{
-			pstmt=con.prepareStatement("select count(*) from feed f,feed_like l "
-					+ "where f.feed_id=l.feed_id and l.cust_id="+cust_id);
+			pstmt=con.prepareStatement("select count(*) from feed f,feed_like l where f.feed_id=l.feed_id and l.cust_id=?");
+			pstmt.setString(1, cust_id);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()){
@@ -641,10 +668,9 @@ public class CmtSns {
 		//물음표가 여러개면 여러개 쓰고 key값에 들어가는 숫자는 물음표의 순번
 		ResultSet rs = null;
 		String board_list_sql="select * from feed "
-				+ "left outer join feed_like on feed.feed_id= feed_like.feed_id and feed_like.cust_id=?"
-				+ "left outer join cust_follow on feed.cust_id = cust_follow.cust_following and cust_follow.cust_id=? "
-				+ "left outer join cust_houseinfo on feed.cust_id = cust_houseinfo.cust_id and cust_houseinfo.cust_id=? "
-				+ "order by feed_date desc limit ?,8";
+				+ " left outer join feed_like on feed.feed_id= feed_like.feed_id and feed_like.cust_id=?"
+				+ " left outer join cust_follow on feed.cust_id = cust_follow.cust_following and cust_follow.cust_id=? "
+				+ " left outer join cust_houseinfo on feed.cust_id = cust_houseinfo.cust_id order by feed_date desc limit ?,8";
 				//전체 feed테이블과, 로그인한 아이디로 좋아요를 누른 feed_like 테이블의 정보를 합집합으로 가져옴
 		ArrayList<Feed> articleList = new ArrayList<Feed>();
 		Feed feed = null;
@@ -655,8 +681,7 @@ public class CmtSns {
 			pstmt = con.prepareStatement(board_list_sql);
 			pstmt.setString(1, cust_id);
 			pstmt.setString(2, cust_id);
-			pstmt.setString(3, cust_id);
-			pstmt.setInt(4, startrow); 
+			pstmt.setInt(3, startrow); 
 			rs = pstmt.executeQuery();
 
 			while(rs.next()){
@@ -759,24 +784,29 @@ public class CmtSns {
 
 		return deleteCount;
 	}
-	public ArrayList<Feed> selectFollowLogin(String cust_id){  // 로그인 한 개인의 팔로우 정보를 모두 불러오기
+	public ArrayList<Feed> selectFollowLogin(int page, int limit,String cust_id){  // 로그인 한 개인의 팔로우 정보를 모두 불러오기
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Feed> articleList = new ArrayList<Feed>();
 		Feed feed;
-		
+		int startrow=(page-1)*8; 
 		try{
-			pstmt = con.prepareStatement(
-					"select * from feed f,cust_follow c where f.cust_id = c.cust_following and c.cust_id= ? order by feed_date desc;");
+			pstmt = con.prepareStatement(" select * from feed "
+					+ " join cust_follow on feed.cust_id= cust_follow.cust_following and cust_follow.cust_id=? "
+					+ " left outer join feed_like on feed.feed_id= feed_like.feed_id and feed_like.cust_id=? "
+					+ " left outer join cust_houseinfo on feed.cust_id = cust_houseinfo.cust_id "
+					+ " order by feed_date desc limit ?, 8;");
 			pstmt.setString(1, cust_id);
+			pstmt.setString(2, cust_id);
+			pstmt.setInt(3, startrow);
 			rs= pstmt.executeQuery();
 
 			while(rs.next()){
 				feed = new Feed();
 				feed.setFeed_id(rs.getInt("feed_id"));
 				feed.setCust_id(rs.getString("cust_id"));
-				//feed.setFeed_pics(rs.getString("feed_pics"));
+				feed.setCust_pic(rs.getString("cust_pic"));
 				feed.setFeed_txt(rs.getString("feed_txt"));
 				feed.setFeed_date(rs.getString("feed_date"));
 				feed.setFeed_hashtag(rs.getString("feed_hashtag"));
@@ -786,7 +816,19 @@ public class CmtSns {
 				feed.setFeed_read(rs.getInt("feed_read"));
 				String feed_pics = rs.getString("feed_pics");
 				String [] filename = feed_pics.split(",");
-				feed.setFeed_pics(filename[0]);
+				for(int i = 0; i<filename.length;i++) {
+					if(i==0) {
+						feed.setFeed_pics(filename[0]);
+					}else if(i==1) {
+						feed.setFeed_pic1(filename[1]);
+					}else if(i==2) {
+						feed.setFeed_pic2(filename[2]);
+					}else if(i==3) {
+						feed.setFeed_pic3(filename[3]);
+					}
+				}
+				feed.setFollow_time(rs.getString("follow_time"));
+				feed.setLike_time(rs.getString("like_time"));
 				//썸네일에서는 어차피 파일 하나만 보여지기 때문에 썸네일 파일을 만든 첫번째 파일로 만들면 된다
 				articleList.add(feed);
 			}
@@ -804,10 +846,10 @@ public class CmtSns {
 		ResultSet rs = null;
 
 		try{
-			pstmt=con.prepareStatement("select count(*) from feed f,cust_follow c "
-					+ "where f.cust_id = c.cust_following and c.cust_id= "+cust_id+" order by feed_date desc;");
+			pstmt=con.prepareStatement("select count(*) from feed f,cust_follow c where f.cust_id = c.cust_following and c.cust_id= ? order by feed_date desc;");
+			pstmt.setString(1, cust_id);
 			rs = pstmt.executeQuery();
-
+			
 			if(rs.next()){
 				listCount=rs.getInt(1); //첫번째 값을 listCount에 넣어라 (어차피 하나의 값 밖에 없지만)
 			}
@@ -964,6 +1006,7 @@ public class CmtSns {
 		ArrayList<Feed_comment> commentlist = new ArrayList<Feed_comment>();
 		Feed_comment comment = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
 		int feed_id = 0;
 		for (int i = 0 ; i<articleList.size(); i++) {
@@ -971,16 +1014,18 @@ public class CmtSns {
 //			System.out.println(i+feed_id+"  출력중");
 		
 		try{
-			pstmt = con.prepareStatement(
-					"select * from feed_comment  "
-					+ "left outer join cust_houseinfo on feed_comment.cust_id = cust_houseinfo.cust_id  "
-					+ " where feed_id=? order by cmt_time desc;");
+//			pstmt2 = con.prepareStatement("select feed_id from feed left outer join feed_like on feed.feed_id= feed_like.feed_id and feed_like.cust_id= ? "
+//					+ " left outer join cust_follow on feed.cust_id = cust_follow.cust_following and cust_follow.cust_id= ? "
+//					+ " left outer join cust_houseinfo on cust_houseinfo.cust_id= ? "
+//					+ " where feed.cust_id= ? "
+//					+ " order by feed.feed_date desc;");
 //			pstmt = con.prepareStatement(
-//					"select feed_comment.feed_id, feed_comment.cmt_id, feed_comment.cust_id, feed_comment.root_cmt,"
-//					+"feed_comment.parent_cmt, feed_comment.cmt_txt, cust_houseinfo.cust_pic,DATE_FORMAT(feed_comment.cmt_time,'%b.%e %H:%i') as cmt_time "
-//					+"from feed_comment"
-//					+"left outer join cust_houseinfo on feed_comment.cust_id = cust_houseinfo.cust_id  "
-//					+"where feed_id=? order by cmt_time desc;");
+//					"select * from feed_comment  "
+//					+ "left outer join cust_houseinfo on feed_comment.cust_id = cust_houseinfo.cust_id  "
+//					+ " where feed_id=? order by cmt_time desc;");
+			pstmt = con.prepareStatement("select feed_comment.feed_id, feed_comment.cmt_id, feed_comment.cust_id, feed_comment.root_cmt,"
+					+ " feed_comment.parent_cmt, feed_comment.cmt_txt, cust_houseinfo.cust_pic,DATE_FORMAT(feed_comment.cmt_time,'%b.%e %H:%i') as cmt_time "
+					+ " from feed_comment left outer join cust_houseinfo on feed_comment.cust_id = cust_houseinfo.cust_id where feed_id= ? order by cmt_time desc");
 			pstmt.setInt(1, feed_id); 
 			rs= pstmt.executeQuery();
 	
@@ -1005,6 +1050,33 @@ public class CmtSns {
 		}
 	}
 		return commentlist;
+	}
+	public int insertcomment(Feed_comment comment){   //sns글쓰기 완료 후 table에 저장되는 일
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int num =0;
+		String sql="";
+		int insertCount=0;
+
+		try{
+			sql="insert into feed_comment (cmt_id,feed_id,cust_id,root_cmt,parent_cmt,cmt_txt, cmt_time) values(default,?,?,?,?,?,now())";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, comment.getFeed_id());
+			pstmt.setString(2, comment.getCust_id());  //cust_id를 해야한다
+			pstmt.setInt(3, comment.getRoot_cmt());
+			pstmt.setInt(4, comment.getParent_cmt());
+			pstmt.setString(5, comment.getCmt_txt());
+			insertCount=pstmt.executeUpdate(); //수행하면 insertCount=1
+
+		}catch(Exception ex){
+			System.out.println(ex+"=> insertFeed에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+
+		return insertCount;
+
 	}
 
 }

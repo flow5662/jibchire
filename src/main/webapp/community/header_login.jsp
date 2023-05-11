@@ -504,7 +504,7 @@
 <!-- 			<div class="store"><li><a href ="../shopping.html"> 스토어 </a></li></div> -->
 			<div class="gosu"><li><a href ="../bachi/bachi_main.jsp"> 바치 </a></li></div>
 	
-			<li><a href="index.jsp"><div class="logo"> </div></a></li>
+			<li><a href="snsIndexList.sns?cust_id=<%=id%>"><div class="logo"> </div></a></li>
 	
 			<div class="serch">
 				<div class="search-box">

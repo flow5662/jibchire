@@ -24,7 +24,7 @@ public class SnsFollowLoginService {
 		
 	}
 
-	public ArrayList<Feed> registArticle(String cust_id) throws Exception{
+	public ArrayList<Feed> registArticle(int page, int limit,String cust_id) throws Exception{
 		System.out.println("followloginservice 도착");
 
 		ArrayList<Feed> articleList = null;
@@ -33,7 +33,7 @@ public class SnsFollowLoginService {
 		sns.setConnection(con);
 
 		/* feed_like 테이블에서 로그인한 아이디로 좋아요 한 feed_id 가져오기 */
-		articleList= sns.selectFollowLogin(cust_id);
+		articleList= sns.selectFollowLogin(page, limit, cust_id);
 
 		close(con);
 		

@@ -19,7 +19,6 @@ public class SnsFollowLoginAction implements Action {
 	 public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		 
 		 	ActionForward forward = new ActionForward();
-		 	Feed_like heart = new Feed_like();
 			/*페이지 기본 값 세팅하기*/
 		  	int page=1;
 			int limit=8;		
@@ -31,12 +30,12 @@ public class SnsFollowLoginAction implements Action {
 		 	
 		 	//url로 넘겨준 값 세팅하기
 			String cust_id = request.getParameter("cust_id");
-			System.out.println("좋아요 전달받은 아이디는 => "+cust_id);
+			System.out.println("팔로우 전달받은 아이디는 => "+cust_id);
 			SnsFollowLoginService snsfollowloginservice = new SnsFollowLoginService();
 			int listCount = snsfollowloginservice.getListCount(cust_id); // listCount = feed_like 테이블에서 로그인 한 아이디가 좋아요를 누른 레코드 수
-			ArrayList<Feed> articleList = snsfollowloginservice.registArticle(cust_id);
+			ArrayList<Feed> articleList = snsfollowloginservice.registArticle(page, limit, cust_id);
 			
-			System.out.println("좋아요 페이지는 => "+listCount);
+			System.out.println("팔로우 페이지는 => "+listCount);
 			
 			/* 페이징을 하는 거의 공식과 같은 문장들 */
 	   		int maxPage=(int)((double)listCount/limit+0.95); // 15/10+0.95=2.45, maxPage=2

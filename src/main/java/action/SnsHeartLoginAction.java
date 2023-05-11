@@ -18,7 +18,6 @@ public class SnsHeartLoginAction implements Action {
 	 public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		 
 		 	ActionForward forward = new ActionForward();
-		 	Feed_like heart = new Feed_like();
 			/*페이지 기본 값 세팅하기*/
 		  	int page=1;
 			int limit=8;		

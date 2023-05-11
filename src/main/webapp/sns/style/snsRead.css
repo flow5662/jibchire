@@ -4,11 +4,30 @@ a { text-decoration : none; }
 
 /*전체구조*/
 #wrap{width: 1280px; margin: 0 auto;}
-#wraper{width: 450px; margin: 0 auto;}
+#wraper{width: 500px; margin: 0 auto;}
 #title{text-align: center;  margin: 30px auto;    height: 30px;}
 
+/*아이디 & 이미지*/
+.custpic{width: 90%;  margin: 15px auto 0 auto;}
+.custpic img{border-radius: 50%;  box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);}
+.custpic span{position:relative; top:-20px; font-weight: 800;}
+.custpic .updatemenu{display: none; float: right; }
+.custpic .updatelist{position: absolute; width: 100px;  left: 59%; z-index: 5;  background-color: white;
+    border: 1px solid white;  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    display: none; border-radius: 12px;}
+.custpic .updatelist li{display: block;    text-align: center;
+    padding: 10px 0;
+    border-radius: inherit;}
+.custpic .updatelist li:hover{ background-color: lightgrey; -webkit-transition: all 0.2s ease;}
+
+/*feed border style*/
+#snsthunbnail li.feed{display: block; width: 500px;  border: 1px solid white;  
+			 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+ 			 transition: all 0.3s cubic-bezier(.25,.8,.25,1);     border-radius: 30px;
+    margin-top: 20px;}
+    
 /*이미지 슬라이더*/
-.slider {  position: relative;  overflow: hidden;  margin: 20px auto 0 auto; height: 450px;}
+.slider {  position: relative;  overflow: hidden;  margin: 5px auto 0 auto; height: 450px;}
 .slider ul {  position: relative;  margin: 0;  padding: 0;  list-style: none;}
 .slider ul li {  position: relative;  display: block;  float: left;  margin: 0;padding: 0;  height: 450px; 
 	  text-align: center;  line-height: 300px; }
@@ -21,16 +40,27 @@ a.control_next {  right: 0;}
 .pics{width: 450px; height: 450px; overflow: hidden; margin-left: -2px;}
 .pics>img{object-fit:cover;}
 
-/*feed border style*/
-#snsthunbnail li.feed{display: block; width: 450px;  border: 1px solid white;  
-			 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
- 			 transition: all 0.3s cubic-bezier(.25,.8,.25,1); border-radius: 10px;}
-pre{font-size: 12pt; white-space: pre-wrap;}
+/*내용 및 아이콘*/
+.txt{ width: 87%;   margin: 10px auto;}
+.txt .read{margin:5px 0;}
+.txt .read pre{font-size: 12pt; white-space: pre-wrap; margin:5px 0;}
+
 
 /*댓글관련 css*/
-.comment{width: 100%; background-color: beige;}
+.comment{    width: 87%;    margin: 5px auto;}
 .comment ul{display: block;}
 .comment ul li{display: inline-block;}
+.comment ul li.commentimg{}
+.comment ul li.commentimg img{border-radius: 50%;}
+.comment ul li.commentid{position: relative;     top: -7px;    font-size: 11pt;	font-weight: 600;     }
+.comment ul li.comnenttxt{position: relative;     top: -7px; font-size: 10pt;     margin-left: 10px;}
+.comment ul li.commenttime{position: relative;    top: -7px;font-size: 8px; }
+.inputcomment {margin:20px;}
+.inputcomment li:first-child{font-weight: 600;}
+.inputcomment .commentwrite{height: 40px;     width: 280px;  padding-left: 2em; border: 1px solid white;  
+			 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);}
+.inputcomment .commentsubmit{height: 41px;      width: 40px; border: 1px solid white;  
+			 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);}
 /*내용이 들어가는 공간 */
 /* #text {width:80%; margin: 20px auto 0 auto; } */
 /* #like {width:80px;position: fixed; right: 230px;  top: 350px; } */

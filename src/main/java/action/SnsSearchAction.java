@@ -22,7 +22,8 @@ import svc.SnsSearchService;
 		int limit=8;	
 		search.setPage(page);
 		search.setLimit(limit);
-		search.setSearchword(request.getParameter("snsSearchWord"));
+		String searchword = request.getParameter("snsSearchWord");
+		search.setSearchword(searchword);
 	System.out.println("  보내진 검색어는 ? => "+search.getSearchword());
 		if(request.getParameter("page")!=null){ 
 			page=Integer.parseInt(request.getParameter("page"));
@@ -60,6 +61,7 @@ import svc.SnsSearchService;
 		/*snsList.jsp 에서 이 값들을 사용하기 위해서 setAttribute로 객체를 세팅*/
 		request.setAttribute("pageInfo", pageInfo);  // "pageInfo"라는 key값에 pageInfo라는 객체를 value값으로 넣음
 		request.setAttribute("articleList", articleList);
+		request.setAttribute("searchword", searchword);
 		
 		/*path를 세팅하기 위해 ActionForward class의 객체 생성*/
 		ActionForward forward= new ActionForward();

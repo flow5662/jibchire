@@ -448,7 +448,7 @@ li {
 	width: 100%;
 	border-bottom: 1px solid lightgray;
 	height: 70px;
-	background-color: #EBE1B9;
+	background-color: #d0c0b0;
 }
 
 .line {

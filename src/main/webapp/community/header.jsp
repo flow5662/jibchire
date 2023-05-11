@@ -261,7 +261,7 @@
 	.item_index	.st6{fill:#0C6667;}
 	
 	.cart .st0{fill:#000000;}
-	.tophead{width: 100%; border-bottom: 1px solid lightgray; height: 70px; background-color: #F2EFD2;}
+	.tophead{width: 100%; border-bottom: 1px solid lightgray; height: 70px; background-color: #d0c0b0;}
 	.line{width:100%; border-bottom: 1px solid lightgray; }
 </style>
 <body>

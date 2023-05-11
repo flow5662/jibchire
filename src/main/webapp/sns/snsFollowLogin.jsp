@@ -46,7 +46,7 @@
 	<%
 	if(articleList != null && listCount > 0){
 	%>
-		<!-- 리스트, 썸네일목록 -->
+			<!-- 리스트, 썸네일목록 -->
 		<section>
 			<div id="title"> <h2>일상공유</h2></div>
 			<div id="snsthunbnail">				
@@ -57,22 +57,39 @@
 							%>
 							<!-- 1열1행 -->
 							<li>
-								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>">	
+								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>&feed_writer=<%=articleList.get(i).getCust_id()%>">	
 								  	<!-- 타이틀. 회원사진과 아이디 -->
 								  	<div class='snstitle'>
-								  		<div class="custpic"></div>
-								  		<span>id <%=articleList.get(i).getCust_id() %></span></div>
-									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>'> </div>
+								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='img/sns/profile04.jpg'" style="width: 50px;"> </div>
+								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
+									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>' onerror="this.src='feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
 								</a>
-									<!-- 내용공간. hashtag, 조회수 -->
-									<div class='txt'>
-										<!-- 좋아요 버튼 -->
-										<img src="img/sns/heart-fill.png" class="buttonlike" value="<%=articleList.get(i).getFeed_id()%>">
-										<div class="read"><%=articleList.get(i).getFeed_hashtag()%>
-											<br><%=articleList.get(i).getFeed_txt() %>
-										</div>
-
+								<!-- 내용공간. hashtag, 조회수 -->
+								<div class='txt'>
+									<!-- 팔로우 버튼. 이미 팔로우 누른 피드는 초록색 아이콘, 안누른 피드는 검은라인 아이콘 -->
+									<%
+										String follow = articleList.get(i).getFollow_time();
+										if(follow==null){
+											%><img src="img/sns/user-unfollow-line.png" class="buttonfollow" value="<%=articleList.get(i).getCust_id()%>"><%
+										}else{
+											%><img src="img/sns/user-follow-fill.png" class="buttonfollow" value="<%=articleList.get(i).getCust_id()%>"><%
+										}
+									%>
+									<!-- 좋아요 버튼. 이미 좋아요 누른 피드는 빨간색 하트, 좋아요 안누른 피드는 검은라인 하트 -->
+									<% 
+										String like= articleList.get(i).getLike_time();
+										if(like==null){
+											%><img src="img/sns/heart-add-line.png" class="buttonlike" value="<%=articleList.get(i).getFeed_id()%>"><%
+										}else{
+											%><img src="img/sns/heart-fill.png" class="buttonlike" value="<%=articleList.get(i).getFeed_id()%>"><%
+										}
+									%>
+									<!-- <img src="img/sns/heart-add-line.png" class="buttonlike" value="<%=articleList.get(i).getFeed_id()%>"> -->
+									<div class="read"><%=articleList.get(i).getFeed_hashtag()%>
+										<br><pre><%=articleList.get(i).getFeed_txt() %></pre>
 									</div>
+
+								</div>
 							</li>
 							<!-- 검색창 및 메뉴가 들어갈 1행2열 여기서 집어넣기 -->
 							<li style="width: 370px; height: 420px;" id="topmiddle">
@@ -87,50 +104,87 @@
 							     		</div>
 						     		</div>
 					     		</form>
+					     		<div id ="dungdung">
+						     		<a href="snsSearchAction.sns?snsSearchWord=레시피" id="dung">#레시피</a>
+								    <a href="snsSearchAction.sns?snsSearchWord=인테리어" id="dung1">#인테리어</a>
+								    <a href="snsSearchAction.sns?snsSearchWord=바치후기" id="dung2">#바치후기</a>
+								    <a href="snsSearchAction.sns?snsSearchWord=일상" id="dung3">#일상</a>
+								    <a href="snsSearchAction.sns?snsSearchWord=DIY" id="dung4">#DIY</a>
+							    </div>
 							</li> 
 							<%	
 							}else if(i==3 || i==6){
 							%>
-							<!-- 2행2열, 3행3열 중앙에 위치 다름 -->
+							<!-- 2행2열, 3행2열 중앙에 위치 다름 -->
 							<li style="position: relative; top: -80px;">
-								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>">	
+								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>&feed_writer=<%=articleList.get(i).getCust_id()%>">	
 								  	<!-- 타이틀. 회원사진과 아이디 -->
 								  	<div class='snstitle'>
-								  		<div class="custpic"></div>
-								  		<span>id <%=articleList.get(i).getCust_id() %></span></div>
-									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>'> </div>
-									<!-- 내용공간. hashtag, 조회수 -->
-									<div class='txt'>
-										<!-- 좋아요 버튼 -->
-										<img src="img/sns/heart-fill.png" class="buttonlike" value="<%=articleList.get(i).getFeed_id()%>">
-										<div class="read"><%=articleList.get(i).getFeed_hashtag()%>
-											<br><%=articleList.get(i).getFeed_txt() %>
-										</div>
-								</a>
-										
+								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='img/sns/profile04.jpg'" style="width: 50px;"> </div>
+								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
+									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>'  onerror="this.src='feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
+								</a>	
+								<!-- 내용공간. hashtag, 조회수 -->
+								<div class='txt'>
+									<!-- 팔로우 버튼. 이미 팔로우 누른 피드는 초록색 아이콘, 안누른 피드는 검은라인 아이콘 -->
+									<%
+										String follow = articleList.get(i).getFollow_time();
+										if(follow==null){
+											%><img src="img/sns/user-unfollow-line.png" class="buttonfollow" value="<%=articleList.get(i).getCust_id()%>"><%
+										}else{
+											%><img src="img/sns/user-follow-fill.png" class="buttonfollow" value="<%=articleList.get(i).getCust_id()%>"><%
+										}
+									%>
+									<!-- 좋아요 버튼 -->
+									<% 
+										String like= articleList.get(i).getLike_time();
+										if(like==null){
+											%><img src="img/sns/heart-add-line.png" class="buttonlike" value="<%=articleList.get(i).getFeed_id()%>"><%
+										}else{
+											%><img src="img/sns/heart-fill.png" class="buttonlike" value="<%=articleList.get(i).getFeed_id()%>"><%
+										}
+									%>
+									<div class="read"><%=articleList.get(i).getFeed_hashtag()%>
+										<br><%=articleList.get(i).getFeed_txt() %>
 									</div>
+								</div>
 							</li> 
 							<% 	
 							}else{
 							%>
 							<!-- 나머지 칸 -->
 							<li>
-								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>">	
+								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>&feed_writer=<%=articleList.get(i).getCust_id()%>">	
 								  	<!-- 타이틀. 회원사진과 아이디 -->
 								  	<div class='snstitle'>
-								  		<div class="custpic"></div>
-								  		<span>id <%=articleList.get(i).getCust_id() %></span></div>
-									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>'> </div>
-									<!-- 내용공간. hashtag, 조회수 -->
-									<div class='txt'>
-										<!-- 좋아요 버튼 -->
-										<img src="img/sns/heart-fill.png" class="buttonlike" value="<%=articleList.get(i).getFeed_id()%>">
-										<div class="read"><%=articleList.get(i).getFeed_hashtag()%>
-											<br><%=articleList.get(i).getFeed_txt() %>
-										</div>
-								</a>
-										
+								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>"   onerror="this.src='img/sns/profile04.jpg'" style="width: 50px;"></div>
+								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
+									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>' onerror="this.src='feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
+								</a>	
+								<!-- 내용공간. hashtag, 조회수 -->
+								<div class='txt'>
+									<!-- 팔로우 버튼. 이미 팔로우 누른 피드는 초록색 아이콘, 안누른 피드는 검은라인 아이콘 -->
+									<%
+										String follow = articleList.get(i).getFollow_time();
+										if(follow==null){
+											%><img src="img/sns/user-unfollow-line.png" class="buttonfollow" value="<%=articleList.get(i).getCust_id()%>"><%
+										}else{
+											%><img src="img/sns/user-follow-fill.png" class="buttonfollow" value="<%=articleList.get(i).getCust_id()%>"><%
+										}
+									%>
+									<!-- 좋아요 -->
+									<% 
+										String like= articleList.get(i).getLike_time();
+										if(like==null){
+											%><img src="img/sns/heart-add-line.png" class="buttonlike" value="<%=articleList.get(i).getFeed_id()%>"><%
+										}else{
+											%><img src="img/sns/heart-fill.png" class="buttonlike" value="<%=articleList.get(i).getFeed_id()%>"><%
+										}
+									%>
+									<div class="read"><%=articleList.get(i).getFeed_hashtag()%>
+										<br><%=articleList.get(i).getFeed_txt() %>
 									</div>
+								</div>
 							</li>
 							<%
 							}
@@ -166,20 +220,20 @@
 			else
 			{
 			%>
-			<section id="emptyArea">등록된 글이 없습니다.</section>
+			<section id="emptyArea"><br><br> 팔로우 한 회원이 없습니다.</section>
 			<%
 			}
 			%>
 		<!-- 글쓰기버튼 -->
-		<section> 
-			<% //로그인한 상태면 글쓰기 버튼 보이게 할 것
-				String id2 = (String) session.getAttribute("ID");
-				if(!(id2==null)){
-			%>
-			    <input type="button" value="글쓰기" onclick="location.href='snsWrite.jsp'" id="writing">
-		    <%  } 	
-		    %> 
-		</section>
+<!-- 		<section>  -->
+<%-- 			<% //로그인한 상태면 글쓰기 버튼 보이게 할 것 --%>
+<!-- // 				String id2 = (String) session.getAttribute("ID"); -->
+<!-- // 				if(!(id2==null)){ -->
+<%-- 			%> --%>
+<!-- 			    <input type="button" value="글쓰기" onclick="location.href='snsWrite.jsp'" id="writing"> -->
+<%-- 		    <%  } 	 --%>
+<%-- 		    %>  --%>
+<!-- 		</section> -->
 	</div>		
 <script>
 $(function(){

@@ -55,11 +55,6 @@
 							<div>
 								<div id="preview" contenteditable="true"><img id="previewImg" />
 									<div>썸네일 확인</div> </div>
-								<div id="files">
-									<input type="file" name="feed_pic1">
-									<input type="file" name="feed_pic2">
-									<input type="file" name="feed_pic3">
-								</div>
 								<div id="inputfile">썸네일로 고를 사진을 올려주세요 <br><input type="file" onchange="readImage(this);" name="feed_pics"></div>
 							</div>
 						</td>
@@ -67,6 +62,11 @@
 							<div>
 								<textarea placeholder="내용을 입력해주세요" name="feed_txt"></textarea>
 								<input type="text" placeholder="#ootd" name="feed_hashtag" id="hashtag"> 
+								<div id="threepics">
+									<input type="file" name="feed_pic1">
+									<input type="file" name="feed_pic2">
+									<input type="file" name="feed_pic3">
+								</div>
 							</div>
 						</td>
 					</tr>

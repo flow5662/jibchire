@@ -65,10 +65,10 @@
 							%>
 							<!-- 1열1행 -->
 							<li>
-								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>">	
+								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>&feed_writer=<%=articleList.get(i).getCust_id()%>">	
 								  	<!-- 타이틀. 회원사진과 아이디 -->
 								  	<div class='snstitle'>
-								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>" onerror="this.src='img/sns/901.png'"> </div>
+								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='../sns/img/sns/profile04.jpg'" style="width: 50px; height: 50px;"> </div>
 								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
 									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>' onerror="this.src='feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
 								</a>
@@ -125,10 +125,10 @@
 							%>
 							<!-- 2행2열, 3행2열 중앙에 위치 다름 -->
 							<li style="position: relative; top: -80px;">
-								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>">	
+								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>&feed_writer=<%=articleList.get(i).getCust_id()%>">	
 								  	<!-- 타이틀. 회원사진과 아이디 -->
 								  	<div class='snstitle'>
-								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='img/sns/901.png'"> </div>
+								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='../sns/img/sns/profile04.jpg'" style="width: 50px; height: 50px;"> </div>
 								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
 									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>'  onerror="this.src='feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
 								</a>	
@@ -162,10 +162,10 @@
 							%>
 							<!-- 나머지 칸 -->
 							<li>
-								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>">	
+								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>&feed_writer=<%=articleList.get(i).getCust_id()%>">	
 								  	<!-- 타이틀. 회원사진과 아이디 -->
 								  	<div class='snstitle'>
-								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='img/sns/901.png'"></div>
+								  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>"   onerror="this.src='../sns/img/sns/profile04.jpg'" style="width: 50px; height: 50px;"></div>
 								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
 									<div class='thumbnail'><img src='feedPics/sm_<%=articleList.get(i).getFeed_pics() %>' onerror="this.src='feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
 								</a>	
@@ -228,20 +228,20 @@
 			else
 			{
 			%>
-			<section id="emptyArea">등록된 글이 없습니다.</section>
+			<section id="emptyArea"><br><br>등록된 글이 없습니다.</section>
 			<%
 			}
 			%>
 		<!-- 글쓰기버튼 -->
-		<section> 
-			<% //로그인한 상태면 글쓰기 버튼 보이게 할 것
-				String id2 = (String) session.getAttribute("ID");
-				if(!(id2==null)){
-			%>
-			    <input type="button" value="글쓰기" onclick="location.href='snsWrite.jsp'" id="writing">
-		    <%  } 	
-		    %> 
-		</section>
+<!-- 		<section>  -->
+<%-- 			<% //로그인한 상태면 글쓰기 버튼 보이게 할 것 --%>
+<!-- // 				String id2 = (String) session.getAttribute("ID"); -->
+<!-- // 				if(!(id2==null)){ -->
+<%-- 			%> --%>
+<!-- 			    <input type="button" value="글쓰기" onclick="location.href='snsWrite.jsp'" id="writing"> -->
+<%-- 		    <%  } 	 --%>
+<%-- 		    %>  --%>
+<!-- 		</section> -->
 	</div>		
 <script>
 $(function(){
@@ -304,6 +304,7 @@ $(function(){
 	/*마우스 올렸을 때 이미지 살짝 커지게 하기*/
 	$("img").mouseenter(function(){
 		$(this).css("scale","1.05");
+		$(this).css("transition","all 0.3s cubic-bezier(.25,.8,.25,1)");
 		$(this).css("cursor","pointer");
 	});
 	$("img").mouseleave(function(){

@@ -14,6 +14,7 @@ import action.SnsFollowLoginAction;
 import action.SnsHeartAction;
 import action.SnsHeartLoginAction;
 import action.SnsIndexAction;
+import action.SnsInsertCommentAction;
 import action.SnsListAction;
 import action.SnsReadAction;
 import action.SnsSearchAction;
@@ -156,6 +157,14 @@ public class SnsController extends javax.servlet.http.HttpServlet
 		}else if(command.equals("/bachi/snsIndexList.sns")){  //index화면에서 보여줄 데이터 연결
 			System.out.println("index 컨트롤러 실행");
 			action = new SnsIndexAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/sns/snsInsertComment.sns")){  //index화면에서 보여줄 데이터 연결
+			System.out.println("댓글 insert 컨트롤러 실행");
+			action = new SnsInsertCommentAction();
 			try{
 				forward=action.execute(request, response);
 			}catch(Exception e){

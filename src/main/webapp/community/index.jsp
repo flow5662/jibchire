@@ -20,10 +20,10 @@
 #section01{width:100%; height: 500px; background-color: #f4ede7;} 
 .skewdBox {  position: absolute;      left: -60px;   width: 45%;  height: 500px;  background-color:#d1c9be;
 	transform: skewX(30deg) translateX(-85px);  overflow: hidden;}
-.skewdBox #background{background-image: url(img/index/entrance01.jpg); height: inherit;    transform: skewX(-30deg);    opacity: 0.2;
+.skewdBox #background{background-image: url(../community/img/index/entrance01.jpg); height: inherit;    transform: skewX(-30deg);    opacity: 0.2;
     position: relative;    left: 5%;}
 .skewdBox2 {  width: 100%;  height: 100%;   background-color: #f4ede7;}
-.skewdBox2 #halfround{width:280px;height:400px;    background-image: url(img/index/door02.jpg); box-shadow: 10px 10px 10px #8d6046; border-top-left-radius:50%; border-top-right-radius:50%;
+.skewdBox2 #halfround{width:280px;height:400px;    background-image: url(../community/img/index/door02.jpg); box-shadow: 10px 10px 10px #8d6046; border-top-left-radius:50%; border-top-right-radius:50%;
     position: relative;    left: 15%;    top: 50px; animation:section01slide 1s ease-in;}
 .skewdBox2 #explain01{ width: 50%; height: 100%; position: relative;     left: 49%;      bottom: 300px;  animation:explain01 1s ease-in;}
 @keyframes section01slide{	0%{left:-15%;}100%{left:15%;}}
@@ -49,9 +49,9 @@ section[id^=sec] h1{font-family: 'DM Serif Text', serif; font-size: 43px; color:
 #portionleft ul li h5{font-size: 12pt; color: #8d6046;    font-style: italic;    font-weight: 900;}
 #portionleft ul li h6{font-size: 10pt; margin: 10px 0 10px 20px;}
 #portionright{width: 35%;    height: 500px;  background-color: #dcdedd;   position: absolute;    right: 0;}
-#portionright #leftpicture{width:280px; height:400px; background-image: url(img/index/bachi.jpg); box-shadow: 10px 10px 10px #6c746f; 
+#portionright #leftpicture{width:280px; height:400px; background-image: url(../community/img/index/bachi.jpg); box-shadow: 10px 10px 10px #6c746f; 
 	position: absolute;    top: 50px;    left: -140px; animation:leftpicture 1s ease-in;}
-#portionright #background2{background-image: url(img/index/entrance02.jpg); height: inherit;  opacity: 0.2;}
+#portionright #background2{background-image: url(../community/img/index/entrance02.jpg); height: inherit;  opacity: 0.2;}
 @keyframes leftpicture{	0%{left:0;}100%{left:-140px;}}
 @keyframes explain02{	0%{left:-60px;}100%{left:0;}}
 
@@ -154,7 +154,7 @@ object-fit:cover;
 .sns-text-title{
     position: relative;
     top: 20px;
-    left: -80px;
+    left: -140px;
     font-size: 20px;
 }
 .sns-user-area{
@@ -249,6 +249,7 @@ align-items: center;
 		}else{
 	%>
 		<jsp:include page="header_login.jsp" />
+		<input type="hidden" name="cust_id" value="<%=id%>">
 	<%
 		}
 
@@ -260,18 +261,18 @@ align-items: center;
 		<div class="fixed-banner-scroll">
 			<div class="sns-screen">
 				<div class="out">
-					<span class="sns-text-title">집치레 sns</span> <
+					<span class="sns-text-title">일상공유</span> <
 				</div>
 				<ul>
 					<%
-						for(int i=0;i<=6;i++){
+						for(int i=0;i<8;i++){
 							%>
 							<!-- 나머지 칸 -->
 							<li>
-								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>">	
+								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>&feed_writer=<%=articleList.get(i).getCust_id()%>">	
 								  	<!-- 타이틀. 회원사진과 아이디 -->
 								  	<div class='snstitle'>
-								  		<div class="custpic"><img src="../sns/feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='../sns/img/sns/901.png'"></div>
+								  		<div class="custpic"><img src="../sns/feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='../sns/img/sns/profile04.jpg'" style="width: 50px;"></div>
 								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
 									<div class='thumbnail'>
 									<img src='../sns/feedPics/sm_<%=articleList.get(i).getFeed_pics() %>' onerror="this.src='../sns/feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
@@ -434,10 +435,10 @@ $(document).ready(function(){
 
 			var src1 = $(this).attr("src");
 			//alert(src1);
-			if(src1=="img/sns/heart-fill.png"){
-				$(this).attr("src","img/sns/heart-add-line.png");
+			if(src1=="../sns/img/sns/heart-fill.png"){
+				$(this).attr("src","../sns/img/sns/heart-add-line.png");
 			}else{
-				$(this).attr("src","img/sns/heart-fill.png");
+				$(this).attr("src","../sns/img/sns/heart-fill.png");
 			}
 
 		}
@@ -462,11 +463,11 @@ $(document).ready(function(){
 		//내가 누른 버튼의 아이콘 변경. 그리고 같은 글쓴이를 공유하고 있는 다른 버튼들도 팔로우 버튼 자동적으로 변경 
 		var src1 = $(this).attr("src");
 		if(src1=="img/sns/user-unfollow-line.png"){
-			$(this).attr("src","img/sns/user-follow-fill.png");
-			$(".buttonfollow[value="+cust_following+"]").attr("src","img/sns/user-follow-fill.png");
+			$(this).attr("src","../sns/img/sns/user-follow-fill.png");
+			$(".buttonfollow[value="+cust_following+"]").attr("src","../sns/img/sns/user-follow-fill.png");
 		}else{
 			$(this).attr("src","img/sns/user-unfollow-line.png");
-			$(".buttonfollow[value="+cust_following+"]").attr("src","img/sns/user-unfollow-line.png");
+			$(".buttonfollow[value="+cust_following+"]").attr("src","../sns/img/sns/user-unfollow-line.png");
 		}
 		}
 	});

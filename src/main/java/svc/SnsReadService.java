@@ -11,7 +11,7 @@ import static db.JdbcUtil.*;
 
 public class SnsReadService {
 
-	public ArrayList<Feed> getArticle(int feed_id) throws Exception{
+	public ArrayList<Feed> getArticle(int feed_id,String feed_writer) throws Exception{
 
 		Feed feed = null;
 		Connection con = getConnection();
@@ -26,13 +26,13 @@ public class SnsReadService {
 		else{
 			rollback(con);
 		}
-		ArrayList<Feed> articleList = consns.selectArticle(feed_id);
+		ArrayList<Feed> articleList = consns.selectArticle(feed_id,feed_writer);
 		close(con);
 		return articleList;
 		
 	}
 	
-	public ArrayList<Feed> getHeartArticle(int feed_id,String cust_id) throws Exception{
+	public ArrayList<Feed> getHeartArticle(int feed_id,String cust_id,String feed_writer) throws Exception{
 
 		Feed feed = null;
 		Connection con = getConnection();
@@ -48,7 +48,7 @@ public class SnsReadService {
 		else{
 			rollback(con);
 		}
-		articleList = consns.selectHeartArticle(feed_id,cust_id);
+		articleList = consns.selectHeartArticle(feed_id,cust_id,feed_writer);
 		close(con);
 		return articleList;
 		
