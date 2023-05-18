@@ -17,7 +17,7 @@ import svc.SnsReadService;
 		int feed_id=Integer.parseInt(request.getParameter("feed_id")); //고유번호 feed_id 가져오기
 		Feed feed = null;
 		ArrayList<Feed> articleList = null;
-		ArrayList<Feed_comment> commentlist = null;
+
 		
 		SnsReadService snsReadService = new SnsReadService();
 		/*로그인 되어있으면 좋아요&팔로잉 정보까지 가져오기, 로그인 안되어있으면 전체정보만 가져오기*/
@@ -31,12 +31,13 @@ import svc.SnsReadService;
 			articleList = snsReadService.getHeartArticle(feed_id,cust_id,feed_writer);//로그인되어있으면 좋아요정보까지 가져오는 메소드 연결
 			
 		}
-		commentlist = snsReadService.getFeedComment(articleList);
 		
+//		ArrayList<Feed_comment> commentlist = null;
+//		commentlist = snsReadService.getFeedComment(articleList);
+//		request.setAttribute("commentlist", commentlist);
 
 		ActionForward forward = new ActionForward();
 	   	request.setAttribute("articleList", articleList);
-	   	request.setAttribute("commentlist", commentlist);
    		forward.setPath("snsRead.jsp");
    		return forward;
 

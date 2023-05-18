@@ -1001,36 +1001,27 @@ public class CmtSns {
 		}
 		return alist;
 	}
-	public ArrayList<Feed_comment> getFeedComment(ArrayList<Feed> articleList) throws Exception{
+	public ArrayList<Feed_comment> getFeedComment(int feed_id, String cust_id) throws Exception{
 		
 		ArrayList<Feed_comment> commentlist = new ArrayList<Feed_comment>();
 		Feed_comment comment = null;
 		PreparedStatement pstmt = null;
-		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
-		int feed_id = 0;
-		for (int i = 0 ; i<articleList.size(); i++) {
-			feed_id= articleList.get(i).getFeed_id();
+//		int feed_id = 0;
+//		for (int i = 0 ; i<articleList.size(); i++) {
+//			feed_id= articleList.get(i).getFeed_id();
 //			System.out.println(i+feed_id+"  출력중");
 		
 		try{
-//			pstmt2 = con.prepareStatement("select feed_id from feed left outer join feed_like on feed.feed_id= feed_like.feed_id and feed_like.cust_id= ? "
-//					+ " left outer join cust_follow on feed.cust_id = cust_follow.cust_following and cust_follow.cust_id= ? "
-//					+ " left outer join cust_houseinfo on cust_houseinfo.cust_id= ? "
-//					+ " where feed.cust_id= ? "
-//					+ " order by feed.feed_date desc;");
-//			pstmt = con.prepareStatement(
-//					"select * from feed_comment  "
-//					+ "left outer join cust_houseinfo on feed_comment.cust_id = cust_houseinfo.cust_id  "
-//					+ " where feed_id=? order by cmt_time desc;");
 			pstmt = con.prepareStatement("select feed_comment.feed_id, feed_comment.cmt_id, feed_comment.cust_id, feed_comment.root_cmt,"
 					+ " feed_comment.parent_cmt, feed_comment.cmt_txt, cust_houseinfo.cust_pic,DATE_FORMAT(feed_comment.cmt_time,'%b.%e %H:%i') as cmt_time "
-					+ " from feed_comment left outer join cust_houseinfo on feed_comment.cust_id = cust_houseinfo.cust_id where feed_id= ? order by cmt_time desc");
+					+ " from feed_comment "
+					+ " left outer join cust_houseinfo on feed_comment.cust_id = cust_houseinfo.cust_id "
+					+ " where feed_id= ? order by cmt_time desc");
 			pstmt.setInt(1, feed_id); 
 			rs= pstmt.executeQuery();
-	
+			System.out.println("댓글select하는중");
 			while(rs.next()){
-				
 				comment = new Feed_comment();
 				comment.setFeed_id(rs.getInt("feed_id"));
 				comment.setCmt_id(rs.getInt("cmt_id"));
@@ -1048,7 +1039,7 @@ public class CmtSns {
 			close(rs);
 			close(pstmt);
 		}
-	}
+//	}
 		return commentlist;
 	}
 	public int insertcomment(Feed_comment comment){   //sns글쓰기 완료 후 table에 저장되는 일
@@ -1057,7 +1048,7 @@ public class CmtSns {
 		int num =0;
 		String sql="";
 		int insertCount=0;
-
+		System.out.println("댓글insert하는중");
 		try{
 			sql="insert into feed_comment (cmt_id,feed_id,cust_id,root_cmt,parent_cmt,cmt_txt, cmt_time) values(default,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
@@ -1076,6 +1067,48 @@ public class CmtSns {
 		}
 
 		return insertCount;
+	}
+	public int deleteComment(int cmt_id){  // 본인이 작성한 게시글을 하나 삭제하기
+
+		PreparedStatement pstmt = null;
+		int deleteCount=0;
+
+		try{
+			pstmt=con.prepareStatement("delete from feed_comment where cmt_id=?");
+			pstmt.setInt(1, cmt_id);
+			deleteCount=pstmt.executeUpdate();
+		}catch(Exception ex){
+			System.out.println(ex+"deleteComment메소드에서 오류");
+		}	finally{
+			close(pstmt);
+		}
+
+		return deleteCount;
+	}
+	public int updateComment(Feed_comment comment){   // 댓글 수정 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int num =0;
+		String sql="";
+		int updateCount=0;
+
+		try{
+			sql="update feed_comment set cmt_txt=?, cmt_time=now() "
+					+ "where cmt_id=?;";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, comment.getCmt_txt());
+			pstmt.setInt(2, comment.getCmt_id());
+
+			updateCount=pstmt.executeUpdate(); //수행하면 insertCount=1
+
+		}catch(Exception ex){
+			System.out.println(ex+"=> updateFeed에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+
+		return updateCount;
 
 	}
 

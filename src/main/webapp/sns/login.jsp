@@ -171,7 +171,7 @@ a { text-decoration : none; }
 		            	<a href="#고객센터">로그인에 문제가 있으신가요?</a>
 		            </div>
 		            <div id="forgot">
-		            	<a href="#아이디찾기">아이디 찾기 ㅣ </a>
+		            	<a href="#아이디찾기">아이디 찾기 </a>
 		            	<a href="#비번찾기">비밀번호 찾기</a>
 		            </div>
 		            <input type="submit" value="로그인">

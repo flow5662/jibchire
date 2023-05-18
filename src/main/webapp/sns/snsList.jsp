@@ -211,11 +211,11 @@
 	
 			<%for(int a=startPage;a<=endPage;a++){
 					if(a==nowPage){%>
-				[<%=a%>]&nbsp;&nbsp;
-			<%}else{ %>
-				<a href="snsListAction.sns?page=<%=a%>">[<%=a%>]
-				</a>&nbsp;
-			<%} %>
+						[<%=a%>]&nbsp;&nbsp;
+					<%}else{ %>
+						<a href="snsListAction.sns?page=<%=a%>">[<%=a%>]
+						</a>&nbsp;
+					<%} %>
 			<%} %>
 			<%if(nowPage>=maxPage){ %>
 				[다음]

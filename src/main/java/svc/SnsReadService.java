@@ -54,15 +54,6 @@ public class SnsReadService {
 		
 	}
 	
-	public ArrayList<Feed_comment> getFeedComment(ArrayList<Feed> articleList) throws Exception{
-			
-		ArrayList<Feed_comment> commentlist = null;
-		Connection con = getConnection();
-		CmtSns consns = CmtSns.getInstance();
-		consns.setConnection(con);
-		commentlist = consns.getFeedComment(articleList);
-		
-		return commentlist;
-	}
+
 
 }

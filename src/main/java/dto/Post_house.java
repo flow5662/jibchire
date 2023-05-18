@@ -30,6 +30,7 @@ public class Post_house {
 	public String post_writetime;
 	public String bookmark_time;
 	public int post_read;
+	public String post_position;
 	
 	public String post_item10; // 아이템의 사진 이름등록해서 mouse hover 했을 때 해당 상품의 이름과, 가격, 브랜드 등 보일 수 있게 
 	public String post_item11;
@@ -253,5 +254,12 @@ public class Post_house {
 	public void setPost_item19(String post_item19) {
 		this.post_item19 = post_item19;
 	}
+	public String getPost_position() {
+		return post_position;
+	}
+	public void setPost_position(String post_position) {
+		this.post_position = post_position;
+	}
+	
 	
 }

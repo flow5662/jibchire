@@ -12,7 +12,6 @@
 </head>
 <%  //데이터 작업으로 얻은 객체 가져오기
 	ArrayList<Feed> articleList = (ArrayList<Feed>)request.getAttribute("articleList");
-	ArrayList<Feed_comment> commentlist = (ArrayList<Feed_comment>)request.getAttribute("commentlist");
 %>
 <body>
 <!-- header -->
@@ -91,31 +90,37 @@
 						</div>
 						<!-- 댓글 -->
 						<div class="comment" id="<%=articleList.get(i).getFeed_id()%>">
-							<%
-								int feedid = articleList.get(i).getFeed_id();
-								for(int j =0; j<commentlist.size(); j++){
-									if(commentlist.get(j).getFeed_id()==feedid){
-										%>
+							<div class="emptycomment"></div>
+<%-- 							<% --%>
+<!-- // 								int feedid = articleList.get(i).getFeed_id(); -->
+<!-- // 								for(int j =0; j<commentlist.size(); j++){ -->
+<!-- // 									if(commentlist.get(j).getFeed_id()==feedid){ -->
+<%-- 										%> --%>
 										<ul>
-											<li class="commentimg"><img src="feedPics/<%=commentlist.get(j).getCust_pic()%>" onerror="this.src='img/sns/reddit-round-line-icon.png'" style="width:24px; height: 24px;"> </li>
-											<li class="commentid"><%=commentlist.get(j).getCust_id()%> </li>
-											<li class="comnenttxt"><%=commentlist.get(j).getCmt_txt()%> </li>
-											<li class="commenttime"><%=commentlist.get(j).getCmt_time()%> </li>
+											<li class="commentimg"> </li>
+											<li class="commentid"> </li>
+											<li class="comnenttxt"> </li>
+											<li class="commenttime"></li>
+											<li class="commentupdate"></li>
+											<li class="commentdelete" ></li>
 										</ul>
-										<% 
-									}
-								}
-							%>
-							<ul class="inputcomment">
-								<% if(!(id==null)){%>
-								<li><%=id%></li>
-								<%	
-								}
-								%> 
-								<li><input type="text" name="feed_comment" class="commentwrite"></li>
-								<li><button class="commentsubmit" id="<%=articleList.get(i).getFeed_id()%>"> 입력 </button> </li>
-							</ul>
+<%-- 										<%  --%>
+<!-- // 									} -->
+<!-- // 								} -->
+<%-- 							%> --%>
 						</div>
+						<ul class="inputcomment">
+							<% if(!(id==null)){%>
+							<li><%=id%></li>
+							<%	
+							}else{
+							%><li style="width:40px;"></li><%	
+							}
+							%> 
+							<li><input type="text" name="feed_comment" id="<%=articleList.get(i).getFeed_id()%>"class="commentwrite"></li>
+							<li><button class="commentsubmit" id="<%=articleList.get(i).getFeed_id()%>"> 입력 </button> </li>
+						</ul>
+						
 					</li>
 				<% } %>
 				</ul>
@@ -222,13 +227,32 @@
 		});
 		
 		$(".comment").hide(); //댓글창 숨기기
-		/* 댓글 아이콘 눌렀을 때 댓글 창 */
+		/* 댓글 아이콘 눌렀을 때 댓글 창 보이기 */
 		$(".buttoncomment").click(function(){
-			var value = $(this).attr("value");   //로그인 한 사람이 팔로잉하는 아이디
-			var dd = "div#"+value;
+			var cust_id = $("input:hidden[name=cust_id]").val();
+			var feed_id = $(this).attr("value");   //로그인 한 사람이 팔로잉하는 아이디
+			var dd = "div#"+feed_id;
+			
+			$.ajax({
+	            url : "snsSelectComment.sns?feed_id="+feed_id+"&cust_id="+cust_id,  
+	            dataType : "html",
+	            //data : "post",
+	            success : function(check){
+	                $(dd).html(check);
+      	     	}
+			});
 			$(dd).show(200,'swing');
+			var src1 = $(this).attr("src");
+			//alert(src1);
+			if(src1=="img/sns/chat-1-fill.png"){
+				$(this).attr("src","img/sns/chat-1-line.png");
+				$(dd).hide(200,'swing');
+			}else{
+				$(this).attr("src","img/sns/chat-1-fill.png");
+			} 
+			
 		});
-		
+
 		/*로그인 안했을 때 댓글 남길 수 없음*/
 		var cust_id= $("input:hidden[name=cust_id]").val();  
 		if(cust_id==null){
@@ -240,20 +264,33 @@
 		
 		/*댓글 submit후 바로 보이기*/
 		$(".commentsubmit").click(function(){
-			var cmt_txt = $(".commentwrite").val();
-			var feed_id = $(".commentsubmit").attr("id");
+			var feed_id = $(this).attr("id"); 
+			var input_txt = "input:text[id="+feed_id+"]";
+			var cmt_txt = $(input_txt).val();
 			var cust_id = $("input:hidden[name=cust_id]").val();
 			var feed_writer =$("span").html(); 
-			//alert(feed_writer);
+			var dd = "div#"+feed_id;
+			
+			/*댓글 DB에 입력하기 */
 			$.ajax({
 				url : "snsInsertComment.sns?cust_id="+cust_id+"&feed_id="+feed_id+"&cmt_txt="+cmt_txt+"&feed_writer="+feed_writer,  
 				dataType : "html",
-				//data : "post",
 				success : function(check){
-					location.reload();//새로고침
+					
+					/*댓글창 바로 보이기*/
+					$.ajax({
+			            url : "snsSelectComment.sns?feed_id="+feed_id+"&cust_id="+cust_id,  
+			            dataType : "html",
+			            success : function(check){
+			                $(dd).html(check);
+		      	     	}
+					});
 				}
 			});
+			
+			$(dd).show(200,'swing');
 		});		
+		
 		
 		/*로그인 한 사람이 쓴 글일때 보이기 점3개 메뉴 보이기*/
 		var writer_id = $("h2").attr("value");
@@ -292,8 +329,6 @@
 		 	}
 		});
 		
-
-
 	});
 </script>	
 <!-- footer -->
