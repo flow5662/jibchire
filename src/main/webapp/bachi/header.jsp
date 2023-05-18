@@ -644,7 +644,7 @@ li {
 					<li><a href="../bachi/bachi_match-home.bc">고수매칭</a></li>
 				</div>
 				<div class="index2">
-					<li><a href="../bachi/bachi_market.jsp"> 마켓 </a></li>
+					<li><a href="../bachi/bachi_market_cust_ver.jsp"> 마켓 </a></li>
 				</div>
 				
 			</div>

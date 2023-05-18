@@ -24,6 +24,14 @@ gap:10px;
   align-items: center;
       padding-top: 50px;
 }
+.matching input[type="button"]{
+width:100px;
+height: 40px;
+background-color: #789849;
+color: white;
+border: none;
+border-radius: 8px;
+} 
 </style>
 <body>
    <div class="wrap">
@@ -51,7 +59,7 @@ gap:10px;
 	</div>
 		<div class="final-btn">
 	<input type="button" onclick="location.href='bachi_main.jsp'" value="메인화면">
-	<input type="button" onclick="location.href='bachi_match.jsp'" value="받은 답변보기">
+	<input type="button" onclick="location.href='bachi_match-home.bc'" value="받은 답변보기">
 	</div>
 	</div>
 	</section>

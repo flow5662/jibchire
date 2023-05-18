@@ -276,7 +276,7 @@ jQuery(document).ready(function ($) {
 									<div class="gosutex">
 										<h3>전문가이신가요?</h3>
 										고수로 활동해 고객을 만나보세요.
-										<div class="gosujoinbtn">고수가입</div>
+										<input type="button" class="gosujoinbtn" value="고수가입" onclick="location.href='bachi_insert.bc'">
 									</div>
 								</div>
 

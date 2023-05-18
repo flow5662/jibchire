@@ -43,7 +43,7 @@ public class BachiInfoAction implements Action{
 		}else {
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("index.jsp");
+			forward.setPath("bachi_match-home.bc");
 		
 		}
 		

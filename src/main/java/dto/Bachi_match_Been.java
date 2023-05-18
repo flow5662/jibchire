@@ -11,7 +11,15 @@ public class Bachi_match_Been {
 	private String est_q_date;
 	private String cust_pic;
 	private String cust_adr;
+	private String ans_cust_id;
 	
+	
+	public String getAns_cust_id() {
+		return ans_cust_id;
+	}
+	public void setAns_cust_id(String ans_cust_id) {
+		this.ans_cust_id = ans_cust_id;
+	}
 	public String getCust_adr() {
 		return cust_adr;
 	}

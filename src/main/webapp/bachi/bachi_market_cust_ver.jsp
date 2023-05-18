@@ -1,23 +1,15 @@
+<%@page import="dto.Bachi_market"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import="java.util.ArrayList"%>
-    <%@page import="dto.Bachi_market"%>
-     <%@page import="dto.Bachi_product"%>
-     <%request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <title>바치상점</title>
-</head>
-<%
-//String cust_id = request.getParameter("cust_id"); //request.getParameter("cust_id");
-//String cust_pw = request.getParameter("cust_pw");
-//session.setAttribute("cust_id",cust_id);
-//session.setAttribute("cust_pw",cust_pw);
-%>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head> <!-- 바치마켓 실제 결제 화면!! -->
+<link rel="stylesheet" type="text/css" href="style/bachi_market.css">
+<body>
 <%
 // 이미지 파일이 저장된 경로를 가져옵니다.
 String imagePath = request.getServletContext().getRealPath("/image");
@@ -75,13 +67,13 @@ String imageUrl = request.getContextPath() + "/image/";
 		<input type="text" name="serch" class="css-search-text" placeholder="검색어를 입력하세요.">
 		<input type="submit" value="검색" class="css-search-button">
 		<div class="market_re">
-		 <input type="button" onclick="location.href='bachi_market_re.jsp'" value="등록하기" class="css-search-button"></div>
+	
 		</div>
 		
             
             
 		<%
-
+//경로수정필요
 		ArrayList<Bachi_market> market_list = market.gosu_mark_sel(); 
 	
 		out.println("<div class='css-whide'>");
@@ -127,9 +119,4 @@ String imageUrl = request.getContextPath() + "/image/";
 </div>
 
 </body>
-<script>
-
-</script>
-
-
 </html>

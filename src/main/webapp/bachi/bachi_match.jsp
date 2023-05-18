@@ -286,6 +286,16 @@ $('.btn_gotop').click(function(){
 			}else{
 				$(".serv").show();
 				$(".notfound").hide();
+				
+				if(search_text === "에어컨"){
+					$("#conserting").hide;
+					$("#math-lesson").hide;
+					$("#dobe-sigong").hide;
+					$("#pt-training").hide;
+					$("#music-lesson").hide;
+				}
+				
+				
 			}
 		});
 		

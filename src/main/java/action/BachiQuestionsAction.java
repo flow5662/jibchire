@@ -60,7 +60,7 @@ public class BachiQuestionsAction implements Action {
 		}else {
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("bachi_match_final.jsp");
+			forward.setPath("bachi_match_final.bc");
 		}
 		
 	

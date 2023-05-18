@@ -29,19 +29,16 @@ public class BachiMatchAnsAction implements Action{
 	Bachi_Match_Ans ansService = new Bachi_Match_Ans();
 	boolean isWriteSuccess = ansService.Answer(bachi_match_been_a); 
 	System.out.println(isWriteSuccess);
-	
-	if(!isWriteSuccess){
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>");
-		out.println("alert('fail')");
-		out.println("history.back();");
-		out.println("</script>");
-	}else {
-	
-	forward= new ActionForward(); //이동 클래스
-	forward.setPath("bachi_match_req.bc");
+	if (!isWriteSuccess) {
+	    response.setContentType("text/html;charset=UTF-8");
+	    PrintWriter out = response.getWriter();
+	    out.println("<script>");
+	    out.println("alert('fail')");
+	    out.println("history.back();");
+	    out.println("</script>");
+	} else {
+	    response.sendRedirect("bachi_match_req.bc"); //redirect해야함!!redirect 안하면 경로가 bc?id~~ 경로로 새로고침하면 값이 계속 insert되는 현상 발생함
 	}
-	return forward;
+	return null;
 	}
 }

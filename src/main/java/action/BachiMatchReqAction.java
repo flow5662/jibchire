@@ -17,10 +17,14 @@ public class BachiMatchReqAction implements Action{
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
 		ArrayList<Bachi_match_Been> match_been= new ArrayList<Bachi_match_Been>(); //ArrayList 객체 생성
+		HttpSession session = request.getSession();
 		
 		int page=1;
 		int limit=10;
+	
 		
+		String cust_id = (String) session.getAttribute("ID"); //가져올때 로그인 된 아이디만 답변완료 - 기능이 뜨도록
+		System.out.println(cust_id);
 		
 		String gosu_menu1 = request.getParameter("gosu_menu1"); //select태그
 		String gosu_menu2 = request.getParameter("gosu_menu2");

@@ -119,6 +119,9 @@ public class Bachi_match_controller extends javax.servlet.http.HttpServlet
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/bachi/bachi_match_final.bc")) {
+			forward = new ActionForward();
+			forward.setPath("bachi_match_final.jsp");
 		}
 		
 		

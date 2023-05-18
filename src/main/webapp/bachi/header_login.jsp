@@ -824,6 +824,23 @@ li {
 			         });
 			        
 			        
+			        $(".index4").on("click",function(){
+			        	$.ajax({ // gosu_info에 등록되지 않은 아이디일 경우, hide되며 등록된 아이디만 show하도록 구현
+			        	    url : "bachi_select_id.bc",
+			        	    data : {cust_id: "<%= id %>" },
+			        	    type : "post",
+			        	    success: function(result){    
+			        	        if(result === "false"){ // "false" 값이 반환되면
+			        	        //그냥 bachi_market.jsp띄우기
+			        	        }else{
+			        	        	location.href="bachi_market_cust_ver.jsp"; //고객이 직접 상품을 판매하는 페이지로 이동, 이것도 서블릿으로 할 예정
+			        	        }
+			        	    }
+			        	});
+			        });
+			         
+			        
+			        
 			        
 		});
 </script>

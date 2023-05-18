@@ -78,12 +78,12 @@ width:350px;
 height: 50px;
 padding: 5px 10px 5px 10px;
 }
-input[type="time"]{
+.menu_all input[type="time"]{
 width:200px;
 height: 50px;
 border: 1px solid lightgray;
 }
-input[type="text"]{
+.menu_all input[type="text"]{
 border: 1px solid lightgray;
 }
 select{
