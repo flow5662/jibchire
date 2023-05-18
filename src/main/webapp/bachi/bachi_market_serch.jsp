@@ -98,7 +98,7 @@ for(int i= 0;i < market_list.size();i++){
 	
 			//out.println("<td id='cust_id'>"+"<a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>"+market_list.get(i).getCust_id()+"</td>");
 			out.println("<div class='market'>");
-			String serverImagePath = request.getContextPath() + "/image/sm_" + market_list.get(i).getMarket_picture();
+			String serverImagePath = request.getContextPath() + "/bachi/bachi_market/sm_" + market_list.get(i).getMarket_picture();
 			%>
 			<a href='bachi_market_det.jsp?market_id=<%=market_list.get(i).getMarket_id()%>'>
 	    <img src='<%=serverImagePath%>' style='width:416px;height: 280px; border-radius:8px;'></a>

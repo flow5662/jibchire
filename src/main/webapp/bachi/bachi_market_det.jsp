@@ -59,7 +59,7 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     		//out.println("<li id='market_id' name='market_id'>"+market_list_cust.get(0).getMarket_id()+"</li>");
 	    	//out.println("<li name='cust_id'>"+market_list_cust.get(0).getCust_id()+"</li>");
 	    	
-	    		String serverImagePath = request.getContextPath() + "/image/sm_" + market_list_cust.get(0).getMarket_picture();
+	    		String serverImagePath = request.getContextPath() + "/bachi/bachi_market/sm_" + market_list_cust.get(0).getMarket_picture();
 		%>
 		
     <img src='<%=serverImagePath%>' style='width:750px;height: 500px; border-radius:8px;'>

@@ -12,10 +12,10 @@
 <body>
 <%
 // 이미지 파일이 저장된 경로를 가져옵니다.
-String imagePath = request.getServletContext().getRealPath("/image");
+String imagePath = request.getServletContext().getRealPath("/bachi/bachi_market");
 
 // 이미지 파일의 URL을 생성합니다.
-String imageUrl = request.getContextPath() + "/image/";
+String imageUrl = request.getContextPath() + "/bachi/bachi_market";
 
 %>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">

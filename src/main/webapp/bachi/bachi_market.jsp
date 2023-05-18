@@ -20,10 +20,10 @@
 %>
 <%
 // 이미지 파일이 저장된 경로를 가져옵니다.
-String imagePath = request.getServletContext().getRealPath("/image");
+String imagePath = request.getServletContext().getRealPath("/bachi/bachi_market");
 
 // 이미지 파일의 URL을 생성합니다.
-String imageUrl = request.getContextPath() + "/image/";
+String imageUrl = request.getContextPath() + "/bachi/bachi_market";
 
 %>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -91,7 +91,7 @@ String imageUrl = request.getContextPath() + "/image/";
 		
 		//out.println("<td id='cust_id'>"+"<a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>"+market_list.get(i).getCust_id()+"</td>");
 		out.println("<div class='market'>");
-		String serverImagePath = request.getContextPath() + "/market/sm_" + market_list.get(i).getMarket_picture();
+		String serverImagePath = request.getContextPath() + "/bachi/bachi_market/sm_" + market_list.get(i).getMarket_picture();
 		%>
 		<a href='bachi_market_det.jsp?market_id=<%=market_list.get(i).getMarket_id()%>'>
     <img src='<%=serverImagePath%>' style='width:416px;height: 280px; border-radius:8px;'></a>

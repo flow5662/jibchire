@@ -30,7 +30,7 @@
 
 
 ServletContext context = request.getServletContext();
-String imagePath=context.getRealPath("image");
+String imagePath=context.getRealPath("bachi/bachi_market");
 
 int size = 1*1024*1024 ;
 String filename="";

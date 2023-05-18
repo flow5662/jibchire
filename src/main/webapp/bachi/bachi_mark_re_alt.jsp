@@ -27,7 +27,7 @@
         <jsp:useBean id="market1" class="dao.Gosu_mark">
 <%
 ServletContext context = request.getServletContext();
-String imagePath=context.getRealPath("image");
+String imagePath=context.getRealPath("bachi/bachi_market");
 
 int size = 1*1024*1024 ;
 String filename="";

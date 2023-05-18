@@ -91,7 +91,7 @@ padding-top: 50px;
 			%>
 			<tr class="user"> 
 			<%
-			String serverImagePath = request.getContextPath() + "/img/sm_" + article_match.get(i).getCust_pic();
+			String serverImagePath = request.getContextPath() + "/cust/sm_" + article_match.get(i).getCust_pic();
 			
 			%>
 			<td ><a href="bachi_match_req_s.bc?est_id=<%=article_match.get(i).getEst_id()%>"><div class="user-info"><img src=<%=serverImagePath%> style=""><h5><%=article_match.get(i).getCust_id()%></h5></div></a></td>
