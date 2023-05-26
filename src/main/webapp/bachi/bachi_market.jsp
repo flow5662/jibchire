@@ -82,11 +82,10 @@ String imageUrl = request.getContextPath() + "/bachi/bachi_market";
             
 		<%
 
-		ArrayList<Bachi_market> market_list = market.gosu_mark_sel(); 
-	
+		ArrayList<Bachi_market> market_list = market.gosu_mark_sel(); //db에서 list가져옴
 		out.println("<div class='css-whide'>");
 		
-		for(int i= 0;i < market_list.size();i++){
+		for(int i= 0;i < market_list.size();i++){ //Arrylist size만큼 for문 돌리기
 		//out.println("<tr><a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>");
 		
 		//out.println("<td id='cust_id'>"+"<a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>"+market_list.get(i).getCust_id()+"</td>");

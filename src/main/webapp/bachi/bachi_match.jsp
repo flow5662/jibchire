@@ -11,8 +11,7 @@
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 <link rel="stylesheet" type="text/css" href="style/bachi_match.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<style>
 		.overlay {
 			position: fixed;

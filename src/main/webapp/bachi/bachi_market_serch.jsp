@@ -73,12 +73,12 @@ String serch_text = null;
 
 
 
-if(value.equals("all")){
-	serch_id = serch;
+if(value.equals("all")){ //전체라면
+	serch_id = serch; //모든 값을 serch에 넣는다
 	serch_title = serch;
 	serch_text = serch;
-}else if(value.equals("cust_id")){
-	serch_id = serch;
+}else if(value.equals("cust_id")){ //cust_id라면 
+	serch_id = serch; //cust_id에만 serch값을 넣는다
 	
 }else if(value.equals("market_title")){
 	serch_title = serch;

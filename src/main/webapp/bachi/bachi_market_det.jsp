@@ -4,6 +4,9 @@
    <%@page import="java.util.ArrayList"%>
     <%@page import="dto.Bachi_market"%>
      <%@page import="dto.Bachi_product"%>
+         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <%
@@ -16,13 +19,14 @@ String cust_pw = (String)session.getAttribute("cust_pw");
 
 <head>
 
-
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>바치상점</title>
 </head>
 <link rel="stylesheet" type="text/css" href="style/bachi_market_det.css">
 <body>
+
+
 <!-- 상세 페이지 -->
 
 <!-- 헤더 -->
@@ -53,6 +57,7 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     		<% 
     		int mark = Integer.parseInt(market_id);
     		ArrayList<Bachi_market> market_list_cust = market.gosu_mark_sel_det(mark);
+    		ArrayList<Bachi_product> bachi_product = market.gosu_pro_det(mark);
     		%>
     		<div class="flex-aside-left">
     		<%
@@ -100,7 +105,7 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     		</div>
     		
     		<div class="user-text-section-gosu">
-    		<%out.println(market_list_cust.get(0).getMarket_text()); %>
+    		<%out.println(market_list_cust.get(0).getMarket_text());%>
     		
     		</div>
     		
@@ -113,6 +118,7 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     	</div>
     	
     	<div class="flex-aside-right">
+    	<div class="flex-aside-right-list">
     	<div class="flex-controller">
     	<div class="no-space"> 
     	<% 
@@ -128,33 +134,22 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     	<div class="css-option-group">
     	<div class="product-option">
     		<div class="css-option-box">
+    		<!-- 중첩으로 놓거나 아니면 gosu_product랑 같이 조인하거나.. -->
+    		
+    		
     			<div class="css-option-title">옵션 제목입니다.</div>
     			<div class="css-option-price"><strong><% out.println(market_list_cust.get(0).getGosu_price()); %>원</strong></div>
-    			<div class="css-option-text">옵션 텍스트입니다.<br>
-    			옵션 내용을 추가합니다.<br>
-    			현재는 옵션 기능이 구현되지 않습니다.<br>
- 				(마켓)의 게시판용도로 사용됩니다.
+    			<div class="css-option-text">
+    			<details>
+    			<summary>텍스트 보기</summary>
+    			<p>옵션 텍스트입니다.</p>
+    			<p>옵션 내용을 추가합니다.</p>
+    			<p>현재는 옵션 기능이 구현되지 않습니다.</p>
+ 				<p>(마켓)의 게시판용도로 사용됩니다.</p>
+ 				</details>
     			</div>
     		</div>
-    		<div class="css-option-box">
-    			<div class="css-option-title">옵션 제목입니다.</div>
-    			<div class="css-option-price"><strong>n원</strong></div>
-    			<div class="css-option-text">옵션 텍스트입니다.<br>
-    			옵션 내용을 추가합니다.<br>
-    			현재는 옵션 기능이 구현되지 않습니다.<br>
- 				(마켓)의 게시판용도로 사용됩니다.
-    			</div>
-    		</div>
-    		<div class="css-option-box">
-    			<div class="css-option-title">옵션 제목입니다.</div>
-    			<div class="css-option-price"><strong>n원</strong></div>
-    			<div class="css-option-text">옵션 텍스트입니다.<br>
-    			옵션 내용을 추가합니다.<br>
-    			현재는 옵션 기능이 구현되지 않습니다.<br>
- 				(마켓)의 게시판용도로 사용됩니다.
-    			</div>
-    		</div>
-    	</div>
+    		
     	</div>
     	</div>
     	<div class="css-button-submit">
@@ -165,19 +160,23 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     	<input type="button" value="삭제" onclick="deleteMarket()" class="css-button-del">
     	</div>
     		</div>
-    		
-    	
-    		
-    		
+    		</div>
+    		</div>
     		
     		
     		
     		
     		
-    		<input type="hidden" name="market_id" value="<%=market_id %>">
+    		
+    		
+    		<input type="hidden" name="market_id" value="<%=mark %>">
     		<input type="hidden" name="gosu_id" value="<%=market_list_cust.get(0).getGosu_id()%>">
-    		<input type="hidden" name="market_picture" value="<%=market_list_cust.get(0).getMarket_picture()%>">
-    		<input type="hidden" name="market_text" value="<%=market_list_cust.get(0).getMarket_text()%>">
+    		<input type="hidden" name="market_picture_text" value=<%=market_list_cust.get(0).getMarket_picture()%>>
+    		<input type="hidden" name="market_picture" value="<%=serverImagePath%>">
+    		
+<input type="hidden" name="market_text" value="<% String market_t = market_list_cust.get(0).getMarket_text();
+													market_t = market_t.replaceAll("\"", "'"); //큰따옴표를 작은따옴표로 변경
+													out.println(market_t);%>" >
     		<input type="hidden" name="market_title" value="<%=market_list_cust.get(0).getMarket_title()%>">
     		<input type="hidden" name="gosu_menu1" value="<%=market_list_cust.get(0).getGosu_menu1()%>">
     		<input type="hidden" name="gosu_menu2" value="<%=market_list_cust.get(0).getGosu_menu2()%>">

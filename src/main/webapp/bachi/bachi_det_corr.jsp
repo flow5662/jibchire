@@ -1,14 +1,23 @@
+<%@page import="java.io.PrintWriter"%>
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%request.setCharacterEncoding("utf-8");%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.sql.*"%>
+<%@ page isELIgnored="false" %>
+
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+       <script src="https://cdn.tiny.cloud/1/u6ttna9u2bsyyg5t3sp6z6lxhzotbwqu8g9a5cyiqt8xhfyw/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
-<title>Insert title here</title>
+<title>바치상점</title>
 </head>
 <%
 String cust_id = (String)session.getAttribute("cust_id");
@@ -17,12 +26,17 @@ String market_title = request.getParameter("market_title");
 String market_id = request.getParameter("market_id");
 String gosu_id = request.getParameter("gosu_id");
 String market_picture = request.getParameter("market_picture");
+String market_picture_text = request.getParameter("market_picture_text");
 String market_text = request.getParameter("market_text");
+//request.setAttribute("market_text", market_text);
+
 String gosu_menu1 = request.getParameter("gosu_menu1");
 String gosu_menu2 = request.getParameter("gosu_menu2");
 
 
 String serverImagePath = request.getContextPath() + "/image/sm_" + market_picture;
+
+
 %>
 
 
@@ -96,6 +110,9 @@ display: flex;
     justify-content: space-between;
     padding-top: 20px;
 }
+p {
+  word-wrap: break-word;
+}
 </style>
 <body>
   <!-- 헤더 -->
@@ -123,7 +140,7 @@ display: flex;
 
 
 
-<form action="bachi_mark_re_alt.jsp" method="post" enctype="multipart/form-data" >
+<form action="bachi_mark_re_alt.jsp" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 <!--  onsubmit="return false;" -->
 
 <input type="hidden" name="market_id" value=<%=market_id %>>
@@ -138,7 +155,7 @@ display: flex;
 
 <div class="lable-title">상품/카테고리 선택</div>
 <div class="option-selected-css">
-<select name="gosu_id" id="gosu_id" class="css-gosu-option">
+<select name="gosu_id" id="gosu_id" class="css-gosu-option" multiple="multiple" size="6">
 <option value="1">상품옵션1</option>
 <option value="2">상품옵션2</option>
 </select>
@@ -153,13 +170,16 @@ display: flex;
  </div>
  <div class="lable-title">상품 이미지 선택</div>
  <div class="file-css">
-  <input type="file" id="file-input" name ="filename" value="<%=serverImagePath %>">
-<input type="hidden" name="market_picture" id="file-path" value="<%=market_picture%>">
+  <input type="file" accept=".jpg,.jpeg,.png" id="file-input" name ="filename">
+<input type="hidden" name="market_picture" id="file-path">
 <img id="image-preview">
 </div>
 
 
-<textarea rows="50" cols="160" name="market_text" style="resize: none;" class="css-title"><%=market_text%></textarea>
+<textarea rows="50" cols="160" name="market_text" style="resize: none;" class="css-title" id="market_text">
+<%=market_text %>
+ 
+</textarea>
 
 <div class="submit-button">
 <input type="submit" value="저장" class="css-button-re">
@@ -196,5 +216,95 @@ $(document).ready(function() {
     reader.readAsDataURL(file);
   });
 });
+</script>
+<script>
+$(function(){
+	//글쓰기 api 에디터 
+	
+	
+    var plugins = [
+        "advlist", "autolink", "lists", "link", "image", "charmap", "print", "preview", "anchor",
+        "searchreplace", "visualblocks", "code", "fullscreen", "insertdatetime", "media", "table",
+        "paste", "code", "help", "wordcount", "save"
+    ];
+    var edit_toolbar = 'formatselect fontselect fontsizeselect |'
+               + ' forecolor backcolor |'
+               + ' bold italic underline strikethrough |'
+               + ' alignjustify alignleft aligncenter alignright |'
+               + ' bullist numlist |'
+               + ' table tabledelete |'
+               + ' link image';
+
+    tinymce.init({
+    	language: "ko_KR", //한글판으로 변경
+        selector: '#market_text',
+        height: 500,
+        menubar: false,
+        plugins: plugins,
+        toolbar: edit_toolbar,
+        autosave_retention: '30m',
+        
+  
+        
+        
+        /*** image upload ***/
+        image_title: true,
+        /* enable automatic uploads of images represented by blob or data URIs*/
+        automatic_uploads: true,
+        /*
+            URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
+            images_upload_url: 'postAcceptor.php',
+            here we add custom filepicker only to Image dialog
+        */
+        file_picker_types: 'image',
+        /* and here's our custom image picker*/
+        file_picker_callback: function (cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+
+            /*
+            Note: In modern browsers input[type="file"] is functional without
+            even adding it to the DOM, but that might not be the case in some older
+            or quirky browsers like IE, so you might want to add it to the DOM
+            just in case, and visually hide it. And do not forget do remove it
+            once you do not need it anymore.
+            */
+            input.onchange = function () {
+                var file = this.files[0];
+
+                var reader = new FileReader();
+                reader.onload = function () {
+                    /*
+                    Note: Now we need to register the blob in TinyMCEs image blob
+                    registry. In the next release this part hopefully won't be
+                    necessary, as we are looking to handle it internally.
+                    */
+                    var id = 'blobid' + (new Date()).getTime();
+                    var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                    var base64 = reader.result.split(',')[1];
+                    var blobInfo = blobCache.create(id, file, base64);
+                    blobCache.add(blobInfo);
+
+                    /* call the callback and populate the Title field with the file name */
+                    cb(blobInfo.blobUri(), { title: file.name });
+                };
+                reader.readAsDataURL(file);
+            };
+            input.click();
+        },
+        /*** image upload ***/
+        
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+
+
+    $("#save").on("click", function(){
+        var content = tinymce.activeEditor.getContent();
+        console.log(content);
+    });
+ 
+});
+
 </script>
 </html>

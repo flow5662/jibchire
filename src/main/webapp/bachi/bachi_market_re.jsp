@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+       <script src="https://cdn.tiny.cloud/1/u6ttna9u2bsyyg5t3sp6z6lxhzotbwqu8g9a5cyiqt8xhfyw/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 <title>Insert title here</title>
 </head>
@@ -18,8 +19,8 @@ String cust_pw = (String)session.getAttribute("cust_pw");
 
 
 <style>
+
 .wrap{
-	width:1900px;
 	margin-left:auto;
 	margin-right:auto;
 }
@@ -30,7 +31,7 @@ padding-top: 20px;
 padding-bottom: 20px;
 }
 .css-market-title-style{
- width: 70%;
+ width: 100%;
     height: calc(1.5em + 1.5rem);
 }
 .css-title{
@@ -124,7 +125,7 @@ display: flex;
 
 <div class="lable-title">상품/카테고리 선택</div>
 <div class="option-selected-css">
-<select name="gosu_id" id="gosu_id" class="css-gosu-option">
+<select name="gosu_id" id="gosu_id" class="css-gosu-option" multiple="multiple" size="6">
 <option value="1">상품옵션1</option>
 <option value="2">상품옵션2</option>
 </select>
@@ -144,7 +145,9 @@ display: flex;
 <img id="image-preview">
 </div>
 
-<textarea rows="50" cols="160" name="market_text" style="resize: none;" class="css-title"></textarea>
+<textarea rows="50" cols="160" name="market_text" style="resize: none;" class="css-title" id="market_text">
+
+</textarea>
 
 <div class="submit-button">
 <input type="submit" value="저장" class="css-button-re">
@@ -161,19 +164,108 @@ display: flex;
 </div>
 <script>
 $(document).ready(function() {
-  // 파일 선택 시 hidden과 img 태그에 파일 경로를 저장하고 이미지를 미리보기합니다.
+  // 파일 선택 시 hidden과 img 태그에 파일 경로를 저장하고 이미지를 미리보기
   $('#file-input').on('change', function() {
     var file = $(this).prop('files')[0];
     var reader = new FileReader();
     reader.onload = function(event) {
-      //$('#file-path').val("img/test/"+file.name); // 파일 경로를 hidden 태그에 저장합니다.
-      $('#image-preview').attr('src', event.target.result); // 미리보기 이미지를 출력합니다.
+      //$('#file-path').val("img/test/"+file.name); // 파일 경로를 hidden 태그에 저장
+      $('#image-preview').attr('src', event.target.result); // 미리보기 이미지를 출력
     };
     reader.readAsDataURL(file); 
   });
 });
+//css-title
 </script>
+<script>
+$(function(){
+	//글쓰기 api 에디터 
+	
+	
+    var plugins = [
+        "advlist", "autolink", "lists", "link", "image", "charmap", "print", "preview", "anchor",
+        "searchreplace", "visualblocks", "code", "fullscreen", "insertdatetime", "media", "table",
+        "paste", "code", "help", "wordcount", "save"
+    ];
+    var edit_toolbar = 'formatselect fontselect fontsizeselect |'
+               + ' forecolor backcolor |'
+               + ' bold italic underline strikethrough |'
+               + ' alignjustify alignleft aligncenter alignright |'
+               + ' bullist numlist |'
+               + ' table tabledelete |'
+               + ' link image';
 
+    tinymce.init({
+    	language: "ko_KR", //한글판으로 변경
+        selector: '#market_text',
+        height: 500,
+        menubar: false,
+        plugins: plugins,
+        toolbar: edit_toolbar,
+        autosave_retention: '30m',
+        
+  
+        
+        
+        /*** image upload ***/
+        image_title: true,
+        /* enable automatic uploads of images represented by blob or data URIs*/
+        automatic_uploads: true,
+        /*
+            URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
+            images_upload_url: 'postAcceptor.php',
+            here we add custom filepicker only to Image dialog
+        */
+        file_picker_types: 'image',
+        /* and here's our custom image picker*/
+        file_picker_callback: function (cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+
+            /*
+            Note: In modern browsers input[type="file"] is functional without
+            even adding it to the DOM, but that might not be the case in some older
+            or quirky browsers like IE, so you might want to add it to the DOM
+            just in case, and visually hide it. And do not forget do remove it
+            once you do not need it anymore.
+            */
+            input.onchange = function () {
+                var file = this.files[0];
+
+                var reader = new FileReader();
+                reader.onload = function () {
+                    /*
+                    Note: Now we need to register the blob in TinyMCEs image blob
+                    registry. In the next release this part hopefully won't be
+                    necessary, as we are looking to handle it internally.
+                    */
+                    var id = 'blobid' + (new Date()).getTime();
+                    var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                    var base64 = reader.result.split(',')[1];
+                    var blobInfo = blobCache.create(id, file, base64);
+                    blobCache.add(blobInfo);
+
+                    /* call the callback and populate the Title field with the file name */
+                    cb(blobInfo.blobUri(), { title: file.name });
+                };
+                reader.readAsDataURL(file);
+            };
+            input.click();
+        },
+        /*** image upload ***/
+        
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+
+
+    $("#save").on("click", function(){
+        var content = tinymce.activeEditor.getContent();
+        console.log(content);
+    });
+ 
+});
+
+</script>
 </body>
-
 </html>

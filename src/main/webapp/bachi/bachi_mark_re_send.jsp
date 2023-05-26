@@ -1,4 +1,5 @@
- <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+ <%@page import="dto.Bachi_product"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="dto.Bachi_market"%>
@@ -49,7 +50,7 @@ try{ //png이외의 파일이면 이슈발생, 수정요망
 	
 	Bachi_market mark = new Bachi_market();
 	mark.setCust_id((String) session.getAttribute("ID"));
-	mark.setGosu_id(multi.getParameter("gosu_id"));
+	
 	mark.setMarket_text(multi.getParameter("market_text"));
 	mark.setMarket_title(multi.getParameter("market_title"));
 	mark.setGosu_menu1(multi.getParameter("gosu_menu1"));
@@ -58,16 +59,47 @@ try{ //png이외의 파일이면 이슈발생, 수정요망
 	mark.setMarket_picture(filename);
 
 	dao.Gosu_mark market = new dao.Gosu_mark();
-	market.gosu_mark_add(mark);
+	
+	
+	// 여기까지는 market 넣는곳이라면
+	
+	String[] gosu_id  = multi.getParameterValues("gosu_id"); //상품옵션 선택받은거
+	int minPrice = Integer.MAX_VALUE; //최대값으로 초기화
+	String minId = ""; //gosu_id를 받기 위함
+	
+	//application.log(gosu_id[0]); //로그찍기
+	int market_id = market.market_id();
+	market_id = market_id + 1;
+	
+	for(int i=0;i<gosu_id.length;i++){
+		market.gosu_middle(market_id,Integer.parseInt(gosu_id[i])); //insert
+		Bachi_product product = market.gosu_product_id(Integer.parseInt(gosu_id[i])); //product객체에 id와 가격 넣기
+		int price = product.getGosu_price(); //객체에 받은 price만 가져옴
+		 if (price < minPrice) { //1)최소가격(최대값으로 초기화)이 현재 가격보다 크면/2)최신 가격으로 맞춰진
+		        minPrice = price; //값을 현재 값으로 넣음
+		        minId= gosu_id[i]; //현재 for문이 돌아가고있기에 최소값의 gosu_id로
+		    }
+	
+	} // 중간테이블에 값 넣기
+	
+	application.log(minId); //로그찍기
+	
+	mark.setGosu_id(minId); //set으로 가격이 min값인 gosu_id 넣음
+	
+
+	market.gosu_mark_add(mark); //gosu_market 테이블에 입력됨
+	
 	response.sendRedirect("bachi_market.jsp");
 }catch(Exception e){
 	e.printStackTrace();
 }
 
 
-
 ParameterBlock pb=new ParameterBlock();
 pb.add(imagePath+"/"+filename);
+BufferedImage bufferedImage = ImageIO.read(new File(imagePath+"/"+filename)); 		// jpg->png 변경
+ImageIO.write(bufferedImage, "png", new File(imagePath+"/"+filename));
+
 RenderedOp rOp=JAI.create("fileload",pb);
 
 BufferedImage bi= rOp.getAsBufferedImage();

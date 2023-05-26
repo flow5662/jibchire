@@ -23,6 +23,7 @@ if(market_id != null && !market_id.isEmpty()) {
 out.println(market_id);
 out.println(mark);
 market.gosu_mark_del(mark);
+market.gosu_middle_delete(mark);
 response.sendRedirect("bachi_market.jsp");
 
 

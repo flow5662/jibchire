@@ -23,7 +23,7 @@ public class Gosu_mark {
 	void conn() {
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/interior?useUnicode=true&characterEncoding=utf8","root","1234");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -40,6 +40,47 @@ public class Gosu_mark {
 		
 	}
 	
+	public int market_id() {
+		int market_id = 0;	
+		try {
+			this.conn();
+			if(conn == null)
+			throw new Exception("데이터베이스에 접근할 수 없습니다.");		
+			stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("select max(market_id) from gosu_market;");
+		if(rs.next()) {
+			market_id = rs.getInt("max(market_id)"); //max순번
+		}
+		this.diconn();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return market_id;
+		
+	}
+	
+	public void gosu_pro_conn(int market_id, int gosu_id) { // gosu_market 테이블과 gosu_product의 연결 테이블에 넣을 값들
+		try {
+			this.conn();
+			if(conn == null)
+				throw new Exception("데이터베이스에 접근할 수 없습니다.");			
+		// select
+		stmt = conn.createStatement();
+		String command = String.format("insert into gosu_m_p(market_id,gosu_id) values(%s,%s);");
+			//gosu_info 
+		int rowNum = stmt.executeUpdate(command);
+		
+		if(rowNum < 1)
+			throw new Exception("데이터베이스에 접근할 수 없습니다.");
+
+		
+		this.diconn();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public void gosu_pro_add(Bachi_product gosu_pro_add){ //입력
 		//게시글 작성
 
@@ -49,7 +90,7 @@ public class Gosu_mark {
 					throw new Exception("데이터베이스에 접근할 수 없습니다.");			
 			// select
 			stmt = conn.createStatement();
-			String command = String.format("insert into gosu_product(cust_id,gosu_text,gosu_price)"+"values('%s','%s',%s);",
+			String command = String.format("insert into gosu_product(cust_id,gosu_title,gosu_text,gosu_price)"+"values('%s','%s','%s',%s);", 
 				gosu_pro_add.getCust_id(),gosu_pro_add.getGosu_text(),gosu_pro_add.getGosu_price());
 				//gosu_info 
 			int rowNum = stmt.executeUpdate(command);
@@ -64,6 +105,31 @@ public class Gosu_mark {
 			}
 	
 	}
+	
+	public ArrayList<Bachi_product> gosu_pro_det(int market_id){
+		ArrayList<Bachi_product> bachi_product = new ArrayList<Bachi_product>();
+		try {
+			this.conn();
+			if(conn == null)
+			throw new Exception("데이터베이스에 접근할 수 없습니다.");		
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from gosu_product left join gosu_market on gosu_product.gosu_id = gosu_market.gosu_id where gosu_market.market_id ='" +market_id+"';");
+			while(rs.next()){
+				Bachi_product gosu_pro = new Bachi_product();
+				gosu_pro.setGosu_id(rs.getInt("gosu_id"));
+				gosu_pro.setCust_id(rs.getString("cust_id"));
+				gosu_pro.setGosu_text(rs.getString("gosu_title"));
+				gosu_pro.setGosu_text(rs.getString("gosu_text"));
+				gosu_pro.setGosu_price(rs.getInt("gosu_price"));
+				bachi_product.add(gosu_pro);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 	
 	public ArrayList<Bachi_product> gosu_pro_sel(String cust_id){ 
@@ -80,10 +146,10 @@ public class Gosu_mark {
 			while(rs.next()){							
 				//return 해야함
 				Bachi_product gosu_pro = new Bachi_product();
-				gosu_pro.setGosu_id(rs.getString("gosu_id"));
+				gosu_pro.setGosu_id(rs.getInt("gosu_id"));
 				gosu_pro.setCust_id(rs.getString("cust_id"));
 				gosu_pro.setGosu_text(rs.getString("gosu_text"));
-				gosu_pro.setGosu_price(rs.getString("gosu_price"));
+				gosu_pro.setGosu_price(rs.getInt("gosu_price"));
 				
 				
 				pro_list.add(gosu_pro);
@@ -94,7 +160,7 @@ public class Gosu_mark {
 		}	
 		return pro_list;
 	}
-	public void gosu_pro_del(String gosu_id) { 
+	public void gosu_pro_del(int gosu_id) { 
 		try {
 			this.conn();
 			if(conn == null)
@@ -226,7 +292,6 @@ public class Gosu_mark {
 	
 	public void gosu_mark_add(Bachi_market gosu_mark_add){
 
-
 		try{
 			this.conn();
 			if(conn == null)
@@ -289,8 +354,67 @@ public class Gosu_mark {
 	    }
 	}
 
+	public Bachi_product gosu_product_id(int gosu_id) { 	
+		Bachi_product product = new Bachi_product();
+		try {
+			this.conn();
+			if(conn == null)
+			throw new Exception("데이터베이스에 접근할 수 없습니다.");		
+			stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("select gosu_id,gosu_price from gosu_product where gosu_id="+gosu_id+";"); //gosu_id와 price를 찾음
+		if(rs.next()) {
+			product.setGosu_id(rs.getInt("gosu_id"));
+			product.setGosu_price(rs.getInt("gosu_price"));
+			//gosu_id = rs.getInt("gosu_id"); //min
+		}
+		this.diconn();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return product;
+	}
 	
+	public void gosu_middle(int market_id,int gosu_id) { //market_id와 gosu_id를 연결해주는 중간테이블 insert
+		try {
+			this.conn();
+			if(conn == null)
+				throw new Exception("데이터베이스에 접근할 수 없습니다.");
+			stmt = conn.createStatement();
+			String command = String.format("insert into gosu_m_p(market_id,gosu_id) values(%s,%s);",market_id,gosu_id);
+				
+			int rowNum = stmt.executeUpdate(command);
+			
+			if(rowNum < 1)
+				throw new Exception("DB에 연결할 수 없습니다.");
 	
+		
+			this.diconn();	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void gosu_middle_delete(int market_id) { //update, delete 시 같이 삭제용
+		try {
+			this.conn();
+			if(conn == null)
+				throw new Exception("데이터베이스에 접근할 수 없습니다.");
+			stmt = conn.createStatement();
+			String command = String.format("delete from gosu_m_p where market_id ='", market_id+"';");
+			
+			int rowNum = stmt.executeUpdate(command);
+			
+			if(rowNum < 1)
+				throw new Exception("DB에 연결할 수 없습니다.");
+	
+		
+			this.diconn();	
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

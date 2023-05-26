@@ -1,6 +1,5 @@
 @charset "UTF-8";
 .wrap{
-	width:1900px;
 	margin-left:auto;
 	margin-right:auto;
 }
@@ -25,7 +24,7 @@ display: flex;
 .flex-aside-left{  max-width: 60rem;
     padding-bottom: 2rem;}
 .flex-aside-right{width: 31rem;
-    z-index: 1;}
+    z-index: 1;  position: relative;}
 .product-title{font-size: 1.5rem;}
 
 .product-option{ 
@@ -163,4 +162,12 @@ padding-bottom: 10px;
 	    padding-bottom: 20px;
     padding-top: 20px;
 	
+}
+.flex-aside-right-list{
+display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 6.5rem;
+    z-index: 999;
+    max-height: calc(100vh - 6.5rem);
 }

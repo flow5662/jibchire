@@ -2,10 +2,10 @@ package dto;
 
 public class Bachi_product {
 
-	String gosu_id;
+	int gosu_id;
 	String cust_id;
 	String gosu_text;
-	String gosu_price;
+	int gosu_price;
 	String gosu_title;
 	
 	public String getGosu_title() {
@@ -14,10 +14,10 @@ public class Bachi_product {
 	public void setGosu_title(String gosu_title) {
 		this.gosu_title = gosu_title;
 	}
-	public String getGosu_id() {
+	public int getGosu_id() {
 		return gosu_id;
 	}
-	public void setGosu_id(String gosu_id) {
+	public void setGosu_id(int gosu_id) {
 		this.gosu_id = gosu_id;
 	}
 	public String getCust_id() {
@@ -32,10 +32,10 @@ public class Bachi_product {
 	public void setGosu_text(String gosu_text) {
 		this.gosu_text = gosu_text;
 	}
-	public String getGosu_price() {
+	public int getGosu_price() {
 		return gosu_price;
 	}
-	public void setGosu_price(String gosu_price) {
+	public void setGosu_price(int gosu_price) {
 		this.gosu_price = gosu_price;
 	}
 }
