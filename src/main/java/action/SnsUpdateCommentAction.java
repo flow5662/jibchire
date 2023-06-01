@@ -47,7 +47,7 @@ import svc.SnsUpdateCommentService;
 			forward.setRedirect(true);
 			forward.setPath("snsSelectComment.sns?feed_id="+feed_id+"&cust_id="+cust_id);
 			// 계속 데이터 작업을 할 필요는 없으니까 잠시 주석처리
-//			forward.setPath("snsReadComment.jsp");
+			forward.setPath("empty.jsp");
 		}
    		return forward;
 

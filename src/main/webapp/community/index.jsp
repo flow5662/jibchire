@@ -34,7 +34,7 @@ section[id^=sec] h1{font-family: 'DM Serif Text', serif; font-size: 43px; color:
 .skewdBox2 ul{margin-top: 20px;}
 .skewdBox2 ul li {width: inherit;  background-color: wheat;} 
 .skewdBox2 ul li h5{font-size: 12pt; color: #8d6046;    font-style: italic;    font-weight: 900;}
-.skewdBox2 ul li h6{font-size: 10pt;  margin: 10px 0 10px 20px;}
+.skewdBox2 ul li h6{font-size: 10pt;  color: black; margin: 10px 0 10px 20px;}
 
 /*section02*/
 #section02{width: 100%; height: 500px;}
@@ -325,8 +325,8 @@ align-items: center;
 							Show Your Rooms <br> on Community
 						</h1>
 						<ul>
-							<li><h5>집들이</h5></li>
-							<li><h6>집의 사진 및 인테리어에 이용한 상품 정보를 공유하는 공간</h6></li>
+							<a href="../community/select_board.jsp?cust_id=<%=id%>"><li><h5>집들이</h5></li>
+							<li><h6>집의 사진 및 인테리어에 이용한 상품 정보를 공유하는 공간</h6></li></a>
 							<li><h5>일상공유</h5></li>
 							<li><h6>일상에 대한 정보를 공유하고 다른 사용자와 소통하는 공간</h6></li>
 							<li><h5>나와 비슷한</h5></li>

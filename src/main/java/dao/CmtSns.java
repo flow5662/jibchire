@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import dto.Cust_follow;
 import dto.Cust_houseinfo;
+import dto.Cust_info;
 import dto.Feed;
 import dto.Feed_comment;
 import dto.Feed_like;
@@ -233,7 +234,7 @@ public class CmtSns {
 		Feed feed = null;
 		ArrayList<Feed> articleList = new ArrayList<Feed>();
 		try{
-			pstmt = con.prepareStatement("select * from feed left outer join cust_houseinfo on cust_houseinfo.cust_id= ? where feed.cust_id = ? ");
+			pstmt = con.prepareStatement("select * from feed left outer join cust_houseinfo on cust_houseinfo.cust_id= ? where feed.cust_id = ? order by feed.feed_date desc;");
 			pstmt.setString(1, feed_writer);
 			pstmt.setString(2, feed_writer);
 			rs= pstmt.executeQuery();
@@ -285,7 +286,7 @@ public class CmtSns {
 					+ " left outer join cust_follow on feed.cust_id = cust_follow.cust_following and cust_follow.cust_id= ? "
 					+ " left outer join cust_houseinfo on cust_houseinfo.cust_id= ? "
 					+ " where feed.cust_id= ? "
-					+ " order by feed.feed_date desc;";
+					+ " order by feed.feed_date desc;";  // 최신순으로 가져오기 하니까 가장 최근글이 가장 아래로 감
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cust_id);
 			pstmt.setString(2, cust_id);
@@ -903,7 +904,7 @@ public class CmtSns {
 		return insertCount;
 
 	}
-	public Cust_houseinfo selectCustinfo(String cust_id) {
+	public Cust_houseinfo selectCusthouseinfo(String cust_id) {   // 내가 입력한 집 정보 가져오기 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Cust_houseinfo po = null;
@@ -914,10 +915,10 @@ public class CmtSns {
 			pstmt.setString(1, cust_id);
 			rs= pstmt.executeQuery();
 
-			while(rs.next()){
+			if(rs.next()){
 				po = new Cust_houseinfo();
 				po.setCust_house(rs.getString("cust_house"));
-				po.setCust_room(rs.getInt("cust_rooms"));
+				po.setCust_room(rs.getInt("cust_room"));
 				po.setCust_m2(rs.getInt("cust_m2"));
 				po.setCust_fam(rs.getInt("cust_fam"));
 				po.setCust_houseold(rs.getInt("cust_houseold"));
@@ -925,8 +926,8 @@ public class CmtSns {
 				po.setCust_direc(rs.getString("cust_direc"));
 				po.setCust_region(rs.getString("cust_region"));
 				po.setCust_pet(rs.getString("cust_pet"));
-				po.setCust_style(rs.getString("cust_style"));
-				po.setCust_color(rs.getString("cust_color"));
+//				po.setCust_style(rs.getString("cust_style"));
+//				po.setCust_color(rs.getString("cust_color"));
 				
 				//String style =rs.getString("post_style");
 				//String color =rs.getString("post_color");
@@ -942,21 +943,102 @@ public class CmtSns {
 		}
 		return po;
 	}
+	public Cust_info getcustinfo(String cust_id){  // api이용할 때 내 주소 가지고 오기 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Cust_info info = new Cust_info();
+		System.out.println("getcustinfo data 도착");
+		try{
+			String sql="select * from cust_info where cust_id=? ;";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cust_id);
+			rs= pstmt.executeQuery();
+			if(rs.next()) {
+				info.setCust_sex(rs.getString("cust_sex"));
+				String adr = rs.getString("cust_adr");
+				String [] adrs = adr.split("\\s");
+				String [] adrs1 = adr.split(" "); // 위, 아래 방법 모두 띄어쓰기를 바탕으로 주소를 자를 수 있음 
+				info.setCust_adr(adrs[1]);			
+				System.out.println(info.getCust_adr());
+			}
+		}catch(Exception ex){
+			System.out.println(ex+" getmyregion 메소드에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return info;
+	}
 	
-	public ArrayList<Post_house> selectHouseinfo(Cust_houseinfo houseinfo) {
+	public ArrayList<Post_house> gethouseinfo(Cust_houseinfo houseinfo) { //주거형태 집평수 방개수
 		ArrayList<Post_house> alist = new ArrayList<Post_house>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		try{
-			pstmt = con.prepareStatement(
-					"select * from post_house where ?=? and ?=? and ?=? order by ;");
-			pstmt.setString(1, "post_house"); //주거형태
-			pstmt.setString(3, "post_rooms"); //방개수
-			pstmt.setString(5, "post_m2");	  //집평수
-			pstmt.setString(2, houseinfo.getCust_house());//주거형태
-			pstmt.setInt(4, houseinfo.getCust_room());	  //방개수
-			pstmt.setInt(6, houseinfo.getCust_m2());	  //집평수
+			pstmt = con.prepareStatement("select * from post_house left outer join post_bookmark on post_house.post_id = post_bookmark.post_id "
+					+ " where post_house=? and post_rooms=? and post_m2=? "
+					+ " and post_writetime BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()"
+					+ " order by post_house.post_read desc limit 0,3;");
+			pstmt.setString(1, houseinfo.getCust_house());//주거형태
+			pstmt.setInt(2, houseinfo.getCust_room());	  //방개수
+			pstmt.setInt(3, houseinfo.getCust_m2());	  //집평수
+			rs= pstmt.executeQuery();
+
+			while(rs.next()){
+//				System.out.println("주거형태, 방개수, 집평수 추출중");
+				Post_house po = new Post_house();
+				
+				po.setPost_id(rs.getInt("post_id"));
+				po.setCust_id(rs.getString("cust_id"));
+				po.setPost_title(rs.getString("post_title"));
+				po.setPost_txt(rs.getString("post_txt"));
+				po.setPost_house(rs.getString("post_house"));
+				
+				po.setPost_rooms(rs.getInt("post_rooms"));
+				po.setPost_m2(rs.getInt("post_m2"));
+				po.setPost_fam(rs.getInt("post_fam"));
+				po.setPost_houseold(rs.getInt("post_houseold"));
+				po.setPost_budget(rs.getInt("post_budget"));
+				
+				po.setPost_family(rs.getString("post_family"));
+				po.setPost_direc(rs.getString("post_direc"));
+				po.setPost_region(rs.getString("post_region"));
+				po.setPost_pet(rs.getString("post_pet"));
+				po.setPost_startdate(rs.getString("post_startdate"));
+				po.setPost_enddate(rs.getString("post_enddate"));
+				po.setPost_color(rs.getString("post_color"));
+				
+				String feed_pics = rs.getString("post_pics");
+				String [] filename = feed_pics.split(",");
+				po.setPost_pics(filename[0]);
+				po.setPost_pic2(filename[1]);
+				po.setPost_pic3(filename[2]);
+				po.setPost_pic4(filename[3]);
+				po.setPost_writetime(rs.getString("post_writetime"));
+				po.setBookmark_time(rs.getString("bookmark_time"));
+				alist.add(po);
+				
+			}
+		}catch(Exception ex){
+			System.out.println(ex+" gethouseinfo메소드에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return alist;
+	}
+	public ArrayList<Post_house> getfamilyinfo(Cust_houseinfo houseinfo) { //가족형태 가족수
+		ArrayList<Post_house> alist = new ArrayList<Post_house>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+//		/가족인원수 가족형태 
+		try{
+			pstmt = con.prepareStatement("select * from post_house left outer join post_bookmark on post_house.post_id = post_bookmark.post_id  "
+					+ " where post_family=? and post_fam=? "
+					+ " and post_writetime BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW() "
+					+ " order by post_house.post_read desc limit 0,3;");
+			pstmt.setString(1, houseinfo.getCust_family());//주거형태
+			pstmt.setInt(2, houseinfo.getCust_fam());	  //방개수
 			rs= pstmt.executeQuery();
 
 			while(rs.next()){
@@ -994,7 +1076,65 @@ public class CmtSns {
 				
 			}
 		}catch(Exception ex){
-			System.out.println(ex+"selectHouseInfo메소드에서 오류");
+			System.out.println(ex+" getfamilyinfo메소드에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return alist;
+	}
+	public ArrayList<Post_house> getcustfamilyinfo(String famliy, String sex) {//성별 가족형태
+		ArrayList<Post_house> alist = new ArrayList<Post_house>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{
+			pstmt = con.prepareStatement("select * from post_house "
+					+ " left outer join post_bookmark on post_house.post_id = post_bookmark.post_id "
+					+ " left outer join cust_info on post_house.cust_id = cust_info.cust_id "
+					+ " where post_family=? and cust_sex=? "
+					+ " and post_writetime BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW() "
+					+ " order by post_house.post_read desc limit 0,3;");
+			pstmt.setString(1, famliy);
+			pstmt.setString(2, sex);	  //성별넣어야하는
+			rs= pstmt.executeQuery();
+
+			while(rs.next()){
+				Post_house po = new Post_house();
+				
+				po.setPost_id(rs.getInt("post_id"));
+				po.setCust_id(rs.getString("cust_id"));
+				po.setPost_title(rs.getString("post_title"));
+				po.setPost_txt(rs.getString("post_txt"));
+				po.setPost_house(rs.getString("post_house"));
+				
+				po.setPost_rooms(rs.getInt("post_rooms"));
+				po.setPost_m2(rs.getInt("post_m2"));
+				po.setPost_fam(rs.getInt("post_fam"));
+				po.setPost_houseold(rs.getInt("post_houseold"));
+				po.setPost_budget(rs.getInt("post_budget"));
+				
+				po.setPost_family(rs.getString("post_family"));
+				po.setPost_direc(rs.getString("post_direc"));
+				po.setPost_region(rs.getString("post_region"));
+				po.setPost_pet(rs.getString("post_pet"));
+				po.setPost_startdate(rs.getString("post_startdate"));
+				po.setPost_enddate(rs.getString("post_enddate"));
+				po.setPost_color(rs.getString("post_color"));
+				
+				String feed_pics = rs.getString("post_pics");
+				String [] filename = feed_pics.split(",");
+				po.setPost_pics(filename[0]);
+				po.setPost_pic2(filename[1]);
+				po.setPost_pic3(filename[2]);
+				po.setPost_pic4(filename[3]);
+				po.setPost_writetime(rs.getString("post_writetime"));
+				po.setBookmark_time(rs.getString("bookmark_time"));
+				alist.add(po);
+				
+			}
+		}catch(Exception ex){
+			System.out.println(ex+" getfamilyinfo메소드에서 오류");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -1020,8 +1160,8 @@ public class CmtSns {
 					+ " where feed_id= ? order by cmt_time desc");
 			pstmt.setInt(1, feed_id); 
 			rs= pstmt.executeQuery();
-			System.out.println("댓글select하는중");
 			while(rs.next()){
+//				System.out.println("댓글select하는중");
 				comment = new Feed_comment();
 				comment.setFeed_id(rs.getInt("feed_id"));
 				comment.setCmt_id(rs.getInt("cmt_id"));
@@ -1048,7 +1188,7 @@ public class CmtSns {
 		int num =0;
 		String sql="";
 		int insertCount=0;
-		System.out.println("댓글insert하는중");
+//		System.out.println("댓글insert하는중");
 		try{
 			sql="insert into feed_comment (cmt_id,feed_id,cust_id,root_cmt,parent_cmt,cmt_txt, cmt_time) values(default,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
@@ -1111,5 +1251,128 @@ public class CmtSns {
 		return updateCount;
 
 	}
+	public Post_house selectMainComty(){  // 메인이 되는 글 하나 가져오기 =>이번주 조회수 가장 높은 곳
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Post_house po = new Post_house();
+		try{
+			String sql="select * from post_house left outer join post_bookmark on post_house.post_id = post_bookmark.post_id "
+					+ " where post_writetime BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW() "
+					+ " order by post_read desc "
+					+ " limit 0,1 "
+					+ " ;";
+			pstmt = con.prepareStatement(sql);
+			rs= pstmt.executeQuery();
+
+			if(rs.next()) {
+				System.out.println("이번주 조회수 가장 높은 곳");
+				po.setPost_id(rs.getInt("post_id"));
+				po.setCust_id(rs.getString("cust_id"));
+				po.setPost_title(rs.getString("post_title"));
+				po.setPost_txt(rs.getString("post_txt"));
+				po.setPost_txt2(rs.getString("post_txt2"));
+				po.setPost_house(rs.getString("post_house"));
+				
+				po.setPost_rooms(rs.getInt("post_rooms"));
+				po.setPost_m2(rs.getInt("post_m2"));
+				po.setPost_fam(rs.getInt("post_fam"));
+				po.setPost_houseold(rs.getInt("post_houseold"));
+				po.setPost_budget(rs.getInt("post_budget"));
+				
+				po.setPost_family(rs.getString("post_family"));
+				po.setPost_direc(rs.getString("post_direc"));
+				po.setPost_region(rs.getString("post_region"));
+				po.setPost_pet(rs.getString("post_pet"));
+				po.setPost_startdate(rs.getString("post_startdate"));
+				po.setPost_enddate(rs.getString("post_enddate"));
+				po.setPost_color(rs.getString("post_color"));
+				String feed_pics = rs.getString("post_pics");
+				String [] filename = feed_pics.split(",");
+				for(int i = 0; i<filename.length;i++) {
+					if(i==0) {
+						po.setPost_pics(filename[0]);
+					}else if(i==1) {
+						po.setPost_pic2(filename[1]);
+					}else if(i==2) {
+						po.setPost_pic3(filename[2]);
+					}else if(i==3) {
+						po.setPost_pic4(filename[3]);
+					}
+				}
+				//아이템 등록 
+				po.setPost_item(rs.getString("post_item1"));
+				String post_item1 = rs.getString("post_item1");
+				String [] postitem1 = post_item1.split(",");
+				System.out.println("select_one 에서 postitem1.length => "+postitem1.length);
+				for(int i = 0; i<postitem1.length;i++) {
+					if(i==0) {
+						po.setPost_item10(postitem1[0]);
+					}else if(i==1) {
+						po.setPost_item11(postitem1[1]);
+					}else if(i==2) {
+						po.setPost_item12(postitem1[2]);
+					}else if(i==3) {
+						po.setPost_item13(postitem1[3]);
+					}else if(i==4) {
+						po.setPost_item14(postitem1[4]);
+					}else if(i==5) {
+						po.setPost_item15(postitem1[5]);
+					}else if(i==6) {
+						po.setPost_item16(postitem1[6]);
+					}else if(i==7) {
+						po.setPost_item17(postitem1[7]);
+					}else if(i==8) {
+						po.setPost_item18(postitem1[8]);
+					}else if(i==9) {
+						po.setPost_item19(postitem1[9]);
+					}
+				}
+				po.setPost_writetime(rs.getString("post_writetime"));
+				po.setPost_read(rs.getInt("post_read"));
+				po.setPost_position(rs.getString("post_position"));
+				//System.out.println(rs.getString("post_position"));
+				
+//				String post_position = rs.getString("post_position");
+//				String [] position1 = post_position.split(",");
+//				po.setPost_position10(position1[0]);
+//				po.setPost_position11(position1[1]);
+//				System.out.println(post_position+"좌표 : "+position1[0]+"  ,  "+position1[1]);
+			}
+		}catch(Exception ex){
+			System.out.println(ex+" selectMainComty 메소드에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return po;
+	}
+	public Cust_info getmyregion(String cust_id){  // api이용할 때 내 주소 가지고 오기 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Cust_info info = new Cust_info();
+		System.out.println("getmyregion data 도착");
+		try{
+			String sql="select * from cust_info where cust_id=? ;";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cust_id);
+			rs= pstmt.executeQuery();
+			if(rs.next()) {
+//				info.setCust_adr(rs.getString("cust_adr"));
+//				System.out.println(info.getCust_adr());
+				String adr = rs.getString("cust_adr");
+				String [] adrs = adr.split("\\s");
+				String [] adrs1 = adr.split(" "); // 위, 아래 방법 모두 띄어쓰기를 바탕으로 주소를 자를 수 있음 
+				info.setCust_adr(adrs[1]);			
+				System.out.println(info.getCust_adr());
+			}
+		}catch(Exception ex){
+			System.out.println(ex+" getmyregion 메소드에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return info;
+	}
+
 
 }

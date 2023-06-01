@@ -38,6 +38,7 @@ import svc.SnsReadService;
 
 		ActionForward forward = new ActionForward();
 	   	request.setAttribute("articleList", articleList);
+	   	request.setAttribute("feed_id", feed_id);
    		forward.setPath("snsRead.jsp");
    		return forward;
 

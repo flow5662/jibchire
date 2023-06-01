@@ -84,8 +84,8 @@ public class CmtHousewarming {
 						po.setPost_pic4(filename[3]);
 					}
 				}
-				
 				//아이템 등록 
+				po.setPost_item(rs.getString("post_item1"));
 				String post_item1 = rs.getString("post_item1");
 				String [] postitem1 = post_item1.split(",");
 				System.out.println("select_one 에서 postitem1.length => "+postitem1.length);
@@ -114,6 +114,14 @@ public class CmtHousewarming {
 				}
 				po.setPost_writetime(rs.getString("post_writetime"));
 				po.setPost_read(rs.getInt("post_read"));
+				po.setPost_position(rs.getString("post_position"));
+				System.out.println(rs.getString("post_position"));
+				
+//				String post_position = rs.getString("post_position");
+//				String [] position1 = post_position.split(",");
+//				po.setPost_position10(position1[0]);
+//				po.setPost_position11(position1[1]);
+//				System.out.println(post_position+"좌표 : "+position1[0]+"  ,  "+position1[1]);
 			}
 			
 		}catch(Exception e) {
@@ -294,12 +302,12 @@ public class CmtHousewarming {
 			stmt = conn.createStatement();
 			String insert = String.format("insert into post_house (post_id,cust_id,post_title,post_txt,post_txt2,post_house,"
 					+ "post_rooms,post_m2,post_fam,post_houseold,post_budget,post_family,post_direc,post_region,"
-					+ "post_pet,post_startdate,post_enddate,post_pics,post_color,post_writetime)"
-					+ "values(%s,'%s','%s','%s','%s',%s,%s,%s,%s,%s,'%s','%s','%s','%s','%s','%s','%s','%s','%s',now());", "default",
+					+ "post_pet,post_startdate,post_enddate,post_pics,post_color,post_position,post_writetime)"
+					+ "values(%s,'%s','%s','%s','%s','%s',%s,%s,%s,%s,%s,'%s','%s','%s','%s','%s','%s','%s','%s','%s',now());", "default",
 					po.getCust_id(),po.getPost_title(),po.getPost_txt(),po.getPost_txt2(),po.getPost_house(),
 					po.getPost_rooms(),po.getPost_m2(),po.getPost_fam(),po.getPost_houseold(),po.getPost_budget(),
 					po.getPost_family(),po.getPost_direc(),po.getPost_region(),po.getPost_pet(),po.getPost_startdate(),
-					po.getPost_enddate(),po.getPost_pics(),po.getPost_color());
+					po.getPost_enddate(),po.getPost_pics(),po.getPost_color(),po.getPost_position());
 			stmt.executeUpdate(insert);	
 		}catch(Exception e){
 			System.out.println(e+"insert_board() 메소드에서 오류남");
@@ -670,7 +678,6 @@ public class CmtHousewarming {
 		try {
 			conn();
 			stmt = conn.createStatement();
-							//1주일간 가장 북마크를 많이 받은 게시물의 post_id
 			String select = "select * from pro_post where pro_picture like '%"+picture+"%';";
 			ResultSet rs = stmt.executeQuery(select);  
 			if(rs.next()) {
@@ -686,7 +693,28 @@ public class CmtHousewarming {
 			disconn();
 		}
 		return product;
-	
+	}
+	public Pro_post selectItem(int pro_id) {
+		Pro_post product = null;
+		try {
+			conn();
+			stmt = conn.createStatement();
+			String select = "select * from pro_post where pro_id="+pro_id+";";
+			ResultSet rs = stmt.executeQuery(select);  
+			if(rs.next()) {
+				product = new Pro_post();
+				product.setPro_title(rs.getString("pro_title"));
+				product.setPro_company(rs.getString("pro_company"));
+				product.setPro_menu1(rs.getString("pro_menu1"));
+				product.setPro_price(rs.getInt("pro_price"));
+				product.setPro_picture(rs.getString("pro_picture"));
+			}
+		}catch(Exception e) {
+			System.out.println(e+"selectItem() 메소드 오류");
+		}finally {
+			disconn();
+		}
+		return product;
 	}
 
 }

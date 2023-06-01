@@ -414,7 +414,7 @@
 		</div>
 
 		<div class="header">
-			<div class="cumu"><li><a href ="../community/community.jsp"> 커뮤니티 </a></li></div>
+			<div class="cumu"><li><a href ="../sns/communitymain.sns"> 커뮤니티 </a></li></div>
 <!-- 			<div class="store"><li><a href ="shopping.jsp"> 스토어 </a></li></div> -->
 			<div class="gosu"><li><a href ="../bachi/bachi_main.jsp"> 바치 </a></li></div>
 			<li><a href="snsIndexList.sns"><div class="logo"> </div></a></li>
@@ -441,6 +441,7 @@
 				<div class="index1"><li><a href="../community/select_board.jsp">집들이</a></li></div>
 				<div class="index2"><li><a href="snsListAction.sns">일상공유</a></li></div>
 				<div class="index2"><li><a href="login.jsp">나와 비슷한</a></li></div>
+				<div class="index2"><li><a href="publicapiinfo.sns">대여소 찾기</a></li></div>
 			</div>
 		
 <!-- 			<div id="shop"> -->

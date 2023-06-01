@@ -26,7 +26,8 @@ public class SnsHeartAction implements Action {
 			boolean isLikeSuccess = snsheartservice.registArticle(heart);
 			
 		   	//request.setAttribute("Feed", feed);
-	   		forward.setPath("snsListAction.sns.jsp");
+//	   		forward.setPath("snsListAction.sns.jsp");
+			forward.setPath("empty.jsp");
 	   		return forward;
 	   		
 	 }

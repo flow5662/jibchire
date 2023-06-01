@@ -500,7 +500,7 @@
 			</div>
 		</div>
 		<div class="header">
-			<div class="cumu"><li><a href ="community.jsp"> 커뮤니티 </a></li></div>
+			<div class="cumu"><li><a href ="../sns/communitymain.sns"> 커뮤니티 </a></li></div>
 <!-- 			<div class="store"><li><a href ="../shopping.html"> 스토어 </a></li></div> -->
 			<div class="gosu"><li><a href ="../bachi/bachi_main.jsp"> 바치 </a></li></div>
 	
@@ -521,9 +521,10 @@
 	<div class="nav">
 		<nav>
 			<div id="cumu">	
-				<div class="index1"><li><a href="select_board.jsp?cust_id=<%=id%>">집들이</a></li></div>
+				<div class="index1"><li><a href="../community/select_board.jsp?cust_id=<%=id%>">집들이</a></li></div>
 				<div class="index2"><li><a href="../sns/snsListAction.sns?cust_id=<%=id%>">일상공유</a></li></div>
-				<div class="index2"><li><a href="#">나와 비슷한</a></li></div>
+				<div class="index2"><li><a href="../sns/myRecommendList.sns?cust_id=<%=id%>">나와 비슷한</a></li></div>
+				<div class="index2"><li><a href="../sns/publicapiinfo.sns?cust_id=<%=id%>">대여소 찾기</a></li></div>
 			</div>
 <!-- 			<div id="shop"> -->
 <!-- 				<div class="index1"><li><a href="../store/used_board/board_index.jsp">중고거래</a></li></div> -->

@@ -60,17 +60,17 @@ input[id="cb10"] + label {background-color:#FF66B2;}
 
 /* 글작성 테이블*/
 #writing h4{font-size:18pt;}
-#writing input[type="text"]{width: 98%; height: 60px; font-size: 16pt; padding-left:5px;}
+#writing input[type="text"]{width: 96%; height: 60px; font-size: 16pt; padding-left:5px;}
 #writing textarea{width:98%;height: 300px;padding:10px; font-size: 16pt;  } 
-#writing td{text-align: center;}
+thead td, tfoot td{text-align: center;}
 #writing input[type="submit"]{width: 100px;height: 40px; background-color:#C0C0C0; border-radius: 5px;}
 
 /* 이미지 미리보기*/
-#preview{max-width:98%; height: auto; margin:0 auto;  overflow:hidden; }
-#previewImg{width: 100%; height: 100%; object-fit:cover;}
+
 #writing h5{margin-bottom:5px;font-size: 13pt;}
 #writing input[type=file]{position:relative; left:30px;}
 
 /*글제목과 내용 쓰는 공간 '칸에' 패딩주기. 직접 <input><textarea>태그에 주면 폭이 벗어남*/
-#title{padding-left:5px;}
-#text{ padding:10px; }
+#title{padding-left:5px; text-align: center;}
+#text{  padding:10px; }
+#text #textarea{width: 96%;}

@@ -28,7 +28,8 @@ public class SnsFollowAction implements Action {
 			boolean isLikeSuccess = snsfollowservice.registArticle(follow);
 			
 		   	//request.setAttribute("Feed", feed);
-	   		forward.setPath("snsListAction.sns.jsp");
+	   		//forward.setPath("snsListAction.sns.jsp");
+			forward.setPath("empty.jsp");
 	   		return forward;
 	   		
 	 }

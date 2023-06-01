@@ -9,98 +9,8 @@ body nav ul li{	display: inline-block; }
 section [class$=pic]{border-radius: 5px;}
 img[src$=png]:hover{transform: scale(1.1);}
 
-#backwrap{width: 1280px; height: 100%; margin:0 auto;}
-
-
-/*스크롤 하면 나올 네비 픽스*/
-#scrollnav{ width: 743px;   height: 60px; z-index: 999; margin: 0 auto; left :0; right:0; top: 20px;
-    padding: 10px 10px 0 10px ;    background-color: #FFF4E5; border-radius: 35px; opacity: 85%;
-    box-shadow: 5px 5px 3px #B7A383; }
-#scrollnav nav a{position: relative;    width: 16.6%;  z-index: 10;     display: table-cell;    
-    text-align: center;    color: #000000;   transform: translateY(-10%);
-    font-weight: bold;    padding: 10px 20px; font-size : 12pt;    transition: 0.2s ease color;}
-#scrollnav a:hover{  color: #292929; transform:translateY(-10px);}
-
-/*헤더 두번째 네비*/
-#midnav{ float: left; display: table;     width: 743px;    transform: translateY(-10%); margin-left:140px;
-    padding: 0 10px;
-}
-#midnav nav a{position: relative;    width: 16.6%;  z-index: 10;     display: table-cell;    
-    text-align: center;    color: #949494;   
-    font-weight: bold;    padding: 10px 20px; font-size : 12pt;    transition: 0.2s ease color;}
-nav a:before, nav a:after{    content: "";    position: absolute;
-    border-radius: 50%;    transform: scale(0);
-    transition: 0.2s ease transform;}
-#midnav nav a:before{  top: 0;    left: 10px;  width: 6px;  height: 6px;}
-#midnav nav a:after{   top: 5px;  left: 18px;  width: 4px;  height: 4px}
-#midnav nav a:before{    background-color: #FFF4E5;}
-#midnav nav a:after{    background-color: #ECD1AD;} 
-nav a:hover:before, nav a:hover:after{    transform: scale(1);}
-nav a:before, nav a:after{    content: "";    position: absolute;
-    border-radius: 50%;    transform: scale(0);
-    transition: 0.2s ease transform;}
-#midnav a:hover{  color: #292929; transform:translateY(-5px);}
-#indicator{    position: absolute;    left: 0;    bottom: 8px;    width: 115px;    height: 60px;   
-    border-radius: 35px;    transition: 0.2s ease left; z-index: 0;}
-nav a:hover{ color: #8B4513; filter:opacity(0.7) drop-shadow(0 0 0 #8B4513);}
-/*글씨크기 변경 등 배경 안맞으면 큰박스 길이만 조절해주기*/
-nav a:nth-child(1):hover ~ #indicator{    left: 2%;     background: #ECD1AD;}
-nav a:nth-child(2):hover ~ #indicator{    left: 18%;    background: #ECD1AD;}
-nav a:nth-child(3):hover ~ #indicator{    left: 33%;    background: #ECD1AD;}
-nav a:nth-child(4):hover ~ #indicator{    left: 50%;    background: #ECD1AD;}
-nav a:nth-child(5):hover ~ #indicator{    left: 65%;    background: #ECD1AD;}
-nav a:nth-child(6):hover ~ #indicator{    left: 81%;    background: #ECD1AD;}
-/*원 혹은 네모박스. 색상 그라데이션으로 주기
-#midnav a:hover{color: #292929; transform:translateY(-5px);}
-#indicator{position: absolute;  left: 0;  bottom: -10px;  width: 100px;    height: 100px;   
-    border-radius: 50%;    transition: 0.2s ease left; z-index: 0; 
-nav a:nth-child(1):hover ~ #indicator{    left: 2%;     background: linear-gradient(130deg, #FFF4E5, #ECD1AD);}
-nav a:nth-child(2):hover ~ #indicator{    left: 19%;    background: linear-gradient(130deg, #FFF4E5, #ECD1AD);}
-nav a:nth-child(3):hover ~ #indicator{    left: 36%;    background: linear-gradient(130deg, #FFF4E5, #ECD1AD);}
-nav a:nth-child(4):hover ~ #indicator{    left: 52%;    background: linear-gradient(130deg, #FFF4E5, #ECD1AD);}
-nav a:nth-child(5):hover ~ #indicator{    left: 69%;    background: linear-gradient(130deg, #FFF4E5, #ECD1AD);}
-nav a:nth-child(6):hover ~ #indicator{    left: 86%;    background: linear-gradient(130deg, #FFF4E5, #ECD1AD);}
-}
-*/
-
-/* 검색창 */
-.search-wrapper {float: left; position: absolute;    transform: translate(-50%, -50%);   
-    top:45px; margin-left: 730px;}
-.search-wrapper .input-holder {    
-    height: 70px;    width:70px;    overflow: hidden;    background: #FFF;    border-radius:6px;
-    position: relative;    transition: all 0.3s ease-in-out;}
-.search-wrapper.active .input-holder {    width:250px;    border-radius: 50px;    
-    background: #FFF4E5;    transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);}
-.search-wrapper .input-holder .search-input {    width:100%;    height: 50px;    padding:0px 70px 0 20px;
-    opacity: 0;    position: absolute;    top:0px;    left:0px;    background: transparent;   
-    box-sizing: border-box;    border:none;    outline:none;    font-size: 16px;    font-weight: 400;
-    line-height: 20px;    color:black; font-family: 'NEXON Lv1 Gothic OTF';    transform: translate(0, 60px);
-    transition: all .3s cubic-bezier(0.000, 0.105, 0.035, 1.570);    transition-delay: 0.3s;}
-.search-wrapper.active .input-holder .search-input {    opacity: 1;    transform: translate(0, 10px);}
-.search-wrapper .input-holder .search-icon {    width:70px;    height:70px;    border:none;
-    border-radius:6px;    background: #FFF;    padding:0px;    outline:none;    position: relative;
-    z-index: 2;    float:right;    cursor: pointer;    transition: all 0.3s ease-in-out;}
-.search-wrapper.active .input-holder .search-icon {    width: 50px;    height:50px;
-    margin: 10px;    border-radius: 30px;}
-.search-wrapper .input-holder .search-icon span {    width:22px;    height:22px;    display: inline-block;
-    vertical-align: middle;    position:relative;    transform: rotate(45deg);
-    transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);}
-.search-wrapper.active .input-holder .search-icon span {    transform: rotate(-45deg);}
-.search-wrapper .input-holder .search-icon span::before, .search-wrapper .input-holder .search-icon span::after {
-    position: absolute;     content:'';}
-.search-wrapper .input-holder .search-icon span::before {    width: 4px;    height: 11px;    left: 9px;
-    top: 18px;    border-radius: 2px;    background: #FE5F55;}
-.search-wrapper .input-holder .search-icon span::after {    width: 14px;    height: 14px;    left: 0px;
-    top: 0px;    border-radius: 16px;    border: 4px solid #FE5F55;}
-.search-wrapper .close {    position: absolute;    z-index: 1;    top:24px;    right:20px;
-    width:25px;    height:25px;    cursor: pointer;    transform: rotate(-180deg);
-    transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);    transition-delay: 0.2s;}
-.search-wrapper.active .close {    right:-50px;    transform: rotate(45deg);
-    transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);    transition-delay: 0.5s;}
-.search-wrapper .close::before, .search-wrapper .close::after {    position:absolute;    content:'';
-    background: #8B4513;    border-radius: 2px;}
-.search-wrapper .close::before {    width: 5px;    height: 25px;    left: 10px;    top: 0px;}
-.search-wrapper .close::after {    width: 25px;    height: 5px;    left: 0px;    top: 10px;}
+/*전체 크기 바탕*/
+#backwrap{width: 1280px; margin:0 auto;}
 
 /*main사진과 글제목*/
 section #main{height: 500px; margin:10px 0;}
@@ -126,7 +36,6 @@ a.control_prev:hover, a.control_next:hover {
   opacity: 1;  transition: all 0.2s ease;}
 
 /* 중간 분류메뉴 */
-section #mid{height: 150px;}
 section #midtitle{font-size: 22pt; padding: 20px;}
 .tabs {  display: flex;  position: relative;
   box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
@@ -146,6 +55,59 @@ input[id="radio-6"]:checked ~ .glider { transform: translateX(500%);}
 input[id="radio-7"]:checked ~ .glider { transform: translateX(600%);}
 input[id="radio-8"]:checked ~ .glider { transform: translateX(700%);}
 input[id="radio-9"]:checked ~ .glider { transform: translateX(800%);}
+
+/*전체구조*/
+#title{text-align: center;     margin-top: 30px;    height: 30px;}
+#snsthunbnail ul{width : 1280px; margin : 10px auto; }
+#snsthunbnail li{display: inline-block; width: 370px; height: 500px;  border: 1px solid white; margin: 25px; overflow: hidden; 
+			 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+ 			 transition: all 0.3s cubic-bezier(.25,.8,.25,1); border-radius: 10px;}
+			/*height를 650을 주면 사진크기가 370*450정도롤 들어갈 수 있긴 한데 전체적으로 너무 길어보여서..*/
+#snsthunbnail li:hover{ box-shadow: 0 14px 18px rgba(29, 31, 25, 0.23), 0 10px 10px rgba(29, 31, 25, 0.23);}
+#topmiddle{position:relative; top:-80px;}	
+#writing{position: relative; top: -100px;  left: 583px;width: 100px;height: 40px; background-color:#C0C0C0; border-radius: 5px;}
+		
+/*박스 안의 세부구조*/
+.snstitle{width: 95%; height: 10%; border: 1px solid white; margin: 10px auto 0 auto; }
+.thumbnail{width: 350px; height: 70%;  border: 1px solid white; margin: 10px auto 0 auto; overflow: hidden;}
+			/* 사진이 잘리는 크기와 일치하기 때문에, 이 css와 WriteAction의 BufferdImage()내의 값은 동일할 것 */
+.thumbnail>img{object-fit:cover; border-radius: 5px;}
+.txt{width: 95%; height: 10%; border: 1px solid white; margin: 10px auto 0 auto; }
+
+/*회원사진,아이디*/
+.snstitle .custpic{float: left; width: 50px; height: 100%; overflow:hidden; background-color:#C0C0C0; border-radius: 50%;}
+.snstitle span{position: relative; top:29%; left: 3%;}
+
+/*해시테그, 조회수, 좋아요*/
+.txt .read{height: 85%; overflow: hidden;}
+.txt .buttonlike{z-index:10; float: right; width: 25px; height: 25px; /*background-color:#C0C0C0; border-radius: 50%;*/}
+.txt .buttonfollow{float: right; width: 25px; height: 25px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*글씨크기 변경 등 배경 안맞으면 큰박스 길이만 조절해주기*/
+nav a:nth-child(1):hover ~ #indicator{    left: 2%;     background: #ECD1AD;}
+nav a:nth-child(2):hover ~ #indicator{    left: 18%;    background: #ECD1AD;}
+nav a:nth-child(3):hover ~ #indicator{    left: 33%;    background: #ECD1AD;}
+nav a:nth-child(4):hover ~ #indicator{    left: 50%;    background: #ECD1AD;}
+nav a:nth-child(5):hover ~ #indicator{    left: 65%;    background: #ECD1AD;}
+nav a:nth-child(6):hover ~ #indicator{    left: 81%;    background: #ECD1AD;}
 
 /* 3X3으로 나뉘는 sns사진  */
 section div[id^="row"]{height: 450px; margin:40px 0;  z-index:0; }

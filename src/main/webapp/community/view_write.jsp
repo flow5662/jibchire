@@ -4,11 +4,77 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>게시글 작성</title>
 	<link rel="stylesheet" type="text/css" href="style/view_write.css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="js/view_write.js"> </script>
+
+<script>
+//첨부파일 삽입하면 이미지 미리보기
+function readImage(input) {  
+	
+	  if (input.files && input.files[0]) { // 인풋 태그에 파일이 있는 경우
+	    var reader = new FileReader();  // FileReader 인스턴스 생성
+	    reader.onload = function(e) {
+	      document.getElementById('previewImg').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } 
+	  else {
+	    document.getElementById('previewImg').src = "";
+	  }
+	}
+$(function(){
+	
+	// 공사시작일, 공사마감일에 대한 select의 옵션 추가하기
+    // 생년월일 selectbox 만들기 위한 변수선언
+	var now = new Date();
+    var year = now.getFullYear();
+    var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
+    var date = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate()); 
+
+    //년도 selectbox만들기               
+    for(var i = 2020 ; i <= year ; i++) {
+        $('#startdate_year').append('<option value="'+i+'">' + i + '년</option>');  
+        $('#enddate_year').append('<option value="'+i+'">' + i + '년</option>');    
+    }
+    // 월별 selectbox 만들기            
+    for(var i=1; i <= 12; i++) {
+        var mm = i > 9 ? i : "0"+i ;            
+        $('#startdate_month').append('<option value="'+mm+'">' + mm + '월</option>');
+        $('#enddate_month').append('<option value="'+mm+'">' + mm + '월</option>');    
+    }
+    // 일별 selectbox 만들기
+    for(var i=1; i <= 31; i++) {
+        var dd = i > 9 ? i : "0"+i ;            
+        $('#startdate_date').append('<option value="'+dd+'">' + dd+ '일</option>');  
+        $('#enddate_date').append('<option value="'+dd+'">' + dd+ '일</option>');   
+    }
+	$("input[type='submit']").click(function(){
+		
+		for(var i = 1 ; i<=10 ; i++){
+			 var iconid = "#icon"+i;
+			 var iconvalue = "input:hidden[name='icon"+i+"']";
+			 var top = $(iconid).css("top");
+			 var left = $(iconid).css("left");
+			 var position = top +","+left+",";
+			 $(iconvalue).attr("value",position);
+			 $(iconvalue).val(position);
+// 	 		var sss = $(iconvalue).attr("value");
+// 	 		alert("iconvalue"+sss);
+		}
+		
+// 		var top = $("#icon1").css("top");
+// 		var left = $("#icon1").css("left");
+// 		var position = top +","+left+",";
+// 		$("input:hidden[name='icon1']").attr("value",position);
+		
+	});
+});
+</script>
+
+<!-- <script src="js/view_write.js"> </script> -->
 <% request.setCharacterEncoding("utf-8");  %>
 <body>
 	<!-- name은 db에 들어있는 table의 변수 이름과 동일하게 작성 -->
@@ -192,44 +258,15 @@
 			</tr>
 			</tbody>		
 		</table>
-		<table id="writing">
-			<thead><tr><td><h4> 글 작성 </h4></td></tr></thead>
-			<tbody>
-				<tr><td id="title"> <input type="text" name="post_title" placeholder="글제목"> </td></tr>
-				<tr><td><div id="preview"><img id="previewImg" ></div> </td></tr>
-				<tr><td><h5>가장 메인이 되는 사진을 올려주세요. 이 사진은 썸네일로 사용 될 예정입니다</h5> 
-						 <input type="file" onchange="readImage(this);" name="post_pics"> 
-						 <input type="file" name="post_pic1"> 
-						 <input type="file" name="post_pic2"> 
-						 <input type="file" name="post_pic3"> 
-					</td>
-				</tr>
-				<tr><td id="text"> <textarea name="post_txt" id="textarea" placeholder="글내용을 입력해주세요"></textarea> </td></tr>
-			</tbody>
-			<tfoot>	<tr><td> <input type="submit" value="작성완료"> </td></tr>	</tfoot>
-		</table>
+		<jsp:include page="draggable.jsp"></jsp:include>
+		<div style="text-align: center;"><input type="submit" value="작성완료"> </div>
 	</div>
-	</form>
-	<script>
-	//첨부파일 삽입하면 이미지 미리보기
-	function readImage(input) {  
-		
-		  if (input.files && input.files[0]) { // 인풋 태그에 파일이 있는 경우
-		    var reader = new FileReader();  // FileReader 인스턴스 생성
-		    reader.onload = function(e) {
-		      document.getElementById('previewImg').src = e.target.result;
-		    };
-		    reader.readAsDataURL(input.files[0]);
-		  } 
-		  else {
-		    document.getElementById('previewImg').src = "";
-		  }
-		}
-	</script>
-	<!-- footer -->
-	<footer>
-		<jsp:include page="footer.jsp" />
-	</footer>
+</form>
+
+<!-- footer -->
+<footer>
+	<jsp:include page="footer.jsp" />
+</footer>
 
 
 </body>

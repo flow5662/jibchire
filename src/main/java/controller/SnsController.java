@@ -6,8 +6,14 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import action.Action;
+import action.CommunityMainAction;
+import action.PublicApiMyInfoAction;
 import action.MyPageWriteAction;
+import action.MyRecommendListAction;
+import action.PublicApiRent;
+import action.PublicApiRepairStore;
 import action.SnsDeleteAction;
 import action.SnsDeleteCommentAction;
 import action.SnsFollowAction;
@@ -30,7 +36,7 @@ import dto.ActionForward;
 public class SnsController extends javax.servlet.http.HttpServlet 
 {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)  /*jsp는 request와 response를 server page에서 객체를 사용할 수 있는게 이미 약속이 되어있기 때문에 괜찮지만
-																							servlet은 java를 통해 사용할 부분을 import를 해왔기 때문에
+																						servlet은 java를 통해 사용할 부분을 import를 해왔기 때문에
 																							method에서 request와 response를 parameter로 가져와야만 사용이 가능한 것.*/
 		throws ServletException, IOException {
 		
@@ -192,6 +198,41 @@ public class SnsController extends javax.servlet.http.HttpServlet
 		}else if(command.equals("/sns/snsUpdateComment.sns")){  //읽기화면에서 댓글 수정
 			System.out.println("댓글 update 컨트롤러 실행");
 			action = new SnsUpdateCommentAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/sns/publicapirent.sns")){  //공공api대여소 데이터 가져오기 
+			action = new PublicApiRent();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/sns/publicapirepairstore.sns")){  //공공api 시공업체 데이터 가져오기 
+			action = new PublicApiRepairStore();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/sns/publicapiinfo.sns")){  // 내가 로그인 한 상태면 공공api에 디폴트 값으로 내 주소 가져올 수 있도록 
+			action = new PublicApiMyInfoAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/sns/communitymain.sns")){  //커뮤니티 메인에 데이터 가져오기 
+			action = new CommunityMainAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/sns/myRecommendList.sns")){  //커뮤니티 메인에 데이터 가져오기 
+			action = new MyRecommendListAction();
 			try{
 				forward=action.execute(request, response);
 			}catch(Exception e){

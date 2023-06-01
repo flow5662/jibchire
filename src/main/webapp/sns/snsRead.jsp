@@ -10,10 +10,12 @@
 	<title>일상공유 읽기</title>
 	<link rel="stylesheet" type="text/css" href="style/snsRead.css">
 </head>
+<body>
 <%  //데이터 작업으로 얻은 객체 가져오기
 	ArrayList<Feed> articleList = (ArrayList<Feed>)request.getAttribute("articleList");
+	int fid = (int) request.getAttribute("feed_id");
 %>
-<body>
+<input type="hidden" name="fid" value="<%=fid%>">
 <!-- header -->
 <header>
     <% 
@@ -40,7 +42,7 @@
 			<div id="snsthunbnail">				
 				<ul>
 				<%	for(int i=0;i<articleList.size();i++){	%>
-					<li class="feed">
+					<li class="feed" id="<%=articleList.get(i).getFeed_id()%>">
 					  	<!-- 타이틀. 회원사진과 아이디 -->
 					  	<div class='snstitle'>
 					  		<div class="custpic"><img src="feedPics/<%=articleList.get(i).getCust_pic()%>" onerror="this.src='../sns/img/sns/profile04.jpg'" style="width: 50px; height: 50px;"> 
@@ -56,10 +58,10 @@
 							<a class="control_next" value='<%=articleList.get(i).getFeed_id()%>'>>> </a>
 							<a class="control_prev" value='<%=articleList.get(i).getFeed_id()%>'><< </a>
 							<ul>
+								<li><div class="pics"><img src="feedPics/<%=articleList.get(i).getFeed_pic3() %>" style="width: 450px; height: 450px;"></div></li>
 							    <li><div class="pics"><img src="feedPics/<%=articleList.get(i).getFeed_pics() %>" style="width: 450px; height: 450px;"></div></li>
 							    <li><div class="pics"><img src="feedPics/<%=articleList.get(i).getFeed_pic1() %>" style="width: 450px; height: 450px;"></div></li>
 							    <li><div class="pics"><img src="feedPics/<%=articleList.get(i).getFeed_pic2() %>" style="width: 450px; height: 450px;"></div></li>
-							    <li><div class="pics"><img src="feedPics/<%=articleList.get(i).getFeed_pic3() %>" style="width: 450px; height: 450px;"></div></li>
 						    </ul>
 						</div>
 						<!-- 내용공간. hashtag, 조회수 -->
@@ -89,7 +91,7 @@
 							</div>
 						</div>
 						<!-- 댓글 -->
-						<div class="comment" id="<%=articleList.get(i).getFeed_id()%>">
+						<div class="comment" id="comment<%=articleList.get(i).getFeed_id()%>">
 							<div class="emptycomment"></div>
 <%-- 							<% --%>
 <!-- // 								int feedid = articleList.get(i).getFeed_id(); -->
@@ -120,7 +122,6 @@
 							<li><input type="text" name="feed_comment" id="<%=articleList.get(i).getFeed_id()%>"class="commentwrite"></li>
 							<li><button class="commentsubmit" id="<%=articleList.get(i).getFeed_id()%>"> 입력 </button> </li>
 						</ul>
-						
 					</li>
 				<% } %>
 				</ul>
@@ -129,6 +130,16 @@
 	</div>
 </div>	
 <script>
+
+	/*클릭한 피드로 스크롤 옮기기*/
+	var fid = $("input[name=fid]").val();
+	var div_id = "#snsthunbnail > ul > #"+fid;
+	var offset = $(div_id).offset(); //선택한 태그의 위치를 반환
+	console.log(offset);
+    //animate()메서드를 이용해서 선택한 태그의 스크롤 위치를 지정해서 0.4초 동안 부드럽게 해당 위치로 이동함 
+    $('html').animate({scrollTop : offset.top}, 500);
+
+    
 	/*slider 관련 기능*/
 // 	setInterval(function () {   moveRight();	}, 3000); // 자동슬라이드 해제
 	var slideCount = $('.slider ul li div').width();
@@ -226,13 +237,14 @@
 			}
 		});
 		
+		$(".inputcomment").hide(); //댓글 입력창 숨기기
 		$(".comment").hide(); //댓글창 숨기기
 		/* 댓글 아이콘 눌렀을 때 댓글 창 보이기 */
 		$(".buttoncomment").click(function(){
 			var cust_id = $("input:hidden[name=cust_id]").val();
 			var feed_id = $(this).attr("value");   //로그인 한 사람이 팔로잉하는 아이디
-			var dd = "div#"+feed_id;
-			
+			var dd = "div#comment"+feed_id;
+// 			alert(dd);
 			$.ajax({
 	            url : "snsSelectComment.sns?feed_id="+feed_id+"&cust_id="+cust_id,  
 	            dataType : "html",
@@ -241,12 +253,14 @@
 	                $(dd).html(check);
       	     	}
 			});
+			$(".inputcomment").show();
 			$(dd).show(200,'swing');
 			var src1 = $(this).attr("src");
 			//alert(src1);
 			if(src1=="img/sns/chat-1-fill.png"){
 				$(this).attr("src","img/sns/chat-1-line.png");
 				$(dd).hide(200,'swing');
+				$(".inputcomment").hide();
 			}else{
 				$(this).attr("src","img/sns/chat-1-fill.png");
 			} 
@@ -269,14 +283,12 @@
 			var cmt_txt = $(input_txt).val();
 			var cust_id = $("input:hidden[name=cust_id]").val();
 			var feed_writer =$("span").html(); 
-			var dd = "div#"+feed_id;
-			
+			var dd = "div#comment"+feed_id;
 			/*댓글 DB에 입력하기 */
 			$.ajax({
 				url : "snsInsertComment.sns?cust_id="+cust_id+"&feed_id="+feed_id+"&cmt_txt="+cmt_txt+"&feed_writer="+feed_writer,  
 				dataType : "html",
 				success : function(check){
-					
 					/*댓글창 바로 보이기*/
 					$.ajax({
 			            url : "snsSelectComment.sns?feed_id="+feed_id+"&cust_id="+cust_id,  
@@ -290,7 +302,7 @@
 			
 			$(dd).show(200,'swing');
 		});		
-		
+			
 		
 		/*로그인 한 사람이 쓴 글일때 보이기 점3개 메뉴 보이기*/
 		var writer_id = $("h2").attr("value");

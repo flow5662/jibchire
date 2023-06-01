@@ -1,23 +1,48 @@
 
 function send(){   //onsubmit에 대한 메소드. 빈칸이거나 중복확인 버튼 누르지 않으면 넘어가는 것 불가
 		var id = $("input:button[name=cust_id_b]").attr("disabled"); //아이디사용버튼
+		var phn1 = $("#cust_phn_1").prop("selected",true).val();
+		var phn2 = $("#cellphone").val();
 		var name = $("input:text[name=cust_name]").val(); 
-		var sb = $("input[type=radio]:checked").val();
 		var vr2 = $("#verify_bt2").attr("disabled");
 		var email = $("#email").val();
 		var emailadr = $("#emailbox").prop("selected",true).val();
+		var sb = $('input:radio[name=cust_sex]').is(':checked');
+		var add1 = $("#sample4_roadAddress").val(); 
+		var add4 = $("#sample4_detailAddress").val(); 
+		var pw1 = $("#pw1").val();
+		var pw2 = $("#pw2").val();
+		/* 비밀번호, 휴대폰 통신사, 주소 빈칸 없도록 해서 유효성 검사 다시 해야함 */
 
 		if(typeof id == "undefined"){
 			alert("아이디 사용을 눌러주세요");
 			return false;
+		}else if(pw1=="" || pw2==""){
+			alert("비밀번호를 입력해주세요");
+			return false;
+		}else if(pw1 !== pw2){
+			alert("비밀번호가 일치하지 않습니다");
+			return false;
 		}else if(name==""){
 			alert("이름을 입력해주세요");
 			return false;
-		}else if(typeof sb == "undefined"){
+		}else if(!sb){
 			alert("성별을 선택해주세요");
+			return false;
+		}else if(phn1 == "choose"){
+			alert("통신사를 선택해주세요");
+			return false;
+		}else if(phn2 == ""){
+			alert("핸드폰 번호를 입력해주세요");
 			return false;
 		}else if(typeof vr2 == "undefined"){
 			alert("핸드폰 인증번호를 확인해주세요");
+			return false;
+		}else if(add1==""){
+			alert("주소를 입력해주세요");
+			return false;
+		}else if(add4==""){
+			alert("상세주소를 입력해주세요");
 			return false;
 		}else if(email == ""){
 			alert("메일을 입력해주세요");
@@ -25,9 +50,6 @@ function send(){   //onsubmit에 대한 메소드. 빈칸이거나 중복확인 
 		}else if(emailadr == "choose"){
 			alert("이메일 주소를 선택해주세요 ");
 			return false;
-		}
-		else{
-			
 		}
 
 }

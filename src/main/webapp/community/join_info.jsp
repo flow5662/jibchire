@@ -52,8 +52,8 @@
 					</td>		    
 				</tr>
 				<tr class="pwcheck">
-					<td colspan="2" class="pwcheck"></td>
-					<td colspan="4" class="pwcheck">
+					<td colspan="2" class="pwcheck" ></td>
+					<td colspan="4" class="pwcheck" >
 						<i id="success"> 비밀번호가 일치합니다 </i>
 						<i id="fail"> 비밀번호가 일치하지 않습니다 </i>
 					</td>
@@ -98,7 +98,7 @@
 						<img src="img/join/chat-check-fill.png"> 
 					</td> 
 			    	<td> 
-			    		<select name="cust_phn_1" class="cell">
+			    		<select name="cust_phn_1" id="cust_phn_1" class="cell">
 			    			<option value="choose" > 선택 </option>
 			    			<option value="skt" > skt </option>
 				      	    <option value="uplus" >u+ </option>
@@ -107,7 +107,8 @@
 			    	    </select> 
 			    	</td>
 			    	<td  colspan="2" > 
-			    		<input type="text" name="cust_phn_2" id="cellphone" size="11">  
+			    		<input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+			    			placeholder="숫자만 입력 가능합니다." name="cust_phn_2" id="cellphone" size="11">  
 			    	</td>
 			    	<td>
 			    	    <input type="button" value = "인증번호 발송" id="verify_bt1" name="verify" class="button"> 
@@ -117,7 +118,7 @@
 			    	<td colspan="2"> </td>
 			    	<td class="submenu"> 인증번호 입력 </td>
 			    	<td colspan="2"> 
-			    		<input id="verify" type="text" name="verify_num" size="6" placeholder="전송된 인증번호를 입력해주세요"> 
+			    		<input id="verify" type="text" name="verify_num" size="6" placeholder="전송된 인증번호를 입력해주세요 (123123)"> 
 			    	</td>
 			    	<td> 
 			    		<input type="button" value = "인증번호 확인"  id="verify_bt2"name="verify_button" class="button">

@@ -40,7 +40,8 @@ public class SnsInsertCommentAction implements Action {
 		else{
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("snsReadAction.sns?feed_id="+feed_id+"&cust_id="+cust_id+"&feed_writer="+feed_writer);
+			forward.setPath("snsSelectComment.sns?feed_id="+feed_id+"&cust_id="+cust_id);
+//			forward.setPath("snsReadAction.sns?feed_id="+feed_id+"&cust_id="+cust_id+"&feed_writer="+feed_writer);
 			// 계속 데이터 작업을 할 필요는 없으니까 잠시 주석처리
 //			forward.setPath("snsReadComment.jsp");
 		}

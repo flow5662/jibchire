@@ -18,9 +18,6 @@ request.setCharacterEncoding("utf-8");
 	Post_house po = sl.select_one(pid);
 	sl.updateReadCount(pid); //조회수 올리기 
 	
-	
-	
-	
 	request.setAttribute("post", po);
 	RequestDispatcher dispatcher=request.getRequestDispatcher("view_read.jsp");
 	dispatcher.forward(request, response);

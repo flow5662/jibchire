@@ -2,10 +2,8 @@ package dto;
 
 
 public class Cust_info {
-	//추가; 별명, 성별
 	public String cust_id;
 	public String cust_pw;
-	public String cust_nickname; //별명
 	public String cust_sex; //성별 m남성, f여성
 	public String cust_name;
 	public String cust_birth;
@@ -25,12 +23,6 @@ public class Cust_info {
 	}
 	public void setCust_pw(String cust_pw) {
 		this.cust_pw = cust_pw;
-	}
-	public String getCust_nickname() {
-		return cust_nickname;
-	}
-	public void setCust_nickname(String cust_nickname) {
-		this.cust_nickname = cust_nickname;
 	}
 	public String getCust_sex() {
 		return cust_sex;

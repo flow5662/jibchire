@@ -120,6 +120,20 @@
 				}
 			}
 		}
+		// 사진 위 좌표
+		String icon1 = multi.getParameter("icon1");
+		String icon2 = multi.getParameter("icon2");
+		String icon3 = multi.getParameter("icon3");
+		String icon4 = multi.getParameter("icon4");
+		String icon5 = multi.getParameter("icon5");
+		String icon6 = multi.getParameter("icon6");
+		String icon7 = multi.getParameter("icon7");
+		String icon8 = multi.getParameter("icon8");
+		String icon9 = multi.getParameter("icon9");
+		String icon10 = multi.getParameter("icon10");
+		post.setPost_position(icon1+icon2+icon3+icon4+icon5+icon6+icon7+icon8+icon9+icon10);
+		
+// 		out.println(post.getPost_position());
 		post.setPost_pics(thumbnail+sum);
 		// 썸네일로 만든 파일명을 가장 앞칸에 둬서 select을 해오더라도 가장 앞에서 가져올 수 있도록 한다
 		com.insert_board(post);

@@ -1,4 +1,59 @@
-$(function(){		
+$(function(){	
+	
+	/* 포지션별로 지정된 아이콘에 대한 정보 가져오기 */
+	$("#position img").mouseover(function(){
+		var pro_id = $(this).attr("id");
+		//alert(pro_id);
+		var div_id = "#item_div"+pro_id;
+		$.ajax({
+ 			url : "select_item.jsp?pro_id="+pro_id,  
+ 			dataType : "html",
+ 			success : function(check){
+				//alert(check);
+ 				$(div_id).html(check);
+ 			}
+ 		}); 
+ 		$(div_id).show(100);
+		$("#position img").mouseout(function(){
+			$(div_id).hide(50,'swing');
+			$(".postPics").css("top", 0);
+		});
+	});
+	/* 처음 게시글을 클릭할 때 2번사진에 포커스가 가있기 때문에 나머지는 지우면 됨 */
+	$("#position ul li:nth-child(1)").hide();
+	$("#position ul li:nth-child(3)").hide();
+	$("#position ul li:nth-child(4)").hide();
+	/*사진에 마우스 올리면 각기 다른 아이콘 위치 뜨기*/
+	$(".insertedpicture li:nth-child(1)").mouseover(function(){
+//		alert("1");
+		$("#position ul li:nth-child(1)").show();
+		$("#position ul li:nth-child(2)").hide();
+		$("#position ul li:nth-child(3)").hide();
+		$("#position ul li:nth-child(4)").hide();
+	});
+	$(".insertedpicture li:nth-child(2)").mouseover(function(){
+//		alert("2");
+		$("#position ul li:nth-child(1)").hide();
+		$("#position ul li:nth-child(2)").show();
+		$("#position ul li:nth-child(3)").hide();
+		$("#position ul li:nth-child(4)").hide();
+	});
+	$(".insertedpicture li:nth-child(3)").mouseover(function(){
+//		alert("3");
+		$("#position ul li:nth-child(1)").hide();
+		$("#position ul li:nth-child(2)").hide();
+		$("#position ul li:nth-child(3)").show();
+		$("#position ul li:nth-child(4)").hide();
+	});
+	$(".insertedpicture li:nth-child(4)").mouseover(function(){
+//		alert("4");
+		$("#position ul li:nth-child(1)").hide();
+		$("#position ul li:nth-child(2)").hide();
+		$("#position ul li:nth-child(3)").hide();
+		$("#position ul li:nth-child(4)").show();
+	});
+
+	
 	//상품상세설명 
  	$(".itemthumbnailinfo").hide();
 	$(".itemthumbnail > li#item10").mouseover(function(){
@@ -187,11 +242,12 @@ $(function(){
     $('a.control_next').click(function () {
         moveRight();
     });
-		$("input:button[value=삭제]").click(function(){  // 글삭제 버튼 눌렀을 때 한 번 더 의도 체크, 확인버튼 누를 때 삭제
-			var num = $("#post_id").val();
-			var con = confirm("삭제하시겠습니까?");
-			if(con){
-				location.href='delete_write.jsp?post_id='+num; //url로 값을 바로 줘서 다음페이지에서 아무런 그거 없어도 되니까
-			}
-		});
+    
+	$("input:button[value=삭제]").click(function(){  // 글삭제 버튼 눌렀을 때 한 번 더 의도 체크, 확인버튼 누를 때 삭제
+		var num = $("#post_id").val();
+		var con = confirm("삭제하시겠습니까?");
+		if(con){
+			location.href='delete_write.jsp?post_id='+num; //url로 값을 바로 줘서 다음페이지에서 아무런 그거 없어도 되니까
+		}
+	});
 	});

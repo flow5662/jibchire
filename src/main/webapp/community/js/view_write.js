@@ -1,5 +1,6 @@
 $(function(){
-
+	$(".draggable").draggable({ containment: "#previewImg" });
+	
 	// 공사시작일, 공사마감일에 대한 select의 옵션 추가하기
     // 생년월일 selectbox 만들기 위한 변수선언
 	var now = new Date();
@@ -24,7 +25,4 @@ $(function(){
         $('#startdate_date').append('<option value="'+dd+'">' + dd+ '일</option>');  
         $('#enddate_date').append('<option value="'+dd+'">' + dd+ '일</option>');   
     }
-    
-
-
 });

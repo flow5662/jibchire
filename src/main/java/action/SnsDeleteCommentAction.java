@@ -40,9 +40,9 @@ public class SnsDeleteCommentAction implements Action {
 //			out.println("alert('삭제가 완료되었습니다');");
 //			out.println("</script>");
 //			out.close(); // 닫아줘야 하는 걸 알게되었다.
-			forward.setPath("snsSelectComment.sns?feed_id="+feed_id+"&cust_id="+cust_id); 
+//			forward.setPath("snsSelectComment.sns?feed_id="+feed_id+"&cust_id="+cust_id); 
 			// 계속 데이터 작업을 할 필요는 없으니까 잠시 주석처리
-//			forward.setPath("snsReadComment.jsp");
+			forward.setPath("empty.jsp");
 		}
 
 		return forward;

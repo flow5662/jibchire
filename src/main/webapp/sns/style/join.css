@@ -37,7 +37,8 @@ ul.nacc li.active {	 transition-delay: 0.3s;	 z-index: 2;	 opacity: 1;	 transfor
 /* 약관동의 내용 */
 #agree{width: 750px; padding: 15px;}
 .agree_explain{width: 720px; padding: 10px; border-bottom: 2px solid darkgray;}
-
+input[type=button]{	border: solid 2px #E9E9E9; background-color: #E9E9E9; width: 120px;height: 52px;}
+.active h5{    margin-top: 10px; text-align: center;}
 /* 상세페이지 설명 */
 .explain{width: 720px; padding: 10px; font-size:10pt; background-color: #E9E9E9;  }
 
