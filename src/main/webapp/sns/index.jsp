@@ -62,6 +62,9 @@ section[id^=sec] h1{font-family: 'DM Serif Text', serif; font-size: 43px; color:
 #section03 #middlepicture ul{display: inline-block; margin:20px 20px 0 0; }
 #section03 #middlepicture ul li{display: block; }
 #section03 #middlepicture ul li.pic{width:260px;height:300px;border-top-left-radius:50%; border-top-right-radius:50%;  background: #FFFFFF;  box-shadow: 10px 10px 10px #8d6046;}
+#section03 #middlepicture ul li#picjoin{background-image: url(../community/img/index/join.jpg);}
+#section03 #middlepicture ul li#picrequest{background-image: url(../community/img/index/request.jpg);}
+#section03 #middlepicture ul li#picmaching{background-image: url(../community/img/index/matching.jpg);}
 #section03 #middlepicture ul li.text{width:260px; height: 50px; margin-top: 20px; }
 #section03 ul li h5{font-size: 14pt; color: #8d6046;    font-style: italic;    font-weight: 900; text-align: center;}
 #section03 ul li h6{font-size: 10pt; margin: 10px 0 10px 20px; text-align: center;}
@@ -376,21 +379,21 @@ align-items: center;
 	
 					<div id="middlepicture">
 						<ul>
-							<li class="pic"></li>
+							<li class="pic" id="picjoin"></li>
 							<li class="text">
 								<h5> Join</h5>
 								<h6> 집치레와 함께 해 보세요</h6>
 							</li>
 						</ul>
 						<ul>
-							<li class="pic"></li>
+							<li class="pic" id="picrequest"></li>
 							<li class="text">
 								<h5> Request & Respond </h5>
 								<h6> 견적을 요청하고 답변을 받아보세요 </h6>
 							</li>
 						</ul>
 						<ul>
-							<li class="pic"></li>
+							<li class="pic" id ="picmaching"></li>
 							<li class="text">
 								<h5> Matching</h5>
 								<h6> 자신과 가장 맞는 바치와 거래해 보세요 </h6>

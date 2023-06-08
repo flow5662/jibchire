@@ -34,7 +34,7 @@ section[id^=sec] h1{font-family: 'DM Serif Text', serif; font-size: 43px; color:
 .skewdBox2 ul{margin-top: 20px;}
 .skewdBox2 ul li {width: inherit;  background-color: wheat;} 
 .skewdBox2 ul li h5{font-size: 12pt; color: #8d6046;    font-style: italic;    font-weight: 900;}
-.skewdBox2 ul li h6{font-size: 10pt;  color: black; margin: 10px 0 10px 20px;}
+.skewdBox2 ul li h6{font-size: 10pt;  margin: 10px 0 10px 20px;}
 
 /*section02*/
 #section02{width: 100%; height: 500px;}
@@ -62,6 +62,9 @@ section[id^=sec] h1{font-family: 'DM Serif Text', serif; font-size: 43px; color:
 #section03 #middlepicture ul{display: inline-block; margin:20px 20px 0 0; }
 #section03 #middlepicture ul li{display: block; }
 #section03 #middlepicture ul li.pic{width:260px;height:300px;border-top-left-radius:50%; border-top-right-radius:50%;  background: #FFFFFF;  box-shadow: 10px 10px 10px #8d6046;}
+#section03 #middlepicture ul li#picjoin{background-image: url(../community/img/index/join.jpg);}
+#section03 #middlepicture ul li#picrequest{background-image: url(../community/img/index/request.jpg);}
+#section03 #middlepicture ul li#picmaching{background-image: url(../community/img/index/matching.jpg);}
 #section03 #middlepicture ul li.text{width:260px; height: 50px; margin-top: 20px; }
 #section03 ul li h5{font-size: 14pt; color: #8d6046;    font-style: italic;    font-weight: 900; text-align: center;}
 #section03 ul li h6{font-size: 10pt; margin: 10px 0 10px 20px; text-align: center;}
@@ -272,7 +275,7 @@ align-items: center;
 								<a href="snsReadAction.sns?feed_id=<%=articleList.get(i).getFeed_id()%>&cust_id=<%=id%>&feed_writer=<%=articleList.get(i).getCust_id()%>">	
 								  	<!-- 타이틀. 회원사진과 아이디 -->
 								  	<div class='snstitle'>
-								  		<div class="custpic"><img src="../sns/feedPics/<%=articleList.get(i).getCust_pic()%>"  onerror="this.src='../sns/img/sns/profile04.jpg'" style="width: 50px;"></div>
+								  		<div class="custpic"><img src="../sns/feedPics/<%=articleList.get(i).getCust_pic()%>" onerror="this.src='../sns/img/sns/profile04.jpg'" style="width: 50px;"></div>
 								  		<span>작성자 <%=articleList.get(i).getCust_id() %></span></div>
 									<div class='thumbnail'>
 									<img src='../sns/feedPics/sm_<%=articleList.get(i).getFeed_pics() %>' onerror="this.src='../sns/feedPics/<%=articleList.get(i).getFeed_pics() %>'"   style="width: 350px; height: 350px;"> </div>
@@ -325,8 +328,8 @@ align-items: center;
 							Show Your Rooms <br> on Community
 						</h1>
 						<ul>
-							<a href="../community/select_board.jsp?cust_id=<%=id%>"><li><h5>집들이</h5></li>
-							<li><h6>집의 사진 및 인테리어에 이용한 상품 정보를 공유하는 공간</h6></li></a>
+							<li><h5>집들이</h5></li>
+							<li><h6>집의 사진 및 인테리어에 이용한 상품 정보를 공유하는 공간</h6></li>
 							<li><h5>일상공유</h5></li>
 							<li><h6>일상에 대한 정보를 공유하고 다른 사용자와 소통하는 공간</h6></li>
 							<li><h5>나와 비슷한</h5></li>
@@ -376,21 +379,21 @@ align-items: center;
 	
 					<div id="middlepicture">
 						<ul>
-							<li class="pic"></li>
+							<li class="pic" id="picjoin"></li>
 							<li class="text">
 								<h5> Join</h5>
 								<h6> 집치레와 함께 해 보세요</h6>
 							</li>
 						</ul>
 						<ul>
-							<li class="pic"></li>
+							<li class="pic" id="picrequest"></li>
 							<li class="text">
 								<h5> Request & Respond </h5>
 								<h6> 견적을 요청하고 답변을 받아보세요 </h6>
 							</li>
 						</ul>
 						<ul>
-							<li class="pic"></li>
+							<li class="pic" id ="picmaching"></li>
 							<li class="text">
 								<h5> Matching</h5>
 								<h6> 자신과 가장 맞는 바치와 거래해 보세요 </h6>
@@ -462,7 +465,7 @@ $(document).ready(function(){
 			});
 		//내가 누른 버튼의 아이콘 변경. 그리고 같은 글쓴이를 공유하고 있는 다른 버튼들도 팔로우 버튼 자동적으로 변경 
 		var src1 = $(this).attr("src");
-		if(src1=="img/sns/user-unfollow-line.png"){
+		if(src1=="../sns/img/sns/user-unfollow-line.png"){
 			$(this).attr("src","../sns/img/sns/user-follow-fill.png");
 			$(".buttonfollow[value="+cust_following+"]").attr("src","../sns/img/sns/user-follow-fill.png");
 		}else{

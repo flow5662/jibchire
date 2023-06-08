@@ -21,7 +21,7 @@
     #line {
       width: 100%;
       border-top: 1px solid #444444;
-       margin: 30px 0px;
+      margin-bottom: 30px;
     }
 	a {text-decoration: none; color: gray;}
 	
