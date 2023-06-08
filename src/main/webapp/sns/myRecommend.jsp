@@ -43,7 +43,7 @@
 	if(alist != null){
 	%>
 	     <div class="list">
-	     	<h2> i) 주거형태 집평수 방개수 </h2>
+<%-- 	     	<h2> <%=alist.get(0).getCust_id()%>님과 동일하게 주거형태:'<%=alist.get(0).getPost_family()%>',  집평수: '<%=alist.get(0).getPost_m2()%>', 방개수: '<%=alist.get(0).getPost_rooms()%>' 인 공간 </h2> --%>
 	    	<ul>
 	    		<%  
     			for(int i=0; i<alist.size(); i++){   //한 줄에 세 칸을 넣을	

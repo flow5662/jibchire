@@ -274,8 +274,8 @@ UPDATE `interior`.`post_house` SET `post_position` =
 					for(int j =0 ; j<items.length ; j++){ //포지션은 x,y이니까 2칸씩 점프
 						String itemid = "item1"+j;
 			%>				
-			    <li id="<%=itemid%>"><img src="postPics/<%=items[j]%>"style="width:130px; height: 130px;">
-			    	<input type="hidden" value="<%=items[j]%>"></li>
+<%-- 			    <li id="<%=itemid%>"><img src="postPics/<%=items[j]%>"style="width:130px; height: 130px;"> --%>
+<%-- 			    	<input type="hidden" value="<%=items[j]%>"></li> --%>
 			<% 
 					} 
 			    }

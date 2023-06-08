@@ -15,6 +15,7 @@ import dto.Feed;
 import dto.Feed_comment;
 import dto.Feed_like;
 import dto.Post_house;
+import dto.Pro_post;
 import dto.SearchSns;
 
 public class CmtSns {
@@ -873,8 +874,8 @@ public class CmtSns {
 
 		try{
 			sql="insert into cust_houseinfo (cust_id,cust_pic,cust_introduce,cust_house,cust_room,cust_m2,cust_fam,"
-					+ "cust_family, cust_direc,cust_household,cust_pet,cust_region,cust_style,cust_color)"
-					+"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+					+ "cust_family, cust_direc,cust_houseold,cust_pet,cust_region)"
+					+"values(?,?,?,?,?,?,?,?,?,?,?,?);";
 			System.out.println("insertHouseInfo 잘 되어가나요?");
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, house.getCust_id());
@@ -889,8 +890,6 @@ public class CmtSns {
 			pstmt.setInt(10, house.getCust_houseold());
 			pstmt.setString(11, house.getCust_pet());
 			pstmt.setString(12, house.getCust_region());
-			pstmt.setString(13, house.getCust_style());
-			pstmt.setString(14, house.getCust_color());
 
 			insertCount=pstmt.executeUpdate(); //수행하면 insertCount=1
 
@@ -911,7 +910,9 @@ public class CmtSns {
 		
 		try{
 			pstmt = con.prepareStatement(
-					"select * from cust_houseinfo where cust_id=?;");
+					"select * from cust_houseinfo "
+					+ " left outer join cust_info on cust_houseinfo.cust_id = cust_info.cust_id "
+					+ " where cust_houseinfo.cust_id=?;");
 			pstmt.setString(1, cust_id);
 			rs= pstmt.executeQuery();
 
@@ -926,7 +927,7 @@ public class CmtSns {
 				po.setCust_direc(rs.getString("cust_direc"));
 				po.setCust_region(rs.getString("cust_region"));
 				po.setCust_pet(rs.getString("cust_pet"));
-//				po.setCust_style(rs.getString("cust_style"));
+				po.setCust_sex(rs.getString("cust_sex"));
 //				po.setCust_color(rs.getString("cust_color"));
 				
 				//String style =rs.getString("post_style");
@@ -962,7 +963,7 @@ public class CmtSns {
 				System.out.println(info.getCust_adr());
 			}
 		}catch(Exception ex){
-			System.out.println(ex+" getmyregion 메소드에서 오류");
+			System.out.println(ex+" getcustinfo 메소드에서 오류");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -1372,6 +1373,36 @@ public class CmtSns {
 			close(pstmt);
 		}
 		return info;
+	}
+	public ArrayList<Pro_post> getSearchResult(String searchword){  // api이용할 때 내 주소 가지고 오기 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Pro_post> productlist = new ArrayList<Pro_post>();
+		System.out.println("getSearchResult data 도착");
+		try{
+//			String sql="select * from pro_post where pro_title= ? or pro_company = ? or pro_menu1 like '%?%' ;";
+			String sql="select * from pro_post where pro_title like '%"+searchword+"%'  or pro_company like '%"+searchword+"%' or pro_menu1 like '%"+searchword+"%' ;";
+			pstmt = con.prepareStatement(sql);
+//			pstmt.setString(1, searchword);
+//			pstmt.setString(2, searchword);
+//			pstmt.setString(3, searchword);
+			rs= pstmt.executeQuery();
+			while(rs.next()) {
+				Pro_post pro = new Pro_post();
+				pro.setPro_id(rs.getInt("pro_id"));
+				pro.setPro_title(rs.getString("pro_title"));
+				pro.setPro_price(rs.getInt("pro_price"));
+				pro.setPro_company(rs.getString("pro_company"));
+				pro.setPro_picture(rs.getString("pro_picture"));
+				productlist.add(pro);
+			}
+		}catch(Exception ex){
+			System.out.println(ex+" getSearchResult 메소드에서 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return productlist;
 	}
 
 

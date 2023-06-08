@@ -20,6 +20,8 @@ public class Cust_houseinfo {
 	public String cust_style;
 	public String cust_color;
 	
+	public String cust_sex;
+	
 	public String getCust_id() {
 		return cust_id;
 	}
@@ -103,6 +105,12 @@ public class Cust_houseinfo {
 	}
 	public void setCust_introduce(String cust_introduce) {
 		this.cust_introduce = cust_introduce;
+	}
+	public String getCust_sex() {
+		return cust_sex;
+	}
+	public void setCust_sex(String cust_sex) {
+		this.cust_sex = cust_sex;
 	}
 	
 	

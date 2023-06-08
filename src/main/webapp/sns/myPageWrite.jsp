@@ -27,7 +27,8 @@
 		}
 	%>
 	</header>
-	<form action="myPageWrite.sns" method="post" enctype="multipart/form-data">
+	<!-- onsubmit="return send()" -->
+	<form action="myPageWrite.sns" method="post"  onsubmit="return send()" enctype="multipart/form-data">
     <div id="wrap">
 		<table id="writing">
 			<thead><tr><td colspan="2"><h4> 내 정보 입력하기 </h4></td></tr></thead>
@@ -35,7 +36,7 @@
 				<tr><td rowspan="3"><div id="preview"><img id="previewImg" ></div> </td>
 				<td><input type="text" value="<%=id%>" name="cust_id" readonly="readonly"> </td></tr>
 				<tr><td> <input type="text" placeholder="내 계정 소개" name="cust_introduce"> </td></tr>
-				<tr><td>회원아이디 이미지 등록 <input type="file" onchange="readImage(this);" name="post_pic">  </td></tr>
+				<tr><td>회원아이디 이미지 등록 <input type="file" onchange="readImage(this);" name="post_pic" id="post_pic">  </td></tr>
 			</tbody>
 			
 		</table>
@@ -99,42 +100,42 @@
 					<input type="radio" name="cust_direc" value="dontknow">잘모르겠음 
 					</td>
 				</tr>
-				<tr><td> 스타일 </td>
-					<td> <input type="checkbox" name="cust_style" value="미니멀/심플">미니멀/심플
-						<input type="checkbox" name="cust_style" value="내추럴">내추럴
-						<input type="checkbox" name="cust_style" value="북유럽">북유럽
-						<input type="checkbox" name="cust_style" value="빈티지">빈티지
-						<input type="checkbox" name="cust_style" value="유니크">유니크
-						<input type="checkbox" name="cust_style" value="프렌치/플로럴">프렌치/플로럴
-						<input type="checkbox" name="cust_style" value="믹스매치">믹스매치
-						<input type="checkbox" name="cust_style" value="한옥">한옥
-						<input type="checkbox" name="cust_style" value="오피스겸용">오피스겸용
-					</td>
-				</tr>
-				<tr><td> 색상 톤 </td>
-					<td> <!-- 체크박스 자체에 스타일을 주기 위해서 각각의 라벨추가 -->
-						<input type="checkbox" name="cust_color" id="cb1" value="black"> 
-						 	<label for="cb1"></label>
-						<input type="checkbox" name="cust_color" id="cb2" value="white"> 
-						 	<label for="cb2"></label>
-				 		<input type="checkbox" name="cust_color" id="cb3" value="red"> 
-						 	<label for="cb3"></label>
-				 		<input type="checkbox" name="cust_color" id="cb4" value="orange"> 
-						 	<label for="cb4"></label>
-					 	<input type="checkbox" name="cust_color" id="cb5" value="yellow"> 
-						 	<label for="cb5"></label>
-					 	<input type="checkbox" name="cust_color" id="cb6" value="green"> 
-						 	<label for="cb6"></label>
-					 	<input type="checkbox" name="cust_color" id="cb7" value="blue"> 
-						 	<label for="cb7"></label>
-					 	<input type="checkbox" name="cust_color" id="cb8" value="purple"> 
-						 	<label for="cb8"></label>
-					 	<input type="checkbox" name="cust_color" id="cb9" value="brown"> 
-						 	<label for="cb9"></label>
-					 	<input type="checkbox" name="cust_color" id="cb10" value="pink"> 
-						 	<label for="cb10"></label>
-					</td>
-				</tr>
+<!-- 				<tr><td> 스타일 </td> -->
+<!-- 					<td> <input type="checkbox" name="cust_style" value="미니멀/심플">미니멀/심플 -->
+<!-- 						<input type="checkbox" name="cust_style" value="내추럴">내추럴 -->
+<!-- 						<input type="checkbox" name="cust_style" value="북유럽">북유럽 -->
+<!-- 						<input type="checkbox" name="cust_style" value="빈티지">빈티지 -->
+<!-- 						<input type="checkbox" name="cust_style" value="유니크">유니크 -->
+<!-- 						<input type="checkbox" name="cust_style" value="프렌치/플로럴">프렌치/플로럴 -->
+<!-- 						<input type="checkbox" name="cust_style" value="믹스매치">믹스매치 -->
+<!-- 						<input type="checkbox" name="cust_style" value="한옥">한옥 -->
+<!-- 						<input type="checkbox" name="cust_style" value="오피스겸용">오피스겸용 -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+<!-- 				<tr><td> 색상 톤 </td> -->
+<!-- 					<td> 체크박스 자체에 스타일을 주기 위해서 각각의 라벨추가 -->
+<!-- 						<input type="checkbox" name="cust_color" id="cb1" value="black">  -->
+<!-- 						 	<label for="cb1"></label> -->
+<!-- 						<input type="checkbox" name="cust_color" id="cb2" value="white">  -->
+<!-- 						 	<label for="cb2"></label> -->
+<!-- 				 		<input type="checkbox" name="cust_color" id="cb3" value="red">  -->
+<!-- 						 	<label for="cb3"></label> -->
+<!-- 				 		<input type="checkbox" name="cust_color" id="cb4" value="orange">  -->
+<!-- 						 	<label for="cb4"></label> -->
+<!-- 					 	<input type="checkbox" name="cust_color" id="cb5" value="yellow">  -->
+<!-- 						 	<label for="cb5"></label> -->
+<!-- 					 	<input type="checkbox" name="cust_color" id="cb6" value="green">  -->
+<!-- 						 	<label for="cb6"></label> -->
+<!-- 					 	<input type="checkbox" name="cust_color" id="cb7" value="blue">  -->
+<!-- 						 	<label for="cb7"></label> -->
+<!-- 					 	<input type="checkbox" name="cust_color" id="cb8" value="purple">  -->
+<!-- 						 	<label for="cb8"></label> -->
+<!-- 					 	<input type="checkbox" name="cust_color" id="cb9" value="brown">  -->
+<!-- 						 	<label for="cb9"></label> -->
+<!-- 					 	<input type="checkbox" name="cust_color" id="cb10" value="pink">  -->
+<!-- 						 	<label for="cb10"></label> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
 			<tr><td> 가족 인원 </td>
 				<td><select id="fam" name="cust_fam">
 						<option value="1">1명 </option>
@@ -205,6 +206,37 @@
 		    document.getElementById('previewImg').src = "";
 		  }
 		}
+	
+	function send(){   //onsubmit에 대한 메소드. 빈칸이거나 중복확인 버튼 누르지 않으면 넘어가는 것 불가
+		var cust_introduce = $("input:text[name=cust_introduce]").val(); //계정 소개글
+		var cust_house = $('input:radio[name=cust_house]').is(':checked'); // 주거형태
+		var fileCheck = document.getElementById("post_pic").value; // 파일체크
+		var cust_direc = $('input:radio[name=cust_direc]').is(':checked'); // 집방향
+		var cust_family = $('input:checkbox[name=cust_family]').is(':checked'); // 가족형태
+		var cust_pet = $('input:radio[name=cust_pet]').is(':checked'); // 반려동뮬
+
+		if(cust_introduce== ""){
+			alert("내 계정 소개글을 작성해주세요");
+			return false;
+		}else if(!fileCheck){
+	        alert("회원이미지 파일을 첨부해 주세요");
+	        return false;
+	    }else if(!cust_house){
+			alert("주거형태를 선택해주세요");
+			return false;
+		}else if(!cust_direc){
+			alert("집방향을 선택해주세요");
+			return false;
+		}else if(!cust_family){
+			alert("가족형태를 선택해주세요");
+			return false;
+		}else if(!cust_pet){
+			alert("반려동물 유무를 선택해주세요");
+			return false;
+		}
+
+
+}
 	</script>
 	<!-- footer -->
 	<footer>

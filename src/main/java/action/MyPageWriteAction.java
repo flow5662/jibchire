@@ -58,21 +58,7 @@ public class MyPageWriteAction implements Action {
 		house.setCust_direc(multi.getParameter("cust_direc"));
 		house.setCust_pet(multi.getParameter("cust_pet"));
 		house.setCust_region(multi.getParameter("cust_region"));
-		/*복수의 값을 가진 경우는 한꺼번에 넣기*/
-		String [] stl = multi.getParameterValues("cust_style");
-		String [] col = multi.getParameterValues("cust_color");
-		String colorsum="";
-		String stylesum="";
-		for(int i=0; i<col.length;i++){
-			colorsum += col[i]+",";
-		}
-		for(int i=0; i<stl.length;i++){
-			stylesum += stl[i]+",";
-		}
-		house.setCust_color(colorsum);
-		house.setCust_style(stylesum);
-		
-		System.out.println("색상 여러개가 잘 들어갔나요 ? "+ colorsum);
+
 			
 		/*파일 저장하기*/
 		Enumeration files = multi.getFileNames();
@@ -120,7 +106,7 @@ public class MyPageWriteAction implements Action {
 		else{
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("index.jsp");
+			forward.setPath("snsIndexList.sns?cust_id="+house.getCust_id());
 		}
 
 		return forward; //actionfoward의 객체를 리턴.

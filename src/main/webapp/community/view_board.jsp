@@ -99,7 +99,10 @@
 	%>
 	    <!-- 참고) section style 분류 탭 : jsp:include page="tap_style.jsp" -->    	
     	<!-- 메뉴 분류 탭 주거형태 방 개수, 집 평수, 가족인원수, 집 연식-->
-		<div class="subtitle">최근 집들이</div>
+    	
+    	
+    	
+<!-- 		<div class="subtitle">최근 집들이</div> -->
 			<!-- section style 분류 탭-->
 			<section>
 		    	<article id="mid">

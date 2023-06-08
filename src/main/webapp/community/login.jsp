@@ -111,8 +111,8 @@ a { text-decoration : none; }
 	String id = (String)session.getAttribute("id");
 	String pw = (String)session.getAttribute("pw");
 %>
-
 <script type="text/javascript">
+
 	function loginChk() {
     	var id = document.getElementById("id").value;
    		var pw = document.getElementById("pw").value;

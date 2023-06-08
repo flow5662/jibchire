@@ -25,7 +25,7 @@
 #previewImg{width: 100%; height: 100%; object-fit:cover;}
 
 /*작업 후 넘어가기*/
-.postItem{    width: 140px;    float: left;    margin : 20px 3% 0 3%;}
+.postItem{    width: 140px;    float: left;    margin : 20px 3% 0 1%;}
 
 /*맨 오른쪽*/
 .uploaditem{width: 230px;    float: left;    margin-top: 20px;}
@@ -56,9 +56,26 @@
 	$(function() {
 		$(".draggable").draggable({ containment: "#previewImg" });
 		
+		$("aside").hide();
+		/*검색어 바뀔때마다 내용 바꾸기*/
+		$("#searchwordbutton").click(function(){
+			var searchword = $("#searchwordinput").val();
+			$.ajax({
+				url : "iconselect.sns?searchword="+searchword,  
+				dataType : "html",
+				//data : "post",
+				success : function(check){
+					alert(check);
+					$("#searchresult").html(check);
+				}
+			});
+		});
+		
 		/*아이콘 더블클릭했을 때 상품고르기*/
 		$(".draggable").dblclick(function(){
-			alert("더블클릭에 이벤트 걸 것!!!");
+// 			alert("더블클릭에 이벤트 걸 것!!!");
+			$("aside").show();
+			
 			var icon = $(this).attr("id");
 			for(var i = 1 ; i<=10 ; i++){
 				var iconid = "icon"+i; 
@@ -66,7 +83,7 @@
 					var id = "#"+iconid;
 					var top = $(id).css("top");
 					var left = $(id).css("left");
-					alert("top="+top+"left="+left);
+// 					alert("top="+top+"left="+left);
 					$(".iteminfo").css("top".top);
 					$(".iteminfo").css("left".left);
 					$(".iteminfo").show();
@@ -129,6 +146,18 @@
 <body>
 
 	<div id="wrap">
+<!-- 		<aside id ="searchbox" style="position:fixed; top:200px; left:100px; border:1px solid gray; width: 200px; height: 150px; "> -->
+<!-- 			<div id = "searchinput"> -->
+<!-- 				<input type="text" placeholder="검색어" id="searchwordinput"> -->
+<!-- 				<span id="searchwordbutton">검색</span> -->
+<!-- 				keyup으로 이벤트 -->
+<!-- 			</div> -->
+<!-- 			<div id = "searchresult"> -->
+<!-- 				<ul> -->
+<!-- 				list 클릭으로 이벤트 -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 		</aside> -->
 		<table id="writing">
 			<thead><tr><td ><h4> 글 작성 </h4></td></tr></thead>
 			<tbody>
@@ -137,32 +166,28 @@
 				</tr>
 				<tr>
 					<td class="postPics">
-						<div id="icons">
-							<div class="iteminfo">
-								<input type="text">
-								<h6>검색</h6>
-							</div>
-							<img src="img/community/png/green-button.png" class="draggable" id="icon1">
-								<input type="hidden" name="icon1" >
-							<img src="img/community/png/green-button.png" class="draggable" id="icon2">
-								<input type="hidden" name="icon2">
-							<img src="img/community/png/green-button.png" class="draggable" id="icon3">
-								<input type="hidden" name="icon3">
-							<img src="img/community/png/green-button.png" class="draggable" id="icon4">
-								<input type="hidden" name="icon4">
-							<img src="img/community/png/green-button.png" class="draggable" id="icon5">
-								<input type="hidden" name="icon5">	
-							<img src="img/community/png/green-button.png" class="draggable" id="icon6">
-								<input type="hidden" name="icon6">	
-							<img src="img/community/png/green-button.png" class="draggable" id="icon7">
-								<input type="hidden" name="icon7">	
-							<img src="img/community/png/green-button.png" class="draggable" id="icon8">
-								<input type="hidden" name="icon8">	
-							<img src="img/community/png/green-button.png" class="draggable" id="icon9">
-								<input type="hidden" name="icon9">	
-							<img src="img/community/png/green-button.png" class="draggable" id="icon10">
-								<input type="hidden" name="icon10">	
-						</div>
+<!-- 						<div id="icons"> -->
+<!-- 							<img src="img/community/png/green-button.png" class="draggable" id="icon1"> -->
+<!-- 								<input type="hidden" name="icon1" > -->
+<!-- 							<img src="img/community/png/green-button.png" class="draggable" id="icon2"> -->
+<!-- 								<input type="hidden" name="icon2"> -->
+<!-- 							<img src="img/community/png/green-button.png" class="draggable" id="icon3"> -->
+<!-- 								<input type="hidden" name="icon3"> -->
+<!-- 							<img src="img/community/png/green-button.png" class="draggable" id="icon4"> -->
+<!-- 								<input type="hidden" name="icon4"> -->
+<!-- 							<img src="img/community/png/green-button.png" class="draggable" id="icon5"> -->
+<!-- 								<input type="hidden" name="icon5">	 -->
+<!-- 							<img src="img/community/png/green-button.png" class="draggable" id="icon6"> -->
+<!-- 								<input type="hidden" name="icon6">	 -->
+<!-- 							<img src="img/community/png/green-button.png" class="draggable" id="icon7"> -->
+<!-- 								<input type="hidden" name="icon7">	 -->
+<!-- 							<img src="img/community/png/green-button.png" class="draggable" id="icon8"> -->
+<!-- 								<input type="hidden" name="icon8">	 -->
+<!-- 							<img src="img/community/png/green-button.png" class="draggable" id="icon9"> -->
+<!-- 								<input type="hidden" name="icon9">	 -->
+<!-- 							<img src="img/community/png/green-button.png" class="draggable" id="icon10"> -->
+<!-- 								<input type="hidden" name="icon10">	 -->
+<!-- 						</div> -->
 						<div class="pics">
 							<!-- 썸네일 -->
 							<div id="preview">

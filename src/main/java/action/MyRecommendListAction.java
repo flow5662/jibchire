@@ -31,10 +31,10 @@ import svc.SnsListService;
 		 * */
 		MyRecommendListService mysrv = new MyRecommendListService(); 
 		Cust_houseinfo houseinfo = mysrv.getcusthouseinfo(cust_id);
-		Cust_info info = mysrv.getcustinfo(cust_id);
+		//Cust_info info = mysrv.getcustinfo(cust_id);
 		ArrayList<Post_house> houselist = mysrv.gethouseinfo(houseinfo);
 		ArrayList<Post_house> familylist = mysrv.getfamilyinfo(houseinfo);
-		ArrayList<Post_house> custfamilylist = mysrv.getcustfamilyinfo(houseinfo.getCust_family(),info.getCust_sex());
+		ArrayList<Post_house> custfamilylist = mysrv.getcustfamilyinfo(houseinfo.getCust_family(),houseinfo.getCust_sex());
 		
 		/*snsList.jsp 에서 이 값들을 사용하기 위해서 setAttribute로 객체를 세팅*/
 		request.setAttribute("houselist", houselist);
