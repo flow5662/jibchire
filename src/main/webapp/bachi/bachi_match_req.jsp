@@ -169,8 +169,7 @@ $(document).ready(function(){
 		success: function(re){ //매개변수
 			$("#gosu_menu").html(re);
 			
-		}
-		//정상적으로 잘 갔다 왔냐	 
+		} 
 	});
 	
 	var cust_id = "<%=id%>"; 

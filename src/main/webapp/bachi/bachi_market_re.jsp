@@ -126,8 +126,7 @@ display: flex;
 <div class="lable-title">상품/카테고리 선택</div>
 <div class="option-selected-css">
 <select name="gosu_id" id="gosu_id" class="css-gosu-option" multiple="multiple" size="6">
-<option value="1">상품옵션1</option>
-<option value="2">상품옵션2</option>
+<option></option>
 </select>
 <select name="gosu_menu1" class="css-gosu-option">
 	<option value="취미">취미</option>
@@ -263,6 +262,17 @@ $(function(){
         var content = tinymce.activeEditor.getContent();
         console.log(content);
     });
+    
+    $.ajax({ // select태그
+        url : "product_option.jsp",
+        data : {cust_id: "<%= id %>" },
+        type : "post",
+        success: function(data){     //가져온 값
+        	$("#gosu_id").html(data);
+                
+             }
+        
+	});
  
 });
 

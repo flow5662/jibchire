@@ -1,3 +1,5 @@
+<%@page import="dto.Bachi_market_request"%>
+<%@page import="dto.Bachi_market_review"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%request.setCharacterEncoding("utf-8");%>
@@ -7,6 +9,7 @@
          <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <%
@@ -51,7 +54,7 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     	<article style="width: 100%; display: inline-block;">
     	 <div class="market_section">
     		<jsp:useBean id="market" class="dao.Gosu_mark">
-    		<form action="bachi_det_corr.jsp">
+    		<form action="bachi_det_corr.jsp" onsubmit="return selectId()">
     	
     		<div class="css-section-market-re">
     		<% 
@@ -91,7 +94,16 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     		<div class="css-market-sangse-text">
     		
     		<div class="gosu-user">
-    		<div class="gosu-user-img"></div>
+    		<%
+    		
+    		String user_img = market.cust_img(market_list_cust.get(0).getCust_id());
+    		String serverImagePath_user = request.getContextPath() + "/cust/sm_" + user_img;
+    		
+    		
+    		%>
+    		
+    		<div class="gosu-user-img" style="background-image: url('<%=serverImagePath_user%>'); background-size: cover;"></div>
+    		<!-- div안에 회원 이미지 넣기, backgound-size:cover로 이미 맞춰진 사이즈에 이미지 크기 맞추기 -->
     		<div class="gosu-user-id">
     		
     		<span><%out.println(market_list_cust.get(0).getCust_id()); %></span>
@@ -101,7 +113,7 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     		</div>
     		
     			<div class="gosu-user-adrress">
-    		<span class="ad">서비스 지역</span><span class="ad">지역</span>
+    		<!--  <span class="ad">서비스 지역</span><span class="ad">지역</span>-->
     		</div>
     		
     		<div class="user-text-section-gosu">
@@ -109,6 +121,95 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     		
     		</div>
     		
+    	
+    		<h4 class="section-title">리뷰</h4>
+    		<%
+    		ArrayList<Bachi_market_review> review_list = market.review_select(mark);
+    		if(review_list.size()<1){
+    			out.println("<div class='market-review-none'>리뷰가 등록되지 않았습니다.</div>");
+    		}
+    		
+    		for(int i=0;i<review_list.size();i++){
+    			
+    		
+    		
+    		
+    		String user_img_review = market.cust_img(review_list.get(i).getCust_id());
+    		String serverImagePath_user_review = request.getContextPath() + "/cust/sm_" + user_img_review;
+    		
+    		
+    		%>
+    		<div class="market-review-section">
+	    		<div class="market-review">
+	    			<div class="review-user-img" style="background-image: url('<%=serverImagePath_user_review%>'); background-size: cover;"></div>
+	    			<div class="gosu-user-id">
+	    			<span><%=review_list.get(i).getCust_id() %></span>
+	    			<span><font color="#yyycc"><%
+	    			int review_star = market.review_star_count(review_list.get(i).getCust_id());
+	    			switch(review_star){ //별점이 1~5개이면 특수문자 별로 보이게
+	    			case 1 :
+	    				out.println("★☆☆☆☆");
+	    				break;
+	    			case 2 :
+	    				out.println("★★☆☆☆");
+	    				break;
+	    			case 3 :
+	    				out.println("★★★☆☆");
+	    				break;
+	    			case 4:
+	    				out.println("★★★★☆");
+	    				break;
+	    			case 5:
+	    				out.println("★★★★★");
+	    				break;
+	    			}
+	    			
+	    			%></font></span>
+	    			</div>
+	    		</div>
+	    		<%if(review_list.get(i).getReview_pic() != null){ %>
+	    		<div class="market-review-img">
+	    		<div class="slider-container">
+	    		<div class="slider">
+	    		<%
+	    		String review_img = review_list.get(i).getReview_pic();
+	    		 String[] review = review_img.split(",");
+	    		for(int t=0;t<review.length;t++){
+	    			String ImagePath_review = request.getContextPath() + "/bachi/bachi_market/review/sm_"+review[t];
+	    		 %>
+	    		<img src='<%=ImagePath_review%>' style='width:150px;height: 150px; border-radius:8px;'>
+	    		
+	    		<%} %>
+	    		</div>
+	    			<div class="prev-button" ><</div>
+  					<div class="next-button" >></div>
+	    		</div>
+	    		 	
+	    		</div>
+	    		<%} %>
+	    		<div class="market-review-text">
+	    		<%=review_list.get(i).getReview() %>
+	    		</div>
+    		</div>
+    		<% } %>
+    		<h4 class="section-title">문의</h4>
+    		
+    		<% 
+    		ArrayList<Bachi_market_request> request_list= market.market_request_select(mark); 
+    		for(Bachi_market_request re : request_list){
+    			
+    		
+    		%>
+    		<div class="market-request">
+    		<div class="market-request-gosu_id">
+			<% String gosu_text  = market.market_req_gosu_id(mark, re.getGosu_id());
+			out.println(gosu_text);
+			%>
+			</div>
+    		<div class="market-request-body"><%=re.getReq_text() %></div>
+    		
+    		</div>
+    		<%} %>
     		
     		</div>
     		</div>
@@ -132,23 +233,31 @@ String cust_pw = (String)session.getAttribute("cust_pw");
     	</div>
     	<div class="css-option-body">
     	<div class="css-option-group">
-    	<div class="product-option">
+    	
+    		
+    		
+    		
+    		<!-- 옵션 -->
+    		<% ArrayList<Bachi_product> options = market.option_select(Integer.parseInt(market_id)); 
+    			for(Bachi_product pro : options){ //사용자가 선택한 옵션이 수정되게끔.
+    		%>
+    		<div class="product-option">
     		<div class="css-option-box">
-    		<!-- 중첩으로 놓거나 아니면 gosu_product랑 같이 조인하거나.. -->
     		
-    		
-    			<div class="css-option-title">옵션 제목입니다.</div>
-    			<div class="css-option-price"><strong><% out.println(market_list_cust.get(0).getGosu_price()); %>원</strong></div>
+    			<div class="css-option-title"><%=pro.getGosu_title() %></div>
+    			<div class="css-option-price"><strong>
+    			<fmt:formatNumber value="<%=pro.getGosu_price() %>" pattern="#,###"/>원</strong></div>
     			<div class="css-option-text">
-    			<details>
-    			<summary>텍스트 보기</summary>
-    			<p>옵션 텍스트입니다.</p>
-    			<p>옵션 내용을 추가합니다.</p>
-    			<p>현재는 옵션 기능이 구현되지 않습니다.</p>
- 				<p>(마켓)의 게시판용도로 사용됩니다.</p>
- 				</details>
+    			
+    			<p><%=pro.getGosu_text() %></p>
+ 				
     			</div>
     		</div>
+    		</div>
+    	
+    		<% } %>
+    		
+    		
     		
     	</div>
     	</div>
@@ -189,21 +298,44 @@ String cust_pw = (String)session.getAttribute("cust_pw");
 <script>
 function deleteMarket() {
 	  var marketId = '<%=market_list_cust.get(0).getMarket_id()%>';
-	  $.ajax({
-	    type: "POST",
-	    url: "bachi_market_det_del.jsp",
-	    data: {market_id: marketId},
-	    success: function(response) {
-	      // 성공적으로 삭제되면 어떤 작업을 수행하고자 한다면 여기에 작성합니다.
-	      alert("상품이 삭제되었습니다.");
-	     	location.href="bachi_market.jsp";
-	    },
-	    error: function() {
-	      // 실패 시 처리할 작업을 여기에 작성합니다.
-	      alert("상품 삭제에 실패했습니다.");
-	    }
-	  });
+	  
+	  if("<%=id%>" != "<%=market_list_cust.get(0).getCust_id()%>"){
+			alert("삭제할 수 없습니다.");
+			return false; //id가 일치하지않으면 삭제불가능
+		}else{
+			
+			  $.ajax({
+				    type: "POST",
+				    url: "bachi_market_det_del.jsp",
+				    data: {market_id: marketId},
+				    success: function(response) {
+				      // 상품삭제
+							 alert("상품이 삭제되었습니다.");
+						     	location.href="bachi_market.jsp";
+							
+				    },
+				    error: function() {
+				      // 실패 시 얼럿
+				      alert("상품 삭제에 실패했습니다.");
+				    }
+				  });
+			
+			
+		}
+	  
+	
 	}
+
+function selectId(){	
+		if("<%=id%>" != "<%=market_list_cust.get(0).getCust_id()%>"){
+			alert("수정할 수 없습니다.");
+			return false;
+		}
+}
+
+
+
+
 
 </script>    		
     		
@@ -237,5 +369,18 @@ function deleteMarket() {
     
     
 </body>
+<script>
+$(document).ready(function() {
+	$('.prev-button').click(function() {
+		  $('.slider').animate({ marginLeft: '+=150px' }, 500);
+		});
+
+		$('.next-button').click(function() {
+		  $('.slider').animate({ marginLeft: '-=150px' }, 500);
+		});
+	
+	});
+
+</script>
 
 </html>

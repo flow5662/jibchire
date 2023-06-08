@@ -23,6 +23,7 @@ public class Bachi_Match_Req_Service {
 		
 		close(con);
 		return match_been;
+		
 	}
 	
 	public int getListCount() throws Exception{
@@ -33,6 +34,5 @@ public class Bachi_Match_Req_Service {
 		listCount = bachi_match.count_list();
 		close(con);
 		return listCount;
-		
 	}
 }

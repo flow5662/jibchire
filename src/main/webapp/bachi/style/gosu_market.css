@@ -178,3 +178,10 @@ option {
 	display: flex;
 	justify-content: space-between;
 }
+.css-search-null{
+display: flex;
+align-items: center;
+width: 1280px;
+justify-content: center;
+padding-bottom: 13px;
+}

@@ -754,7 +754,7 @@ li {
 					<li><a href="bachi_match_req.bc">견적답변</a></li>
 				</div>
 				<div class="index4">
-					<li><a href="bachi_market.jsp">마켓</a></li>
+					<li><a href="bachi_market_list.jsp">마켓</a></li>
 				</div>
 	
 			</div>

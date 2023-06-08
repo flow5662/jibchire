@@ -7,9 +7,7 @@
 <%@page import="java.sql.*"%>
 <%@ page isELIgnored="false" %>
 
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +40,6 @@ String serverImagePath = request.getContextPath() + "/image/sm_" + market_pictur
 
 <style>
 .wrap{
-	width:1900px;
 	margin-left:auto;
 	margin-right:auto;
 }
@@ -155,10 +152,13 @@ p {
 
 <div class="lable-title">상품/카테고리 선택</div>
 <div class="option-selected-css">
+
 <select name="gosu_id" id="gosu_id" class="css-gosu-option" multiple="multiple" size="6">
-<option value="1">상품옵션1</option>
-<option value="2">상품옵션2</option>
+<option></option>
 </select>
+
+
+
 <select name="gosu_menu1" class="css-gosu-option">
 	<option value="취미">취미</option>
 	<option value="홈/리빙">홈/리빙</option>
@@ -205,13 +205,13 @@ document.addEventListener('keydown', function(event) {
 </script>
 <script>
 $(document).ready(function() {
-  // 파일 선택 시 hidden과 img 태그에 파일 경로를 저장하고 이미지를 미리보기합니다.
+  // 파일 선택 시 hidden과 img 태그에 파일 경로를 저장하고 이미지를 미리보기
   $('#file-input').on('change', function() {
     var file = $(this).prop('files')[0];
     var reader = new FileReader();
     reader.onload = function(event) {
-      //$('#file-path').val("img/test/"+file.name); // 파일 경로를 hidden 태그에 저장합니다.
-      $('#image-preview').attr('src', event.target.result); // 미리보기 이미지를 출력합니다.
+      //$('#file-path').val("img/test/"+file.name); // 파일 경로를 hidden 태그에 저장
+      $('#image-preview').attr('src', event.target.result); // 미리보기 이미지를 출력
     };
     reader.readAsDataURL(file);
   });
@@ -304,6 +304,18 @@ $(function(){
         console.log(content);
     });
  
+
+    $.ajax({ // select태그
+        url : "product_option.jsp",
+        data : {cust_id: "<%= id %>" },
+        type : "post",
+        success: function(data){     //가져온 값
+        	$("#gosu_id").html(data);
+                
+             }
+        
+	});
+    
 });
 
 </script>

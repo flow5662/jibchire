@@ -50,7 +50,6 @@ public class BachiMatchReqAction implements Action{
    	    
 	   	PageInfo pageInfo = new PageInfo();
 	   	pageInfo.setEndPage(endPage);
-	   	pageInfo.setEndPage(endPage);
 	   	pageInfo.setListCount(listCount);
 		pageInfo.setMaxPage(maxPage);
 		pageInfo.setPage(page);

@@ -88,9 +88,10 @@ try{
 	
 	mark.setGosu_id(minId); //set으로 가격이 min값인 gosu_id 넣음
 	
-	market.gosu_mark_update(mark);
 	market.gosu_middle_delete(Integer.parseInt(market_id));
-	response.sendRedirect("bachi_market.jsp");
+	market.gosu_mark_update(mark);
+	
+	response.sendRedirect("bachi_market_list.jsp");
 }catch(Exception e){
 	e.printStackTrace();
 }

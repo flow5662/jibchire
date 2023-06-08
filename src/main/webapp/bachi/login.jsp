@@ -177,7 +177,7 @@ a { text-decoration : none; }
 		            <input type="submit" value="로그인">
 		            
 		            <div class="sns-login">
-		            <a href="#카카오로그인"><img src="img/login/kakao_login_medium_narrow.png"/></a>
+		            <a href="#카카오 로그인" onclick="kakaoLogin()"><img src="img/login/kakao_login_medium_narrow.png"/></a>
 		            <a href="#네이버로그인"><img src="img/login/naver_login.png" style="width:180px;height:45px;"/></a>
 		            </div>
 		        </div>
@@ -188,6 +188,73 @@ a { text-decoration : none; }
 	<jsp:include page="footer.jsp" />
 </footer>
 </body>
+<!-- 카카오 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('e9950da42ea3f40b10d8bafe103caf7f'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me', //url은 고정
+          success: function (response) {
+        	  console.log(response);
+        	   var kakao = JSON.stringify(response);
+        	   
+        	   var cust_id = kakao["id"];
+        	   var cust_name = kakao["nickname"];
+        	   var cust_pic = kakao["thumbnail_image_url"];
+        	   $.ajax({
+        		  url: 'check_id.jsp',
+        		  method: 'POST',
+        		  data : cust_id,
+        		  success: function(resp){
+        			 //성공했으면 이중 ajax로 data 넣기
+        			 $.ajax({
+        				 url : 'insert_info.jsp',
+        				 method: 'POST',
+        				 data : {cust_id : cust_id,
+        					cust_pw2: cust_id,
+        					cust_name : cust_name,
+        					cust_pic : cust_pic
+        				 },
+        			 success: function(su){
+        				 console.log("성공!");
+        				 //kakao api 자체가 제공하는 게 많지 않아서 형식 상 로그인만 되고 실제 db에 저장하기는 현재 힘듦.
+        			 	}
+        			 
+        			 });
+        			 
+        			 
+        		  },
+        		  error: function(xhr,status,err){
+        			 //중복되는 아이디가 있을 경우 로그인 처리 완료
+        			$.ajax({
+        				url: 'loginSelect.jsp',
+        				method : cust_id,
+        				success:function(re){ //그냥 이동시켜서 로그인 후 세션에 저장시켜버리고 강제로 index이동
+        					location.href="snsIndexList.sns";
+        				}
+        			});
+        		  }
+        	   });
+        	   
+        	   
+        	  //location.href='snsIndexList.sns';
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+  </script>
 </html>
 
 <% session.invalidate(); %>

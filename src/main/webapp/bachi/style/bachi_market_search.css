@@ -6,7 +6,6 @@ html{
 }
 
 .wrap{
-	width:1900px;
 	margin:0 auto;
 }
 #market_picture{
@@ -130,3 +129,14 @@ width: 1280px;
 justify-content: center;
 padding-bottom: 13px;
 }
+#pageList{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 30px;
+    gap: 10px;
+    color: #6c7a56;
+    font-size:16pt;
+}
+#pageList a{color: #353c2b;}

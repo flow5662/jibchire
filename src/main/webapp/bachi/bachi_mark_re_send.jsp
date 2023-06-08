@@ -67,12 +67,12 @@ try{ //png이외의 파일이면 이슈발생, 수정요망
 	int minPrice = Integer.MAX_VALUE; //최대값으로 초기화
 	String minId = ""; //gosu_id를 받기 위함
 	
-	//application.log(gosu_id[0]); //로그찍기
-	int market_id = market.market_id();
-	market_id = market_id + 1;
+	int market_num = market.market_id();
+	market_num = market_num + 1;
 	
 	for(int i=0;i<gosu_id.length;i++){
-		market.gosu_middle(market_id,Integer.parseInt(gosu_id[i])); //insert
+		application.log(gosu_id[i]);
+		market.gosu_middle(market_num,Integer.parseInt(gosu_id[i])); //insert
 		Bachi_product product = market.gosu_product_id(Integer.parseInt(gosu_id[i])); //product객체에 id와 가격 넣기
 		int price = product.getGosu_price(); //객체에 받은 price만 가져옴
 		 if (price < minPrice) { //1)최소가격(최대값으로 초기화)이 현재 가격보다 크면/2)최신 가격으로 맞춰진
@@ -89,7 +89,8 @@ try{ //png이외의 파일이면 이슈발생, 수정요망
 
 	market.gosu_mark_add(mark); //gosu_market 테이블에 입력됨
 	
-	response.sendRedirect("bachi_market.jsp");
+	
+	response.sendRedirect("bachi_market_list.jsp");
 }catch(Exception e){
 	e.printStackTrace();
 }

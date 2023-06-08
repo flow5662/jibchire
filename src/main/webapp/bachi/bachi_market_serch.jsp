@@ -1,3 +1,4 @@
+<%@page import="dto.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
             <%request.setCharacterEncoding("utf-8");%>
@@ -5,6 +6,10 @@
     <%@page import="dto.Bachi_market"%>
      <%@page import="dto.Bachi_product"%>
      <%@page import="java.lang.*" %>
+          <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
       <%request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
@@ -39,7 +44,7 @@
   <div class="css-page-head">
                 <div class="page-title"><h1>바치 상점</h1></div>
           </div> 
-           <form action="bachi_market_serch.jsp">
+           <form action="bachi_market_list_search.jsp">
            <div class="search_mark">
            
         <div class="input-group select-input css-select-box2">
@@ -62,36 +67,23 @@
 
  
 <%
-
-String serch = request.getParameter("serch");
-String value = request.getParameter("market_tag");
-String all = request.getParameter("all");
-
-String serch_id = null;
-String serch_title = null;
-String serch_text = null;
+String search = request.getParameter("serch"); //검색창
+String value = request.getParameter("market_tag"); //전체/아이디 등 옵션
 
 
+PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+int listCount=pageInfo.getListCount();
+int nowPage = pageInfo.getPage();
+int maxPage=pageInfo.getMaxPage();
+int startPage=pageInfo.getStartPage();
+int endPage=pageInfo.getEndPage();
 
-if(value.equals("all")){ //전체라면
-	serch_id = serch; //모든 값을 serch에 넣는다
-	serch_title = serch;
-	serch_text = serch;
-}else if(value.equals("cust_id")){ //cust_id라면 
-	serch_id = serch; //cust_id에만 serch값을 넣는다
-	
-}else if(value.equals("market_title")){
-	serch_title = serch;
-}else if(value.equals("market_text")){
-	serch_text = serch;
-}
 
-try{
 
-ArrayList<Bachi_market> market_list = market.gosu_mark_sel_custom(serch_id, serch_title, serch_text); 
+ArrayList<Bachi_market> market_list = (ArrayList<Bachi_market>)request.getAttribute("market_list");
+
 
 if(market_list.size() > 0) {
-
 for(int i= 0;i < market_list.size();i++){
 	
 	//out.println("<tr><a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>");
@@ -103,28 +95,60 @@ for(int i= 0;i < market_list.size();i++){
 			<a href='bachi_market_det.jsp?market_id=<%=market_list.get(i).getMarket_id()%>'>
 	    <img src='<%=serverImagePath%>' style='width:416px;height: 280px; border-radius:8px;'></a>
 			<%
-			
+		 
 			//out.println("<a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>"+"<img src='../"+market_list.get(i).getMarket_picture()+"' style='width:416px;height: 280px; border-radius:8px;'></a>");
 			out.println("<div class='css-cate-gosu'>");
 			out.println("<div class='css-category'><a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>"+market_list.get(i).getGosu_menu1()+"/"+market_list.get(i).getGosu_menu2()+"</a></div>");
 			out.println("<div class='css-gosu-id'><a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>"+market_list.get(i).getCust_id()+"</a></div>");
 			out.println("</div>");
 			out.println("<h3>"+"<a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>"+market_list.get(i).getMarket_title()+"</a></h3>");
-			out.println("<div class='css-price'><strong><font size='5pt'><a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>"+market_list.get(i).getGosu_price()+"원~</a></strong></font></div>");
+			
+			
+			
+			//out.println("<div class='css-price'><strong><font size='5pt'><a href='bachi_market_det.jsp?market_id="+market_list.get(i).getMarket_id()+"'>"+market_list.get(i).getGosu_price()+"원~</a></strong></font></div>");
+			%>
+		<div class='css-price'>
+		<strong><font size='5pt'>
+		<a href="bachi_market_det.jsp?market_id='<%=market_list.get(i).getMarket_id()%>'">
+		<fmt:formatNumber value="<%=market_list.get(i).getGosu_price() %>" pattern="#,###"/>원~
+		</a></strong></font></div>
+		<%
+
 			out.println("</div>");
 				}
-		
 		}else{
 			out.println("<div class='css-search-null'>");
 			out.println("결과값이 없습니다.");
 			out.println("</div>");
 		}
-	}catch(Exception e){
-		e.printStackTrace();
-	}
+out.println("</div>");
+
 
 %>
 
+<!-- 페이징 수정요망 -->
+	<section id="pageList">
+		<%if(nowPage<=1){ %>
+		◀
+		<%}else{ %>
+		<a href="bachi_market_list_search.jsp?market_tag=<%=value %>&serch=<%=search %>&page=<%=nowPage-1 %>">◀</a>
+		<%} %>
+
+		<%for(int a=startPage;a<=endPage;a++){
+				if(a==nowPage){%>
+		<a href="bachi_market_list_search.jsp?market_tag=<%=value %>&serch=<%=search %>&page=<%=a %>"><%=a %></a>
+		<%}else{ %>
+		<a href="bachi_market_list_search.jsp?market_tag=<%=value %>&serch=<%=search %>&page=<%=a %>"><%=a %>
+		</a>
+		<%} %>
+		<%} %>
+
+		<%if(nowPage>=maxPage){ %>
+		▶
+		<%}else{ %>
+		<a href="bachi_market_list_search.jsp?market_tag=<%=value %>&serch=<%=search %>&page=<%=nowPage+1 %>">▶</a>
+		<%} %>
+	</section>
 
 
 		</form>
@@ -136,9 +160,10 @@ for(int i= 0;i < market_list.size();i++){
         </section>
 
     
+
+</div>
     <div style="margin-left: auto; margin-right: auto;">
 <jsp:include page="footer.jsp" />
-</div>
 </div>
 </body>
 </html>

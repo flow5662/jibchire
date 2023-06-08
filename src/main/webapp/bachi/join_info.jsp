@@ -10,6 +10,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="./CryptoJS/rollups/hmac-sha256.js"></script>
+<script type="text/javascript" src="./CryptoJS/components/enc-base64.js"></script>
 <script src="js/join_info.js"> </script>
 <script type="text/javascript">
 
