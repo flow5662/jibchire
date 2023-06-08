@@ -137,8 +137,8 @@ public class CmtSns {
 		//PreparedStatement를 사용하면 sql문에서 변수값 대신 ? 를 사용할 수 있다 그리고 setString()이나 setInt로 비워둔 부분에 데이터를 넣어줌
 		//물음표가 여러개면 여러개 쓰고 key값에 들어가는 숫자는 물음표의 순번
 		ResultSet rs = null;
-		String board_list_sql="select * from Feed "
-				+" left outer join cust_houseinfo on Feed.cust_id=cust_houseinfo.cust_id "
+		String board_list_sql="select * from feed "
+				+" left outer join cust_houseinfo on feed.cust_id=cust_houseinfo.cust_id "
 				+ "order by feed_date desc limit ?,8";
 		ArrayList<Feed> articleList = new ArrayList<Feed>();
 		Feed feed = null;
